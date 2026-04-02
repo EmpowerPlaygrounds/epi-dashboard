@@ -57,6 +57,7 @@ fix_school_name <- function(x) {
 # ------------------------------------------------------------------
 clean_quick <- raw_quick |>
   slice(-1) |>
+  filter(!str_detect(StartDate, fixed("{")) | is.na(StartDate)) |>
   rename(
     school_name   = Q95,
     visitor       = Q1,
@@ -69,7 +70,7 @@ clean_quick <- raw_quick |>
   ) |>
   mutate(
     school_name  = fix_school_name(school_name),
-    visit_date   = parse_date_time(StartDate, orders = c("Ymd HMS", "mdY HMS", "Ymd HM")),
+    visit_date   = parse_date_time(StartDate, orders = c("Ymd HMS", "mdY HMS", "Ymd HM", "mdy HM")),
     visit_date   = as.Date(visit_date),
     # Replace "Other:" with the actual write-in text
     visit_reason = if_else(
@@ -90,10 +91,11 @@ clean_quick <- raw_quick |>
 # ------------------------------------------------------------------
 clean_full <- raw_full |>
   slice(-1) |>
+  filter(!str_detect(StartDate, fixed("{")) | is.na(StartDate)) |>
   rename(school_name = Q2) |>
   mutate(
     school_name = fix_school_name(school_name),
-    update_date = parse_date_time(StartDate, orders = c("mdY HMS", "Ymd HMS", "mdY HM")),
+    update_date = parse_date_time(StartDate, orders = c("mdY HMS", "Ymd HMS", "mdY HM", "mdy HM")),
     update_date = as.Date(update_date),
     across(where(is.character), str_trim)
   )
@@ -103,6 +105,9 @@ clean_full <- raw_full |>
 # ------------------------------------------------------------------
 clean_student <- raw_student |>
   slice(-1) |>
+  # Remove Qualtrics metadata rows (ImportId JSON objects from historical data)
+  filter(!str_detect(Q3, fixed("ImportId"), negate = FALSE) | is.na(Q3)) |>
+  filter(!str_detect(Q3, fixed("{"), negate = FALSE) | is.na(Q3)) |>
   rename(
     school_selected = Q2,
     school_other    = Q2_51_TEXT,

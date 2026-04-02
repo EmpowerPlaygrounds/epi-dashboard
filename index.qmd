@@ -191,7 +191,7 @@ htmltools::HTML('
 htmltools::HTML('
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:2rem;">
   <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-    <h4 style="color:var(--epi-navy); margin-top:0;">Program Availability</h4>
+    <h4 style="color:var(--epi-navy); margin-top:0;">Program Reach</h4>
     <p style="color:#999; font-size:0.8rem; margin-bottom:1rem;">% of schools with each program</p>
     <div id="program-bars"></div>
   </div>
@@ -306,7 +306,7 @@ function renderDashboard() {
     });
   }
 
-  // Program Availability bars
+  // Program Reach bars
   var programCols = [
     { key: 'MGR', label: 'MGR (Merry-Go-Round)' },
     { key: 'Non-Generating MGR', label: 'Non-Generating MGR' },

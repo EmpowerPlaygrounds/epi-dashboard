@@ -1,0 +1,295 @@
+---
+title: "Print School Reports"
+format:
+  html:
+    toc: false
+---
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(jsonlite)
+library(here)
+
+schools  <- read_csv(here("data", "clean", "schools.csv"), show_col_types = FALSE)
+visits   <- read_csv(here("data", "clean", "visits.csv"), show_col_types = FALSE)
+
+# Read full update data
+raw_full <- read_csv(here("data", "raw", "full_update.csv"), show_col_types = FALSE)
+clean_full <- raw_full |>
+  slice(-1) |>
+  rename(school_name = Q2) |>
+  mutate(school_name = str_trim(school_name))
+
+# Date range defaults
+visit_dates <- visits$visit_date[!is.na(visits$visit_date)]
+date_min <- as.character(min(visit_dates))
+date_max <- as.character(max(visit_dates))
+
+# Build the full data object for all schools
+all_school_data <- list()
+for (name in sort(schools$school_name)) {
+  slug <- name |>
+    str_to_lower() |>
+    str_replace_all("[^a-z0-9]+", "-") |>
+    str_remove("-$")
+
+  school_visits <- visits |> filter(school_name == name) |> mutate(across(everything(), as.character))
+
+  all_school_data[[slug]] <- list(
+    info        = schools |> filter(school_name == name) |> as.list(),
+    visits      = school_visits,
+    full_update = clean_full |> filter(school_name == name) |> mutate(across(everything(), as.character))
+  )
+}
+
+data_json <- toJSON(all_school_data, auto_unbox = TRUE, na = "null")
+```
+
+```{r}
+#| echo: false
+
+htmltools::HTML(paste0('
+<style>
+  @media print {
+    /* Hide everything except the reports */
+    .navbar, .quarto-title, #controls-bar, .nav-footer, header, nav,
+    #quarto-header, #quarto-sidebar, .quarto-title-block { display: none !important; }
+
+    #print-area { display: block !important; }
+
+    .school-report {
+      page-break-after: always;
+      padding: 0.5in 0;
+      font-size: 11pt;
+    }
+    .school-report:last-child { page-break-after: avoid; }
+
+    .school-report h2 {
+      color: #1C2B4A !important;
+      font-size: 16pt;
+      margin-bottom: 4pt;
+      border-bottom: 2pt solid #F5B800;
+      padding-bottom: 4pt;
+    }
+    .school-report .meta { color: #555; font-size: 9pt; margin-bottom: 10pt; }
+    .school-report .programs-list { margin-bottom: 10pt; }
+    .school-report .badge-print {
+      display: inline-block;
+      background: #e9ecef;
+      color: #333;
+      padding: 2pt 8pt;
+      border-radius: 4pt;
+      font-size: 9pt;
+      margin-right: 4pt;
+      margin-bottom: 4pt;
+    }
+    .school-report table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10pt;
+      font-size: 10pt;
+    }
+    .school-report table td {
+      padding: 4pt 8pt;
+      border-bottom: 1px solid #ddd;
+    }
+    .school-report table td:first-child { font-weight: 600; width: 40%; }
+    .school-report .visit-card {
+      border: 1px solid #ddd;
+      border-radius: 4pt;
+      padding: 8pt 10pt;
+      margin-bottom: 8pt;
+      font-size: 10pt;
+    }
+    .school-report .visit-date { font-weight: 600; color: #1C2B4A; }
+    .school-report .visit-staff { color: #666; font-size: 9pt; float: right; }
+    .school-report .section-label {
+      font-size: 11pt; font-weight: 600; color: #1C2B4A;
+      margin: 10pt 0 6pt; border-bottom: 1px solid #e9ecef; padding-bottom: 3pt;
+    }
+    .school-report .no-data { color: #999; font-style: italic; font-size: 10pt; }
+  }
+
+  /* Screen styles */
+  @media screen {
+    #print-area { display: none; }
+    #controls-bar {
+      background: #fff; border-radius: 8px; padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .print-instructions {
+      color: #666; font-size: 0.9rem; margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .btn-print {
+      background: #1C2B4A; color: #fff; border: none; border-radius: 6px;
+      padding: 0.6rem 2rem; font-size: 1rem; font-weight: 600;
+      cursor: pointer; margin-top: 0.5rem;
+    }
+    .btn-print:hover { background: #2a3f6a; }
+    .btn-print:disabled { opacity: 0.5; cursor: not-allowed; }
+    #preview-count {
+      margin-top: 1rem; color: var(--epi-navy); font-weight: 600;
+    }
+  }
+</style>
+
+<div id="controls-bar">
+  <h3 style="color:var(--epi-navy); margin-top:0;">Print School Profile Reports</h3>
+  <p class="print-instructions">
+    Select a date range to filter visit notes, then click <strong>Generate & Print</strong>.<br>
+    Each school will appear on its own page. You can print to paper or save as PDF.
+  </p>
+
+  <div style="display:flex; align-items:center; gap:0.75rem; justify-content:center; flex-wrap:wrap; margin-bottom:1rem;">
+    <label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>
+    <input type="date" id="print-date-start" value="', date_min, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+    <span style="color:#999;">to</span>
+    <input type="date" id="print-date-end" value="', date_max, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+  </div>
+
+  <button class="btn-print" id="btn-generate" onclick="generateAndPrint()">Generate & Print</button>
+  <div id="preview-count"></div>
+</div>
+
+<div id="print-area"></div>
+
+<script>
+var ALL_SCHOOLS = ', data_json, ';
+
+function inRange(dateStr, start, end) {
+  if (!dateStr) return false;
+  var d = dateStr.slice(0, 10);
+  return d >= start && d <= end;
+}
+
+var PROGRAM_MAP = {
+  "MGR": "MGR / Lanterns",
+  "Non-Generating MGR": "Non-Generating MGR",
+  "Library": "Library",
+  "Computer": "Computers",
+  "Feminine Hygiene Kits": "Menstrual Kits",
+  "Science Kits": "Science Kits",
+  "Construction Projects": "Construction",
+  "Boreholes": "Boreholes",
+  "Solar Power": "Solar Power",
+  "Biofill Toilets": "Biofill Toilets",
+  "Light a Village": "Light a Village"
+};
+
+function buildSchoolReport(slug, data, start, end) {
+  var info = data.info;
+
+  // Filter visits
+  var allVisits = data.visits || [];
+  var visits = allVisits;
+  if (start && end && Array.isArray(allVisits)) {
+    visits = allVisits.filter(function(v) {
+      return inRange(v.visit_date || v.StartDate || "", start, end);
+    });
+  }
+
+  var html = \'<div class="school-report">\';
+
+  // School name
+  html += "<h2>" + info.school_name + "</h2>";
+
+  // Meta line
+  var meta = [];
+  if (info.Region) meta.push(info.Region + " Region");
+  if (info["EPI Start Year"]) meta.push("EPI Partner Since " + info["EPI Start Year"]);
+  meta.push("Report: " + start + " to " + end);
+  html += \'<div class="meta">\' + meta.join(" &middot; ") + "</div>";
+
+  // Programs
+  var progs = Object.keys(PROGRAM_MAP)
+    .filter(function(k) { return info[k] == 1; })
+    .map(function(k) { return \'<span class="badge-print">\' + PROGRAM_MAP[k] + "</span>"; });
+  if (progs.length > 0) {
+    html += \'<div class="programs-list">\' + progs.join(" ") + "</div>";
+  }
+
+  // School Details from full update
+  var fu = data.full_update;
+  var latest = (Array.isArray(fu) && fu.length > 0) ? fu[fu.length - 1] : null;
+  if (latest) {
+    html += \'<div class="section-label">School Details</div>\';
+    html += "<table>";
+    if (latest.Q5) html += "<tr><td>Est. Community Population</td><td>" + parseInt(latest.Q5).toLocaleString() + "</td></tr>";
+    if (latest.Q6) html += "<tr><td>Students Enrolled</td><td>" + parseInt(latest.Q6).toLocaleString() + "</td></tr>";
+    if (latest.Q7) html += "<tr><td>Teachers</td><td>" + latest.Q7 + "</td></tr>";
+    var primaryN = latest.Q8 ? parseInt(latest.Q8) : 0;
+    var jhsN = (latest.Q10 === "Yes" && latest.Q11) ? parseInt(latest.Q11) : 0;
+    if (primaryN > 0) html += "<tr><td>Primary Students</td><td>" + primaryN.toLocaleString() + "</td></tr>";
+    if (jhsN > 0) html += "<tr><td>JHS Students</td><td>" + jhsN.toLocaleString() + "</td></tr>";
+    if (latest.Q9) html += "<tr><td>Completed Primary to JHS</td><td>" + latest.Q9 + "</td></tr>";
+    if (latest.Q12) html += "<tr><td>BECE Test Takers</td><td>" + latest.Q12 + "</td></tr>";
+    if (latest.Q13) html += "<tr><td>BECE Passers</td><td>" + latest.Q13 + "</td></tr>";
+    if (latest.Q15 && latest.Q15 !== "N/A") html += "<tr><td>Went to Secondary/Technical</td><td>" + latest.Q15 + "</td></tr>";
+    html += "</table>";
+  }
+
+  // Visit Notes
+  html += \'<div class="section-label">Visit Notes (\' + visits.length + " visit" + (visits.length !== 1 ? "s" : "") + ")</div>";
+  if (visits.length > 0) {
+    // Show visits newest first
+    var sorted = visits.slice().sort(function(a, b) {
+      return (b.visit_date || "").localeCompare(a.visit_date || "");
+    });
+    sorted.forEach(function(v) {
+      html += \'<div class="visit-card">\';
+      if (v.visitor) html += \'<span class="visit-staff">Staff: \' + v.visitor + "</span>";
+      if (v.visit_date) html += \'<span class="visit-date">\' + v.visit_date + "</span>";
+      html += "<br>";
+      if (v.visit_reason) html += "<strong>Reason:</strong> " + v.visit_reason + "<br>";
+      if (v.activities) html += "<strong>Activities:</strong> " + v.activities + "<br>";
+      if (v.doing_well) html += "<strong>Doing well:</strong> " + v.doing_well + "<br>";
+      if (v.struggles) html += "<strong>Struggles:</strong> " + v.struggles + "<br>";
+      if (v.urgent_issues && v.urgent_issues.toLowerCase() !== "no" && v.urgent_issues.toLowerCase() !== "none" && v.urgent_issues.toLowerCase() !== "n/a") {
+        html += \'<strong style="color:#dc3545;">Urgent Issues:</strong> \' + v.urgent_issues + "<br>";
+      }
+      if (v.observations) html += "<strong>Observations:</strong> " + v.observations + "<br>";
+      html += "</div>";
+    });
+  } else {
+    html += \'<p class="no-data">No visits recorded in this date range.</p>\';
+  }
+
+  html += "</div>";
+  return html;
+}
+
+function generateAndPrint() {
+  var start = document.getElementById("print-date-start").value;
+  var end = document.getElementById("print-date-end").value;
+  var btn = document.getElementById("btn-generate");
+  btn.disabled = true;
+  btn.textContent = "Generating...";
+
+  // Small delay so UI updates
+  setTimeout(function() {
+    var slugs = Object.keys(ALL_SCHOOLS).sort();
+    var allHtml = "";
+    var count = 0;
+
+    slugs.forEach(function(slug) {
+      allHtml += buildSchoolReport(slug, ALL_SCHOOLS[slug], start, end);
+      count++;
+    });
+
+    document.getElementById("print-area").innerHTML = allHtml;
+    document.getElementById("preview-count").textContent = count + " school reports generated.";
+
+    btn.disabled = false;
+    btn.textContent = "Generate & Print";
+
+    // Trigger print
+    setTimeout(function() { window.print(); }, 300);
+  }, 100);
+}
+</script>
+'))
+```
