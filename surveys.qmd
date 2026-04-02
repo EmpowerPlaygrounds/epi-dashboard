@@ -1,0 +1,826 @@
+---
+title: "Student Surveys"
+format:
+  html:
+    toc: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(jsonlite)
+library(here)
+library(plotly)
+
+schools  <- read_csv(here("data", "clean", "schools.csv"), show_col_types = FALSE)
+surveys  <- read_csv(here("data", "clean", "surveys.csv"), show_col_types = FALSE)
+
+# Parse dates (mixed formats)
+surveys <- surveys |>
+  mutate(
+    survey_date = coalesce(mdy_hms(StartDate), ymd_hms(StartDate)),
+    survey_year = year(survey_date)
+  )
+
+# Fix has_library: count any "Yes..." variant as Yes
+surveys <- surveys |>
+  mutate(
+    has_library_yn = case_when(
+      str_starts(has_library, "Yes") ~ "Yes",
+      has_library == "No"            ~ "No",
+      TRUE                           ~ NA_character_
+    )
+  )
+
+# Join school-level program flags onto survey data
+surveys <- surveys |>
+  left_join(
+    schools |> select(school_name, MGR, Library, `Feminine Hygiene Kits`, Computer, `Science Kits`),
+    by = "school_name"
+  )
+
+available_years <- sort(unique(surveys$survey_year[!is.na(surveys$survey_year)]))
+
+# Date range defaults
+survey_dates <- as.Date(surveys$survey_date[!is.na(surveys$survey_date)])
+survey_date_min <- as.character(min(survey_dates))
+survey_date_max <- as.character(max(survey_dates))
+n_responses <- nrow(surveys)
+n_schools   <- n_distinct(surveys$school_name, na.rm = TRUE)
+n_total_schools <- nrow(schools)
+
+# ── JSON data for interactive Key Insights charts ──────────────────────
+survey_data <- surveys |>
+  transmute(
+    school_name,
+    survey_date = as.character(as.Date(survey_date)),
+    lantern_group,
+    has_library_yn,
+    menstrual_kit,
+    has_computers,
+    Q6, Q7, Q8, Q9,
+    Q13, Q14, Q15, Q16,
+    Q24, Q25, Q26, Q28,
+    Q32, Q33, Q34,
+    Q37, Q38, Q39, Q41,
+    MGR           = as.character(MGR),
+    Library       = as.character(Library),
+    fem_hygiene   = as.character(`Feminine Hygiene Kits`),
+    Computer      = as.character(Computer),
+    science_kits  = as.character(`Science Kits`)
+  )
+
+survey_json      <- toJSON(survey_data, auto_unbox = TRUE, na = "null")
+school_names_sorted <- sort(unique(surveys$school_name[!is.na(surveys$school_name)]))
+school_names_json <- toJSON(school_names_sorted)
+
+# ── HTML helpers ───────────────────────────────────────────────────────
+school_opts <- paste0(
+  '<option value="', school_names_sorted, '">', school_names_sorted, '</option>',
+  collapse = "\n"
+)
+
+chart_box <- function(title, id, type = "bar", height = 250) {
+  if (type == "pie") {
+    sprintf(
+      '<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+        <h4 style="margin-top:0; color:var(--epi-navy); font-size:0.95rem;">%s</h4>
+        <canvas id="%s"></canvas>
+        <p id="n-%s" style="text-align:center; color:#999; font-size:0.8rem; margin-bottom:0;"></p>
+      </div>', title, id, id)
+  } else {
+    sprintf(
+      '<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+        <h4 style="margin-top:0; color:var(--epi-navy); font-size:0.95rem;">%s</h4>
+        <div style="height:%dpx;"><canvas id="%s"></canvas></div>
+        <p id="n-%s" style="text-align:center; color:#999; font-size:0.8rem; margin-bottom:0;"></p>
+      </div>', title, height, id, id)
+  }
+}
+
+tab_btn <- function(label, tab, active = FALSE) {
+  bg <- if (active) "#1C2B4A" else "#e9ecef"
+  fg <- if (active) "#fff" else "#333"
+  sprintf(
+    '<button class="ki-tab" data-tab="%s" onclick="showInsightsTab(\'%s\')" style="padding:0.5rem 1.2rem; border:none; border-radius:4px 4px 0 0; background:%s; color:%s; font-weight:600; font-size:0.85rem; cursor:pointer;">%s</button>',
+    tab, tab, bg, fg, label)
+}
+
+# ── Build tab HTML ─────────────────────────────────────────────────────
+grid_open  <- '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.5rem;">'
+grid_close <- '</div>'
+
+lanterns_tab <- paste0(
+  '<div id="tab-lanterns" class="ki-panel" style="display:block;">',
+  grid_open,
+  chart_box("Students Currently in a Lantern Group", "lantern-group", "pie"),
+  chart_box("Teachers Check in with Lantern Groups", "teacher-checkin", "pie"),
+  chart_box("Meeting Frequency", "meeting-freq", "bar", 220),
+  chart_box("Lantern Leader Overall Experience", "leader-exp", "bar", 200),
+  chart_box("Challenges Reported", "lantern-challenges", "bar", 220),
+  grid_close, '</div>')
+
+libraries_tab <- paste0(
+  '<div id="tab-libraries" class="ki-panel" style="display:none;">',
+  grid_open,
+  chart_box("Book Checkout Allowed", "book-checkout", "pie"),
+  chart_box("Visit Frequency", "library-freq", "bar", 220),
+  chart_box("How Students Utilize Library", "library-when", "bar", 200),
+  grid_close, '</div>')
+
+menstrual_tab <- paste0(
+  '<div id="tab-menstrual" class="ki-panel" style="display:none;">',
+  grid_open,
+  chart_box("Received Kit", "received-kit", "pie"),
+  chart_box("Usage Frequency", "kit-usage", "pie"),
+  chart_box("Reported Benefits", "kit-benefits", "bar", 250),
+  chart_box("Reported Challenges", "kit-challenges", "bar", 280),
+  grid_close, '</div>')
+
+computers_tab <- paste0(
+  '<div id="tab-computers" class="ki-panel" style="display:none;">',
+  grid_open,
+  chart_box("How Often Computers are Used Each Week", "computer-freq", "bar", 250),
+  chart_box("Activities Computers are Used For", "computer-activities", "bar", 280),
+  chart_box("Computer Use Outside of Class", "computer-outside", "pie"),
+  chart_box("Subjects Computers Are Used For", "computer-subjects", "bar", 280),
+  grid_close, '</div>')
+
+science_tab <- paste0(
+  '<div id="tab-science" class="ki-panel" style="display:none;">',
+  grid_open,
+  chart_box("Students Have Personally Worked With Kits This Term", "science-usage", "pie"),
+  chart_box("Frequency of Use Per Term", "science-freq", "bar", 200),
+  chart_box("Reported Challenges", "science-challenges", "bar", 220),
+  grid_close, '</div>')
+
+# ── JavaScript code (raw string to avoid quoting issues) ──────────────
+js_code <- r"--(
+var charts = {};
+var SURVEY_DATA, SCHOOL_NAMES;
+
+// Populate school dropdown
+(function() {
+  var sel = document.getElementById("insights-school-filter");
+  if (!sel) return;
+  SCHOOL_NAMES.forEach(function(name) {
+    var opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name;
+    sel.appendChild(opt);
+  });
+})();
+
+function filterBySchool(data, school) {
+  if (!school) return data;
+  return data.filter(function(d) { return d.school_name === school; });
+}
+
+function countSingle(data, field) {
+  var counts = {};
+  data.forEach(function(d) {
+    var v = d[field];
+    if (v && v !== "null" && v !== "") {
+      counts[v] = (counts[v] || 0) + 1;
+    }
+  });
+  return counts;
+}
+
+function countMulti(data, field) {
+  var counts = {};
+  data.forEach(function(d) {
+    var v = d[field];
+    if (v && v !== "null" && v !== "") {
+      v.split(",").forEach(function(item) {
+        item = item.trim();
+        if (item.indexOf("Other") === 0) item = "Other";
+        if (item) counts[item] = (counts[item] || 0) + 1;
+      });
+    }
+  });
+  return counts;
+}
+
+function sortedDesc(counts) {
+  return Object.entries(counts).sort(function(a, b) { return b[1] - a[1]; });
+}
+
+function destroyChart(id) {
+  if (charts[id]) { charts[id].destroy(); delete charts[id]; }
+}
+
+function truncLabel(label, max) {
+  max = max || 40;
+  return label.length > max ? label.substring(0, max - 3) + "..." : label;
+}
+
+var PIE_COLORS = ["#1C2B4A", "#F5B800", "#3498db", "#28a745", "#e67e22", "#9b59b6", "#dc3545", "#1abc9c", "#95a5a6"];
+
+function makePie(id, labels, values) {
+  destroyChart(id);
+  var canvas = document.getElementById(id);
+  if (!canvas) return;
+  var total = values.reduce(function(a,b) { return a + b; }, 0);
+  charts[id] = new Chart(canvas, {
+    type: "pie",
+    data: {
+      labels: labels,
+      datasets: [{ data: values, backgroundColor: PIE_COLORS.slice(0, labels.length) }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { position: "bottom", labels: { font: { size: 11 } } },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              var pct = total > 0 ? Math.round(ctx.raw / total * 100) : 0;
+              return ctx.label + ": " + ctx.raw + " (" + pct + "%" + ")";
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+function makeHBar(id, labels, values, color, xlabel) {
+  destroyChart(id);
+  var canvas = document.getElementById(id);
+  if (!canvas) return;
+  var total = values.reduce(function(a,b) { return a + b; }, 0);
+  charts[id] = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: labels.map(function(l) { return truncLabel(l); }),
+      datasets: [{ data: values, backgroundColor: color || "#1C2B4A" }]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              var pct = total > 0 ? Math.round(ctx.raw / total * 100) : 0;
+              return ctx.raw + " responses (" + pct + "%" + ")";
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          title: { display: !!xlabel, text: xlabel || "" },
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+function setN(id, n) {
+  var el = document.getElementById("n-" + id);
+  if (el) el.textContent = n > 0 ? "n = " + n : "No responses";
+}
+
+function showInsightsTab(tab) {
+  document.querySelectorAll(".ki-panel").forEach(function(p) { p.style.display = "none"; });
+  document.querySelectorAll(".ki-tab").forEach(function(b) {
+    b.style.background = "#e9ecef";
+    b.style.color = "#333";
+  });
+  var panel = document.getElementById("tab-" + tab);
+  if (panel) panel.style.display = "block";
+  var btn = document.querySelector('.ki-tab[data-tab="' + tab + '"]');
+  if (btn) { btn.style.background = "#1C2B4A"; btn.style.color = "#fff"; }
+}
+
+/* ── Participation chart ───────────────────────────────────────────── */
+
+function renderParticipation(data) {
+  var programs = [
+    { name: "MGR / Lantern Groups", compute: function(d) {
+        var el = d.filter(function(r) { return r.MGR === "1" && r.lantern_group && r.lantern_group !== "null"; });
+        var us = el.filter(function(r) { return r.lantern_group === "Yes"; });
+        return el.length > 0 ? Math.round(us.length / el.length * 100) : 0;
+    }},
+    { name: "Library", compute: function(d) {
+        var el = d.filter(function(r) { return r.Library === "1" && r.has_library_yn && r.has_library_yn !== "null"; });
+        var us = el.filter(function(r) { return r.has_library_yn === "Yes"; });
+        return el.length > 0 ? Math.round(us.length / el.length * 100) : 0;
+    }},
+    { name: "Menstrual Kits", compute: function(d) {
+        var el = d.filter(function(r) { return r.menstrual_kit === "Yes" && r.Q32 && r.Q32 !== "null"; });
+        var us = el.filter(function(r) { return r.Q32 === "Always" || r.Q32 === "Sometimes"; });
+        return el.length > 0 ? Math.round(us.length / el.length * 100) : 0;
+    }},
+    { name: "Computers", compute: function(d) {
+        var el = d.filter(function(r) { return r.Computer === "1" && r.has_computers && r.has_computers !== "null"; });
+        var us = el.filter(function(r) { return r.has_computers === "Yes"; });
+        return el.length > 0 ? Math.round(us.length / el.length * 100) : 0;
+    }},
+    { name: "Science Kits", compute: function(d) {
+        var el = d.filter(function(r) { return r.science_kits === "1" && (r.Q6 === "Yes" || r.Q6 === "No"); });
+        var us = el.filter(function(r) { return r.Q6 === "Yes"; });
+        return el.length > 0 ? Math.round(us.length / el.length * 100) : 0;
+    }}
+  ];
+
+  var results = programs.map(function(p) { return { name: p.name, pct: p.compute(data) }; });
+  results.sort(function(a, b) { return a.pct - b.pct; });
+
+  destroyChart("chart-participation");
+  var canvas = document.getElementById("chart-participation");
+  if (!canvas) return;
+  charts["chart-participation"] = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: results.map(function(r) { return r.name; }),
+      datasets: [{ data: results.map(function(r) { return r.pct; }), backgroundColor: "#F5B800" }]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: function(ctx) { return ctx.raw + "%"; } } }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: "% Participation Among Eligible" },
+          beginAtZero: true,
+          max: 100,
+          ticks: { callback: function(v) { return v + "%"; } }
+        }
+      }
+    }
+  });
+}
+
+/* ── Lanterns & MGR ────────────────────────────────────────────────── */
+
+function renderLanterns(data) {
+  var mgrData = data.filter(function(d) { return d.MGR === "1"; });
+
+  // In Lantern Group pie
+  var groupData = mgrData.filter(function(d) { return d.lantern_group && d.lantern_group !== "null"; });
+  var gc = countSingle(groupData, "lantern_group");
+  var e = sortedDesc(gc);
+  if (e.length > 0) makePie("lantern-group", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
+  setN("lantern-group", groupData.length);
+
+  // Teacher Check-ins (lantern members only) — relabel "Yes, asked verbally" → "Yes, verbally"
+  var members = mgrData.filter(function(d) { return d.lantern_group === "Yes" && d.Q26 && d.Q26 !== "null"; });
+  var tc = countSingle(members, "Q26");
+  if (tc["Yes, asked verbally"]) { tc["Yes, verbally"] = tc["Yes, asked verbally"]; delete tc["Yes, asked verbally"]; }
+  e = sortedDesc(tc);
+  if (e.length > 0) makePie("teacher-checkin", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
+  setN("teacher-checkin", members.length);
+
+  // Meeting Frequency — group into buckets, ordered bottom-to-top: 1-2x, 3-4x, 5-6x, Daily
+  var freqD = mgrData.filter(function(d) { return d.lantern_group === "Yes" && d.Q25 && d.Q25 !== "null"; });
+  var rawFreq = countSingle(freqD, "Q25");
+  var freqBuckets = { "1-2x": 0, "3-4x": 0, "5-6x": 0, "Daily": 0 };
+  Object.keys(rawFreq).forEach(function(k) {
+    if (k === "Every day") freqBuckets["Daily"] += rawFreq[k];
+    else if (k.indexOf("2") >= 0) freqBuckets["1-2x"] += rawFreq[k];
+    else if (k.indexOf("3") >= 0 || k.indexOf("4") >= 0) freqBuckets["3-4x"] += rawFreq[k];
+    else if (k.indexOf("5") >= 0 || k.indexOf("6") >= 0) freqBuckets["5-6x"] += rawFreq[k];
+  });
+  // Order: top-to-bottom = Daily, 5-6x, 3-4x, 1-2x (so bottom-to-top reads 1-2x → Daily)
+  var freqLabels = ["Daily", "5-6x", "3-4x", "1-2x"];
+  var freqValues = freqLabels.map(function(l) { return freqBuckets[l] || 0; });
+  if (freqD.length > 0) makeHBar("meeting-freq", freqLabels, freqValues, "#1C2B4A", "Responses");
+  setN("meeting-freq", freqD.length);
+
+  // Leader Experience (multi-select, lantern members)
+  var expD = mgrData.filter(function(d) { return d.lantern_group === "Yes" && d.Q24 && d.Q24 !== "null"; });
+  var ec2 = countMulti(expD, "Q24");
+  e = sortedDesc(ec2);
+  if (e.length > 0) makeHBar("leader-exp", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}), "#1C2B4A", "Responses");
+  setN("leader-exp", expD.length);
+
+  // Challenges (multi-select, lantern members only)
+  var chalD = mgrData.filter(function(d) { return d.lantern_group === "Yes" && d.Q28 && d.Q28 !== "null"; });
+  var cc = countMulti(chalD, "Q28");
+  e = sortedDesc(cc);
+  if (e.length > 0) makeHBar("lantern-challenges", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}), "#1C2B4A", "Responses");
+  setN("lantern-challenges", chalD.length);
+}
+
+/* ── Libraries ─────────────────────────────────────────────────────── */
+
+function renderLibraries(data) {
+  var libData = data.filter(function(d) { return d.Library === "1"; });
+
+  // Book Checkout (Q15) — remove "I do not know"
+  var coD = libData.filter(function(d) { return d.Q15 && d.Q15 !== "null" && d.Q15 !== "I do not know"; });
+  var cc = countSingle(coD, "Q15");
+  var e = sortedDesc(cc);
+  if (e.length > 0) makePie("book-checkout", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
+  setN("book-checkout", coD.length);
+
+  // Visit Frequency (Q14) — relabel and factor order (bottom-to-top: Have never visited → More than 3x per week)
+  var frD = libData.filter(function(d) { return d.Q14 && d.Q14 !== "null"; });
+  var rawFC = countSingle(frD, "Q14");
+  var freqMap = {
+    "I have never visited": "Have never visited",
+    "Less than once a week": "Less than 1x per week",
+    "1-2 times a week": "1-2x per week",
+    "More than 3 times a week": "More than 3x per week"
+  };
+  var freqLabels = ["More than 3x per week", "1-2x per week", "Less than 1x per week", "Have never visited"];
+  var freqValues = freqLabels.map(function(newLabel) {
+    var count = 0;
+    Object.keys(rawFC).forEach(function(k) { if (freqMap[k] === newLabel) count += rawFC[k]; });
+    return count;
+  });
+  if (frD.length > 0) makeHBar("library-freq", freqLabels, freqValues, "#1C2B4A", "Responses");
+  setN("library-freq", frD.length);
+
+  // How Students Utilize Library (Q13) — remove "Never", relabel
+  var whD = libData.filter(function(d) { return d.Q13 && d.Q13 !== "null"; });
+  var whc = countMulti(whD, "Q13");
+  delete whc["Never"];
+  var whenMap = {
+    "With class": "Visit with their class",
+    "On my own": "Visit on their own",
+    "Teacher brings books": "Teachers bring back books"
+  };
+  var whenLabels = [];
+  var whenValues = [];
+  Object.keys(whc).forEach(function(k) {
+    var label = whenMap[k] || k;
+    whenLabels.push(label);
+    whenValues.push(whc[k]);
+  });
+  // Sort descending
+  var whenPairs = whenLabels.map(function(l,i) { return [l, whenValues[i]]; });
+  whenPairs.sort(function(a,b) { return b[1] - a[1]; });
+  if (whenPairs.length > 0) makeHBar("library-when", whenPairs.map(function(p){return p[0];}), whenPairs.map(function(p){return p[1];}), "#1C2B4A", "Responses");
+  setN("library-when", whD.length);
+}
+
+/* ── Menstrual Kits ────────────────────────────────────────────────── */
+
+function renderMenstrualKits(data) {
+  var mkData = data.filter(function(d) { return d.fem_hygiene === "1"; });
+
+  // Received Kit pie (menstrual_kit)
+  var rkD = mkData.filter(function(d) { return d.menstrual_kit && d.menstrual_kit !== "null"; });
+  var rkc = countSingle(rkD, "menstrual_kit");
+  var e = sortedDesc(rkc);
+  if (e.length > 0) makePie("received-kit", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
+  setN("received-kit", rkD.length);
+
+  // Usage Frequency pie (Q32, kit recipients only)
+  var usD = mkData.filter(function(d) { return d.menstrual_kit === "Yes" && d.Q32 && d.Q32 !== "null"; });
+  var usc = countSingle(usD, "Q32");
+  e = sortedDesc(usc);
+  if (e.length > 0) makePie("kit-usage", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
+  setN("kit-usage", usD.length);
+
+  // Reported Benefits (Q33, multi-select, kit recipients) — condensed labels
+  var benefitMap = {
+    "I have learned more about my body and cycle": "Learn more about body",
+    "I no longer miss school because of my period": "Not missing school",
+    "I feel more confident and comfortable when I have my period": "More confident"
+  };
+  var beD = mkData.filter(function(d) { return d.menstrual_kit === "Yes" && d.Q33 && d.Q33 !== "null"; });
+  var bec = countMulti(beD, "Q33");
+  delete bec["Other"];
+  var benMapped = {};
+  Object.keys(bec).forEach(function(k) { var lbl = benefitMap[k] || k; benMapped[lbl] = (benMapped[lbl] || 0) + bec[k]; });
+  e = sortedDesc(benMapped);
+  if (e.length > 0) makeHBar("kit-benefits", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}), "#1C2B4A", "Responses");
+  setN("kit-benefits", beD.length);
+
+  // Reported Challenges (Q34, multi-select, kit recipients) — condensed labels
+  var challengeMap = {
+    "I have no challenges with the kit": "No challenges",
+    "Not enough underwear to use during my period": "Not enough underwear",
+    "The pads and underwear are difficult to clean": "Difficult to clean",
+    "The reusable pads feel uncomfortable": "Uncomfortable pads",
+    "Not enough reusable pads to use during my period": "Not enough pads",
+    "I am embarrassed to wash them": "Embarrassed to wash"
+  };
+  var chD = mkData.filter(function(d) { return d.menstrual_kit === "Yes" && d.Q34 && d.Q34 !== "null"; });
+  var chc = countMulti(chD, "Q34");
+  delete chc["Other"];
+  var chalMapped = {};
+  Object.keys(chc).forEach(function(k) { var lbl = challengeMap[k] || k; chalMapped[lbl] = (chalMapped[lbl] || 0) + chc[k]; });
+  e = sortedDesc(chalMapped);
+  if (e.length > 0) makeHBar("kit-challenges", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}), "#1C2B4A", "Responses");
+  setN("kit-challenges", chD.length);
+}
+
+/* ── Computers ─────────────────────────────────────────────────────── */
+
+function renderComputers(data) {
+  var compData = data.filter(function(d) { return d.Computer === "1"; });
+
+  // How Often Computers are Used Each Week (Q37) — only students who have computers
+  var frD = compData.filter(function(d) { return d.has_computers === "Yes" && d.Q37 && d.Q37 !== "null"; });
+  var rawFrc = countSingle(frD, "Q37");
+  var compFreqMap = {
+    "Never": "Never", "1 time a week": "1x", "2 times a week": "2x",
+    "3 times a week": "3x", "4 times a week": "4x", "Everyday": "Daily"
+  };
+  var compFreqBuckets = {};
+  Object.keys(rawFrc).forEach(function(k) { var lbl = compFreqMap[k] || k; compFreqBuckets[lbl] = (compFreqBuckets[lbl] || 0) + rawFrc[k]; });
+  var compFreqLabels = ["Daily", "4x", "3x", "2x", "1x", "Never"];
+  var compFreqValues = compFreqLabels.map(function(l) { return compFreqBuckets[l] || 0; });
+  if (frD.length > 0) makeHBar("computer-freq", compFreqLabels, compFreqValues, "#1C2B4A", "Responses");
+  setN("computer-freq", frD.length);
+
+  // Activities Computers are Used For (Q41) — group/rename/remove
+  var actMap = {
+    "Read a book": "Reading", "Read an article/web page": "Reading",
+    "Watched a video": "Pictures/Videos", "Looked at pictures": "Pictures/Videos",
+    "Used Excel/Word/other installed programs": "Word/Excel",
+    "Played a game": "Games",
+    "Gone on the RACHEL website": "RACHEL website"
+  };
+  var removeAct = { "Other": true, "Explored a website": true };
+  var acD = compData.filter(function(d) { return d.has_computers === "Yes" && d.Q41 && d.Q41 !== "null"; });
+  var rawAcc = countMulti(acD, "Q41");
+  var actBuckets = {};
+  Object.keys(rawAcc).forEach(function(k) {
+    if (removeAct[k]) return;
+    var lbl = actMap[k] || k;
+    actBuckets[lbl] = (actBuckets[lbl] || 0) + rawAcc[k];
+  });
+  var e = sortedDesc(actBuckets);
+  if (e.length > 0) makeHBar("computer-activities", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}), "#1C2B4A", "Responses");
+  setN("computer-activities", acD.length);
+
+  // Computer Use Outside of Class (Q39, pie) — only students who have computers
+  var ouD = compData.filter(function(d) { return d.has_computers === "Yes" && d.Q39 && d.Q39 !== "null"; });
+  var ouc = countSingle(ouD, "Q39");
+  e = sortedDesc(ouc);
+  if (e.length > 0) makePie("computer-outside", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
+  setN("computer-outside", ouD.length);
+
+  // Subjects Computers Are Used For (Q38) — only students who have computers, remove "Other"
+  var suD = compData.filter(function(d) { return d.has_computers === "Yes" && d.Q38 && d.Q38 !== "null"; });
+  var suc = countMulti(suD, "Q38");
+  delete suc["Other"];
+  e = sortedDesc(suc);
+  if (e.length > 0) makeHBar("computer-subjects", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}), "#1C2B4A", "Responses");
+  setN("computer-subjects", suD.length);
+}
+
+/* ── Science Kits ──────────────────────────────────────────────────── */
+
+function renderScienceKits(data) {
+  var sciData = data.filter(function(d) { return d.science_kits === "1"; });
+
+  // Usage pie (Q6)
+  var usD = sciData.filter(function(d) { return d.Q6 && d.Q6 !== "null"; });
+  var usc = countSingle(usD, "Q6");
+  var e = sortedDesc(usc);
+  if (e.length > 0) makePie("science-usage", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
+  setN("science-usage", usD.length);
+
+  // Frequency of Use Per Term (Q7) — factored order bottom-to-top: 1-2x, 3-4x, >5x
+  var frD = sciData.filter(function(d) { return d.Q6 === "Yes" && d.Q7 && d.Q7 !== "null"; });
+  var rawSciFreq = countSingle(frD, "Q7");
+  var sciFreqMap = { "1-2 times": "1-2x", "3-4 times": "3-4x", "More than 5 times": ">5x" };
+  var sciFreqBuckets = {};
+  Object.keys(rawSciFreq).forEach(function(k) { var lbl = sciFreqMap[k] || k; sciFreqBuckets[lbl] = (sciFreqBuckets[lbl] || 0) + rawSciFreq[k]; });
+  var sciFreqLabels = [">5x", "3-4x", "1-2x"];
+  var sciFreqValues = sciFreqLabels.map(function(l) { return sciFreqBuckets[l] || 0; });
+  if (frD.length > 0) makeHBar("science-freq", sciFreqLabels, sciFreqValues, "#1C2B4A", "Responses");
+  setN("science-freq", frD.length);
+
+  // Reported Challenges (Q9, multi-select) — only students who worked with kits, remove "Other" and "None"
+  var chD = sciData.filter(function(d) { return d.Q6 === "Yes" && d.Q9 && d.Q9 !== "null"; });
+  var chc = countMulti(chD, "Q9");
+  delete chc["Other"];
+  delete chc["None"];
+  e = sortedDesc(chc);
+  if (e.length > 0) makeHBar("science-challenges", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}), "#1C2B4A", "Responses");
+  setN("science-challenges", chD.length);
+}
+
+/* ── Master render ─────────────────────────────────────────────────── */
+
+function inRange(dateStr, start, end) {
+  if (!dateStr) return false;
+  var d = dateStr.slice(0, 10);
+  return d >= start && d <= end;
+}
+
+function renderAll() {
+  var school = document.getElementById("insights-school-filter").value;
+  var startEl = document.getElementById("survey-date-start");
+  var endEl = document.getElementById("survey-date-end");
+  var start = startEl ? startEl.value : "";
+  var end = endEl ? endEl.value : "";
+
+  var data = SURVEY_DATA;
+  if (start && end) {
+    data = data.filter(function(d) { return inRange(d.survey_date, start, end); });
+  }
+  data = filterBySchool(data, school);
+
+  // Update stat card
+  var statEl = document.getElementById("stat-responses");
+  if (statEl) statEl.textContent = data.length;
+
+  renderParticipation(data);
+  renderLanterns(data);
+  renderLibraries(data);
+  renderMenstrualKits(data);
+  renderComputers(data);
+  renderScienceKits(data);
+}
+
+// Initial render + event listeners
+document.addEventListener("DOMContentLoaded", function() {
+  renderAll();
+  var applyBtn = document.getElementById("btn-survey-apply");
+  if (applyBtn) applyBtn.addEventListener("click", renderAll);
+  var resetBtn = document.getElementById("btn-survey-reset");
+  if (resetBtn) resetBtn.addEventListener("click", function() {
+    var allDates = SURVEY_DATA.map(function(d) { return d.survey_date; }).filter(function(d) { return d && d !== "null"; }).sort();
+    document.getElementById("survey-date-start").value = allDates[0] || "";
+    document.getElementById("survey-date-end").value = allDates[allDates.length - 1] || "";
+    renderAll();
+  });
+});
+)--"
+
+# ── Assemble the big HTML block ────────────────────────────────────────
+insights_html <- paste0(
+  # School filter
+  '<div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">',
+  '<label for="insights-school-filter" style="font-size:0.9rem; font-weight:600; color:var(--epi-navy); text-transform:uppercase; letter-spacing:0.05em;">Filter by School:</label>',
+  '<select id="insights-school-filter" onchange="renderAll()" style="padding:0.4rem 0.8rem; border-radius:4px; border:1px solid #ccc; font-size:1rem; min-width:200px;">',
+  '<option value="">All Schools</option>',
+  school_opts,
+  '</select>',
+  '</div>',
+
+  # Participation chart
+  '<h3>Overall Program Participation</h3>',
+  '<p style="color:#666; font-size:0.9rem; margin-bottom:1rem;"><em>Among students with access to each program, the percentage who report actively using it</em></p>',
+  '<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:2rem;">',
+  '<div style="height:280px;"><canvas id="chart-participation"></canvas></div>',
+  '</div>',
+
+  # Key Insights heading
+  '<h3>Key Insights</h3>',
+  '<p style="color:#666; font-size:0.9rem; margin-bottom:1rem;"><em>Detailed breakdowns for each EPI program from student survey responses</em></p>',
+
+  # Tab buttons
+  '<div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1.5rem;">',
+  tab_btn("Lanterns & MGR", "lanterns", active = TRUE),
+  tab_btn("Libraries", "libraries"),
+  tab_btn("Menstrual Kits", "menstrual"),
+  tab_btn("Computers", "computers"),
+  tab_btn("Science Kits", "science"),
+  '</div>',
+
+  # Tab panels
+  lanterns_tab,
+  libraries_tab,
+  menstrual_tab,
+  computers_tab,
+  science_tab,
+
+  # Chart.js + data + render logic
+  '<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>',
+  '<script>',
+  'var SURVEY_DATA = ', survey_json, ';\n',
+  'var SCHOOL_NAMES = ', school_names_json, ';\n',
+  js_code,
+  '</script>'
+)
+```
+
+```{r}
+#| echo: false
+
+# Date range selector
+htmltools::HTML(paste0(
+  '<div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">',
+  '<label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>',
+  '<input type="date" id="survey-date-start" value="', survey_date_min, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">',
+  '<span style="color:#999;">to</span>',
+  '<input type="date" id="survey-date-end" value="', survey_date_max, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">',
+  '<button id="btn-survey-apply" style="background:var(--epi-navy); color:#fff; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Apply</button>',
+  '<button id="btn-survey-reset" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer;">Reset</button>',
+  '</div>'
+))
+```
+
+<!-- Stat Cards -->
+::: {.stat-card style="max-width:300px; margin:0 auto;"}
+[`r n_responses`]{.stat-value #stat-responses}
+
+[Survey Responses]{.stat-label}
+:::
+
+## Respondent Demographics
+
+```{r}
+#| echo: false
+
+# Gender breakdown
+gender_data <- surveys |>
+  filter(!is.na(Q3)) |>
+  count(Q3) |>
+  mutate(pct = round(n / sum(n) * 100, 1))
+
+fig_gender <- plot_ly(
+  gender_data,
+  labels = ~Q3,
+  values = ~n,
+  type = "pie",
+  textinfo = "label+percent",
+  textposition = "inside",
+  marker = list(colors = c("#F5B800", "#1C2B4A")),
+  hoverinfo = "label+value+percent"
+) |>
+  layout(
+    title = list(text = "Gender Breakdown", font = list(size = 14)),
+    showlegend = TRUE,
+    margin = list(t = 40, b = 20)
+  )
+
+fig_gender
+```
+
+```{r}
+#| echo: false
+
+# Schools represented
+pct_schools_represented <- round(n_schools / n_total_schools * 100)
+
+htmltools::HTML(sprintf(
+  '<div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-top:1rem;">
+     <span style="font-size:0.9rem; font-weight:500; color:#666; text-transform:uppercase; letter-spacing:0.05em;">Schools Represented in Survey</span>
+     <div style="display:flex; align-items:center; margin-top:0.5rem;">
+       <div class="program-bar" style="flex:1;">
+         <div class="fill" style="width:%d%%;">%d%% (%d of %d schools)</div>
+       </div>
+     </div>
+   </div>',
+  max(pct_schools_represented, 3), pct_schools_represented, n_schools, n_total_schools
+))
+```
+
+## Program Access
+
+*Percentage of all EPI schools that currently have each program*
+
+```{r}
+#| echo: false
+
+program_access <- tibble(
+  Program = c("MGR / Lantern Groups", "Library", "Menstrual Kits", "Computers", "Science Kits"),
+  pct = c(
+    round(mean(schools$MGR == 1, na.rm = TRUE) * 100),
+    round(mean(schools$Library == 1, na.rm = TRUE) * 100),
+    round(mean(schools$`Feminine Hygiene Kits` == 1, na.rm = TRUE) * 100),
+    round(mean(schools$Computer == 1, na.rm = TRUE) * 100),
+    round(mean(schools$`Science Kits` == 1, na.rm = TRUE) * 100)
+  )
+) |>
+  mutate(Program = fct_reorder(Program, pct))
+
+fig_access <- plot_ly(
+  program_access,
+  x = ~pct,
+  y = ~Program,
+  type = "bar",
+  orientation = "h",
+  marker = list(color = "#1C2B4A"),
+  text = ~paste0(pct, "%"),
+  textposition = "outside",
+  hoverinfo = "text",
+  hovertext = ~paste0(Program, ": ", pct, "% of all schools")
+) |>
+  layout(
+    xaxis = list(title = "% of All EPI Schools", range = c(0, 105), ticksuffix = "%"),
+    yaxis = list(title = ""),
+    margin = list(l = 150, r = 50, t = 10, b = 40),
+    plot_bgcolor = "rgba(0,0,0,0)",
+    paper_bgcolor = "rgba(0,0,0,0)"
+  )
+
+fig_access
+```
+
+```{r}
+#| echo: false
+
+# Output the interactive Key Insights section
+htmltools::HTML(insights_html)
+```

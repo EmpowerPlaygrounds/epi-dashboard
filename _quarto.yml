@@ -1,0 +1,30 @@
+project:
+  type: website
+  output-dir: _site
+  pre-render: Rscript run-all.R
+  resources:
+    - data/clean/**
+
+website:
+  title: "EPI Data Dashboard"
+  navbar:
+    logo: images/epi-logo.png
+    background: "#1C2B4A"
+    foreground: "#FFFFFF"
+    left:
+      - href: index.qmd
+        text: Overview
+      - href: schools.qmd
+        text: School Profiles
+      - href: visits.qmd
+        text: Visits
+      - href: surveys.qmd
+        text: Student Surveys
+      - href: issues.qmd
+        text: Issues
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false

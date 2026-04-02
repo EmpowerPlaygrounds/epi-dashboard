@@ -1,0 +1,400 @@
+---
+title: "Overview"
+format:
+  html:
+    toc: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(leaflet)
+library(here)
+library(jsonlite)
+library(htmltools)
+
+schools     <- read_csv(here("data", "clean", "schools.csv"), show_col_types = FALSE)
+visits      <- read_csv(here("data", "clean", "visits.csv"), show_col_types = FALSE)
+surveys     <- read_csv(here("data", "clean", "surveys.csv"), show_col_types = FALSE)
+issues      <- read_csv(here("data", "clean", "issues.csv"), show_col_types = FALSE)
+new_projects <- read_csv(here("data", "clean", "new_projects.csv"), show_col_types = FALSE)
+full_updates <- read_csv(here("data", "clean", "full_updates.csv"), show_col_types = FALSE)
+
+# Parse survey dates
+surveys <- surveys |> mutate(
+  survey_date = parse_date_time(StartDate, orders = c("mdY HMS", "Ymd HMS", "mdY HM")),
+  survey_date = as.Date(survey_date)
+)
+
+# Build JSON for JS-side filtering
+visits_json <- visits |>
+  mutate(
+    slug = school_name |> str_to_lower() |> str_replace_all("[^a-z0-9]+", "-") |> str_remove("-$"),
+    visit_date = as.character(visit_date)
+  ) |>
+  select(school_name, slug, visitor, visit_reason, activities, urgent_issues, visit_date) |>
+  toJSON(auto_unbox = TRUE)
+
+issues_json <- issues |>
+  mutate(visit_date = as.character(visit_date)) |>
+  select(school_name, urgent_issues, visit_date, visitor) |>
+  toJSON(auto_unbox = TRUE)
+
+projects_json <- new_projects |>
+  mutate(project_date = as.character(project_date)) |>
+  select(school_name, visitor, project_type, project_date) |>
+  toJSON(auto_unbox = TRUE)
+
+full_json <- full_updates |>
+  mutate(update_date = as.character(update_date)) |>
+  select(school_name, update_date) |>
+  toJSON(auto_unbox = TRUE)
+
+surveys_json <- surveys |>
+  mutate(survey_date = as.character(survey_date)) |>
+  select(school_name, survey_date) |>
+  toJSON(auto_unbox = TRUE)
+
+schools_json <- schools |>
+  select(school_name, Region, `EPI Start Year`, Latitude, Longitude,
+         MGR, `Non-Generating MGR`, `Feminine Hygiene Kits`, `Science Kits`,
+         Library, Computer, `Construction Projects`, Boreholes,
+         `Solar Power`, `Biofill Toilets`, `Light a Village`,
+         n_visits, n_responses, n_issues) |>
+  toJSON(auto_unbox = TRUE)
+
+# Date range for selector defaults
+all_dates <- c(visits$visit_date, new_projects$project_date, full_updates$update_date, surveys$survey_date)
+all_dates <- all_dates[!is.na(all_dates)]
+date_min <- as.character(min(all_dates))
+date_max <- as.character(max(all_dates))
+```
+
+```{r}
+#| echo: false
+htmltools::HTML(paste0(
+'<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Date Range Selector -->
+<div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">
+  <label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>
+  <input type="date" id="date-start" value="', date_min, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+  <span style="color:#999;">to</span>
+  <input type="date" id="date-end" value="', date_max, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+  <button id="btn-apply-dates" style="background:var(--epi-navy); color:#fff; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Apply</button>
+  <button id="btn-reset-dates" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer;">Reset</button>
+</div>
+
+<!-- Stat Cards -->
+<div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:1rem; margin-bottom:1.5rem;">
+  <div class="stat-card" style="text-align:center; padding:1.25rem;">
+    <span id="stat-visits" class="stat-value" style="font-size:2rem; display:block;"></span>
+    <span class="stat-label">Field Visits</span>
+  </div>
+  <div class="stat-card" style="text-align:center; padding:1.25rem;">
+    <span id="stat-projects" class="stat-value" style="font-size:2rem; display:block;"></span>
+    <span class="stat-label">New Projects</span>
+  </div>
+  <div class="stat-card" style="text-align:center; padding:1.25rem;">
+    <span id="stat-full" class="stat-value" style="font-size:2rem; display:block;"></span>
+    <span class="stat-label">Full Updates</span>
+  </div>
+  <div class="stat-card" style="text-align:center; padding:1.25rem;">
+    <span id="stat-surveys" class="stat-value" style="font-size:2rem; display:block;"></span>
+    <span class="stat-label">Student Surveys</span>
+  </div>
+  <div class="stat-card" style="text-align:center; padding:1.25rem;">
+    <span id="stat-issues" class="stat-value" style="font-size:2rem; display:block;"></span>
+    <span class="stat-label">Open Issues</span>
+  </div>
+</div>'
+))
+```
+
+## School Map
+
+```{r}
+#| echo: false
+schools_with_coords <- schools |>
+  filter(!is.na(Latitude) & !is.na(Longitude))
+
+leaflet(schools_with_coords) |>
+  addTiles() |>
+  addCircleMarkers(
+    lng = ~Longitude, lat = ~Latitude,
+    popup = ~paste0(
+      "<strong>", school_name, "</strong><br>",
+      "Region: ", Region, "<br>",
+      "EPI Start: ", `EPI Start Year`, "<br>",
+      "Visits: ", n_visits, " | Surveys: ", n_responses
+    ),
+    radius = 6,
+    color = "#1C2B4A",
+    fillColor = "#F5B800",
+    fillOpacity = 0.8,
+    stroke = TRUE,
+    weight = 2
+  )
+```
+
+## Recent School Visits
+
+```{r}
+#| echo: false
+htmltools::HTML('
+<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:2rem;">
+  <table id="recent-visits-table" class="table table-striped" style="width:100%;">
+    <thead>
+      <tr>
+        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Date</th>
+        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">School</th>
+        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Staff</th>
+        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Visit Reason</th>
+        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Activities</th>
+      </tr>
+    </thead>
+    <tbody id="recent-visits-body"></tbody>
+  </table>
+</div>
+')
+```
+
+## Recent New Projects
+
+```{r}
+#| echo: false
+htmltools::HTML('
+<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:2rem;">
+  <table id="recent-projects-table" class="table table-striped" style="width:100%;">
+    <thead>
+      <tr>
+        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Date</th>
+        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">School</th>
+        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Staff</th>
+        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Project Type</th>
+      </tr>
+    </thead>
+    <tbody id="recent-projects-body"></tbody>
+  </table>
+</div>
+')
+```
+
+## Programs at a Glance
+
+```{r}
+#| echo: false
+htmltools::HTML('
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:2rem;">
+  <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+    <h4 style="color:var(--epi-navy); margin-top:0;">Program Availability</h4>
+    <p style="color:#999; font-size:0.8rem; margin-bottom:1rem;">% of schools with each program</p>
+    <div id="program-bars"></div>
+  </div>
+  <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+    <h4 style="color:var(--epi-navy); margin-top:0;">Schools with Open Issues</h4>
+    <p style="color:#999; font-size:0.8rem; margin-bottom:1rem;">Schools where field staff flagged urgent issues (in date range)</p>
+    <div id="issues-summary"></div>
+  </div>
+</div>
+')
+```
+
+```{r}
+#| echo: false
+htmltools::HTML(paste0(
+  '<script>\nconst ALL_VISITS = ', visits_json,
+  ';\nconst ALL_ISSUES = ', issues_json,
+  ';\nconst ALL_PROJECTS = ', projects_json,
+  ';\nconst ALL_FULL = ', full_json,
+  ';\nconst ALL_SURVEYS = ', surveys_json,
+  ';\nconst ALL_SCHOOLS = ', schools_json,
+  ';\n</script>'
+))
+```
+
+```{r}
+#| echo: false
+#| results: asis
+cat(r"--(
+<script>
+// Helper: filter array by date range
+function inRange(dateStr, start, end) {
+  if (!dateStr) return false;
+  var d = dateStr.slice(0, 10);
+  return d >= start && d <= end;
+}
+
+// DataTable instances
+var visitsTable = null;
+var projectsTable = null;
+
+// cell style
+var cs = 'padding:0.75rem; border-bottom:1px solid #e9ecef;';
+
+// Main render function
+function renderDashboard() {
+  var start = document.getElementById('date-start').value;
+  var end   = document.getElementById('date-end').value;
+
+  // Filter data
+  var visits   = ALL_VISITS.filter(function(v) { return inRange(v.visit_date, start, end); });
+  var issues   = ALL_ISSUES.filter(function(v) { return inRange(v.visit_date, start, end); });
+  var projects = ALL_PROJECTS.filter(function(v) { return inRange(v.project_date, start, end); });
+  var full     = ALL_FULL.filter(function(v) { return inRange(v.update_date, start, end); });
+  var surveys  = ALL_SURVEYS.filter(function(v) { return inRange(v.survey_date, start, end); });
+
+  // Stat cards
+  document.getElementById('stat-visits').textContent   = visits.length;
+  document.getElementById('stat-projects').textContent  = projects.length;
+  document.getElementById('stat-full').textContent      = full.length;
+  document.getElementById('stat-surveys').textContent   = surveys.length;
+  document.getElementById('stat-issues').textContent    = issues.length;
+
+  // Recent Visits table
+  var sortedVisits = visits.slice().sort(function(a, b) {
+    return (b.visit_date || '').localeCompare(a.visit_date || '');
+  });
+  var visitsBody = document.getElementById('recent-visits-body');
+  visitsBody.innerHTML = '';
+  sortedVisits.forEach(function(v) {
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td style="' + cs + '">' + (v.visit_date || '') + '</td>' +
+      '<td style="' + cs + '"><a href="schools.html?school=' + v.slug + '" style="color:var(--epi-navy); font-weight:600; text-decoration:none; border-bottom:1px dashed var(--epi-navy);">' + v.school_name + '</a></td>' +
+      '<td style="' + cs + '">' + (v.visitor || '') + '</td>' +
+      '<td style="' + cs + '">' + (v.visit_reason || '') + '</td>' +
+      '<td style="' + cs + '">' + (v.activities || '') + '</td>';
+    visitsBody.appendChild(tr);
+  });
+
+  if (visitsTable) { visitsTable.destroy(); visitsTable = null; }
+  if (typeof jQuery !== 'undefined' && jQuery.fn.DataTable) {
+    visitsTable = jQuery('#recent-visits-table').DataTable({
+      pageLength: 10,
+      order: [[0, 'desc']],
+      language: { search: 'Filter:' }
+    });
+  }
+
+  // Recent Projects table
+  var sortedProjects = projects.slice().sort(function(a, b) {
+    return (b.project_date || '').localeCompare(a.project_date || '');
+  });
+  var projectsBody = document.getElementById('recent-projects-body');
+  projectsBody.innerHTML = '';
+  sortedProjects.forEach(function(p) {
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td style="' + cs + '">' + (p.project_date || '') + '</td>' +
+      '<td style="' + cs + '">' + (p.school_name || '') + '</td>' +
+      '<td style="' + cs + '">' + (p.visitor || '') + '</td>' +
+      '<td style="' + cs + '">' + (p.project_type || '') + '</td>';
+    projectsBody.appendChild(tr);
+  });
+
+  if (projectsTable) { projectsTable.destroy(); projectsTable = null; }
+  if (typeof jQuery !== 'undefined' && jQuery.fn.DataTable) {
+    projectsTable = jQuery('#recent-projects-table').DataTable({
+      pageLength: 10,
+      order: [[0, 'desc']],
+      language: { search: 'Filter:' }
+    });
+  }
+
+  // Program Availability bars
+  var programCols = [
+    { key: 'MGR', label: 'MGR (Merry-Go-Round)' },
+    { key: 'Non-Generating MGR', label: 'Non-Generating MGR' },
+    { key: 'Feminine Hygiene Kits', label: 'Feminine Hygiene Kits' },
+    { key: 'Science Kits', label: 'Science Kits' },
+    { key: 'Library', label: 'Library' },
+    { key: 'Computer', label: 'Computer Lab' },
+    { key: 'Construction Projects', label: 'Construction Projects' },
+    { key: 'Boreholes', label: 'Boreholes' },
+    { key: 'Solar Power', label: 'Solar Power' },
+    { key: 'Biofill Toilets', label: 'Biofill Toilets' },
+    { key: 'Light a Village', label: 'Light a Village' }
+  ];
+
+  var barsHtml = '';
+  programCols.forEach(function(prog) {
+    var total = ALL_SCHOOLS.length;
+    var withProg = ALL_SCHOOLS.filter(function(s) { return Number(s[prog.key]) >= 1; }).length;
+    var pct = Math.round((withProg / total) * 100);
+    var barWidth = Math.max(pct, 3);
+    barsHtml +=
+      '<div style="display:flex; align-items:center; margin-bottom:0.4rem;">' +
+      '<span style="width:180px; font-size:0.85rem;">' + prog.label + '</span>' +
+      '<div class="program-bar" style="flex:1;">' +
+      '<div class="fill" style="width:' + barWidth + '%;">' + pct + '%</div>' +
+      '</div></div>';
+  });
+  document.getElementById('program-bars').innerHTML = barsHtml;
+
+  // Schools with Open Issues
+  var schoolsWithIssues = [];
+  var seen = {};
+  issues.forEach(function(i) {
+    if (!seen[i.school_name]) {
+      seen[i.school_name] = true;
+      schoolsWithIssues.push(i.school_name);
+    }
+  });
+  var totalSchools = ALL_SCHOOLS.length;
+  var pctWithIssues = totalSchools > 0 ? Math.round((schoolsWithIssues.length / totalSchools) * 100) : 0;
+
+  var issuesHtml = '';
+  issuesHtml +=
+    '<div style="text-align:center; margin-bottom:1.5rem;">' +
+    '<span style="font-size:2rem; font-weight:700; color:var(--epi-navy);">' + schoolsWithIssues.length + '</span>' +
+    '<span style="font-size:0.9rem; color:#666;"> / ' + totalSchools + ' schools</span>' +
+    '<div style="font-size:0.85rem; color:#999;">(' + pctWithIssues + '% of schools have open issues)</div>' +
+    '</div>';
+
+  if (schoolsWithIssues.length > 0) {
+    schoolsWithIssues.sort();
+    schoolsWithIssues.forEach(function(name) {
+      var schoolIssues = issues.filter(function(i) { return i.school_name === name; });
+      var slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, '');
+      issuesHtml +=
+        '<div style="border-left:3px solid #dc3545; padding-left:0.75rem; margin-bottom:0.75rem;">' +
+        '<a href="schools.html?school=' + slug + '" style="color:var(--epi-navy); font-weight:600; font-size:0.9rem; text-decoration:none; border-bottom:1px dashed var(--epi-navy);">' + name + '</a>' +
+        '<span style="color:#999; font-size:0.8rem;"> (' + schoolIssues.length + ' issue' + (schoolIssues.length > 1 ? 's' : '') + ')</span>';
+      schoolIssues.forEach(function(iss) {
+        issuesHtml += '<div style="font-size:0.8rem; color:#555; margin-top:0.2rem;">' + iss.urgent_issues + '</div>';
+      });
+      issuesHtml += '</div>';
+    });
+  } else {
+    issuesHtml += '<p style="color:#999; font-style:italic;">No urgent issues flagged in this date range.</p>';
+  }
+  document.getElementById('issues-summary').innerHTML = issuesHtml;
+}
+
+// Use window.onload to ensure all CDN scripts are loaded
+window.addEventListener('load', function() {
+  renderDashboard();
+
+  document.getElementById('btn-apply-dates').addEventListener('click', renderDashboard);
+
+  document.getElementById('btn-reset-dates').addEventListener('click', function() {
+    var allDates = []
+      .concat(ALL_VISITS.map(function(v) { return v.visit_date; }))
+      .concat(ALL_PROJECTS.map(function(v) { return v.project_date; }))
+      .concat(ALL_FULL.map(function(v) { return v.update_date; }))
+      .concat(ALL_SURVEYS.map(function(v) { return v.survey_date; }))
+      .filter(function(d) { return d; });
+    allDates.sort();
+    document.getElementById('date-start').value = allDates[0] || '';
+    document.getElementById('date-end').value = allDates[allDates.length - 1] || '';
+    renderDashboard();
+  });
+});
+</script>
+)--")
+```

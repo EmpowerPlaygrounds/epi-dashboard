@@ -1,0 +1,190 @@
+---
+title: "Visit Tracker"
+format:
+  html:
+    toc: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(jsonlite)
+library(here)
+library(DT)
+
+visits  <- read_csv(here("data", "clean", "visits.csv"), show_col_types = FALSE)
+schools <- read_csv(here("data", "clean", "schools.csv"), show_col_types = FALSE)
+
+# Date range defaults
+visit_dates <- visits$visit_date[!is.na(visits$visit_date)]
+date_min <- as.character(min(visit_dates))
+date_max <- as.character(max(visit_dates))
+
+# All school names for the "0 visits" inclusion
+all_school_names <- sort(schools$school_name)
+
+# Build JSON for interactive filtering
+visits_json_data <- visits |>
+  transmute(
+    visit_date = as.character(visit_date),
+    school_name,
+    visitor,
+    visit_reason,
+    activities
+  )
+
+visits_json <- toJSON(visits_json_data, auto_unbox = TRUE, na = "null")
+schools_json <- toJSON(all_school_names, auto_unbox = TRUE)
+n_total_schools <- length(all_school_names)
+```
+
+```{r}
+#| echo: false
+
+# Date range selector
+htmltools::HTML(paste0(
+  '<div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">',
+  '<label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>',
+  '<input type="date" id="date-start" value="', date_min, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">',
+  '<span style="color:#999;">to</span>',
+  '<input type="date" id="date-end" value="', date_max, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">',
+  '<button id="btn-apply-dates" style="background:var(--epi-navy); color:#fff; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Apply</button>',
+  '<button id="btn-reset-dates" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer;">Reset</button>',
+  '</div>'
+))
+```
+
+```{r}
+#| echo: false
+
+# Pie chart + visit log + visits by school — all rendered via JS for year filtering
+htmltools::HTML(paste0(
+'<div style="max-width:380px; margin:0 auto 2rem; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;">
+  <h4 style="margin-top:0; color:var(--epi-navy);">Schools Visited</h4>
+  <canvas id="visited-pie" width="280" height="280"></canvas>
+  <p id="visited-summary" style="color:#666; font-size:0.85rem; margin-top:0.75rem;"></p>
+</div>
+
+<h2>Visit Log</h2>
+<div id="visit-log-container" style="margin-bottom:2rem;">
+  <table id="visit-log-table" class="display compact stripe" style="width:100%;"></table>
+</div>
+
+<h2>Visits by School</h2>
+<div id="visits-by-school-container">
+  <table id="visits-by-school-table" class="display compact stripe" style="width:100%;"></table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+var VISITS = ', visits_json, ';
+var ALL_SCHOOLS = ', schools_json, ';
+var N_TOTAL = ', n_total_schools, ';
+var visitedPieChart = null;
+var logDT = null;
+var bySchoolDT = null;
+
+function inRange(dateStr, start, end) {
+  if (!dateStr) return false;
+  var d = dateStr.slice(0, 10);
+  return d >= start && d <= end;
+}
+
+function renderVisitPage() {
+  var start = document.getElementById("date-start").value;
+  var end   = document.getElementById("date-end").value;
+  var filtered = VISITS.filter(function(v) { return inRange(v.visit_date, start, end); });
+
+  // --- Pie chart: % schools visited ---
+  var visitedSchools = {};
+  filtered.forEach(function(v) { if (v.school_name) visitedSchools[v.school_name] = true; });
+  var nVisited = Object.keys(visitedSchools).length;
+  var nNotVisited = N_TOTAL - nVisited;
+
+  if (visitedPieChart) visitedPieChart.destroy();
+  var canvas = document.getElementById("visited-pie");
+  visitedPieChart = new Chart(canvas, {
+    type: "pie",
+    data: {
+      labels: ["Visited (" + nVisited + ")", "Not Visited (" + nNotVisited + ")"],
+      datasets: [{
+        data: [nVisited, nNotVisited],
+        backgroundColor: ["#1C2B4A", "#e9ecef"]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { position: "bottom", labels: { font: { size: 12 } } },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              var pct = N_TOTAL > 0 ? Math.round(ctx.raw / N_TOTAL * 100) : 0;
+              return ctx.label + " - " + pct + "%";
+            }
+          }
+        }
+      }
+    }
+  });
+
+  var pctVisited = N_TOTAL > 0 ? Math.round(nVisited / N_TOTAL * 100) : 0;
+  document.getElementById("visited-summary").textContent = nVisited + " of " + N_TOTAL + " schools visited (" + pctVisited + "%)";
+
+  // --- Visit Log DataTable ---
+  if (logDT) { logDT.destroy(); document.getElementById("visit-log-table").innerHTML = ""; }
+  var logData = filtered.map(function(v) {
+    return [v.visit_date || "", v.school_name || "", v.visitor || "", v.visit_reason || "", v.activities || ""];
+  });
+  logDT = jQuery("#visit-log-table").DataTable({
+    data: logData,
+    columns: [
+      { title: "Date", width: "100px" },
+      { title: "School", width: "140px" },
+      { title: "Staff Member", width: "100px" },
+      { title: "Visit Reason" },
+      { title: "Activities" }
+    ],
+    pageLength: 15,
+    order: [[0, "desc"]],
+    dom: "lfrtip",
+    autoWidth: false
+  });
+
+  // --- Visits by School (include 0-visit schools) ---
+  if (bySchoolDT) { bySchoolDT.destroy(); document.getElementById("visits-by-school-table").innerHTML = ""; }
+  var schoolCounts = {};
+  ALL_SCHOOLS.forEach(function(s) { schoolCounts[s] = 0; });
+  filtered.forEach(function(v) { if (v.school_name && schoolCounts.hasOwnProperty(v.school_name)) schoolCounts[v.school_name]++; });
+  var bySchoolData = Object.keys(schoolCounts).sort().map(function(s) { return [s, schoolCounts[s]]; });
+
+  bySchoolDT = jQuery("#visits-by-school-table").DataTable({
+    data: bySchoolData,
+    columns: [
+      { title: "School" },
+      { title: "Visits", width: "80px" }
+    ],
+    pageLength: 15,
+    order: [[1, "desc"]],
+    dom: "lfrtip"
+  });
+}
+
+// Initial render + event listeners
+document.addEventListener("DOMContentLoaded", function() {
+  renderVisitPage();
+  document.getElementById("btn-apply-dates").addEventListener("click", renderVisitPage);
+  document.getElementById("btn-reset-dates").addEventListener("click", function() {
+    var allDates = VISITS.map(function(v) { return v.visit_date; }).filter(function(d) { return d; }).sort();
+    document.getElementById("date-start").value = allDates[0] || "";
+    document.getElementById("date-end").value = allDates[allDates.length - 1] || "";
+    renderVisitPage();
+  });
+});
+</script>
+'))
+```

@@ -1,0 +1,22 @@
+# Environment and secrets
+.env
+
+# Raw and clean data (rebuilt from pipeline)
+data/raw/
+data/clean/
+
+# Quarto build output
+_site/
+.quarto/
+
+# R artifacts
+.Rproj.user
+.Rhistory
+.RData
+.Rproj.user/
+
+# OS files
+.DS_Store
+
+/.quarto/
+**/*.quarto_ipynb

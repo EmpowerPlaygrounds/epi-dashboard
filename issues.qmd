@@ -1,0 +1,106 @@
+---
+title: "Issues & Flags"
+format:
+  html:
+    toc: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(here)
+
+issues <- read_csv(here("data", "clean", "issues.csv"), show_col_types = FALSE)
+
+# Build school profile slugs for linking
+issues <- issues |>
+  mutate(
+    slug = school_name |>
+      str_to_lower() |>
+      str_replace_all("[^a-z0-9]+", "-") |>
+      str_remove("-$"),
+    visit_date = as.character(visit_date)
+  )
+```
+
+```{r}
+#| echo: false
+
+n_issues <- nrow(issues)
+n_schools_affected <- n_distinct(issues$school_name)
+
+# Build the HTML
+issue_cards <- ""
+if (n_issues == 0) {
+  issue_cards <- '<p><em style="color:#999;">No urgent issues currently flagged.</em></p>'
+} else {
+  for (i in seq_len(n_issues)) {
+    row <- issues[i, ]
+    border <- 'border-left:4px solid #dc3545;'
+    date_str <- if (!is.na(row$visit_date) && row$visit_date != "") row$visit_date else ""
+    visitor_str <- if (!is.na(row$visitor) && row$visitor != "") row$visitor else ""
+
+    card <- paste0(
+      '<div style="background:#fff; border-radius:8px; padding:1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1rem; ', border, '">',
+      '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">',
+      '<a href="schools.html?school=', row$slug, '" style="color:var(--epi-navy); font-weight:700; font-size:1rem; text-decoration:none; border-bottom:1px dashed var(--epi-navy);">', row$school_name, '</a>',
+      '<span style="color:#999; font-size:0.8rem;">', date_str,
+      if (visitor_str != "") paste0(' &middot; ', visitor_str) else "",
+      '</span>',
+      '</div>',
+      '<p style="font-size:0.9rem; margin:0.25rem 0 0; color:#333;">', row$urgent_issues, '</p>',
+      if (!is.na(row$visit_reason) && row$visit_reason != "") paste0('<p style="font-size:0.8rem; margin:0.25rem 0 0; color:#999;">Visit reason: ', row$visit_reason, '</p>') else "",
+      '</div>'
+    )
+    issue_cards <- paste0(issue_cards, card)
+  }
+}
+
+# Summary table with clickable school names
+summary_data <- issues |>
+  count(school_name, slug, sort = TRUE)
+
+summary_rows <- ""
+for (i in seq_len(nrow(summary_data))) {
+  row <- summary_data[i, ]
+  summary_rows <- paste0(summary_rows,
+    '<tr>',
+    '<td style="padding:0.75rem; border-bottom:1px solid #e9ecef;">',
+    '<a href="schools.html?school=', row$slug, '" style="color:var(--epi-navy); font-weight:600; text-decoration:none; border-bottom:1px dashed var(--epi-navy);">', row$school_name, '</a></td>',
+    '<td style="padding:0.75rem; border-bottom:1px solid #e9ecef; text-align:center;">', row$n, '</td>',
+    '</tr>')
+}
+
+summary_table <- paste0(
+  '<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);">',
+  '<table style="width:100%; border-collapse:collapse;">',
+  '<thead><tr>',
+  '<th style="background:var(--epi-navy); color:#fff; padding:0.75rem; text-align:left; border-radius:4px 0 0 0;">School</th>',
+  '<th style="background:var(--epi-navy); color:#fff; padding:0.75rem; text-align:center; border-radius:0 4px 0 0;">Issues Reported</th>',
+  '</tr></thead><tbody>',
+  summary_rows,
+  '</tbody></table></div>'
+)
+
+htmltools::HTML(paste0(
+  # Stat overview
+  '<div class="stat-card" style="padding:1rem; max-width:300px; margin:0 auto 2rem;">',
+  '<span class="stat-value" style="font-size:1.8rem; display:block;">', n_issues, '</span>',
+  '<span class="stat-label" style="font-size:0.75rem;">Open Issues</span></div>',
+
+  # Current issues
+  '<h2>Current Issues</h2>',
+  '<p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">Urgent issues flagged during field visits. <em>Issue resolution will be available in a future update.</em></p>',
+  issue_cards,
+
+  # Resolved issues placeholder
+  '<h2>Resolved Issues</h2>',
+  '<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:2rem;">',
+  '<p style="color:#999; font-style:italic; margin:0;">No resolved issues yet. The ability to resolve issues will be available in a future update.</p>',
+  '</div>',
+
+  # Summary
+  '<h2>Summary</h2>',
+  summary_table
+))
+```

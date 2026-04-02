@@ -1,0 +1,369 @@
+---
+title: "School Profiles"
+format:
+  html:
+    toc: false
+---
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(jsonlite)
+library(here)
+
+schools  <- read_csv(here("data", "clean", "schools.csv"), show_col_types = FALSE)
+visits   <- read_csv(here("data", "clean", "visits.csv"), show_col_types = FALSE)
+surveys  <- read_csv(here("data", "clean", "surveys.csv"), show_col_types = FALSE)
+issues   <- read_csv(here("data", "clean", "issues.csv"), show_col_types = FALSE)
+
+# Read full update data
+raw_full <- read_csv(here("data", "raw", "full_update.csv"), show_col_types = FALSE)
+clean_full <- raw_full |>
+  slice(-1) |>
+  rename(school_name = Q2) |>
+  mutate(school_name = str_trim(school_name))
+
+# Date range defaults
+visit_dates <- visits$visit_date[!is.na(visits$visit_date)]
+date_min <- as.character(min(visit_dates))
+date_max <- as.character(max(visit_dates))
+
+# Build the full data object for all schools
+all_school_data <- list()
+for (name in sort(schools$school_name)) {
+  slug <- name |>
+    str_to_lower() |>
+    str_replace_all("[^a-z0-9]+", "-") |>
+    str_remove("-$")
+
+  school_visits <- visits |> filter(school_name == name) |> mutate(across(everything(), as.character))
+
+  all_school_data[[slug]] <- list(
+    info        = schools |> filter(school_name == name) |> as.list(),
+    visits      = school_visits,
+    full_update = clean_full |> filter(school_name == name) |> mutate(across(everything(), as.character)),
+    issues      = issues |> filter(school_name == name) |> mutate(across(everything(), as.character))
+  )
+}
+
+# Build dropdown options
+school_options <- schools |>
+  arrange(school_name) |>
+  transmute(
+    name = school_name,
+    slug = school_name |>
+      str_to_lower() |>
+      str_replace_all("[^a-z0-9]+", "-") |>
+      str_remove("-$")
+  )
+
+options_html <- paste0(
+  '<option value="', school_options$slug, '">', school_options$name, '</option>',
+  collapse = "\n"
+)
+
+data_json <- toJSON(all_school_data, auto_unbox = TRUE, na = "null")
+```
+
+```{r}
+#| echo: false
+
+htmltools::HTML(paste0(
+'<div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">
+  <label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>
+  <input type="date" id="school-date-start" value="', date_min, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+  <span style="color:#999;">to</span>
+  <input type="date" id="school-date-end" value="', date_max, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+  <button id="btn-school-apply" style="background:var(--epi-navy); color:#fff; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Apply</button>
+  <button id="btn-school-reset" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer;">Reset</button>
+</div>
+
+<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem;">
+  <label for="school-dropdown" style="font-size:0.9rem; font-weight:600; color:var(--epi-navy); text-transform:uppercase; letter-spacing:0.05em;">Select a School:</label>
+  <select id="school-dropdown" onchange="loadSchool(this.value)" style="margin-left:0.5rem; padding:0.4rem 0.8rem; border-radius:4px; border:1px solid #ccc; font-size:1rem;">
+    <option value="">— Choose a school —</option>
+    ', options_html, '
+  </select>
+</div>
+
+<div id="school-detail" style="display:none;">
+
+<div class="school-header">
+  <h2 id="school-name"></h2>
+  <p id="school-meta" style="margin:0; opacity:0.85;"></p>
+</div>
+
+<div id="info-cards" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:1rem; margin-bottom:1.5rem;"></div>
+
+<h3>Programs</h3>
+<div id="school-programs" style="margin-bottom:1.5rem;"></div>
+
+<div id="school-details-section" style="display:none;">
+<h3>School Details</h3>
+<div style="display:flex; flex-wrap:wrap; gap:1.5rem; margin-bottom:1.5rem;">
+  <div id="class-chart-container" style="flex:1; min-width:280px; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+    <h4 style="margin-top:0; color:var(--epi-navy);">Student Enrollment Breakdown</h4>
+    <canvas id="class-pie-chart" width="300" height="300"></canvas>
+    <div id="no-class-data" style="display:none; color:#999;"><em>No class data available</em></div>
+  </div>
+  <div id="school-details" style="flex:1; min-width:280px; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"></div>
+</div>
+</div>
+
+<h3>Notes From Last Visit</h3>
+<div id="school-visits" style="margin-bottom:1.5rem;"></div>
+
+<h3>AI Summary</h3>
+<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem;">
+  <p style="color:#666; font-size:0.9rem; margin-bottom:0.75rem;">Generate an AI-powered summary of visit notes highlighting what this school is doing well and where it needs support.</p>
+  <button class="btn-ai-summary" onclick="generateSummary()">Generate AI Summary</button>
+  <div id="ai-summary" style="margin-top:1rem;"></div>
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+var ALL_SCHOOLS = ', data_json, ';
+
+var currentSchool = null;
+var classChart = null;
+
+function inRange(dateStr, start, end) {
+  if (!dateStr) return false;
+  var d = dateStr.slice(0, 10);
+  return d >= start && d <= end;
+}
+
+var ICONS = {
+  community: \'<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--epi-navy); opacity:0.4;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>\',
+  visits: \'<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--epi-navy); opacity:0.4;"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>\',
+  issues: \'<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#dc3545; opacity:0.6;"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>\'
+};
+
+function makeCard(value, label, icon) {
+  return \'<div class="stat-card" style="padding:1rem;">\' +
+    \'<span class="stat-value" style="font-size:1.8rem; display:block;">\' + value + \'</span>\' +
+    \'<div style="display:flex; align-items:center; justify-content:center; gap:0.35rem; margin-top:0.25rem;">\' +
+    (icon ? icon : "") +
+    \'<span class="stat-label" style="font-size:0.75rem;">\' + label + \'</span>\' +
+    \'</div></div>\';
+}
+
+function loadSchool(slug) {
+  if (!slug) {
+    document.getElementById("school-detail").style.display = "none";
+    return;
+  }
+  var data = ALL_SCHOOLS[slug];
+  if (!data) {
+    document.getElementById("school-detail").style.display = "none";
+    return;
+  }
+  currentSchool = data;
+  currentSchool._slug = slug;
+  document.getElementById("school-detail").style.display = "block";
+
+  var info = data.info;
+
+  // Header with year selector
+  document.getElementById("school-name").textContent = info.school_name;
+  var metaParts = [];
+  if (info.Region) metaParts.push(info.Region + " Region");
+  if (info["EPI Start Year"]) metaParts.push("EPI Partner Since " + info["EPI Start Year"]);
+  if (info.Latitude && info.Longitude) {
+    metaParts.push(\'<a href="https://www.google.com/maps?q=\' + info.Latitude + "," + info.Longitude + \'" target="_blank" style="color:var(--epi-yellow); text-decoration:underline;">View on Map</a>\');
+  }
+  document.getElementById("school-meta").innerHTML = metaParts.join(" &nbsp;&middot;&nbsp; ");
+
+  renderSchoolContent(slug, data);
+}
+
+function renderSchoolContent(slug, data) {
+  var info = data.info;
+  var start = document.getElementById("school-date-start").value;
+  var end = document.getElementById("school-date-end").value;
+
+  // Filter visits by date range
+  var allVisits = data.visits || [];
+  var visits = allVisits;
+  if (start && end && Array.isArray(allVisits)) {
+    visits = allVisits.filter(function(v) {
+      var d = v.visit_date || v.StartDate || "";
+      return inRange(d, start, end);
+    });
+  }
+
+  // Info Cards
+  var fu = data.full_update;
+  var latestUpdate = (Array.isArray(fu) && fu.length > 0) ? fu[fu.length - 1] : null;
+
+  var cards = "";
+  if (latestUpdate && latestUpdate.Q5) {
+    cards += makeCard(parseInt(latestUpdate.Q5).toLocaleString(), "Estimated Community Population", ICONS.community);
+  }
+  cards += makeCard(visits.length, "Visit(s) in Range", ICONS.visits);
+  if (info.n_issues > 0) {
+    cards += makeCard(info.n_issues, "Open Issues", ICONS.issues);
+  }
+  document.getElementById("info-cards").innerHTML = cards;
+
+  // Programs
+  var programMap = {
+    "MGR": "MGR / Lanterns",
+    "Non-Generating MGR": "Non-Generating MGR",
+    "Library": "Library",
+    "Computer": "Computers",
+    "Feminine Hygiene Kits": "Menstrual Kits",
+    "Science Kits": "Science Kits",
+    "Construction Projects": "Construction",
+    "Boreholes": "Boreholes",
+    "Solar Power": "Solar Power",
+    "Biofill Toilets": "Biofill Toilets",
+    "Light a Village": "Light a Village"
+  };
+  var progHtml = Object.keys(programMap)
+    .filter(function(key) { return info[key] == 1; })
+    .map(function(key) { return \'<span class="badge-program">\' + programMap[key] + "</span>"; })
+    .join(" ");
+  document.getElementById("school-programs").innerHTML = progHtml || "<em>No programs recorded</em>";
+
+  // School Details
+  var detailsSection = document.getElementById("school-details-section");
+
+  if (latestUpdate) {
+    detailsSection.style.display = "block";
+
+    // Enrollment pie chart (Primary vs JHS)
+    var noDataMsg = document.getElementById("no-class-data");
+    var canvas = document.getElementById("class-pie-chart");
+
+    if (classChart) {
+      classChart.destroy();
+      classChart = null;
+    }
+
+    var primaryN = latestUpdate.Q8 ? parseInt(latestUpdate.Q8) : 0;
+    var jhsN = (latestUpdate.Q10 === "Yes" && latestUpdate.Q11) ? parseInt(latestUpdate.Q11) : 0;
+
+    if (primaryN > 0 || jhsN > 0) {
+      canvas.style.display = "block";
+      noDataMsg.style.display = "none";
+      var chartLabels = [];
+      var chartData = [];
+      var chartColors = [];
+      if (primaryN > 0) { chartLabels.push("Primary (" + primaryN + ")"); chartData.push(primaryN); chartColors.push("#1C2B4A"); }
+      if (jhsN > 0) { chartLabels.push("JHS (" + jhsN + ")"); chartData.push(jhsN); chartColors.push("#F5B800"); }
+      classChart = new Chart(canvas, {
+        type: "pie",
+        data: {
+          labels: chartLabels,
+          datasets: [{
+            data: chartData,
+            backgroundColor: chartColors
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: { position: "bottom", labels: { font: { size: 12 } } }
+          }
+        }
+      });
+    } else {
+      canvas.style.display = "none";
+      noDataMsg.style.display = "block";
+    }
+
+    // Details table — enrollment stats + last year academic outcomes
+    var details = \'<table class="dashboard-table">\';
+    if (latestUpdate.Q6) details += "<tr><td style=\\"font-weight:600; width:250px;\\">Students Enrolled</td><td>" + parseInt(latestUpdate.Q6).toLocaleString() + "</td></tr>";
+    if (latestUpdate.Q7) details += "<tr><td style=\\"font-weight:600;\\">Teachers</td><td>" + latestUpdate.Q7 + "</td></tr>";
+    details += "</table>";
+
+    // Last year stats
+    var hasLastYear = latestUpdate.Q9 || latestUpdate.Q12 || latestUpdate.Q13 || (latestUpdate.Q15 && latestUpdate.Q15 !== "N/A");
+    if (hasLastYear) {
+      details += \'<h5 style="margin:1.25rem 0 0.5rem; color:var(--epi-navy); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.05em; border-top:1px solid #e9ecef; padding-top:1rem;">Last Year</h5>\';
+      details += \'<table class="dashboard-table">\';
+      if (latestUpdate.Q9) details += "<tr><td style=\\"font-weight:600; width:250px;\\">Completed Primary to JHS</td><td>" + latestUpdate.Q9 + " students</td></tr>";
+      if (latestUpdate.Q12) details += "<tr><td style=\\"font-weight:600;\\">BECE Test Takers</td><td>" + latestUpdate.Q12 + "</td></tr>";
+      if (latestUpdate.Q13) details += "<tr><td style=\\"font-weight:600;\\">BECE Passers</td><td>" + latestUpdate.Q13 + "</td></tr>";
+      if (latestUpdate.Q15 && latestUpdate.Q15 !== "N/A") details += "<tr><td style=\\"font-weight:600;\\">Went on to Secondary/Technical</td><td>" + latestUpdate.Q15 + " students</td></tr>";
+      details += "</table>";
+    }
+
+    document.getElementById("school-details").innerHTML = details;
+  } else {
+    detailsSection.style.display = "none";
+  }
+
+  // Notes From Last Visit (most recent visit only)
+  if (Array.isArray(visits) && visits.length > 0) {
+    var v = visits[visits.length - 1];
+    var date = v.visit_date || v.StartDate || "";
+    var vhtml = \'<div style="background:#fff; border-radius:8px; padding:1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1rem;">\';
+    vhtml += \'<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">\';
+    if (date) vhtml += \'<span style="color:var(--epi-navy); font-weight:600; font-size:0.95rem;">\' + date + "</span>";
+    if (v.visitor) vhtml += \'<span style="color:#666; font-size:0.85rem;">Staff: \' + v.visitor + "</span>";
+    vhtml += "</div>";
+    if (v.visit_reason) vhtml += \'<p style="font-size:0.9rem; margin:0.25rem 0;"><strong>Reason for visit:</strong> \' + v.visit_reason + "</p>";
+    if (v.activities) vhtml += \'<p style="font-size:0.9rem; margin:0.25rem 0;"><strong>What was done:</strong> \' + v.activities + "</p>";
+    if (v.observations) vhtml += \'<p style="font-size:0.9rem; margin:0.25rem 0; color:#666;"><strong>Observations:</strong> \' + v.observations + "</p>";
+    vhtml += "</div>";
+    document.getElementById("school-visits").innerHTML = vhtml;
+  } else {
+    document.getElementById("school-visits").innerHTML = \'<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><em style="color:#999;">No visits recorded in this date range</em></div>\';
+  }
+
+  document.getElementById("ai-summary").innerHTML = "";
+}
+
+function generateSummary() {
+  if (!currentSchool) return;
+  var notes = (currentSchool.visits || []).map(function(v) {
+    return [v.doing_well, v.struggles, v.urgent_issues, v.observations].filter(Boolean).join(" ");
+  });
+  if (notes.length === 0) {
+    document.getElementById("ai-summary").innerHTML = \'<em style="color:#999;">No visit notes available for summary.</em>\';
+    return;
+  }
+  document.getElementById("ai-summary").innerHTML = "<em>AI summary generation requires a backend API connection. This feature will be available in a future update.</em>";
+}
+
+// Date range Apply/Reset
+document.getElementById("btn-school-apply").addEventListener("click", function() {
+  if (currentSchool) renderSchoolContent(currentSchool._slug, currentSchool);
+});
+document.getElementById("btn-school-reset").addEventListener("click", function() {
+  var allDates = [];
+  Object.keys(ALL_SCHOOLS).forEach(function(slug) {
+    (ALL_SCHOOLS[slug].visits || []).forEach(function(v) {
+      if (v.visit_date) allDates.push(v.visit_date.slice(0, 10));
+    });
+  });
+  allDates.sort();
+  if (allDates.length > 0) {
+    document.getElementById("school-date-start").value = allDates[0];
+    document.getElementById("school-date-end").value = allDates[allDates.length - 1];
+  }
+  if (currentSchool) renderSchoolContent(currentSchool._slug, currentSchool);
+});
+
+// Auto-select school from URL parameter (e.g. ?school=school-slug)
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var schoolSlug = params.get("school");
+  if (schoolSlug) {
+    var sel = document.getElementById("school-dropdown");
+    if (sel) {
+      sel.value = schoolSlug;
+      loadSchool(schoolSlug);
+    }
+  }
+})();
+</script>
+'))
+```
