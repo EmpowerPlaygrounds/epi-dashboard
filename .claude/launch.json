@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "quarto-preview",
+      "runtimeExecutable": "quarto",
+      "runtimeArgs": ["preview", "--port", "4848", "--no-browse"],
+      "port": 4848
+    },
+    {
+      "name": "static-site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["http-server", "_site", "-p", "4849", "-c-1"],
+      "port": 4849
+    }
+  ]
+}

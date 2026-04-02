@@ -321,16 +321,37 @@ function renderSchoolContent(slug, data) {
   document.getElementById("ai-summary").innerHTML = "";
 }
 
-function generateSummary() {
+async function generateSummary() {
   if (!currentSchool) return;
   var notes = (currentSchool.visits || []).map(function(v) {
     return [v.doing_well, v.struggles, v.urgent_issues, v.observations].filter(Boolean).join(" ");
-  });
+  }).filter(function(n) { return n.trim() !== ""; });
   if (notes.length === 0) {
     document.getElementById("ai-summary").innerHTML = \'<em style="color:#999;">No visit notes available for summary.</em>\';
     return;
   }
-  document.getElementById("ai-summary").innerHTML = "<em>AI summary generation requires a backend API connection. This feature will be available in a future update.</em>";
+
+  var summaryDiv = document.getElementById("ai-summary");
+  summaryDiv.innerHTML = \'<em style="color:var(--epi-navy);">Generating summary...</em>\';
+
+  try {
+    var resp = await fetch("/api/summary", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        school_name: currentSchool.info.school_name,
+        notes: notes
+      })
+    });
+    var data = await resp.json();
+    if (data.error) {
+      summaryDiv.innerHTML = \'<em style="color:#dc3545;">Error: \' + data.error + \'</em>\';
+    } else {
+      summaryDiv.innerHTML = \'<div style="white-space:pre-wrap; line-height:1.6;">\' + data.summary + \'</div>\';
+    }
+  } catch (err) {
+    summaryDiv.innerHTML = \'<em style="color:#dc3545;">Failed to connect to AI service. Please try again later.</em>\';
+  }
 }
 
 // Date range Apply/Reset
