@@ -16,6 +16,7 @@ jobs:
       SHEET_FULL_UPDATE: ${{ secrets.SHEET_FULL_UPDATE }}
       SHEET_STUDENT_SURVEY: ${{ secrets.SHEET_STUDENT_SURVEY }}
       SHEET_NEW_PROJECT: ${{ secrets.SHEET_NEW_PROJECT }}
+      R_LIBS_USER: /home/runner/R/library
 
     steps:
       - name: Checkout repository
@@ -34,24 +35,26 @@ jobs:
 
       - name: Install R packages
         run: |
-          sudo Rscript -e '
+          mkdir -p $R_LIBS_USER
+          Rscript -e '
             options(repos = c(RSPM = "https://packagemanager.posit.co/cran/__linux__/jammy/latest", CRAN = "https://cloud.r-project.org"))
-            install.packages(c("tidyverse", "googlesheets4", "jsonlite", "here", "dotenv"))
+            install.packages(c("tidyverse", "googlesheets4", "jsonlite", "here", "dotenv"), lib = Sys.getenv("R_LIBS_USER"))
+            cat("Library paths:\n")
+            cat(.libPaths(), sep = "\n")
           '
 
       - name: Create .env file from secrets
         run: |
-          cat > .env <<'ENVEOF'
-          SHEET_SCHOOLS_OVERVIEW="${{ secrets.SHEET_SCHOOLS_OVERVIEW }}"
-          SHEET_QUICK_UPDATE="${{ secrets.SHEET_QUICK_UPDATE }}"
-          SHEET_FULL_UPDATE="${{ secrets.SHEET_FULL_UPDATE }}"
-          SHEET_STUDENT_SURVEY="${{ secrets.SHEET_STUDENT_SURVEY }}"
-          SHEET_NEW_PROJECT="${{ secrets.SHEET_NEW_PROJECT }}"
-          ENVEOF
-          sed -i 's/^          //' .env
+          printf 'SHEET_SCHOOLS_OVERVIEW="%s"\nSHEET_QUICK_UPDATE="%s"\nSHEET_FULL_UPDATE="%s"\nSHEET_STUDENT_SURVEY="%s"\nSHEET_NEW_PROJECT="%s"\n' \
+            "$SHEET_SCHOOLS_OVERVIEW" "$SHEET_QUICK_UPDATE" "$SHEET_FULL_UPDATE" "$SHEET_STUDENT_SURVEY" "$SHEET_NEW_PROJECT" > .env
+          cat .env
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Verify R can load packages
+        run: |
+          Rscript -e 'library(tidyverse); cat("tidyverse loaded OK\n"); cat(.libPaths(), sep = "\n")'
 
       - name: Render site
         run: quarto render
