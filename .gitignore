@@ -5,8 +5,7 @@
 data/raw/
 data/clean/
 
-# Quarto build output
-_site/
+# Quarto intermediate files
 .quarto/
 
 # R artifacts

@@ -1,0 +1,53 @@
+{
+  "info": {
+    "school_name": "Oyoko",
+    "Region": "Eastern",
+    "EPI Start Year": 2025,
+    "Latitude": 6.1386,
+    "Longitude": -0.2906,
+    "MGR": 0,
+    "Non-Generating MGR": 0,
+    "Feminine Hygiene Kits": 0,
+    "Science Kits": 0,
+    "Library": 0,
+    "Computer": 1,
+    "Construction Projects": 0,
+    "Boreholes": 0,
+    "Solar Power": 0,
+    "Biofill Toilets": 0,
+    "Light a Village": 0,
+    "n_visits": 1,
+    "n_responses": 0,
+    "pct_lantern": "NA",
+    "pct_library": "NA",
+    "pct_menstrual": "NA",
+    "pct_computers": "NA",
+    "n_issues": 1
+  },
+  "visits": [
+    {
+      "StartDate": "2026-02-10 3:48:50",
+      "Duration (in seconds)": "948",
+      "ResponseId": "R_fGTBKxBEQdr4lkt",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Peace, Akuvi",
+      "school_name": "Oyoko",
+      "visit_reason": "Computer Maintenance",
+      "activities": "Computer Maintenance",
+      "Q11": "One or more computers were not working/turning on, One or more monitors would not turn on (computer was fine), Other:",
+      "Q11_5_TEXT": "Replace three receivers",
+      "Q12": "No, I took the computer with me for it to be fixed, and will have to bring it back",
+      "Q14": "3",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-02-10"
+    }
+  ],
+  "full_update": [],
+  "surveys": [],
+  "issues": []
+}

@@ -1,0 +1,124 @@
+/* EPI Dashboard Custom Styles */
+
+:root {
+  --epi-navy: #1C2B4A;
+  --epi-yellow: #F5B800;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--epi-navy) !important;
+}
+
+.navbar-brand img.navbar-logo {
+  height: 36px;
+  width: auto;
+  margin-right: 0.25rem;
+}
+
+/* Stat cards */
+.stat-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.stat-card .stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--epi-navy);
+}
+
+.stat-card .stat-label {
+  font-size: 0.9rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Program bar charts */
+.program-bar {
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 24px;
+  margin-bottom: 0.5rem;
+}
+
+.program-bar .fill {
+  background: var(--epi-yellow);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--epi-navy);
+}
+
+/* School detail page */
+.school-header {
+  background: var(--epi-navy);
+  color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.school-header h2 {
+  color: var(--epi-yellow);
+  margin-bottom: 0.5rem;
+}
+
+.badge-program {
+  display: inline-block;
+  background: var(--epi-yellow);
+  color: var(--epi-navy);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 0.25rem;
+}
+
+/* Issues page */
+.issue-urgent {
+  border-left: 4px solid #dc3545;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Tables */
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dashboard-table th {
+  background: var(--epi-navy);
+  color: #fff;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.dashboard-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+/* AI Summary button */
+.btn-ai-summary {
+  background: var(--epi-yellow);
+  color: var(--epi-navy);
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-ai-summary:hover {
+  background: #e0a800;
+}

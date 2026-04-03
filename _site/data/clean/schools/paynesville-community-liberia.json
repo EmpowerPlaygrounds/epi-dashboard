@@ -1,0 +1,31 @@
+{
+  "info": {
+    "school_name": "Paynesville Community (Liberia)",
+    "Region": null,
+    "EPI Start Year": 2025,
+    "Latitude": 6.2682,
+    "Longitude": -10.6946,
+    "MGR": 0,
+    "Non-Generating MGR": 0,
+    "Feminine Hygiene Kits": 1,
+    "Science Kits": 0,
+    "Library": 0,
+    "Computer": 0,
+    "Construction Projects": 0,
+    "Boreholes": 0,
+    "Solar Power": 0,
+    "Biofill Toilets": 0,
+    "Light a Village": 0,
+    "n_visits": 0,
+    "n_responses": 0,
+    "pct_lantern": "NA",
+    "pct_library": "NA",
+    "pct_menstrual": "NA",
+    "pct_computers": "NA",
+    "n_issues": 0
+  },
+  "visits": [],
+  "full_update": [],
+  "surveys": [],
+  "issues": []
+}

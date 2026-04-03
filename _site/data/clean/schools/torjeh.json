@@ -1,0 +1,31 @@
+{
+  "info": {
+    "school_name": "Torjeh",
+    "Region": "Greater Accra",
+    "EPI Start Year": 2010,
+    "Latitude": 5.9478,
+    "Longitude": 0.5014,
+    "MGR": 1,
+    "Non-Generating MGR": 0,
+    "Feminine Hygiene Kits": 0,
+    "Science Kits": 1,
+    "Library": 0,
+    "Computer": 0,
+    "Construction Projects": 0,
+    "Boreholes": 0,
+    "Solar Power": 0,
+    "Biofill Toilets": 0,
+    "Light a Village": 0,
+    "n_visits": 0,
+    "n_responses": 0,
+    "pct_lantern": "NA",
+    "pct_library": "NA",
+    "pct_menstrual": "NA",
+    "pct_computers": "NA",
+    "n_issues": 0
+  },
+  "visits": [],
+  "full_update": [],
+  "surveys": [],
+  "issues": []
+}

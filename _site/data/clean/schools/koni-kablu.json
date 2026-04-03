@@ -1,0 +1,83 @@
+{
+  "info": {
+    "school_name": "Koni Kablu",
+    "Region": "Greater Accra",
+    "EPI Start Year": 2008,
+    "Latitude": 5.8761,
+    "Longitude": 0.3375,
+    "MGR": 0,
+    "Non-Generating MGR": 0,
+    "Feminine Hygiene Kits": 0,
+    "Science Kits": 1,
+    "Library": 0,
+    "Computer": 0,
+    "Construction Projects": 0,
+    "Boreholes": 1,
+    "Solar Power": 0,
+    "Biofill Toilets": 0,
+    "Light a Village": 0,
+    "n_visits": 2,
+    "n_responses": 1,
+    "pct_lantern": 1,
+    "pct_library": 1,
+    "pct_menstrual": 1,
+    "pct_computers": "NaN",
+    "n_issues": 0
+  },
+  "visits": [
+    {
+      "StartDate": "10/25/24 3:43",
+      "visitor": "Richard",
+      "Q1.5": "Richard,Alex,Other",
+      "Q1.5_6_TEXT": "Ben",
+      "school_name": "Koni Kablu",
+      "visit_reason": "Project Update Visit",
+      "visit_date": "2024-10-25"
+    },
+    {
+      "StartDate": "3/27/25 5:17",
+      "visitor": "Isaac",
+      "Q1.5_6_TEXT": "Alex",
+      "school_name": "Koni Kablu",
+      "visit_reason": "Routine Program Evaluation",
+      "visit_date": "2025-03-27"
+    }
+  ],
+  "full_update": [],
+  "surveys": [
+    {
+      "StartDate": "2022-01-25 14:37:06",
+      "Duration (in seconds)": "2247",
+      "ResponseId": "R_dKVvQXZDHiHgDXm",
+      "LocationLatitude": "6.555702",
+      "LocationLongitude": "-0.764524",
+      "Q1": "Boateng sandra",
+      "school_selected": "Koni Kablu",
+      "Q3": "Female",
+      "Q4": "10",
+      "Q5": "Class 5",
+      "Q6": "Yes",
+      "Q7": "1-2 times",
+      "Q9": "Missing parts,Difficult to understand,Teachers not allowing us to touch it ourselves",
+      "has_library": "Yes",
+      "Q13": "I visit with my class, during the library period",
+      "Q14": "Less than once a week",
+      "Q15": "No",
+      "lantern_group": "Yes",
+      "Q22": "4",
+      "Q23": "No",
+      "Q25": "2 x per week",
+      "Q26": "Yes",
+      "Q27": "Reading,Homework,Exams,Remembering lessons",
+      "Q28": "No Problem",
+      "Q30": "Yes",
+      "menstrual_kit": "Yes",
+      "Q32": "Every time I have my period for the entire period",
+      "Q33": "The training helped me learn more about my body",
+      "Q34": "I do not have a kit",
+      "Q35": "Disposable Pad",
+      "school_name": "Koni Kablu"
+    }
+  ],
+  "issues": []
+}

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Visit Tracker – EPI Data Dashboard</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-51f10c164b8e96ed66b126fa4c7023c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/epi-logo.png" alt="" class="navbar-logo light-content">
+    <img src="./images/epi-logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">EPI Data Dashboard</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./schools.html"> 
+<span class="menu-text">School Profiles</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./visits.html" aria-current="page"> 
+<span class="menu-text">Visits</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./surveys.html"> 
+<span class="menu-text">Student Surveys</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./issues.html"> 
+<span class="menu-text">Issues</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Visit Tracker</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="cell-output-display">
+<div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;"><label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label><input type="date" id="date-start" value="2018-10-23" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;"><span style="color:#999;">to</span><input type="date" id="date-end" value="2026-03-17" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;"><button id="btn-apply-dates" style="background:var(--epi-navy); color:#fff; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Apply</button><button id="btn-reset-dates" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer;">Reset</button></div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div style="max-width:380px; margin:0 auto 2rem; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;">
+  <h4 style="margin-top:0; color:var(--epi-navy);" class="anchored">Schools Visited</h4>
+  <canvas id="visited-pie" width="280" height="280"></canvas>
+  <p id="visited-summary" style="color:#666; font-size:0.85rem; margin-top:0.75rem;"></p>
+</div>
+
+<h2 class="anchored">Visit Log</h2>
+<div id="visit-log-container" style="margin-bottom:2rem;">
+  <table id="visit-log-table" class="display compact stripe" style="width:100%;"></table>
+</div>
+
+<h2 class="anchored">Visits by School</h2>
+<div id="visits-by-school-container">
+  <table id="visits-by-school-table" class="display compact stripe" style="width:100%;"></table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+var VISITS = [{"visit_date":"2026-01-12","school_name":"Akwanserem","visitor":"Richard","visit_reason":"Routine Visit, MGR/Charging Maintenance","activities":"Routine Visit, MGR/Charging Maintenance"},{"visit_date":"2026-01-12","school_name":"Bahankra","visitor":"Richard","visit_reason":"Routine Visit","activities":"Routine Visit"},{"visit_date":"2026-01-12","school_name":"Domase","visitor":"Richard","visit_reason":"Routine Visit, Look at the borehole and the classroom","activities":"Routine Visit"},{"visit_date":"2026-01-13","school_name":"Nyapienya","visitor":"Alex","visit_reason":"Routine Visit, MGR/Charging Maintenance","activities":"MGR/Charging Maintenance"},{"visit_date":"2026-01-13","school_name":"Anamenampa","visitor":"Alex","visit_reason":"Routine Visit","activities":"MGR/Charging Maintenance"},{"visit_date":"2026-01-14","school_name":"Abrenya","visitor":"Richard","visit_reason":"Routine Visit, Initiate the process of building a computer Lab","activities":"Routine Visit, Student Survey Team Visit"},{"visit_date":"2026-01-19","school_name":"Akwansu","visitor":"Alex","visit_reason":"Menstrual Kit Distribution, Science Kit Training/Distribution","activities":"Routine Visit, Menstrual Kit Distribution, Science Kit Training/Distribution"},{"visit_date":"2026-01-19","school_name":"Akwansu","visitor":"Alex","visit_reason":"Routine Visit","activities":"Routine Visit, Science Kit Training/Distribution"},{"visit_date":"2026-01-14","school_name":"Adenya","visitor":"Alex","visit_reason":"Routine Visit","activities":"MGR/Charging Maintenance, Science Kit Training/Distribution"},{"visit_date":"2026-01-14","school_name":"Attabui","visitor":"Alex","visit_reason":"Routine Visit","activities":"Computer Maintenance, Science Kit Training/Distribution"},{"visit_date":"2026-01-19","school_name":"Obosonu","visitor":"Alex","visit_reason":"Routine Visit","activities":"Routine Visit, Computer Maintenance, Menstrual Kit Distribution"},{"visit_date":"2026-01-15","school_name":"Luta","visitor":"Alex","visit_reason":"Routine Visit","activities":"Routine Visit, MGR/Charging Maintenance"},{"visit_date":"2026-01-15","school_name":"Madavunu","visitor":"Alex","visit_reason":"Routine Visit","activities":"Routine Visit, MGR/Charging Maintenance, Lantern Replacement, Science Kit Training/Distribution"},{"visit_date":"2026-01-19","school_name":"Akwansu","visitor":"Alex","visit_reason":"Routine Visit","activities":"MGR/Charging Maintenance, Menstrual Kit Distribution"},{"visit_date":"2026-01-15","school_name":"Amuyaokope","visitor":"Alex","visit_reason":"Routine Visit","activities":"Routine Visit"},{"visit_date":"2026-01-19","school_name":"Bepotumtum","visitor":"Richard","visit_reason":"Computer Maintenance, Student Survey Team Visit","activities":"Routine Visit, Computer Maintenance, Student Survey Team Visit"},{"visit_date":"2026-01-19","school_name":"Akwanserem","visitor":"Richard","visit_reason":"MGR/Charging Maintenance, Student Survey Team Visit","activities":"MGR/Charging Maintenance, Student Survey Team Visit"},{"visit_date":"2026-01-20","school_name":"Ntomem","visitor":"Richard","visit_reason":"Routine Visit, Science Kit Training/Distribution, Student Survey Team Visit","activities":"Routine Visit, Science Kit Training/Distribution, Student Survey Team Visit"},{"visit_date":"2026-01-21","school_name":"Essam","visitor":"Richard","visit_reason":"Routine Visit","activities":"Routine Visit, Student Survey Team Visit"},{"visit_date":"2026-01-20","school_name":"Anamenampa","visitor":"Alex","visit_reason":"Routine Visit, MGR/Charging Maintenance","activities":"MGR/Charging Maintenance, Lantern Replacement, Menstrual Kit Distribution, Science Kit Training/Distribution"},{"visit_date":"2026-01-21","school_name":"Wurudu Wurudu","visitor":"Alex","visit_reason":"Routine Visit, Computer Maintenance, Menstrual Kit Distribution","activities":"Routine Visit, Computer Maintenance, Menstrual Kit Distribution"},{"visit_date":"2026-01-22","school_name":"Mamakrom","visitor":"Alex","visit_reason":"Routine Visit","activities":"Lantern Replacement, Menstrual Kit Distribution, Science Kit Training/Distribution"},{"visit_date":"2026-01-21","school_name":"Fawotrikosie","visitor":"Alex","visit_reason":"Routine Visit","activities":"Computer Maintenance, Menstrual Kit Distribution, Computer Training, Science Kit Training/Distribution"},{"visit_date":"2026-01-23","school_name":"Anamenampa","visitor":"Alex","visit_reason":"Delivery of Library books","activities":"Delivery of Library books"},{"visit_date":"2026-01-26","school_name":"Wekpeti Abresu","visitor":"Richard","visit_reason":"Science Kit Training/Distribution, Student Survey Team Visit","activities":"Science Kit Training/Distribution, Student Survey Team Visit"},{"visit_date":"2026-01-26","school_name":"Ekorso Akwadum","visitor":"Richard","visit_reason":"Computer Maintenance, Science Kit Training/Distribution, Student Survey Team Visit","activities":"Computer Maintenance, Computer Training, Science Kit Training/Distribution, Student Survey Team Visit"},{"visit_date":"2026-01-22","school_name":"Mansokwa","visitor":"Richard","visit_reason":"Routine Visit, MGR/Charging Maintenance, Science Kit Training/Distribution, Student Survey Team Visit","activities":"Routine Visit, Science Kit Training/Distribution, Student Survey Team Visit"},{"visit_date":"2026-01-27","school_name":"Mampong Shai","visitor":"Alex","visit_reason":"Routine Visit","activities":"Routine Visit"},{"visit_date":"2026-01-27","school_name":"Dedenya","visitor":"Alex","visit_reason":"Routine Visit","activities":"Computer Maintenance"},{"visit_date":"2026-01-27","school_name":"Tun Tun","visitor":"Richard","visit_reason":"Routine Visit, MGR/Charging Maintenance, Science Kit Training/Distribution","activities":"MGR/Charging Maintenance, Science Kit Training/Distribution, Student Survey Team Visit"},{"visit_date":"2026-01-27","school_name":"Tun Tun","visitor":"Richard","visit_reason":"Routine Visit, MGR/Charging Maintenance","activities":"Routine Visit, MGR/Charging Maintenance, Science Kit Training/Distribution, Student Survey Team Visit"},{"visit_date":"2026-01-28","school_name":"Nyapienya","visitor":"Alex","visit_reason":"MGR/Charging Maintenance, Menstrual Kit Distribution","activities":"MGR/Charging Maintenance"},{"visit_date":"2026-01-29","school_name":"Dedenya","visitor":"Alex","visit_reason":"Routine Visit","activities":"Computer Maintenance, Library books distribution"},{"visit_date":"2026-01-30","school_name":"Luta","visitor":"Alex","visit_reason":"MGR/Charging Maintenance, Computer Maintenance","activities":"MGR/Charging Maintenance, Computer Maintenance"},{"visit_date":"2026-02-10","school_name":"Oyoko","visitor":"Alex","visit_reason":"Computer Maintenance","activities":"Computer Maintenance"},{"visit_date":"2026-02-10","school_name":"Mpaem","visitor":"Alex","visit_reason":"Computer Maintenance","activities":"Computer Maintenance"},{"visit_date":"2026-02-11","school_name":"Attabui","visitor":"Alex","visit_reason":"Computer Maintenance","activities":"Computer Maintenance, Computer Training"},{"visit_date":"2026-02-12","school_name":"Afransua Dedewa MA Primary","visitor":"Alex","visit_reason":"Computer Maintenance","activities":"Computer Maintenance, Computer Training, Computer lab restoration"},{"visit_date":"2026-02-16","school_name":"Wurudu Wurudu","visitor":"Alex","visit_reason":"Routine Visit, Computer Maintenance","activities":"Routine Visit, Computer Maintenance"},{"visit_date":"2026-02-16","school_name":"Fawotrikosie","visitor":"Alex","visit_reason":"Computer Maintenance, Computer Training","activities":"Computer Maintenance, Computer Training"},{"visit_date":"2026-02-17","school_name":"Amuyaokope","visitor":"Alex","visit_reason":"Library books donations","activities":"Computer Maintenance, Computer Training"},{"visit_date":"2026-02-19","school_name":"Afransua Dedewa MA Primary","visitor":"Alex","visit_reason":"Routine Visit, Donated Library books","activities":"Menstrual Kit Distribution"},{"visit_date":"2026-02-10","school_name":"Mobia","visitor":"Richard","visit_reason":"Lantern Replacement","activities":"Lantern Replacement, Science Kit Training/Distribution"},{"visit_date":"2026-02-24","school_name":"Attabui","visitor":"Alex","visit_reason":"Routine Visit, Computer Maintenance","activities":"Computer Maintenance, Menstrual Kit Distribution"},{"visit_date":"2026-02-24","school_name":"Adenya","visitor":"Alex","visit_reason":"Menstrual Kit Distribution, Computer Training","activities":"Menstrual Kit Distribution, Science Kit Training/Distribution"},{"visit_date":"2026-02-24","school_name":"Adenya","visitor":"Alex","visit_reason":"Menstrual Kit Distribution","activities":"Menstrual Kit Distribution"},{"visit_date":"2026-02-24","school_name":"Adenya","visitor":"Alex","visit_reason":"Routine Visit","activities":"Menstrual Kit Distribution"},{"visit_date":"2026-02-25","school_name":"Anamenampa","visitor":"Alex","visit_reason":"Routine Visit","activities":"We visited with academic city students"},{"visit_date":"2026-02-12","school_name":"Ekorso Akwadum","visitor":"Richard","visit_reason":"Computer Maintenance","activities":"Computer Maintenance"},{"visit_date":"2026-02-23","school_name":"Dagomba","visitor":"Richard","visit_reason":"MGR/Charging Maintenance, Computer Maintenance, Science Kit Training/Distribution","activities":"MGR/Charging Maintenance"},{"visit_date":"2026-02-24","school_name":"Wenamda","visitor":"Richard","visit_reason":"MGR/Charging Maintenance, Student Survey Team Visit","activities":"MGR/Charging Maintenance, Science Kit Training/Distribution, Student Survey Team Visit"},{"visit_date":"2026-02-26","school_name":"Mampong Shai","visitor":"Alex","visit_reason":"Routine Visit","activities":"Routine Visit, Menstrual Kit Distribution"},{"visit_date":"2026-02-26","school_name":"Dedenya","visitor":"Alex","visit_reason":"Routine Visit","activities":"Menstrual Kit Distribution"},{"visit_date":"2026-03-17","school_name":"Alorkpem Island","visitor":"Alex","visit_reason":"New project Starlink","activities":"New project starlink"},{"visit_date":"2024-10-25","school_name":"Koni Kablu","visitor":"Richard","visit_reason":"Project Update Visit","activities":null},{"visit_date":"2024-10-27","school_name":"Minya","visitor":"Richard","visit_reason":"Project Update Visit","activities":null},{"visit_date":"2025-01-16","school_name":"Wekpeti Abresu","visitor":"Richard","visit_reason":"MGR Maintenance","activities":null},{"visit_date":"2025-01-16","school_name":"Ekorso Akwadum","visitor":"Richard","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2025-01-16","school_name":"Ntomem","visitor":"Richard","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2025-01-27","school_name":"Wenamda","visitor":"Richard","visit_reason":"MGR Maintenance,Routine Program Evaluation,Project Update Visit","activities":null},{"visit_date":"2025-01-27","school_name":"Dagomba","visitor":"Richard","visit_reason":"Routine Program Evaluation,Project Update Visit","activities":null},{"visit_date":"2025-01-27","school_name":"Domase","visitor":"Richard","visit_reason":"Routine Program Evaluation,Project Update Visit","activities":null},{"visit_date":"2025-03-25","school_name":"Bahankra","visitor":"Richard","visit_reason":"MGR Maintenance","activities":null},{"visit_date":"2025-03-25","school_name":"Wenamda","visitor":"Richard","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-03-25","school_name":"Dagomba","visitor":"Richard","visit_reason":"Routine Program Evaluation,Project Update Visit","activities":null},{"visit_date":"2025-03-25","school_name":"Domase","visitor":"Richard","visit_reason":"Routine Program Evaluation,Project Update Visit","activities":null},{"visit_date":"2025-03-25","school_name":"Mobia","visitor":"Richard","visit_reason":"Routine Program Evaluation,Surveyor Team Visit,Project Update Visit","activities":null},{"visit_date":"2025-03-25","school_name":"Wenamda","visitor":"Richard","visit_reason":"Routine Program Evaluation,Surveyor Team Visit,Project Update Visit","activities":null},{"visit_date":"2025-03-27","school_name":"Afransua Dedewa MA Primary","visitor":"Other","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2025-03-27","school_name":"Pediatorkope","visitor":"Isaac","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2025-03-27","school_name":"Koni Kablu","visitor":"Isaac","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2025-04-09","school_name":"Dedenya","visitor":"Peace","visit_reason":"MGR Maintenance,Routine Program Evaluation,Donation","activities":null},{"visit_date":"2025-04-02","school_name":"Akwansu","visitor":"Other","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2025-04-02","school_name":"Obosonu","visitor":"Other","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2025-04-03","school_name":"Anamenampa","visitor":"Other","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2025-04-14","school_name":"Mpaem","visitor":"Peace","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-04-15","school_name":"Madavunu","visitor":"Other","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-04-15","school_name":"Luta","visitor":"Other","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-04-15","school_name":"Terhey","visitor":"Other","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-04-15","school_name":"Amuyaokope","visitor":"Other","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-05-07","school_name":"Pediatorkope","visitor":"Isaac","visit_reason":"MGR Maintenance,Surveyor Team Visit","activities":null},{"visit_date":"2025-04-16","school_name":"Minya","visitor":"Isaac","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-05-08","school_name":"Afransua Dedewa MA Primary","visitor":"Other","visit_reason":"MGR Maintenance,Routine Program Evaluation,Project Update Visit","activities":null},{"visit_date":"2025-05-09","school_name":"Adenya","visitor":"Other","visit_reason":"MGR Maintenance,Routine Program Evaluation,Project Update Visit","activities":null},{"visit_date":"2025-05-12","school_name":"Pediatorkope","visitor":"Isaac","visit_reason":"Solar and Computer lab installation","activities":null},{"visit_date":"2025-05-13","school_name":"Akwansu","visitor":"Isaac","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-05-13","school_name":"Ankwansrem","visitor":"Richard","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-05-13","school_name":"Abrenya","visitor":"Isaac","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-05-19","school_name":"Mampong Shai","visitor":"Other","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-05-22","school_name":"Mpaem","visitor":"Peace","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-05-21","school_name":"Obosonu","visitor":"Peace","visit_reason":"MGR Maintenance,Project Update Visit","activities":null},{"visit_date":"2025-05-19","school_name":"Dedenya","visitor":"Other","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-05-21","school_name":"Akwansu","visitor":"Peace","visit_reason":"Project Update Visit","activities":null},{"visit_date":"2025-05-24","school_name":"Abrenya","visitor":"Richard","visit_reason":"MGR Maintenance","activities":null},{"visit_date":"2025-05-24","school_name":"Ntomem","visitor":"Richard","visit_reason":"Project Update Visit","activities":null},{"visit_date":"2025-05-24","school_name":"Ekorso Akwadum","visitor":"Richard","visit_reason":"Project Update Visit","activities":null},{"visit_date":"2025-05-24","school_name":"Akwansu","visitor":"Richard","visit_reason":"Project Update Visit","activities":null},{"visit_date":"2025-05-24","school_name":"Yonguase","visitor":"Richard","visit_reason":"MGR Maintenance,Project Update Visit","activities":null},{"visit_date":"2025-06-03","school_name":"Adenya","visitor":"Richard","visit_reason":"Routine Program Evaluation,Project Update Visit","activities":null},{"visit_date":"2025-06-03","school_name":"Attabui","visitor":"Richard","visit_reason":"Project Update Visit","activities":null},{"visit_date":"2025-06-04","school_name":"Alorkpem Island","visitor":"Richard","visit_reason":"Project Update Visit","activities":null},{"visit_date":"2025-06-04","school_name":"Obosonu","visitor":"Richard","visit_reason":"Project Update Visit","activities":null},{"visit_date":"2025-05-27","school_name":"Afransua Dedewa MA Primary","visitor":"Other","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-06-05","school_name":"Pediatorkope","visitor":"Isaac","visit_reason":"Computers donation","activities":null},{"visit_date":"2025-05-28","school_name":"Attabui","visitor":"Other","visit_reason":"Project Update Visit","activities":null},{"visit_date":"2025-05-23","school_name":"Pediatorkope","visitor":"Other","visit_reason":"MGR Maintenance,Project Update Visit","activities":null},{"visit_date":"2025-05-22","school_name":"Adenya","visitor":"Peace","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2025-05-29","school_name":"Adenya","visitor":"Peace","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2023-07-20","school_name":"Luta","visitor":"Richard","visit_reason":"Routine Program Evaluation,Project Update Visit","activities":null},{"visit_date":"2023-07-21","school_name":"Bomigo","visitor":"Richard","visit_reason":"Routine Program Evaluation,Project Update Visit","activities":null},{"visit_date":"2023-08-08","school_name":"Old Konkompe","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2023-08-08","school_name":"Watro (Watroso)","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2023-08-16","school_name":"Fawotrikosie","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2023-08-23","school_name":"Yonguase","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2023-08-24","school_name":"Tsledom","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2023-08-24","school_name":"Obelemanya","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2023-08-30","school_name":"Mamakrom","visitor":"George","visit_reason":"Routine Program Evaluation,Menstrual kits","activities":null},{"visit_date":"2024-01-11","school_name":"Obosonu","visitor":"George","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2024-01-11","school_name":"Akwansu","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2024-01-15","school_name":"Minya","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2024-01-15","school_name":"Amuyaokope","visitor":"George","visit_reason":"MGR Maintenance","activities":null},{"visit_date":"2024-01-15","school_name":"Luta","visitor":"George","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2024-01-15","school_name":"Madavunu","visitor":"George","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2024-01-15","school_name":"Terhey","visitor":"George","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2018-10-23","school_name":"Yorogo-Asorogobisi","visitor":"Richard","visit_reason":"MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit,Project Update Visit","activities":null},{"visit_date":"2018-10-23","school_name":"Anateem Sumbrungu","visitor":"Richard","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2018-10-24","school_name":"Anateem Sumbrungu","visitor":"Richard","visit_reason":"MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2018-11-08","school_name":"Ekorso Akwadum","visitor":"Richard","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2019-02-19","school_name":"Community School 9","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-02-19","school_name":"Community School 3","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-02-18","school_name":"Wangarakrom-Tarkuea","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-02-15","school_name":"Nyapienya","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-02-14","school_name":"Mongpong Shai","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-02-14","school_name":"Dedenya","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-02-08","school_name":"Afransua Dedewa M/A Primary School","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-02-01","school_name":"Abrenya","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-01-22","school_name":"Fawotrikosie","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-01-22","school_name":"Wurudu Wurudu","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-01-21","school_name":"Mamakrom","visitor":"George","visit_reason":"MGR Maintenance,Surveyor Team Visit","activities":null},{"visit_date":"2019-01-28","school_name":"Bepotumtum","visitor":"Richard","visit_reason":"MGR Maintenance,Surveyor Team Visit","activities":null},{"visit_date":"2019-03-27","school_name":"Luta","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-03-27","school_name":"Amuyaokope","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-03-26","school_name":"Minya D/A Basic School","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-03-21","school_name":"Anateem Sumbrungu","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit,Science kits","activities":null},{"visit_date":"2019-03-21","school_name":"Ataampuutum","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-03-20","school_name":"Nyariga Girls School","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-03-20","school_name":"Yorogo-Asorogobisi","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit,Science kits microscope","activities":null},{"visit_date":"2019-02-22","school_name":"Watro (Watroso)","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-02-22","school_name":"Nwowom","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-02-21","school_name":"Old Konkompe","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-06-19","school_name":"Luta","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-06-19","school_name":"Amuyaokope","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-06-19","school_name":"Minya D/A Basic School","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-06-13","school_name":"Tuanikope","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-06-13","school_name":"Azizakope","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-06-12","school_name":"Obane","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-06-11","school_name":"Wurudu Wurudu","visitor":"George","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2019-06-11","school_name":"Mamakrom","visitor":"George","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2019-06-07","school_name":"Nwowom","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation,Menstrual kits","activities":null},{"visit_date":"2019-06-07","school_name":"Watro (Watroso)","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation,Menstrual kits","activities":null},{"visit_date":"2019-06-07","school_name":"Fawotrikosie","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation","activities":null},{"visit_date":"2019-05-23","school_name":"Dagomba","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-05-22","school_name":"Bahankra","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit,Project Update Visit","activities":null},{"visit_date":"2019-05-21","school_name":"Afransua Dedewa M/A Primary School","visitor":"George","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2019-06-12","school_name":"Ekorso Akwadum","visitor":"Richard","visit_reason":"Routine Program Evaluation,Surveyor Team Visit,Project Update Visit","activities":null},{"visit_date":"2019-06-12","school_name":"Wekpeti Abresu","visitor":"Richard","visit_reason":"Routine Program Evaluation,Surveyor Team Visit,Project Update Visit","activities":null},{"visit_date":"2019-06-13","school_name":"Bepotumtum","visitor":"Richard","visit_reason":"MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit,Project Update Visit","activities":null},{"visit_date":"2019-06-17","school_name":"Essam Golden Sunbeam Montessori School","visitor":"Richard","visit_reason":"Routine Program Evaluation,Surveyor Team Visit,Project Update Visit","activities":null},{"visit_date":"2019-07-10","school_name":"Wangarakrom-Tarkuea","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-07-03","school_name":"Nyapienya","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-06-27","school_name":"Terhey","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-06-27","school_name":"Madavunu","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-07-16","school_name":"Yonguase","visitor":"Isaac","visit_reason":"Routine Program Evaluation,Menstrual kits distribution","activities":null},{"visit_date":"2019-10-17","school_name":"Other","visitor":"Isaac","visit_reason":"Routine Program Evaluation","activities":null},{"visit_date":"2019-03-12","school_name":"Bahankra","visitor":"Richard","visit_reason":"Routine Program Evaluation,Surveyor Team Visit,Project Update Visit","activities":null},{"visit_date":"2020-02-04","school_name":"Old Konkompe","visitor":"George","visit_reason":"MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-07-11","school_name":"Community School 9","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null},{"visit_date":"2019-07-11","school_name":"Community School 3","visitor":"George","visit_reason":"Routine Program Evaluation,Surveyor Team Visit","activities":null}];
+var ALL_SCHOOLS = ["Abrenya","Adenya","Ador Kope R/C Primary","Afransua Dedewa MA Primary","Akwanserem","Akwansu","Akyeremanteng","Alorkpem Island","Amuyaokope","Anamenampa","Anateem Sumbrungu","Apaah","Ataampuutum A/B","Attabui","Azizakpem","Bahankra","Begoro","Bepotumtum","Bomigo","Community 3","Community 9","Dagomba","Dedenya","Dedewa","Domase","Ebourso","Ekorso Akwadum","Essam","Fanterila","Fawotrikosie","Ferekoroba","Galalia","Gloucester R.E.C. (Sierra Leone)","Gourcy Burkina Faso School","Immanuel Christian Academy (Liberia)","Koni Kablu","Kpala Government","Kpala Private","Kurasua #1 MA","Luta","Madavunu","Mamakrom","Mampong Shai","Mansokwa","Mantukwa","Meyikpoi","Minya","Mobia","Mosipanin","Mpaem","Ntomem","Nwawasua MA","Nwowom","Nyapienya","Nyariga Girls' School","Obani","Obelemanya","Obosonu","Old Konkompe","Oyoko","Paynesville Community (Liberia)","Pediatorkope","Sunyani","Terhey","Torjeh","Treeplanting FBC (Sierra Leone)","Tsledom","Tuanikope","Tun Tun","Wangarakrom","Watro (Watroso)","Wekpeti Abresu","Wenamda","Wurudu Wurudu","Yonguase","Yorogo-Asorogobisi","Zippo Nyuinyui"];
+var N_TOTAL = 77;
+var visitedPieChart = null;
+var logDT = null;
+var bySchoolDT = null;
+
+function inRange(dateStr, start, end) {
+  if (!dateStr) return false;
+  var d = dateStr.slice(0, 10);
+  return d >= start && d <= end;
+}
+
+function renderVisitPage() {
+  var start = document.getElementById("date-start").value;
+  var end   = document.getElementById("date-end").value;
+  var filtered = VISITS.filter(function(v) { return inRange(v.visit_date, start, end); });
+
+  // --- Pie chart: % schools visited ---
+  var visitedSchools = {};
+  filtered.forEach(function(v) { if (v.school_name) visitedSchools[v.school_name] = true; });
+  var nVisited = Object.keys(visitedSchools).length;
+  var nNotVisited = N_TOTAL - nVisited;
+
+  if (visitedPieChart) visitedPieChart.destroy();
+  var canvas = document.getElementById("visited-pie");
+  visitedPieChart = new Chart(canvas, {
+    type: "pie",
+    data: {
+      labels: ["Visited (" + nVisited + ")", "Not Visited (" + nNotVisited + ")"],
+      datasets: [{
+        data: [nVisited, nNotVisited],
+        backgroundColor: ["#1C2B4A", "#e9ecef"]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { position: "bottom", labels: { font: { size: 12 } } },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              var pct = N_TOTAL > 0 ? Math.round(ctx.raw / N_TOTAL * 100) : 0;
+              return ctx.label + " - " + pct + "%";
+            }
+          }
+        }
+      }
+    }
+  });
+
+  var pctVisited = N_TOTAL > 0 ? Math.round(nVisited / N_TOTAL * 100) : 0;
+  document.getElementById("visited-summary").textContent = nVisited + " of " + N_TOTAL + " schools visited (" + pctVisited + "%)";
+
+  // --- Visit Log DataTable ---
+  if (logDT) { logDT.destroy(); document.getElementById("visit-log-table").innerHTML = ""; }
+  var logData = filtered.map(function(v) {
+    return [v.visit_date || "", v.school_name || "", v.visitor || "", v.visit_reason || "", v.activities || ""];
+  });
+  logDT = jQuery("#visit-log-table").DataTable({
+    data: logData,
+    columns: [
+      { title: "Date", width: "100px" },
+      { title: "School", width: "140px" },
+      { title: "Staff Member", width: "100px" },
+      { title: "Visit Reason" },
+      { title: "Activities" }
+    ],
+    pageLength: 15,
+    order: [[0, "desc"]],
+    dom: "lfrtip",
+    autoWidth: false
+  });
+
+  // --- Visits by School (include 0-visit schools) ---
+  if (bySchoolDT) { bySchoolDT.destroy(); document.getElementById("visits-by-school-table").innerHTML = ""; }
+  var schoolCounts = {};
+  ALL_SCHOOLS.forEach(function(s) { schoolCounts[s] = 0; });
+  filtered.forEach(function(v) { if (v.school_name && schoolCounts.hasOwnProperty(v.school_name)) schoolCounts[v.school_name]++; });
+  var bySchoolData = Object.keys(schoolCounts).sort().map(function(s) { return [s, schoolCounts[s]]; });
+
+  bySchoolDT = jQuery("#visits-by-school-table").DataTable({
+    data: bySchoolData,
+    columns: [
+      { title: "School" },
+      { title: "Visits", width: "80px" }
+    ],
+    pageLength: 15,
+    order: [[1, "desc"]],
+    dom: "lfrtip"
+  });
+}
+
+// Initial render + event listeners
+document.addEventListener("DOMContentLoaded", function() {
+  renderVisitPage();
+  document.getElementById("btn-apply-dates").addEventListener("click", renderVisitPage);
+  document.getElementById("btn-reset-dates").addEventListener("click", function() {
+    var allDates = VISITS.map(function(v) { return v.visit_date; }).filter(function(d) { return d; }).sort();
+    document.getElementById("date-start").value = allDates[0] || "";
+    document.getElementById("date-end").value = allDates[allDates.length - 1] || "";
+    renderVisitPage();
+  });
+});
+</script>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
