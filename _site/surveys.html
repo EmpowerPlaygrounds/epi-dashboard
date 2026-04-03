@@ -474,7 +474,7 @@ function showInsightsTab(tab) {
 
 function renderParticipation(data) {
   var programs = [
-    { name: "MGR / Lantern Groups", compute: function(d) {
+    { name: "Lanterns", compute: function(d) {
         var el = d.filter(function(r) { return r.MGR === "1" && r.lantern_group && r.lantern_group !== "null"; });
         var us = el.filter(function(r) { return r.lantern_group === "Yes"; });
         return el.length > 0 ? Math.round(us.length / el.length * 100) : 0;
@@ -485,8 +485,14 @@ function renderParticipation(data) {
         return el.length > 0 ? Math.round(us.length / el.length * 100) : 0;
     }},
     { name: "Menstrual Kits", compute: function(d) {
-        var el = d.filter(function(r) { return r.menstrual_kit === "Yes" && r.Q32 && r.Q32 !== "null"; });
-        var us = el.filter(function(r) { return r.Q32 === "Always" || r.Q32 === "Sometimes"; });
+        // Eligible: girls who received a kit and answered the usage question
+        var el = d.filter(function(r) { return r.fem_hygiene === "1" && r.menstrual_kit && r.menstrual_kit !== "null" && r.menstrual_kit !== "No"; });
+        // Using: anyone whose Q32 answer is NOT a "never" or "do not have a kit" variant
+        var us = el.filter(function(r) {
+          if (!r.Q32 || r.Q32 === "null") return false;
+          var q = r.Q32.toLowerCase();
+          return q.indexOf("never") < 0 && q.indexOf("do not have") < 0;
+        });
         return el.length > 0 ? Math.round(us.length / el.length * 100) : 0;
     }},
     { name: "Computers", compute: function(d) {
