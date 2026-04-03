@@ -52,77 +52,177 @@ data_json <- toJSON(all_school_data, auto_unbox = TRUE, na = "null")
 
 htmltools::HTML(paste0('
 <style>
+  /* ── Print styles ─────────────────────────────────────────────── */
   @media print {
-    /* Hide everything except the reports */
     .navbar, .quarto-title, #controls-bar, .nav-footer, header, nav,
     #quarto-header, #quarto-sidebar, .quarto-title-block { display: none !important; }
-
     #print-area { display: block !important; }
+    #print-area .school-report { page-break-inside: avoid; }
+    body { margin: 0; padding: 0; font-family: "Segoe UI", Helvetica, Arial, sans-serif; }
 
     .school-report {
       page-break-after: always;
-      padding: 0.5in 0;
-      font-size: 11pt;
+      padding: 0;
+      font-size: 10pt;
+      color: #222;
     }
     .school-report:last-child { page-break-after: avoid; }
 
-    .school-report h2 {
-      color: #1C2B4A !important;
-      font-size: 16pt;
-      margin-bottom: 4pt;
+    /* Header banner */
+    .rpt-header {
+      background: #1C2B4A !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      color: #fff;
+      padding: 14pt 18pt;
+      border-radius: 0;
+      margin-bottom: 12pt;
+      display: flex;
+      align-items: center;
+      gap: 14pt;
+    }
+    .rpt-header img { height: 40pt; }
+    .rpt-header h2 { margin: 0; font-size: 16pt; color: #fff !important; }
+    .rpt-header .rpt-subtitle { font-size: 9pt; color: #F5B800; margin-top: 2pt; }
+
+    /* Stat cards row */
+    .rpt-stats {
+      display: flex; gap: 8pt; margin-bottom: 12pt; flex-wrap: wrap;
+    }
+    .rpt-stat {
+      flex: 1; min-width: 90pt; text-align: center;
+      border: 1.5pt solid #e0e0e0; border-radius: 6pt; padding: 8pt 6pt;
+    }
+    .rpt-stat .rpt-stat-icon { margin-bottom: 2pt; }
+    .rpt-stat .rpt-stat-icon svg { width: 18pt; height: 18pt; }
+    .rpt-stat .rpt-stat-value { font-size: 16pt; font-weight: 700; color: #1C2B4A; }
+    .rpt-stat .rpt-stat-label { font-size: 7.5pt; color: #666; text-transform: uppercase; letter-spacing: 0.04em; }
+
+    /* Program badges */
+    .rpt-programs { margin-bottom: 12pt; display: flex; flex-wrap: wrap; gap: 5pt; }
+    .rpt-prog-badge {
+      display: inline-flex; align-items: center; gap: 4pt;
+      background: #f0f4f8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      color: #1C2B4A; padding: 4pt 10pt; border-radius: 12pt;
+      font-size: 8.5pt; font-weight: 600;
+    }
+    .rpt-prog-badge svg { width: 12pt; height: 12pt; }
+
+    /* Enrollment bar */
+    .rpt-enroll-bar {
+      display: flex; height: 16pt; border-radius: 8pt; overflow: hidden;
+      margin: 6pt 0 3pt; border: 1pt solid #ddd;
+    }
+    .rpt-enroll-bar .rpt-bar-primary {
+      background: #1C2B4A !important; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      color: #fff; font-size: 7pt; display: flex; align-items: center; justify-content: center;
+    }
+    .rpt-enroll-bar .rpt-bar-jhs {
+      background: #F5B800 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      color: #1C2B4A; font-size: 7pt; display: flex; align-items: center; justify-content: center;
+    }
+    .rpt-enroll-legend { font-size: 7.5pt; color: #666; margin-bottom: 10pt; }
+
+    /* Two-column details */
+    .rpt-columns { display: flex; gap: 14pt; margin-bottom: 10pt; }
+    .rpt-col { flex: 1; }
+
+    /* Section headers */
+    .rpt-section {
+      font-size: 10pt; font-weight: 700; color: #1C2B4A;
+      margin: 12pt 0 6pt; padding-bottom: 3pt;
       border-bottom: 2pt solid #F5B800;
-      padding-bottom: 4pt;
+      display: flex; align-items: center; gap: 5pt;
     }
-    .school-report .meta { color: #555; font-size: 9pt; margin-bottom: 10pt; }
-    .school-report .programs-list { margin-bottom: 10pt; }
-    .school-report .badge-print {
-      display: inline-block;
-      background: #e9ecef;
-      color: #333;
-      padding: 2pt 8pt;
-      border-radius: 4pt;
-      font-size: 9pt;
-      margin-right: 4pt;
-      margin-bottom: 4pt;
+    .rpt-section svg { width: 14pt; height: 14pt; color: #1C2B4A; }
+
+    /* Detail table */
+    .rpt-table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+    .rpt-table td { padding: 4pt 6pt; border-bottom: 1pt solid #eee; }
+    .rpt-table td:first-child { font-weight: 600; color: #444; width: 50%; }
+    .rpt-table td:last-child { color: #222; }
+
+    /* Visit cards */
+    .rpt-visit {
+      border-left: 3pt solid #F5B800; padding: 6pt 10pt; margin-bottom: 8pt;
+      background: #fafafa !important; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      border-radius: 0 4pt 4pt 0; font-size: 9pt;
     }
-    .school-report table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 10pt;
-      font-size: 10pt;
+    .rpt-visit-header { display: flex; justify-content: space-between; margin-bottom: 3pt; }
+    .rpt-visit-date { font-weight: 700; color: #1C2B4A; font-size: 9.5pt; }
+    .rpt-visit-staff { color: #888; font-size: 8pt; }
+    .rpt-visit p { margin: 2pt 0; line-height: 1.4; }
+    .rpt-visit .rpt-field-label { font-weight: 600; color: #555; }
+    .rpt-visit .rpt-urgent { color: #dc3545; font-weight: 600; }
+
+    .rpt-no-data { color: #999; font-style: italic; font-size: 9pt; padding: 6pt 0; }
+
+    /* Footer */
+    .rpt-footer {
+      margin-top: 10pt; padding-top: 6pt; border-top: 1pt solid #ddd;
+      font-size: 7.5pt; color: #aaa; text-align: center;
     }
-    .school-report table td {
-      padding: 4pt 8pt;
-      border-bottom: 1px solid #ddd;
-    }
-    .school-report table td:first-child { font-weight: 600; width: 40%; }
-    .school-report .visit-card {
-      border: 1px solid #ddd;
-      border-radius: 4pt;
-      padding: 8pt 10pt;
-      margin-bottom: 8pt;
-      font-size: 10pt;
-    }
-    .school-report .visit-date { font-weight: 600; color: #1C2B4A; }
-    .school-report .visit-staff { color: #666; font-size: 9pt; float: right; }
-    .school-report .section-label {
-      font-size: 11pt; font-weight: 600; color: #1C2B4A;
-      margin: 10pt 0 6pt; border-bottom: 1px solid #e9ecef; padding-bottom: 3pt;
-    }
-    .school-report .no-data { color: #999; font-style: italic; font-size: 10pt; }
   }
 
-  /* Screen styles */
+  /* ── Screen styles ────────────────────────────────────────────── */
   @media screen {
-    #print-area { display: none; }
+    #print-area {
+      display: none;
+      max-width: 800px; margin: 0 auto;
+    }
+    #print-area.generated {
+      display: block;
+    }
+    /* On screen, show report previews with page separators */
+    #print-area.generated .school-report {
+      border: 1px solid #ddd; border-radius: 8px; margin-bottom: 2rem;
+      padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    /* Make the header banner show on screen too */
+    #print-area.generated .rpt-header {
+      background: #1C2B4A; color: #fff; padding: 14px 18px;
+      border-radius: 6px; margin: -1.5rem -1.5rem 1rem; display: flex;
+      align-items: center; gap: 14px;
+    }
+    #print-area.generated .rpt-header img { height: 40px; }
+    #print-area.generated .rpt-header h2 { margin: 0; font-size: 1.3rem; color: #fff; }
+    #print-area.generated .rpt-header .rpt-subtitle { font-size: 0.8rem; color: #F5B800; margin-top: 2px; }
+    #print-area.generated .rpt-stats { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+    #print-area.generated .rpt-stat { flex: 1; min-width: 90px; text-align: center; border: 1.5px solid #e0e0e0; border-radius: 6px; padding: 8px 6px; }
+    #print-area.generated .rpt-stat .rpt-stat-icon svg { width: 18px; height: 18px; color: #1C2B4A; }
+    #print-area.generated .rpt-stat .rpt-stat-value { font-size: 1.3rem; font-weight: 700; color: #1C2B4A; }
+    #print-area.generated .rpt-stat .rpt-stat-label { font-size: 0.7rem; color: #666; text-transform: uppercase; }
+    #print-area.generated .rpt-programs { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+    #print-area.generated .rpt-prog-badge { display: inline-flex; align-items: center; gap: 4px; background: #f0f4f8; color: #1C2B4A; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; }
+    #print-area.generated .rpt-prog-badge svg { width: 14px; height: 14px; }
+    #print-area.generated .rpt-section { font-size: 0.95rem; font-weight: 700; color: #1C2B4A; margin: 14px 0 8px; padding-bottom: 4px; border-bottom: 2px solid #F5B800; display: flex; align-items: center; gap: 6px; }
+    #print-area.generated .rpt-section svg { width: 16px; height: 16px; }
+    #print-area.generated .rpt-columns { display: flex; gap: 14px; margin-bottom: 10px; }
+    #print-area.generated .rpt-col { flex: 1; }
+    #print-area.generated .rpt-enroll-bar { display: flex; height: 22px; border-radius: 8px; overflow: hidden; margin: 8px 0 4px; border: 1px solid #ddd; }
+    #print-area.generated .rpt-bar-primary { background: #1C2B4A; color: #fff; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; }
+    #print-area.generated .rpt-bar-jhs { background: #F5B800; color: #1C2B4A; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; }
+    #print-area.generated .rpt-enroll-legend { font-size: 0.75rem; color: #666; margin-bottom: 10px; }
+    #print-area.generated .rpt-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    #print-area.generated .rpt-table td { padding: 4px 6px; border-bottom: 1px solid #eee; }
+    #print-area.generated .rpt-table td:first-child { font-weight: 600; color: #444; width: 50%; }
+    #print-area.generated .rpt-visit { border-left: 3px solid #F5B800; padding: 8px 12px; margin-bottom: 8px; background: #fafafa; border-radius: 0 4px 4px 0; font-size: 0.85rem; }
+    #print-area.generated .rpt-visit-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
+    #print-area.generated .rpt-visit-date { font-weight: 700; color: #1C2B4A; }
+    #print-area.generated .rpt-visit-staff { color: #888; font-size: 0.75rem; }
+    #print-area.generated .rpt-visit p { margin: 2px 0; line-height: 1.4; }
+    #print-area.generated .rpt-field-label { font-weight: 600; color: #555; }
+    #print-area.generated .rpt-urgent { color: #dc3545; font-weight: 600; }
+    #print-area.generated .rpt-no-data { color: #999; font-style: italic; font-size: 0.85rem; }
+    #print-area.generated .rpt-footer { margin-top: 10px; padding-top: 6px; border-top: 1px solid #ddd; font-size: 0.7rem; color: #aaa; text-align: center; }
+
     #controls-bar {
-      background: #fff; border-radius: 8px; padding: 1.5rem;
+      background: #fff; border-radius: 8px; padding: 2rem;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 1.5rem;
-      text-align: center;
+      text-align: center; max-width: 600px; margin-left: auto; margin-right: auto;
     }
     .print-instructions {
-      color: #666; font-size: 0.9rem; margin-bottom: 1rem;
-      line-height: 1.6;
+      color: #666; font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.6;
     }
     .btn-print {
       background: #1C2B4A; color: #fff; border: none; border-radius: 6px;
@@ -131,9 +231,13 @@ htmltools::HTML(paste0('
     }
     .btn-print:hover { background: #2a3f6a; }
     .btn-print:disabled { opacity: 0.5; cursor: not-allowed; }
-    #preview-count {
-      margin-top: 1rem; color: var(--epi-navy); font-weight: 600;
+    .btn-print-now {
+      background: #F5B800; color: #1C2B4A; border: none; border-radius: 6px;
+      padding: 0.6rem 2rem; font-size: 1rem; font-weight: 600;
+      cursor: pointer; margin-top: 0.5rem; margin-left: 0.5rem; display: none;
     }
+    .btn-print-now:hover { background: #e0a800; }
+    #preview-count { margin-top: 1rem; color: var(--epi-navy); font-weight: 600; }
   }
 </style>
 
@@ -151,7 +255,8 @@ htmltools::HTML(paste0('
     <input type="date" id="print-date-end" value="', date_max, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
   </div>
 
-  <button class="btn-print" id="btn-generate" onclick="generateAndPrint()">Generate & Print</button>
+  <button class="btn-print" id="btn-generate" onclick="generateReports()">Generate Reports</button>
+  <button class="btn-print-now" id="btn-print-now" onclick="window.print()">Print All</button>
   <div id="preview-count"></div>
 </div>
 
@@ -166,24 +271,44 @@ function inRange(dateStr, start, end) {
   return d >= start && d <= end;
 }
 
-var PROGRAM_MAP = {
-  "MGR": "MGR / Lanterns",
-  "Non-Generating MGR": "Non-Generating MGR",
-  "Library": "Library",
-  "Computer": "Computers",
-  "Feminine Hygiene Kits": "Menstrual Kits",
-  "Science Kits": "Science Kits",
-  "Construction Projects": "Construction",
-  "Boreholes": "Boreholes",
-  "Solar Power": "Solar Power",
-  "Biofill Toilets": "Biofill Toilets",
-  "Light a Village": "Light a Village"
+/* ── SVG Icons ──────────────────────────────────────────────────── */
+var ICONS = {
+  lantern:     \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>\',
+  library:     \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>\',
+  computer:    \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>\',
+  kit:         \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>\',
+  science:     \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3h6M10 3v7.53L6 18h12l-4-7.47V3"/></svg>\',
+  construct:   \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="22" height="14" rx="2"/><path d="M1 10h22"/></svg>\',
+  water:       \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>\',
+  solar:       \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>\',
+  toilet:      \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7M7 12V5a2 2 0 012-2h6a2 2 0 012 2v7"/></svg>\',
+  bulb:        \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg>\',
+  mgr_ng:      \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h.01M18 12h.01M12 6v12"/></svg>\',
+  people:      \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>\',
+  school:      \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 22h20"/><path d="M6 18V7"/><path d="M18 18V7"/><path d="M2 11l10-7 10 7"/></svg>\',
+  teacher:     \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/></svg>\',
+  calendar:    \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>\',
+  clipboard:   \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>\',
+  graduation:  \'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10l-10-5L2 10l10 5 10-5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/></svg>\'
+};
+
+var PROGRAM_CFG = {
+  "MGR":                   { label: "MGR / Lanterns",    icon: "lantern",   color: "#F5B800" },
+  "Non-Generating MGR":    { label: "Non-Gen MGR",       icon: "mgr_ng",    color: "#e67e22" },
+  "Library":               { label: "Library",           icon: "library",   color: "#3498db" },
+  "Computer":              { label: "Computers",         icon: "computer",  color: "#9b59b6" },
+  "Feminine Hygiene Kits": { label: "Menstrual Kits",    icon: "kit",       color: "#e91e63" },
+  "Science Kits":          { label: "Science Kits",      icon: "science",   color: "#28a745" },
+  "Construction Projects": { label: "Construction",      icon: "construct", color: "#795548" },
+  "Boreholes":             { label: "Boreholes",         icon: "water",     color: "#00bcd4" },
+  "Solar Power":           { label: "Solar Power",       icon: "solar",     color: "#ff9800" },
+  "Biofill Toilets":       { label: "Biofill Toilets",   icon: "toilet",    color: "#607d8b" },
+  "Light a Village":       { label: "Light a Village",   icon: "bulb",      color: "#ffc107" }
 };
 
 function buildSchoolReport(slug, data, start, end) {
   var info = data.info;
 
-  // Filter visits
   var allVisits = data.visits || [];
   var visits = allVisits;
   if (start && end && Array.isArray(allVisits)) {
@@ -194,82 +319,137 @@ function buildSchoolReport(slug, data, start, end) {
 
   var html = \'<div class="school-report">\';
 
-  // School name
-  html += "<h2>" + info.school_name + "</h2>";
+  /* ── Header banner ──────────────────────────────────────────── */
+  html += \'<div class="rpt-header">\';
+  html += \'<img src="images/epi-logo.png" alt="EPI">\';
+  html += \'<div>\';
+  html += \'<h2>\' + info.school_name + \'</h2>\';
+  var subtitle = [];
+  if (info.Region) subtitle.push(info.Region + " Region");
+  if (info["EPI Start Year"]) subtitle.push("Partner Since " + info["EPI Start Year"]);
+  html += \'<div class="rpt-subtitle">\' + subtitle.join("  &bull;  ") + \'</div>\';
+  html += \'</div></div>\';
 
-  // Meta line
-  var meta = [];
-  if (info.Region) meta.push(info.Region + " Region");
-  if (info["EPI Start Year"]) meta.push("EPI Partner Since " + info["EPI Start Year"]);
-  meta.push("Report: " + start + " to " + end);
-  html += \'<div class="meta">\' + meta.join(" &middot; ") + "</div>";
-
-  // Programs
-  var progs = Object.keys(PROGRAM_MAP)
-    .filter(function(k) { return info[k] == 1; })
-    .map(function(k) { return \'<span class="badge-print">\' + PROGRAM_MAP[k] + "</span>"; });
-  if (progs.length > 0) {
-    html += \'<div class="programs-list">\' + progs.join(" ") + "</div>";
-  }
-
-  // School Details from full update
+  /* ── Stat cards ─────────────────────────────────────────────── */
   var fu = data.full_update;
   var latest = (Array.isArray(fu) && fu.length > 0) ? fu[fu.length - 1] : null;
-  if (latest) {
-    html += \'<div class="section-label">School Details</div>\';
-    html += "<table>";
-    if (latest.Q5) html += "<tr><td>Est. Community Population</td><td>" + parseInt(latest.Q5).toLocaleString() + "</td></tr>";
-    if (latest.Q6) html += "<tr><td>Students Enrolled</td><td>" + parseInt(latest.Q6).toLocaleString() + "</td></tr>";
-    if (latest.Q7) html += "<tr><td>Teachers</td><td>" + latest.Q7 + "</td></tr>";
-    var primaryN = latest.Q8 ? parseInt(latest.Q8) : 0;
-    var jhsN = (latest.Q10 === "Yes" && latest.Q11) ? parseInt(latest.Q11) : 0;
-    if (primaryN > 0) html += "<tr><td>Primary Students</td><td>" + primaryN.toLocaleString() + "</td></tr>";
-    if (jhsN > 0) html += "<tr><td>JHS Students</td><td>" + jhsN.toLocaleString() + "</td></tr>";
-    if (latest.Q9) html += "<tr><td>Completed Primary to JHS</td><td>" + latest.Q9 + "</td></tr>";
-    if (latest.Q12) html += "<tr><td>BECE Test Takers</td><td>" + latest.Q12 + "</td></tr>";
-    if (latest.Q13) html += "<tr><td>BECE Passers</td><td>" + latest.Q13 + "</td></tr>";
-    if (latest.Q15 && latest.Q15 !== "N/A") html += "<tr><td>Went to Secondary/Technical</td><td>" + latest.Q15 + "</td></tr>";
-    html += "</table>";
+
+  html += \'<div class="rpt-stats">\';
+  if (latest && latest.Q6) {
+    html += \'<div class="rpt-stat"><div class="rpt-stat-icon">\' + ICONS.school + \'</div>\';
+    html += \'<div class="rpt-stat-value">\' + parseInt(latest.Q6).toLocaleString() + \'</div>\';
+    html += \'<div class="rpt-stat-label">Students</div></div>\';
+  }
+  if (latest && latest.Q7) {
+    html += \'<div class="rpt-stat"><div class="rpt-stat-icon">\' + ICONS.teacher + \'</div>\';
+    html += \'<div class="rpt-stat-value">\' + latest.Q7 + \'</div>\';
+    html += \'<div class="rpt-stat-label">Teachers</div></div>\';
+  }
+  if (latest && latest.Q5) {
+    html += \'<div class="rpt-stat"><div class="rpt-stat-icon">\' + ICONS.people + \'</div>\';
+    html += \'<div class="rpt-stat-value">\' + parseInt(latest.Q5).toLocaleString() + \'</div>\';
+    html += \'<div class="rpt-stat-label">Community Pop.</div></div>\';
+  }
+  html += \'<div class="rpt-stat"><div class="rpt-stat-icon">\' + ICONS.clipboard + \'</div>\';
+  html += \'<div class="rpt-stat-value">\' + visits.length + \'</div>\';
+  html += \'<div class="rpt-stat-label">Visits in Range</div></div>\';
+  html += \'</div>\';
+
+  /* ── Program badges with icons ──────────────────────────────── */
+  var progs = Object.keys(PROGRAM_CFG).filter(function(k) { return info[k] == 1; });
+  if (progs.length > 0) {
+    html += \'<div class="rpt-programs">\';
+    progs.forEach(function(k) {
+      var cfg = PROGRAM_CFG[k];
+      html += \'<span class="rpt-prog-badge" style="border-left:3pt solid \' + cfg.color + \';">\';
+      html += ICONS[cfg.icon] + " " + cfg.label + \'</span>\';
+    });
+    html += \'</div>\';
   }
 
-  // Visit Notes
-  html += \'<div class="section-label">Visit Notes (\' + visits.length + " visit" + (visits.length !== 1 ? "s" : "") + ")</div>";
+  /* ── Enrollment bar + Academic stats ────────────────────────── */
+  if (latest) {
+    var primaryN = latest.Q8 ? parseInt(latest.Q8) : 0;
+    var jhsN = (latest.Q11 && latest.Q11 !== "null") ? parseInt(latest.Q11) : 0;
+    if (isNaN(jhsN)) jhsN = 0;
+    var total = primaryN + jhsN;
+
+    var hasAcademics = latest.Q9 || latest.Q12 || latest.Q13 || (latest.Q15 && latest.Q15 !== "N/A");
+
+    if (total > 0 || hasAcademics) {
+      html += \'<div class="rpt-columns">\';
+
+      // Left column: enrollment
+      html += \'<div class="rpt-col">\';
+      if (total > 0) {
+        html += \'<div class="rpt-section">\' + ICONS.graduation + \' Enrollment Breakdown</div>\';
+        var pPct = Math.round(primaryN / total * 100);
+        var jPct = 100 - pPct;
+        html += \'<div class="rpt-enroll-bar">\';
+        if (primaryN > 0) html += \'<div class="rpt-bar-primary" style="width:\' + pPct + \'%">Primary \' + primaryN + \'</div>\';
+        if (jhsN > 0) html += \'<div class="rpt-bar-jhs" style="width:\' + jPct + \'%">JHS \' + jhsN + \'</div>\';
+        html += \'</div>\';
+        html += \'<div class="rpt-enroll-legend">Total: \' + total.toLocaleString() + \' students</div>\';
+      }
+      html += \'</div>\';
+
+      // Right column: academic outcomes
+      html += \'<div class="rpt-col">\';
+      if (hasAcademics) {
+        html += \'<div class="rpt-section">\' + ICONS.graduation + \' Last Year Outcomes</div>\';
+        html += \'<table class="rpt-table">\';
+        if (latest.Q9) html += \'<tr><td>Primary to JHS</td><td>\' + latest.Q9 + \' students</td></tr>\';
+        if (latest.Q12) html += \'<tr><td>BECE Test Takers</td><td>\' + latest.Q12 + \'</td></tr>\';
+        if (latest.Q13) html += \'<tr><td>BECE Passers</td><td>\' + latest.Q13 + \'</td></tr>\';
+        if (latest.Q15 && latest.Q15 !== "N/A") html += \'<tr><td>To Secondary/Technical</td><td>\' + latest.Q15 + \' students</td></tr>\';
+        html += \'</table>\';
+      }
+      html += \'</div>\';
+
+      html += \'</div>\'; // end columns
+    }
+  }
+
+  /* ── Visit Notes ────────────────────────────────────────────── */
+  html += \'<div class="rpt-section">\' + ICONS.calendar + \' Visit Notes &mdash; \' + start + \' to \' + end + \'</div>\';
   if (visits.length > 0) {
-    // Show visits newest first
     var sorted = visits.slice().sort(function(a, b) {
       return (b.visit_date || "").localeCompare(a.visit_date || "");
     });
     sorted.forEach(function(v) {
-      html += \'<div class="visit-card">\';
-      if (v.visitor) html += \'<span class="visit-staff">Staff: \' + v.visitor + "</span>";
-      if (v.visit_date) html += \'<span class="visit-date">\' + v.visit_date + "</span>";
-      html += "<br>";
-      if (v.visit_reason) html += "<strong>Reason:</strong> " + v.visit_reason + "<br>";
-      if (v.activities) html += "<strong>Activities:</strong> " + v.activities + "<br>";
-      if (v.doing_well) html += "<strong>Doing well:</strong> " + v.doing_well + "<br>";
-      if (v.struggles) html += "<strong>Struggles:</strong> " + v.struggles + "<br>";
+      html += \'<div class="rpt-visit">\';
+      html += \'<div class="rpt-visit-header">\';
+      html += \'<span class="rpt-visit-date">\' + (v.visit_date || "No date") + \'</span>\';
+      if (v.visitor) html += \'<span class="rpt-visit-staff">Staff: \' + v.visitor + \'</span>\';
+      html += \'</div>\';
+      if (v.visit_reason) html += \'<p><span class="rpt-field-label">Reason:</span> \' + v.visit_reason + \'</p>\';
+      if (v.activities) html += \'<p><span class="rpt-field-label">Activities:</span> \' + v.activities + \'</p>\';
+      if (v.doing_well) html += \'<p><span class="rpt-field-label">Doing well:</span> \' + v.doing_well + \'</p>\';
+      if (v.struggles) html += \'<p><span class="rpt-field-label">Struggles:</span> \' + v.struggles + \'</p>\';
       if (v.urgent_issues && v.urgent_issues.toLowerCase() !== "no" && v.urgent_issues.toLowerCase() !== "none" && v.urgent_issues.toLowerCase() !== "n/a") {
-        html += \'<strong style="color:#dc3545;">Urgent Issues:</strong> \' + v.urgent_issues + "<br>";
+        html += \'<p><span class="rpt-urgent">Urgent:</span> \' + v.urgent_issues + \'</p>\';
       }
-      if (v.observations) html += "<strong>Observations:</strong> " + v.observations + "<br>";
-      html += "</div>";
+      if (v.observations) html += \'<p><span class="rpt-field-label">Observations:</span> \' + v.observations + \'</p>\';
+      html += \'</div>\';
     });
   } else {
-    html += \'<p class="no-data">No visits recorded in this date range.</p>\';
+    html += \'<p class="rpt-no-data">No visits recorded in this date range.</p>\';
   }
 
-  html += "</div>";
+  /* ── Footer ─────────────────────────────────────────────────── */
+  html += \'<div class="rpt-footer">Empower Playgrounds Inc. &bull; School Profile Report &bull; Generated \' + new Date().toLocaleDateString() + \'</div>\';
+
+  html += \'</div>\';
   return html;
 }
 
-function generateAndPrint() {
+function generateReports() {
   var start = document.getElementById("print-date-start").value;
   var end = document.getElementById("print-date-end").value;
   var btn = document.getElementById("btn-generate");
   btn.disabled = true;
   btn.textContent = "Generating...";
 
-  // Small delay so UI updates
   setTimeout(function() {
     var slugs = Object.keys(ALL_SCHOOLS).sort();
     var allHtml = "";
@@ -280,14 +460,15 @@ function generateAndPrint() {
       count++;
     });
 
-    document.getElementById("print-area").innerHTML = allHtml;
-    document.getElementById("preview-count").textContent = count + " school reports generated.";
+    var printArea = document.getElementById("print-area");
+    printArea.innerHTML = allHtml;
+    printArea.classList.add("generated");
+
+    document.getElementById("preview-count").textContent = count + " school reports generated. Scroll down to preview, or click Print All.";
+    document.getElementById("btn-print-now").style.display = "inline-block";
 
     btn.disabled = false;
-    btn.textContent = "Generate & Print";
-
-    // Trigger print
-    setTimeout(function() { window.print(); }, 300);
+    btn.textContent = "Generate Reports";
   }, 100);
 }
 </script>

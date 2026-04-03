@@ -246,7 +246,8 @@ function renderSchoolContent(slug, data) {
     }
 
     var primaryN = latestUpdate.Q8 ? parseInt(latestUpdate.Q8) : 0;
-    var jhsN = (latestUpdate.Q10 === "Yes" && latestUpdate.Q11) ? parseInt(latestUpdate.Q11) : 0;
+    var jhsN = (latestUpdate.Q11 && latestUpdate.Q11 !== "null") ? parseInt(latestUpdate.Q11) : 0;
+    if (isNaN(jhsN)) jhsN = 0;
 
     if (primaryN > 0 || jhsN > 0) {
       canvas.style.display = "block";

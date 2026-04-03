@@ -81,21 +81,25 @@ school_opts <- paste0(
   collapse = "\n"
 )
 
-chart_box <- function(title, id, type = "bar", height = 250) {
+chart_box <- function(title, id, type = "bar", height = 250, subtitle = NULL) {
+  sub_html <- ""
+  if (!is.null(subtitle)) {
+    sub_html <- sprintf('<p style="margin:0 0 0.5rem; color:#666; font-size:0.8rem;">%s</p>', subtitle)
+  }
   if (type == "pie") {
     sprintf(
       '<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-        <h4 style="margin-top:0; color:var(--epi-navy); font-size:0.95rem;">%s</h4>
+        <h4 style="margin-top:0; color:var(--epi-navy); font-size:0.95rem;">%s</h4>%s
         <canvas id="%s"></canvas>
         <p id="n-%s" style="text-align:center; color:#999; font-size:0.8rem; margin-bottom:0;"></p>
-      </div>', title, id, id)
+      </div>', title, sub_html, id, id)
   } else {
     sprintf(
       '<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-        <h4 style="margin-top:0; color:var(--epi-navy); font-size:0.95rem;">%s</h4>
+        <h4 style="margin-top:0; color:var(--epi-navy); font-size:0.95rem;">%s</h4>%s
         <div style="height:%dpx;"><canvas id="%s"></canvas></div>
         <p id="n-%s" style="text-align:center; color:#999; font-size:0.8rem; margin-bottom:0;"></p>
-      </div>', title, height, id, id)
+      </div>', title, sub_html, height, id, id)
   }
 }
 
@@ -114,28 +118,28 @@ grid_close <- '</div>'
 lanterns_tab <- paste0(
   '<div id="tab-lanterns" class="ki-panel" style="display:block;">',
   grid_open,
-  chart_box("Students Currently in a Lantern Group", "lantern-group", "pie"),
-  chart_box("Teachers Check in with Lantern Groups", "teacher-checkin", "pie"),
-  chart_box("Meeting Frequency", "meeting-freq", "bar", 220),
-  chart_box("Lantern Leader Overall Experience", "leader-exp", "bar", 200),
-  chart_box("Challenges Reported", "lantern-challenges", "bar", 220),
+  chart_box("Students Currently in a Lantern Group", "lantern-group", "pie", subtitle = "Percentage of students in MGR schools who report being part of a lantern group this term"),
+  chart_box("Teacher Checks In With Lantern Groups", "teacher-checkin", "pie"),
+  chart_box("Frequency of Lantern Group Meetings", "meeting-freq", "bar", 220, subtitle = "How often students report meeting with their group per week"),
+  chart_box("Experience as a Lantern Leader", "leader-exp", "bar", 200, subtitle = "How current lantern leaders describe their leadership role"),
+  chart_box("Challenges With Lanterns", "lantern-challenges", "bar", 220, subtitle = "Most frequent problems students experience with the lanterns"),
   grid_close, '</div>')
 
 libraries_tab <- paste0(
   '<div id="tab-libraries" class="ki-panel" style="display:none;">',
   grid_open,
-  chart_box("Book Checkout Allowed", "book-checkout", "pie"),
-  chart_box("Visit Frequency", "library-freq", "bar", 220),
-  chart_box("How Students Utilize Library", "library-when", "bar", 200),
+  chart_box("Book Checkout", "book-checkout", "pie", subtitle = "Percentage of students that report being allowed to check out books from the library"),
+  chart_box("Library Visit Frequency", "library-freq", "bar", 220, subtitle = "How often students report using the library each week"),
+  chart_box("When Students Visit the Library", "library-when", "bar", 200, subtitle = "How students typically access the library"),
   grid_close, '</div>')
 
 menstrual_tab <- paste0(
   '<div id="tab-menstrual" class="ki-panel" style="display:none;">',
   grid_open,
-  chart_box("Received Kit", "received-kit", "pie"),
-  chart_box("Usage Frequency", "kit-usage", "pie"),
-  chart_box("Reported Benefits", "kit-benefits", "bar", 250),
-  chart_box("Reported Challenges", "kit-challenges", "bar", 280),
+  chart_box("How Many Girls Have Received a Kit", "received-kit", "pie", subtitle = "Percentage of menstruating girls that have received a kit from EPI"),
+  chart_box("How Often Girls Use Their Kits", "kit-usage", "pie", subtitle = "Reported frequency of use among girls who have received a kit"),
+  chart_box("Benefits Experienced", "kit-benefits", "bar", 250, subtitle = "Count of the most common positive impacts girls experience from the kits"),
+  chart_box("Challenges Experienced", "kit-challenges", "bar", 280, subtitle = "Count of the most common difficulties girls report with the kits"),
   grid_close, '</div>')
 
 computers_tab <- paste0(
@@ -150,9 +154,9 @@ computers_tab <- paste0(
 science_tab <- paste0(
   '<div id="tab-science" class="ki-panel" style="display:none;">',
   grid_open,
-  chart_box("Students Have Personally Worked With Kits This Term", "science-usage", "pie"),
-  chart_box("Frequency of Use Per Term", "science-freq", "bar", 200),
-  chart_box("Reported Challenges", "science-challenges", "bar", 220),
+  chart_box("Science Kit Usage", "science-usage", "pie", subtitle = "Percentage of students who report having used a science kit during the current term"),
+  chart_box("Science Kit Use Frequency", "science-freq", "bar", 200, subtitle = "Distribution of how often students used the science kits the term"),
+  chart_box("Challenges Using Science Kits", "science-challenges", "bar", 220, subtitle = "Number of students reporting difficulties they experienced with the science kits"),
   grid_close, '</div>')
 
 # ── JavaScript code (raw string to avoid quoting issues) ──────────────
@@ -218,16 +222,17 @@ function truncLabel(label, max) {
 
 var PIE_COLORS = ["#1C2B4A", "#F5B800", "#3498db", "#28a745", "#e67e22", "#9b59b6", "#dc3545", "#1abc9c", "#95a5a6"];
 
-function makePie(id, labels, values) {
+function makePie(id, labels, values, customColors) {
   destroyChart(id);
   var canvas = document.getElementById(id);
   if (!canvas) return;
   var total = values.reduce(function(a,b) { return a + b; }, 0);
+  var colors = customColors || PIE_COLORS.slice(0, labels.length);
   charts[id] = new Chart(canvas, {
     type: "pie",
     data: {
       labels: labels,
-      datasets: [{ data: values, backgroundColor: PIE_COLORS.slice(0, labels.length) }]
+      datasets: [{ data: values, backgroundColor: colors }]
     },
     options: {
       responsive: true,
@@ -368,11 +373,12 @@ function renderParticipation(data) {
 function renderLanterns(data) {
   var mgrData = data.filter(function(d) { return d.MGR === "1"; });
 
-  // In Lantern Group pie
+  // In Lantern Group pie — relabel Yes/No
   var groupData = mgrData.filter(function(d) { return d.lantern_group && d.lantern_group !== "null"; });
   var gc = countSingle(groupData, "lantern_group");
-  var e = sortedDesc(gc);
-  if (e.length > 0) makePie("lantern-group", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
+  // Force order: In a group first (matches yellow on left), Not in a group second
+  var e = [["In a group", gc["Yes"] || 0], ["Not in a group", gc["No"] || 0]];
+  if (e.length > 0) makePie("lantern-group", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}), ["#F5B800", "#1C2B4A"]);
   setN("lantern-group", groupData.length);
 
   // Teacher Check-ins (lantern members only) — group into Yes/No
@@ -384,7 +390,12 @@ function renderLanterns(data) {
     else tcGrouped["No"] += tc[k];
   });
   e = sortedDesc(tcGrouped);
-  if (e.length > 0) makePie("teacher-checkin", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
+  if (e.length > 0) {
+    var tcLabels = e.map(function(x){return x[0];});
+    var tcValues = e.map(function(x){return x[1];});
+    var tcColors = tcLabels.map(function(l) { return l === "Yes" ? "#F5B800" : "#1C2B4A"; });
+    makePie("teacher-checkin", tcLabels, tcValues, tcColors);
+  }
   setN("teacher-checkin", members.length);
 
   // Meeting Frequency — group into buckets, ordered bottom-to-top: 1-2x, 3-4x, 5-6x, Daily
@@ -403,10 +414,23 @@ function renderLanterns(data) {
   if (freqD.length > 0) makeHBar("meeting-freq", freqLabels, freqValues, "#1C2B4A", "Responses");
   setN("meeting-freq", freqD.length);
 
-  // Leader Experience (multi-select, lantern members)
+  // Leader Experience (multi-select, lantern members) — relabel
   var expD = mgrData.filter(function(d) { return d.lantern_group === "Yes" && d.Q24 && d.Q24 !== "null"; });
   var ec2 = countMulti(expD, "Q24");
-  e = sortedDesc(ec2);
+  var expMap = {
+    "Difficult": "Difficult", "Stressful": "Stressful",
+    "Enjoys the responsibility": "Enjoys the responsibility"
+  };
+  // Map any long labels containing keywords
+  var expMapped = {};
+  Object.keys(ec2).forEach(function(k) {
+    var kl = k.toLowerCase();
+    if (kl.indexOf("difficult") >= 0) expMapped["Difficult"] = (expMapped["Difficult"] || 0) + ec2[k];
+    else if (kl.indexOf("stressful") >= 0) expMapped["Stressful"] = (expMapped["Stressful"] || 0) + ec2[k];
+    else if (kl.indexOf("enjoy") >= 0) expMapped["Enjoys the responsibility"] = (expMapped["Enjoys the responsibility"] || 0) + ec2[k];
+    else expMapped[k] = (expMapped[k] || 0) + ec2[k];
+  });
+  e = sortedDesc(expMapped);
   if (e.length > 0) makeHBar("leader-exp", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}), "#1C2B4A", "Responses");
   setN("leader-exp", expD.length);
 
@@ -432,10 +456,15 @@ function renderLanterns(data) {
 function renderLibraries(data) {
   var libData = data.filter(function(d) { return d.Library === "1"; });
 
-  // Book Checkout (Q15) — remove "I do not know"
+  // Book Checkout (Q15) — remove "I do not know", relabel
   var coD = libData.filter(function(d) { return d.Q15 && d.Q15 !== "null" && d.Q15 !== "I do not know"; });
   var cc = countSingle(coD, "Q15");
-  var e = sortedDesc(cc);
+  var coLabeled = { "Allowed to check out books": 0, "Not allowed to check out books": 0 };
+  Object.keys(cc).forEach(function(k) {
+    if (k === "Yes") coLabeled["Allowed to check out books"] += cc[k];
+    else if (k === "No") coLabeled["Not allowed to check out books"] += cc[k];
+  });
+  var e = sortedDesc(coLabeled);
   if (e.length > 0) makePie("book-checkout", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
   setN("book-checkout", coD.length);
 
@@ -444,11 +473,11 @@ function renderLibraries(data) {
   var rawFC = countSingle(frD, "Q14");
   var freqMap = {
     "I have never visited": "Have never visited",
-    "Less than once a week": "Less than 1x per week",
-    "1-2 times a week": "1-2x per week",
-    "More than 3 times a week": "More than 3x per week"
+    "Less than once a week": "Less than 1x",
+    "1-2 times a week": "1-2x",
+    "More than 3 times a week": ">3x"
   };
-  var freqLabels = ["More than 3x per week", "1-2x per week", "Less than 1x per week", "Have never visited"];
+  var freqLabels = [">3x", "1-2x", "Less than 1x", "Have never visited"];
   var freqValues = freqLabels.map(function(newLabel) {
     var count = 0;
     Object.keys(rawFC).forEach(function(k) { if (freqMap[k] === newLabel) count += rawFC[k]; });
@@ -483,41 +512,34 @@ function renderLibraries(data) {
 function renderMenstrualKits(data) {
   var mkData = data.filter(function(d) { return d.fem_hygiene === "1"; });
 
-  // Received Kit pie (menstrual_kit) — just Yes/No
+  // Received Kit pie (menstrual_kit) — relabel to Have received / Have not received
   var rkD = mkData.filter(function(d) { return d.menstrual_kit && d.menstrual_kit !== "null"; });
   var rkc = countSingle(rkD, "menstrual_kit");
-  var rkGrouped = { "Yes": 0, "No": 0 };
+  var rkGrouped = { "Have received": 0, "Have not received": 0 };
   Object.keys(rkc).forEach(function(k) {
-    if (k.toLowerCase().indexOf("yes") === 0) rkGrouped["Yes"] += rkc[k];
-    else if (k === "No") rkGrouped["No"] += rkc[k];
+    if (k.toLowerCase().indexOf("yes") === 0) rkGrouped["Have received"] += rkc[k];
+    else if (k === "No") rkGrouped["Have not received"] += rkc[k];
   });
   var e = sortedDesc(rkGrouped);
   if (e.length > 0) makePie("received-kit", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
   setN("received-kit", rkD.length);
 
-  // Usage Frequency pie (Q32, kit recipients only) — group into Always/Sometimes/Never, remove "Never, I do not have a kit"
+  // Usage Frequency pie (Q32, kit recipients only) — remove "I do not have a kit" responses, keep original labels
   var usD = mkData.filter(function(d) { return d.menstrual_kit === "Yes" && d.Q32 && d.Q32 !== "null" && d.Q32.indexOf("I do not have a kit") < 0; });
   var usc = countSingle(usD, "Q32");
-  var usGrouped = { "Always": 0, "Sometimes": 0, "Never": 0 };
-  Object.keys(usc).forEach(function(k) {
-    var kl = k.toLowerCase();
-    if (kl === "always" || kl.indexOf("every time") >= 0 || kl.indexOf("for the entire period") >= 0) usGrouped["Always"] += usc[k];
-    else if (kl === "never" || kl.indexOf("never") >= 0) usGrouped["Never"] += usc[k];
-    else usGrouped["Sometimes"] += usc[k];
-  });
   // Remove zero entries
-  Object.keys(usGrouped).forEach(function(k) { if (usGrouped[k] === 0) delete usGrouped[k]; });
-  e = sortedDesc(usGrouped);
+  Object.keys(usc).forEach(function(k) { if (usc[k] === 0) delete usc[k]; });
+  e = sortedDesc(usc);
   if (e.length > 0) makePie("kit-usage", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
   setN("kit-usage", usD.length);
 
   // Reported Benefits (Q33, multi-select, kit recipients) — remove "I do not have a kit", "The kit has not helped me", "Other"; combine similar
   var benefitMap = {
-    "I have learned more about my body and cycle": "Learned more about body/cycle",
-    "The training helped me learn more about my body": "Learned more about body/cycle",
-    "I no longer miss school because of my period": "No longer missing school",
-    "I feel more confident and comfortable when I have my period": "More confident/comfortable",
-    "The training has helped me to calculate my period so I get prepared and do not spoil my dress": "Can predict/prepare for period"
+    "I have learned more about my body and cycle": "Learned about body",
+    "The training helped me learn more about my body": "Learned about body",
+    "I no longer miss school because of my period": "No longer miss school",
+    "I feel more confident and comfortable when I have my period": "Gained more confidence",
+    "The training has helped me to calculate my period so I get prepared and do not spoil my dress": "Gained more confidence"
   };
   var beD = mkData.filter(function(d) { return d.menstrual_kit === "Yes" && d.Q33 && d.Q33 !== "null"; });
   var bec = countMulti(beD, "Q33");
@@ -615,10 +637,11 @@ function renderComputers(data) {
 function renderScienceKits(data) {
   var sciData = data.filter(function(d) { return d.science_kits === "1"; });
 
-  // Usage pie (Q6)
+  // Usage pie (Q6) — relabel Yes/No
   var usD = sciData.filter(function(d) { return d.Q6 && d.Q6 !== "null"; });
   var usc = countSingle(usD, "Q6");
-  var e = sortedDesc(usc);
+  var sciLabeled = { "Have used": usc["Yes"] || 0, "Have not used": usc["No"] || 0 };
+  var e = sortedDesc(sciLabeled);
   if (e.length > 0) makePie("science-usage", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
   setN("science-usage", usD.length);
 
@@ -822,48 +845,6 @@ htmltools::HTML(paste0(
   '</div>',
   '</div>'
 ))
-```
-
-## Program Access
-
-*Percentage of all EPI schools that currently have each program*
-
-```{r}
-#| echo: false
-
-program_access <- tibble(
-  Program = c("MGR / Lantern Groups", "Library", "Menstrual Kits", "Computers", "Science Kits"),
-  pct = c(
-    round(mean(schools$MGR == 1, na.rm = TRUE) * 100),
-    round(mean(schools$Library == 1, na.rm = TRUE) * 100),
-    round(mean(schools$`Feminine Hygiene Kits` == 1, na.rm = TRUE) * 100),
-    round(mean(schools$Computer == 1, na.rm = TRUE) * 100),
-    round(mean(schools$`Science Kits` == 1, na.rm = TRUE) * 100)
-  )
-) |>
-  mutate(Program = fct_reorder(Program, pct))
-
-fig_access <- plot_ly(
-  program_access,
-  x = ~pct,
-  y = ~Program,
-  type = "bar",
-  orientation = "h",
-  marker = list(color = "#1C2B4A"),
-  text = ~paste0(pct, "%"),
-  textposition = "outside",
-  hoverinfo = "text",
-  hovertext = ~paste0(Program, ": ", pct, "% of all schools")
-) |>
-  layout(
-    xaxis = list(title = "% of All EPI Schools", range = c(0, 105), ticksuffix = "%"),
-    yaxis = list(title = ""),
-    margin = list(l = 150, r = 50, t = 10, b = 40),
-    plot_bgcolor = "rgba(0,0,0,0)",
-    paper_bgcolor = "rgba(0,0,0,0)"
-  )
-
-fig_access
 ```
 
 ```{r}
