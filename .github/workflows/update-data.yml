@@ -32,21 +32,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
 
-      - name: Cache R packages
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: r-packages-${{ runner.os }}-4.4.0-v2
-
       - name: Install R packages
         run: |
-          Rscript -e '
+          sudo Rscript -e '
             options(repos = c(RSPM = "https://packagemanager.posit.co/cran/__linux__/jammy/latest", CRAN = "https://cloud.r-project.org"))
-            pkgs <- c("tidyverse", "googlesheets4", "jsonlite", "here", "dotenv")
-            new_pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])]
-            if (length(new_pkgs) > 0) install.packages(new_pkgs)
-            cat("Installed packages:\n")
-            for (p in pkgs) cat(p, packageVersion(p), "\n")
+            install.packages(c("tidyverse", "googlesheets4", "jsonlite", "here", "dotenv"))
           '
 
       - name: Create .env file from secrets
