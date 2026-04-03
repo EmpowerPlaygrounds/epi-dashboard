@@ -505,7 +505,7 @@ async function generateSummary() {
     });
     var data = await resp.json();
     if (data.error) {
-      summaryDiv.innerHTML = '<em style="color:#dc3545;">Error: ' + data.error + '</em>';
+      summaryDiv.innerHTML = '<em style="color:#dc3545;">Error: ' + data.error + (data.details ? ' — ' + data.details : '') + '</em>';
     } else {
       summaryDiv.innerHTML = '<div style="white-space:pre-wrap; line-height:1.6;">' + data.summary + '</div>';
     }
