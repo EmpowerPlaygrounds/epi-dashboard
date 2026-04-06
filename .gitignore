@@ -1,6 +1,7 @@
 # Environment and secrets
 .env
 
+data/clean/
 # Raw data (rebuilt from pipeline)
 data/raw/
 
