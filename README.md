@@ -2,7 +2,7 @@
 
 A Quarto + R dashboard for **Empower Playgrounds Inc. (EPI)** that consolidates field visit reports, student surveys, project records, and school metadata into an interactive website. Built as the final project for GLHLTH 562 at Duke University.
 
-Live pages: **Overview** | **School Profiles** | **Visits** | **Student Surveys** | **Issues**
+Live pages: **Overview** | **School Profiles** | **Visits** | **Student Surveys** | **Issues** | **Print Reports**
 
 ---
 
@@ -79,21 +79,22 @@ run-all.R
 
 ## Output
 
-A static Quarto website (`_site/`) with five pages:
+A static Quarto website (`_site/`) with six pages:
 
 | Page | What it shows |
 |---|---|
 | **Overview** | Stat cards (visit count, new projects, full updates, survey responses, open issues), Leaflet school map, recent visits table, recent projects table, program availability bars, schools with open issues |
-| **School Profiles** | Dropdown to select a school; shows header with programs, visit stats, survey summary bars, notes from last visit, visit history table — all filterable by date range |
+| **School Profiles** | Dropdown to select a school; shows header with programs, visit stats, survey summary bars, notes from last visit, AI summary button, visit history table — all filterable by date range |
 | **Visits** | Pie chart of schools visited vs. not visited, full visit log DataTable, visits-by-school count table — all filterable by date range |
 | **Student Surveys** | Stat cards, survey response DataTable with school filter, all filterable by date range |
 | **Issues** | Stat cards, list of all urgent issues with links to school profiles |
+| **Print Reports** | Printable per-school reports for field staff |
 
 Client-side interactivity uses **Chart.js** (pie charts), **Leaflet** (maps), **jQuery DataTables** (sortable/searchable tables), and vanilla JavaScript for date range filtering. All data is embedded as JSON in `<script>` tags at build time — no server or API calls are needed to view the dashboard.
 
 ### AI Summary Feature
 
-The School Profiles page includes a "Generate AI Summary" button that calls the **Google Gemini API** (`gemini-2.0-flash`) at view time to produce a narrative summary of a school's field visit notes. This requires a `GEMINI_API_KEY` in the `.env` file. The helper function is in `R/gemini_helper.R`.
+The School Profiles page includes a "Generate AI Summary" button that calls the **Google Gemini API** (`gemini-2.5-flash`) at view time to produce a narrative summary of a school's field visit notes. The frontend calls a **Vercel serverless function** (`api/summary.js`) which proxies the request to keep the API key server-side. An equivalent R helper (`R/gemini_helper.R`) is available for use in the data pipeline. Both require a `GEMINI_API_KEY` — set it in the `.env` file locally and in Vercel environment variables for production.
 
 ---
 
@@ -105,7 +106,7 @@ The School Profiles page includes a "Generate AI Summary" button that calls the 
   ```r
   install.packages(c(
     "tidyverse", "googlesheets4", "jsonlite",
-    "dotenv", "here", "DT", "htmltools", "httr2", "leaflet"
+    "dotenv", "here", "DT", "htmltools", "httr2", "leaflet", "plotly"
   ))
   ```
 - **Quarto** (>= 1.4) — [install here](https://quarto.org/docs/get-started/)
@@ -171,10 +172,15 @@ epi-dashboard/
 ├── styles.css           # Custom CSS (stat cards, nav, tables)
 ├── images/
 │   └── epi-logo.png     # Navbar logo
+├── api/
+│   └── summary.js       # Vercel serverless function for AI summaries
 ├── data/
 │   ├── raw/             # Raw CSVs from Google Sheets (gitignored)
-│   └── clean/           # Pipeline output CSVs + JSONs (gitignored)
-├── _site/               # Rendered HTML output (gitignored)
+│   └── clean/           # Pipeline output CSVs + JSONs (gitignored, force-added by GitHub Action)
+├── _site/               # Rendered HTML output
+├── .github/
+│   └── workflows/
+│       └── update-data.yml  # Daily auto-update GitHub Action
 └── .env                 # Sheet IDs + API keys (gitignored)
 ```
 
@@ -185,5 +191,17 @@ The `_site/` directory contains a fully static website that can be deployed to a
 - **GitHub Pages:** Push `_site/` to a `gh-pages` branch, or configure GitHub Actions to run `quarto render` and publish
 - **Netlify/Vercel:** Point the build command to `quarto render` and the publish directory to `_site`
 - **Manual:** Copy the `_site/` folder to any web server
+
+### Automated Updates (GitHub Action)
+
+A GitHub Action (`.github/workflows/update-data.yml`) runs daily at 6:00 AM UTC (1:00 AM EST / 6:00 AM Ghana time) to:
+1. Pull fresh data from Google Sheets
+2. Run the R pipeline
+3. Render the Quarto site
+4. Commit and push any changes to `_site/` and `data/clean/`
+
+The Action requires the Google Sheet IDs to be stored as **GitHub repository secrets** (`SHEET_SCHOOLS_OVERVIEW`, `SHEET_QUICK_UPDATE`, `SHEET_FULL_UPDATE`, `SHEET_STUDENT_SURVEY`, `SHEET_NEW_PROJECT`). Workflow permissions must be set to **Read and write** under Settings > Actions > General.
+
+You can also trigger the workflow manually from the Actions tab.
 
 Note: The data pipeline requires Google Sheets access, so automated CI/CD builds need either public sheets or a service account credential file.
