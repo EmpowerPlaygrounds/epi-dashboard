@@ -141,28 +141,6 @@ leaflet(schools_with_coords) |>
   )
 ```
 
-## Recent School Visits
-
-```{r}
-#| echo: false
-htmltools::HTML('
-<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:2rem;">
-  <table id="recent-visits-table" class="table table-striped" style="width:100%;">
-    <thead>
-      <tr>
-        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Date</th>
-        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">School</th>
-        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Staff</th>
-        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Visit Reason</th>
-        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Activities</th>
-      </tr>
-    </thead>
-    <tbody id="recent-visits-body"></tbody>
-  </table>
-</div>
-')
-```
-
 ## Recent New Projects
 
 ```{r}
@@ -230,7 +208,6 @@ function inRange(dateStr, start, end) {
 }
 
 // DataTable instances
-var visitsTable = null;
 var projectsTable = null;
 
 // cell style
@@ -254,32 +231,6 @@ function renderDashboard() {
   document.getElementById('stat-full').textContent      = full.length;
   document.getElementById('stat-surveys').textContent   = surveys.length;
   document.getElementById('stat-issues').textContent    = issues.length;
-
-  // Recent Visits table
-  var sortedVisits = visits.slice().sort(function(a, b) {
-    return (b.visit_date || '').localeCompare(a.visit_date || '');
-  });
-  var visitsBody = document.getElementById('recent-visits-body');
-  visitsBody.innerHTML = '';
-  sortedVisits.forEach(function(v) {
-    var tr = document.createElement('tr');
-    tr.innerHTML =
-      '<td style="' + cs + '">' + (v.visit_date || '') + '</td>' +
-      '<td style="' + cs + '"><a href="schools.html?school=' + v.slug + '" style="color:var(--epi-navy); font-weight:600; text-decoration:none; border-bottom:1px dashed var(--epi-navy);">' + v.school_name + '</a></td>' +
-      '<td style="' + cs + '">' + (v.visitor || '') + '</td>' +
-      '<td style="' + cs + '">' + (v.visit_reason || '') + '</td>' +
-      '<td style="' + cs + '">' + (v.activities || '') + '</td>';
-    visitsBody.appendChild(tr);
-  });
-
-  if (visitsTable) { visitsTable.destroy(); visitsTable = null; }
-  if (typeof jQuery !== 'undefined' && jQuery.fn.DataTable) {
-    visitsTable = jQuery('#recent-visits-table').DataTable({
-      pageLength: 10,
-      order: [[0, 'desc']],
-      language: { search: 'Filter:' }
-    });
-  }
 
   // Recent Projects table
   var sortedProjects = projects.slice().sort(function(a, b) {
