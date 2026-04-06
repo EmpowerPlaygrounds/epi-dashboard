@@ -38,7 +38,7 @@ jobs:
             lib <- .libPaths()[1]
             cat("Installing to:", lib, "\n")
             options(repos = c(RSPM = "https://packagemanager.posit.co/cran/__linux__/jammy/latest", CRAN = "https://cloud.r-project.org"))
-            install.packages(c("tidyverse", "googlesheets4", "jsonlite", "here", "dotenv"), lib = lib)
+            install.packages(c("tidyverse", "googlesheets4", "jsonlite", "here", "dotenv", "plotly", "leaflet", "htmltools", "DT"), lib = lib)
           '
 
       - name: Write .Renviron so all R processes find packages
