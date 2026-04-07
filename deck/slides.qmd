@@ -1,0 +1,84 @@
+---
+title: "EPI Data Dashboard"
+subtitle: "GLHLTH 562 Final Presentation"
+author: "Morgan O'Loughlin"
+format:
+  revealjs:
+    theme: [simple, slides.css]
+    slide-number: true
+    transition: fade
+    logo: epi-logo.png
+    title-slide-attributes:
+      data-background-color: "#1C2B4A"
+---
+
+## Empower Playgrounds Inc.
+
+::::: columns
+::: {.column width="50%"}
+-   Nonprofit working in **rural schools across West Africa**
+-   Programs include power-generating merry-go-rounds, science kits, libraries, reusable menstrual kits, remote computer labs
+-   Currently in **70+ partner schools**
+:::
+
+::: {.column width="50%"}
+![](IMG_9833%202.jpg){fig-align="center" height="400px"}
+:::
+:::::
+
+## The Problem
+
+::::: columns
+::: {.column width="50%"}
+-   EPI has been collecting data via Qualtrics surveys since 2018, but **very little has been used**
+-   No unified view for organization staff
+-   Hard to track organization activities, issues, or measure program reach
+:::
+
+::: {.column width="50%"}
+![](survey-photo.jpg){fig-align="center" height="400px"}
+:::
+:::::
+
+## The Solution
+
+An **interactive dashboard** that consolidates all field data into one place.
+
+## Data Pipeline
+
+**Every day at 6 AM, a GitHub Action automatically:**
+
+1.  **Fetches** fresh data from 5 Google Sheets via the `googlesheets4` API
+2.  **Processes** it through an R pipeline (import → clean → join → export)
+3.  **Renders** the Quarto site into static HTML
+4.  **Deploys** the updated dashboard
+
+## Live Demo
+
+```{=html}
+<!--
+  Switch to browser and walk through:
+  1. Overview page — stat cards, map, recent visits
+  2. School Profiles — select a school, show programs, click AI Summary
+  3. Visits — date filter, coverage pie chart
+  4. Student Surveys — switch between tabs
+  5. Issues — show open issues list
+-->
+```
+
+::: callout-tip
+Switching to the live dashboard...
+:::
+
+## Next Steps & Future Improvements
+
+-   Collect and implement feedback from EPI staff
+-   Authentication feature
+-   Ability to "resolve" open issues
+-   Historical trend charts over time
+
+## Thank You {.center}
+
+::: r-fit-text
+Questions?
+:::

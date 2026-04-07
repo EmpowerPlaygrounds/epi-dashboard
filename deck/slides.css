@@ -1,0 +1,116 @@
+/*-- scss:defaults --*/
+
+/*-- scss:rules --*/
+
+/* EPI Brand Colors */
+:root {
+  --epi-navy: #1C2B4A;
+  --epi-yellow: #F5B800;
+}
+
+/* Slide background */
+.reveal {
+  background-color: #f8f9fa;
+}
+
+/* Headings */
+.reveal h1, .reveal h2, .reveal h3 {
+  color: var(--epi-navy);
+  font-weight: 700;
+}
+
+/* Body text */
+.reveal {
+  color: #2c3e50;
+  font-size: 32px;
+}
+
+/* Bold text in EPI navy */
+.reveal strong {
+  color: var(--epi-navy);
+}
+
+/* Links */
+.reveal a {
+  color: var(--epi-yellow);
+}
+
+/* Title slide (navy background) */
+#title-slide h1,
+#title-slide .title {
+  color: #ffffff;
+  font-size: 1.8em;
+}
+
+#title-slide .subtitle {
+  color: var(--epi-yellow);
+  font-weight: 600;
+}
+
+#title-slide .author,
+#title-slide .date {
+  color: #cfd8e3;
+}
+
+/* Horizontal rule accent */
+.reveal hr {
+  border-color: var(--epi-yellow);
+}
+
+/* Table styling */
+.reveal table {
+  border-collapse: collapse;
+  font-size: 0.7em;
+}
+
+.reveal table thead th {
+  background-color: var(--epi-navy);
+  color: #fff;
+  padding: 8px 14px;
+  border: none;
+}
+
+.reveal table tbody td {
+  padding: 8px 14px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.reveal table tbody tr:nth-child(even) {
+  background-color: #eef1f5;
+}
+
+/* Ordered list number styling */
+.reveal ol li::marker {
+  color: var(--epi-yellow);
+  font-weight: 700;
+}
+
+/* Callout tip (live demo slide) */
+.reveal .callout-tip {
+  border-left-color: var(--epi-yellow);
+}
+
+/* Code blocks */
+.reveal pre {
+  background-color: var(--epi-navy);
+  color: #f8f9fa;
+  border-radius: 6px;
+  padding: 16px;
+  font-size: 0.65em;
+}
+
+/* Fragment highlight */
+.reveal .fragment.highlight-current-blue {
+  color: var(--epi-yellow);
+}
+
+/* Logo */
+.reveal .slide-logo {
+  height: 40px !important;
+}
+
+/* Slide number */
+.reveal .slide-number {
+  color: var(--epi-navy);
+  font-size: 14px;
+}
