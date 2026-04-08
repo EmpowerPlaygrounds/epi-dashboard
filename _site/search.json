@@ -42,6 +42,55 @@
     "text": "Programs at a Glance\n\n\n\n\n  \n    Program Reach\n    % of schools with each program\n    \n  \n  \n    Schools with Open Issues\n    Schools where field staff flagged urgent issues (in date range)"
   },
   {
+    "objectID": "deck/slides.html#empower-playgrounds-inc.",
+    "href": "deck/slides.html#empower-playgrounds-inc.",
+    "title": "EPI Data Dashboard",
+    "section": "Empower Playgrounds Inc.",
+    "text": "Empower Playgrounds Inc.\n\n\n\nNonprofit working in rural schools across West Africa\nPrograms include power-generating merry-go-rounds, science kits, libraries, reusable menstrual kits, remote computer labs\nCurrently in 70+ partner schools"
+  },
+  {
+    "objectID": "deck/slides.html#the-problem",
+    "href": "deck/slides.html#the-problem",
+    "title": "EPI Data Dashboard",
+    "section": "The Problem",
+    "text": "The Problem\n\n\n\nEPI has been collecting data via Qualtrics surveys since 2018, but very little has been used\nNo unified view for organization staff\nHard to track organization activities, issues, or measure program reach"
+  },
+  {
+    "objectID": "deck/slides.html#the-solution",
+    "href": "deck/slides.html#the-solution",
+    "title": "EPI Data Dashboard",
+    "section": "The Solution",
+    "text": "The Solution\nAn interactive dashboard that consolidates all field data into one place."
+  },
+  {
+    "objectID": "deck/slides.html#data-pipeline",
+    "href": "deck/slides.html#data-pipeline",
+    "title": "EPI Data Dashboard",
+    "section": "Data Pipeline",
+    "text": "Data Pipeline\nEvery day at 6 AM, a GitHub Action automatically:\n\nFetches fresh data from 5 Google Sheets via the googlesheets4 API\nProcesses it through an R pipeline (import → clean → join → export)\nRenders the Quarto site into static HTML\nDeploys the updated dashboard"
+  },
+  {
+    "objectID": "deck/slides.html#live-demo",
+    "href": "deck/slides.html#live-demo",
+    "title": "EPI Data Dashboard",
+    "section": "Live Demo",
+    "text": "Live Demo\n\n\n\n\n\n\n\nTip\n\n\nSwitching to the live dashboard…"
+  },
+  {
+    "objectID": "deck/slides.html#next-steps-future-improvements",
+    "href": "deck/slides.html#next-steps-future-improvements",
+    "title": "EPI Data Dashboard",
+    "section": "Next Steps & Future Improvements",
+    "text": "Next Steps & Future Improvements\n\nCollect and implement feedback from EPI staff\nAuthentication feature\nAbility to “resolve” open issues\nHistorical trend charts over time"
+  },
+  {
+    "objectID": "deck/slides.html#thank-you",
+    "href": "deck/slides.html#thank-you",
+    "title": "EPI Data Dashboard",
+    "section": "Thank You",
+    "text": "Thank You\n\nQuestions?"
+  },
+  {
     "objectID": "surveys.html",
     "href": "surveys.html",
     "title": "Student Surveys",
