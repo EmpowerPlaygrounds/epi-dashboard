@@ -1,47 +1,5 @@
 [
   {
-    "objectID": "visits.html",
-    "href": "visits.html",
-    "title": "Visit Tracker",
-    "section": "",
-    "text": "Date Range:toApplyReset\n\n\n\n\n\n  Schools Visited\n  \n  \n\n\nVisit Log\n\n  \n\n\nVisits by School"
-  },
-  {
-    "objectID": "schools.html",
-    "href": "schools.html",
-    "title": "School Profiles",
-    "section": "",
-    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n  Print Reports\n\n\n\n  Select a School:\n  \n    — Choose a school —\n    Abrenya\nAdenya\nAdor Kope R/C Primary\nAfransua Dedewa MA Primary\nAkwanserem\nAkwansu\nAkyeremanteng\nAlorkpem Island\nAmuyaokope\nAnamenampa\nAnateem Sumbrungu\nApaah\nAtaampuutum A/B\nAttabui\nAzizakpem\nBahankra\nBegoro\nBepotumtum\nBomigo\nCommunity 3\nCommunity 9\nDagomba\nDedenya\nDedewa\nDomase\nEbourso\nEkorso Akwadum\nEssam\nFanterila\nFawotrikosie\nFerekoroba\nGalalia\nGloucester R.E.C. (Sierra Leone)\nGourcy Burkina Faso School\nImmanuel Christian Academy (Liberia)\nKoni Kablu\nKpala Government\nKpala Private\nKurasua #1 MA\nLuta\nMadavunu\nMamakrom\nMampong Shai\nMansokwa\nMantukwa\nMeyikpoi\nMinya\nMobia\nMosipanin\nMpaem\nNtomem\nNwawasua MA\nNwowom\nNyapienya\nNyariga Girls' School\nObani\nObelemanya\nObosonu\nOld Konkompe\nOyoko\nPaynesville Community (Liberia)\nPediatorkope\nSunyani\nTerhey\nTorjeh\nTreeplanting FBC (Sierra Leone)\nTsledom\nTuanikope\nTun Tun\nWangarakrom\nWatro (Watroso)\nWekpeti Abresu\nWenamda\nWurudu Wurudu\nYonguase\nYorogo-Asorogobisi\nZippo Nyuinyui\n  \n\n\n\n\n\n  \n  \n\n\n\n\nPrograms\n\n\n\nSchool Details\n\n  \n    Student Enrollment Breakdown\n    \n    No class data available\n  \n  \n\n\n\nNotes From Last Visit\n\n\nAI Summary\n\n  Generate an AI-powered summary of visit notes highlighting what this school is doing well and where it needs support.\n  Generate AI Summary"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Overview",
-    "section": "",
-    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n\n\n\n\n  \n    \n    Field Visits\n  \n  \n    \n    New Projects\n  \n  \n    \n    Full Updates\n  \n  \n    \n    Student Surveys\n  \n  \n    \n    Open Issues"
-  },
-  {
-    "objectID": "index.html#school-map",
-    "href": "index.html#school-map",
-    "title": "Overview",
-    "section": "School Map",
-    "text": "School Map"
-  },
-  {
-    "objectID": "index.html#recent-new-projects",
-    "href": "index.html#recent-new-projects",
-    "title": "Overview",
-    "section": "Recent New Projects",
-    "text": "Recent New Projects\n\n\n\n  \n\n\n\nDate\nSchool\nStaff\nProject Type"
-  },
-  {
-    "objectID": "index.html#programs-at-a-glance",
-    "href": "index.html#programs-at-a-glance",
-    "title": "Overview",
-    "section": "Programs at a Glance",
-    "text": "Programs at a Glance\n\n\n\n\n  \n    Program Reach\n    % of schools with each program\n    \n  \n  \n    Schools with Open Issues\n    Schools where field staff flagged urgent issues (in date range)"
-  },
-  {
     "objectID": "deck/slides.html#empower-playgrounds-inc.",
     "href": "deck/slides.html#empower-playgrounds-inc.",
     "title": "EPI Data Dashboard",
@@ -91,6 +49,20 @@
     "text": "Thank You\n\nQuestions?"
   },
   {
+    "objectID": "visits.html",
+    "href": "visits.html",
+    "title": "Visit Tracker",
+    "section": "",
+    "text": "Date Range:toApplyReset\n\n\n\n\n\n  Schools Visited\n  \n  \n\n\nVisit Log\n\n  \n\n\nVisits by School"
+  },
+  {
+    "objectID": "schools.html",
+    "href": "schools.html",
+    "title": "School Profiles",
+    "section": "",
+    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n  Print Reports\n\n\n\n  Select a School:\n  \n    — Choose a school —\n    Abrenya\nAdenya\nAdor Kope R/C Primary\nAfransua Dedewa MA Primary\nAkwanserem\nAkwansu\nAkyeremanteng\nAlorkpem Island\nAmuyaokope\nAnamenampa\nAnateem Sumbrungu\nApaah\nAtaampuutum A/B\nAttabui\nAzizakpem\nBahankra\nBegoro\nBepotumtum\nBomigo\nCommunity 3\nCommunity 9\nDagomba\nDedenya\nDedewa\nDomase\nEbourso\nEkorso Akwadum\nEssam\nFanterila\nFawotrikosie\nFerekoroba\nGalalia\nGloucester R.E.C. (Sierra Leone)\nGourcy Burkina Faso School\nImmanuel Christian Academy (Liberia)\nKoni Kablu\nKpala Government\nKpala Private\nKurasua #1 MA\nLuta\nMadavunu\nMamakrom\nMampong Shai\nMansokwa\nMantukwa\nMeyikpoi\nMinya\nMobia\nMosipanin\nMpaem\nNtomem\nNwawasua MA\nNwowom\nNyapienya\nNyariga Girls' School\nObani\nObelemanya\nObosonu\nOld Konkompe\nOyoko\nPaynesville Community (Liberia)\nPediatorkope\nSunyani\nTerhey\nTorjeh\nTreeplanting FBC (Sierra Leone)\nTsledom\nTuanikope\nTun Tun\nWangarakrom\nWatro (Watroso)\nWekpeti Abresu\nWenamda\nWurudu Wurudu\nYonguase\nYorogo-Asorogobisi\nZippo Nyuinyui\n  \n\n\n\n\n\n  \n  \n\n\n\n\nPrograms\n\n\n\nSchool Details\n\n  \n    Student Enrollment Breakdown\n    \n    No class data available\n  \n  \n\n\n\nNotes From Last Visit\n\n\nAI Summary\n\n  Generate an AI-powered summary of visit notes highlighting what this school is doing well and where it needs support.\n  Generate AI Summary"
+  },
+  {
     "objectID": "surveys.html",
     "href": "surveys.html",
     "title": "Student Surveys",
@@ -110,6 +82,34 @@
     "title": "Print School Reports",
     "section": "",
     "text": "Print School Profile Reports\n  \n    Select a date range to filter visit notes, then click Generate & Print.\n    Each school will appear on its own page. You can print to paper or save as PDF.\n  \n\n  \n    Date Range:\n    \n    to\n    \n  \n\n  Generate Reports\n  Print All"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n\n\n\n\n  \n    \n    Field Visits\n  \n  \n    \n    New Projects\n  \n  \n    \n    Full Updates\n  \n  \n    \n    Student Surveys\n  \n  \n    \n    Open Issues"
+  },
+  {
+    "objectID": "index.html#school-map",
+    "href": "index.html#school-map",
+    "title": "Overview",
+    "section": "School Map",
+    "text": "School Map"
+  },
+  {
+    "objectID": "index.html#recent-new-projects",
+    "href": "index.html#recent-new-projects",
+    "title": "Overview",
+    "section": "Recent New Projects",
+    "text": "Recent New Projects\n\n\n\n  \n\n\n\nDate\nSchool\nStaff\nProject Type"
+  },
+  {
+    "objectID": "index.html#programs-at-a-glance",
+    "href": "index.html#programs-at-a-glance",
+    "title": "Overview",
+    "section": "Programs at a Glance",
+    "text": "Programs at a Glance\n\n\n\n\n  \n    Program Reach\n    % of schools with each program\n    \n  \n  \n    Schools with Open Issues\n    Schools where field staff flagged urgent issues (in date range)"
   },
   {
     "objectID": "issues.html",
