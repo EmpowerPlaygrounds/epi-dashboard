@@ -4,6 +4,7 @@ project:
   pre-render: Rscript run-all.R
   resources:
     - data/clean/**
+    - data/raw/**
 
 website:
   title: "EPI Data Dashboard"

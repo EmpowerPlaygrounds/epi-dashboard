@@ -43,8 +43,8 @@ available_years <- sort(unique(surveys$survey_year[!is.na(surveys$survey_year)])
 
 # Date range defaults
 survey_dates <- as.Date(surveys$survey_date[!is.na(surveys$survey_date)])
-survey_date_min <- as.character(min(survey_dates))
-survey_date_max <- as.character(max(survey_dates))
+survey_date_min <- paste0(format(Sys.Date(), "%Y"), "-01-01")
+survey_date_max <- as.character(Sys.Date())
 n_responses <- nrow(surveys)
 n_schools   <- n_distinct(surveys$school_name, na.rm = TRUE)
 n_total_schools <- nrow(schools)
@@ -530,12 +530,21 @@ function renderMenstrualKits(data) {
   if (e.length > 0) makePie("received-kit", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
   setN("received-kit", rkD.length);
 
-  // Usage Frequency pie (Q32, kit recipients only) — remove "I do not have a kit" responses, keep original labels
+  // Usage Frequency pie (Q32, kit recipients only) — grouped into Always / Sometimes / Never
   var usD = mkData.filter(function(d) { return d.menstrual_kit === "Yes" && d.Q32 && d.Q32 !== "null" && d.Q32.indexOf("I do not have a kit") < 0; });
-  var usc = countSingle(usD, "Q32");
-  // Remove zero entries
-  Object.keys(usc).forEach(function(k) { if (usc[k] === 0) delete usc[k]; });
-  e = sortedDesc(usc);
+  var usGrouped = { "Always": 0, "Sometimes": 0, "Never": 0 };
+  usD.forEach(function(d) {
+    var q = d.Q32.toLowerCase();
+    if (q === "always" || q.indexOf("every time i have my period") >= 0) {
+      usGrouped["Always"]++;
+    } else if (q === "sometimes" || q.indexOf("every other month") >= 0) {
+      usGrouped["Sometimes"]++;
+    } else if (q.indexOf("never") >= 0) {
+      usGrouped["Never"]++;
+    }
+  });
+  Object.keys(usGrouped).forEach(function(k) { if (usGrouped[k] === 0) delete usGrouped[k]; });
+  e = sortedDesc(usGrouped);
   if (e.length > 0) makePie("kit-usage", e.map(function(x){return x[0];}), e.map(function(x){return x[1];}));
   setN("kit-usage", usD.length);
 
@@ -749,9 +758,9 @@ document.addEventListener("DOMContentLoaded", function() {
   if (applyBtn) applyBtn.addEventListener("click", renderAll);
   var resetBtn = document.getElementById("btn-survey-reset");
   if (resetBtn) resetBtn.addEventListener("click", function() {
-    var allDates = SURVEY_DATA.map(function(d) { return d.survey_date; }).filter(function(d) { return d && d !== "null"; }).sort();
-    document.getElementById("survey-date-start").value = allDates[0] || "";
-    document.getElementById("survey-date-end").value = allDates[allDates.length - 1] || "";
+    var now = new Date();
+    document.getElementById("survey-date-start").value = now.getFullYear() + "-01-01";
+    document.getElementById("survey-date-end").value = now.toISOString().slice(0, 10);
     renderAll();
   });
 });

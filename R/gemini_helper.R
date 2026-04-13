@@ -16,10 +16,14 @@ generate_school_summary <- function(school_name, notes,
     system_prompt <- paste(
       "You are summarizing field visit notes for", school_name,
       ", a school in rural Ghana participating in Empower",
-      "Playgrounds Inc. programs. Based on the following staff",
-      "observations, write a concise 2-3 paragraph summary",
-      "covering: (1) what the school is doing well, (2) current",
-      "challenges, and (3) any urgent issues needing attention."
+      "Playgrounds Inc. programs. Based on the staff observations",
+      "below, write a summary in exactly this format:\n\n",
+      "**Doing Well:** Summarize what this school is doing well.\n\n",
+      "**Challenges:** Summarize any challenges, struggles, or urgent issues.\n\n",
+      "**Recommendations:** Provide actionable recommendations based on",
+      "staff observations and the challenges listed.\n\n",
+      "Keep each section to 2-3 sentences. If no information is",
+      "available for a section, write 'No information available.'"
     )
   }
 

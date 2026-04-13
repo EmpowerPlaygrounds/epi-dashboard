@@ -16,9 +16,8 @@ visits  <- read_csv(here("data", "clean", "visits.csv"), show_col_types = FALSE)
 schools <- read_csv(here("data", "clean", "schools.csv"), show_col_types = FALSE)
 
 # Date range defaults
-visit_dates <- visits$visit_date[!is.na(visits$visit_date)]
-date_min <- as.character(min(visit_dates))
-date_max <- as.character(max(visit_dates))
+date_min <- paste0(format(Sys.Date(), "%Y"), "-01-01")
+date_max <- as.character(Sys.Date())
 
 # All school names for the "0 visits" inclusion
 all_school_names <- sort(schools$school_name)
@@ -179,9 +178,9 @@ document.addEventListener("DOMContentLoaded", function() {
   renderVisitPage();
   document.getElementById("btn-apply-dates").addEventListener("click", renderVisitPage);
   document.getElementById("btn-reset-dates").addEventListener("click", function() {
-    var allDates = VISITS.map(function(v) { return v.visit_date; }).filter(function(d) { return d; }).sort();
-    document.getElementById("date-start").value = allDates[0] || "";
-    document.getElementById("date-end").value = allDates[allDates.length - 1] || "";
+    var now = new Date();
+    document.getElementById("date-start").value = now.getFullYear() + "-01-01";
+    document.getElementById("date-end").value = now.toISOString().slice(0, 10);
     renderVisitPage();
   });
 });

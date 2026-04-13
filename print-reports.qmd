@@ -24,8 +24,8 @@ clean_full <- raw_full |>
 
 # Date range defaults
 visit_dates <- visits$visit_date[!is.na(visits$visit_date)]
-date_min <- as.character(min(visit_dates))
-date_max <- as.character(max(visit_dates))
+date_min <- paste0(format(Sys.Date(), "%Y"), "-01-01")
+date_max <- as.character(Sys.Date())
 
 # Build the full data object for all schools
 all_school_data <- list()

@@ -19,9 +19,11 @@ export default async function handler(req, res) {
   const prompt =
     `You are summarizing field visit notes for ${school_name}, ` +
     `a school in rural Ghana participating in Empower Playgrounds Inc. programs.\n\n` +
-    `Based on the following staff observations, write a concise 2-3 paragraph summary ` +
-    `covering: (1) what the school is doing well, (2) current challenges, and ` +
-    `(3) any urgent issues needing attention.\n\n` +
+    `Based on the staff observations below, write a summary in exactly this format:\n\n` +
+    `**Doing Well:** Summarize what this school is doing well based on the visit notes.\n\n` +
+    `**Challenges:** Summarize any challenges, struggles, or urgent issues reported.\n\n` +
+    `**Recommendations:** Provide actionable recommendations based on staff observations and the challenges listed.\n\n` +
+    `Keep each section to 2-3 sentences. If no information is available for a section, write "No information available."\n\n` +
     `Notes:\n${notes.join("\n\n")}`;
 
   try {

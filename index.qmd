@@ -64,10 +64,8 @@ schools_json <- schools |>
   toJSON(auto_unbox = TRUE)
 
 # Date range for selector defaults
-all_dates <- c(visits$visit_date, new_projects$project_date, full_updates$update_date, surveys$survey_date)
-all_dates <- all_dates[!is.na(all_dates)]
-date_min <- as.character(min(all_dates))
-date_max <- as.character(max(all_dates))
+date_min <- paste0(format(Sys.Date(), "%Y"), "-01-01")
+date_max <- as.character(Sys.Date())
 ```
 
 ```{r}
@@ -87,6 +85,36 @@ htmltools::HTML(paste0(
   <input type="date" id="date-end" value="', date_max, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
   <button id="btn-apply-dates" style="background:var(--epi-navy); color:#fff; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Apply</button>
   <button id="btn-reset-dates" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer;">Reset</button>
+  <button onclick="openDownloadModal()" style="background:#F5B800; color:#1C2B4A; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Download Data</button>
+</div>
+
+<!-- Download Modal -->
+<div id="download-modal" onclick="if(event.target===this)closeDownloadModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:#fff; border-radius:12px; padding:2rem; max-width:420px; width:90%; box-shadow:0 8px 32px rgba(0,0,0,0.2);">
+    <h3 style="color:var(--epi-navy); margin-top:0; margin-bottom:1.25rem;">Download Data</h3>
+    <div style="margin-bottom:1rem;">
+      <label style="font-weight:600; color:var(--epi-navy); font-size:0.85rem; display:block; margin-bottom:0.35rem;">Dataset</label>
+      <select id="dl-dataset" style="width:100%; padding:0.5rem; border:1px solid #ccc; border-radius:4px; font-size:0.9rem;">
+        <option value="quick">Quick School Updates</option>
+        <option value="full">Full School Updates</option>
+        <option value="projects">New Projects</option>
+        <option value="student">Student Surveys</option>
+        <option value="schools">School Overviews</option>
+      </select>
+    </div>
+    <div id="dl-date-row" style="margin-bottom:1.25rem;">
+      <label style="font-weight:600; color:var(--epi-navy); font-size:0.85rem; display:block; margin-bottom:0.35rem;">Date Range</label>
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <input type="date" id="dl-date-start" style="flex:1; border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+        <span style="color:#999;">to</span>
+        <input type="date" id="dl-date-end" style="flex:1; border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+      </div>
+    </div>
+    <div style="display:flex; gap:0.75rem; justify-content:flex-end;">
+      <button onclick="closeDownloadModal()" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.5rem 1.25rem; font-size:0.85rem; cursor:pointer;">Cancel</button>
+      <button onclick="downloadCSV()" style="background:var(--epi-navy); color:#fff; border:none; border-radius:4px; padding:0.5rem 1.25rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Download CSV</button>
+    </div>
+  </div>
 </div>
 
 <!-- Stat Cards -->
@@ -327,6 +355,114 @@ function renderDashboard() {
   document.getElementById('issues-summary').innerHTML = issuesHtml;
 }
 
+// Download Data feature
+function openDownloadModal() {
+  document.getElementById('dl-date-start').value = document.getElementById('date-start').value;
+  document.getElementById('dl-date-end').value = document.getElementById('date-end').value;
+  document.getElementById('dl-dataset').value = 'visits';
+  document.getElementById('dl-date-row').style.display = 'block';
+  document.getElementById('download-modal').style.display = 'flex';
+}
+
+function closeDownloadModal() {
+  document.getElementById('download-modal').style.display = 'none';
+}
+
+function parseCSVLine(line) {
+  var result = [], current = '', inQuotes = false;
+  for (var i = 0; i < line.length; i++) {
+    var ch = line[i];
+    if (inQuotes) {
+      if (ch === '"' && line[i+1] === '"') { current += '"'; i++; }
+      else if (ch === '"') { inQuotes = false; }
+      else { current += ch; }
+    } else {
+      if (ch === '"') { inQuotes = true; }
+      else if (ch === ',') { result.push(current); current = ''; }
+      else { current += ch; }
+    }
+  }
+  result.push(current);
+  return result;
+}
+
+function extractDate(str) {
+  if (!str) return '';
+  var m = str.match(/^(\d{4}-\d{2}-\d{2})/);
+  if (m) return m[1];
+  m = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (m) return m[3] + '-' + m[1].padStart(2,'0') + '-' + m[2].padStart(2,'0');
+  return '';
+}
+
+function triggerDownload(content, filename) {
+  var blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+  var link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+async function downloadCSV() {
+  var dataset = document.getElementById('dl-dataset').value;
+  var start = document.getElementById('dl-date-start').value;
+  var end = document.getElementById('dl-date-end').value;
+  var csvFile, dateCol, filename;
+
+  switch(dataset) {
+    case 'quick':    csvFile = 'data/raw/quick_update.csv';    dateCol = 'StartDate'; filename = 'quick_school_updates'; break;
+    case 'full':     csvFile = 'data/raw/full_update.csv';     dateCol = 'StartDate'; filename = 'full_school_updates'; break;
+    case 'projects': csvFile = 'data/raw/new_project.csv';     dateCol = 'StartDate'; filename = 'new_projects'; break;
+    case 'student':  csvFile = 'data/raw/student_survey.csv';  dateCol = 'StartDate'; filename = 'student_surveys'; break;
+    case 'schools':  csvFile = 'data/raw/schools_overview.csv'; dateCol = null;         filename = 'school_overviews'; break;
+  }
+
+  try {
+    var resp = await fetch(csvFile);
+    if (!resp.ok) throw new Error('Could not fetch ' + csvFile);
+    var text = await resp.text();
+    var lines = text.split('\n');
+    var header = lines[0];
+
+    if (!dateCol || !start || !end) {
+      triggerDownload(text, filename + '.csv');
+      closeDownloadModal();
+      return;
+    }
+
+    var cols = parseCSVLine(header);
+    var dateIdx = cols.indexOf(dateCol);
+    if (dateIdx < 0) {
+      triggerDownload(text, filename + '.csv');
+      closeDownloadModal();
+      return;
+    }
+
+    var filtered = [header];
+    var startRow = 1;
+    // Qualtrics exports have a label row after the header — preserve it
+    if (dateCol === 'StartDate' && lines.length > 1 && lines[1].trim()) {
+      filtered.push(lines[1]);
+      startRow = 2;
+    }
+    for (var i = startRow; i < lines.length; i++) {
+      if (!lines[i].trim()) continue;
+      var fields = parseCSVLine(lines[i]);
+      var dateVal = extractDate(fields[dateIdx]);
+      if (dateVal && dateVal >= start && dateVal <= end) {
+        filtered.push(lines[i]);
+      }
+    }
+
+    triggerDownload(filtered.join('\n'), filename + '_' + start + '_to_' + end + '.csv');
+  } catch(err) {
+    alert('Download failed: ' + err.message);
+  }
+  closeDownloadModal();
+}
+
 // Use window.onload to ensure all CDN scripts are loaded
 window.addEventListener('load', function() {
   renderDashboard();
@@ -334,16 +470,14 @@ window.addEventListener('load', function() {
   document.getElementById('btn-apply-dates').addEventListener('click', renderDashboard);
 
   document.getElementById('btn-reset-dates').addEventListener('click', function() {
-    var allDates = []
-      .concat(ALL_VISITS.map(function(v) { return v.visit_date; }))
-      .concat(ALL_PROJECTS.map(function(v) { return v.project_date; }))
-      .concat(ALL_FULL.map(function(v) { return v.update_date; }))
-      .concat(ALL_SURVEYS.map(function(v) { return v.survey_date; }))
-      .filter(function(d) { return d; });
-    allDates.sort();
-    document.getElementById('date-start').value = allDates[0] || '';
-    document.getElementById('date-end').value = allDates[allDates.length - 1] || '';
+    var now = new Date();
+    document.getElementById('date-start').value = now.getFullYear() + '-01-01';
+    document.getElementById('date-end').value = now.toISOString().slice(0, 10);
     renderDashboard();
+  });
+
+  document.getElementById('dl-dataset').addEventListener('change', function() {
+    document.getElementById('dl-date-row').style.display = this.value === 'schools' ? 'none' : 'block';
   });
 });
 </script>

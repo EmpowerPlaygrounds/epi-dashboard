@@ -25,9 +25,8 @@ clean_full <- raw_full |>
   mutate(school_name = str_trim(school_name))
 
 # Date range defaults
-visit_dates <- visits$visit_date[!is.na(visits$visit_date)]
-date_min <- as.character(min(visit_dates))
-date_max <- as.character(max(visit_dates))
+date_min <- paste0(format(Sys.Date(), "%Y"), "-01-01")
+date_max <- as.character(Sys.Date())
 
 # Build the full data object for all schools
 all_school_data <- list()
@@ -117,8 +116,8 @@ htmltools::HTML(paste0(
 
 <h3>AI Summary</h3>
 <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem;">
-  <p style="color:#666; font-size:0.9rem; margin-bottom:0.75rem;">Generate an AI-powered summary of visit notes highlighting what this school is doing well and where it needs support.</p>
-  <button class="btn-ai-summary" onclick="generateSummary()">Generate AI Summary</button>
+  <p style="color:#666; font-size:0.9rem; margin-bottom:0.75rem;">AI-powered summary of visit notes organized by strengths, challenges, and recommendations.</p>
+  <button id="btn-generate-summary" class="btn-ai-summary" onclick="generateSummary(true)">Generate AI Summary</button>
   <div id="ai-summary" style="margin-top:1rem;"></div>
 </div>
 
@@ -320,17 +319,69 @@ function renderSchoolContent(slug, data) {
     document.getElementById("school-visits").innerHTML = \'<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><em style="color:#999;">No visits recorded in this date range</em></div>\';
   }
 
-  document.getElementById("ai-summary").innerHTML = "";
+  loadCachedSummary(slug, data);
 }
 
-async function generateSummary() {
-  if (!currentSchool) return;
-  var notes = (currentSchool.visits || []).map(function(v) {
-    return [v.doing_well, v.struggles, v.urgent_issues, v.observations].filter(Boolean).join(" ");
+function simpleHash(str) {
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash = hash & hash;
+  }
+  return hash.toString(36);
+}
+
+function buildNotes(data) {
+  return (data.visits || []).map(function(v) {
+    var parts = [];
+    if (v.doing_well) parts.push("Doing well: " + v.doing_well);
+    if (v.struggles) parts.push("Struggles: " + v.struggles);
+    if (v.urgent_issues) parts.push("Urgent issues: " + v.urgent_issues);
+    if (v.observations) parts.push("Other observations: " + v.observations);
+    return parts.join("; ");
   }).filter(function(n) { return n.trim() !== ""; });
+}
+
+function loadCachedSummary(slug, data) {
+  var notes = buildNotes(data);
+  var cacheKey = "epi-summary-" + slug;
+  var cached = null;
+  try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
+  var currentHash = simpleHash(JSON.stringify(notes));
+  var btn = document.getElementById("btn-generate-summary");
+  if (cached && cached.hash === currentHash && cached.summary) {
+    document.getElementById("ai-summary").innerHTML =
+      \'<div style="white-space:pre-wrap; line-height:1.6;">\' + cached.summary + \'</div>\' +
+      \'<p style="color:#999; font-size:0.75rem; margin-top:0.5rem;">Cached summary from \' + cached.date + \'</p>\';
+    if (btn) btn.textContent = "Regenerate Summary";
+  } else {
+    document.getElementById("ai-summary").innerHTML = "";
+    if (btn) btn.textContent = "Generate AI Summary";
+  }
+}
+
+async function generateSummary(force) {
+  if (!currentSchool) return;
+  var notes = buildNotes(currentSchool);
   if (notes.length === 0) {
     document.getElementById("ai-summary").innerHTML = \'<em style="color:#999;">No visit notes available for summary.</em>\';
     return;
+  }
+
+  var slug = currentSchool._slug;
+  var notesHash = simpleHash(JSON.stringify(notes));
+
+  // Check cache unless forced
+  if (!force) {
+    var cacheKey = "epi-summary-" + slug;
+    var cached = null;
+    try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
+    if (cached && cached.hash === notesHash && cached.summary) {
+      document.getElementById("ai-summary").innerHTML =
+        \'<div style="white-space:pre-wrap; line-height:1.6;">\' + cached.summary + \'</div>\' +
+        \'<p style="color:#999; font-size:0.75rem; margin-top:0.5rem;">Cached summary from \' + cached.date + \'</p>\';
+      return;
+    }
   }
 
   var summaryDiv = document.getElementById("ai-summary");
@@ -345,11 +396,21 @@ async function generateSummary() {
         notes: notes
       })
     });
-    var data = await resp.json();
-    if (data.error) {
-      summaryDiv.innerHTML = \'<em style="color:#dc3545;">Error: \' + data.error + (data.details ? \' — \' + data.details : \'\') + \'</em>\';
+    var result = await resp.json();
+    if (result.error) {
+      summaryDiv.innerHTML = \'<em style="color:#dc3545;">Error: \' + result.error + (result.details ? \' — \' + result.details : \'\') + \'</em>\';
     } else {
-      summaryDiv.innerHTML = \'<div style="white-space:pre-wrap; line-height:1.6;">\' + data.summary + \'</div>\';
+      summaryDiv.innerHTML = \'<div style="white-space:pre-wrap; line-height:1.6;">\' + result.summary + \'</div>\';
+      // Cache the result
+      try {
+        localStorage.setItem("epi-summary-" + slug, JSON.stringify({
+          hash: notesHash,
+          summary: result.summary,
+          date: new Date().toLocaleDateString()
+        }));
+      } catch(e) {}
+      var btn = document.getElementById("btn-generate-summary");
+      if (btn) btn.textContent = "Regenerate Summary";
     }
   } catch (err) {
     summaryDiv.innerHTML = \'<em style="color:#dc3545;">Failed to connect to AI service. Please try again later.</em>\';
@@ -361,17 +422,9 @@ document.getElementById("btn-school-apply").addEventListener("click", function()
   if (currentSchool) renderSchoolContent(currentSchool._slug, currentSchool);
 });
 document.getElementById("btn-school-reset").addEventListener("click", function() {
-  var allDates = [];
-  Object.keys(ALL_SCHOOLS).forEach(function(slug) {
-    (ALL_SCHOOLS[slug].visits || []).forEach(function(v) {
-      if (v.visit_date) allDates.push(v.visit_date.slice(0, 10));
-    });
-  });
-  allDates.sort();
-  if (allDates.length > 0) {
-    document.getElementById("school-date-start").value = allDates[0];
-    document.getElementById("school-date-end").value = allDates[allDates.length - 1];
-  }
+  var now = new Date();
+  document.getElementById("school-date-start").value = now.getFullYear() + "-01-01";
+  document.getElementById("school-date-end").value = now.toISOString().slice(0, 10);
   if (currentSchool) renderSchoolContent(currentSchool._slug, currentSchool);
 });
 
