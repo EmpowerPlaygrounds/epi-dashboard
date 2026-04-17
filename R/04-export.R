@@ -48,13 +48,15 @@ if (nzchar(id_resolved)) {
   }
 
   resolved_raw <- tryCatch(
-    read_sheet(id_resolved),
+    read_sheet(id_resolved, col_types = "c"),
     error = function(e) {
       cat("  Note: Could not read resolved sheet:", e$message, "\n")
       tibble(issue_id = character())
     }
   )
 
+  # Ensure issue_id is character (Google Sheets may guess numeric)
+  resolved_raw <- resolved_raw |> mutate(issue_id = as.character(issue_id))
   resolved_ids <- resolved_raw$issue_id
 
   issues_open <- issues |> filter(!issue_id %in% resolved_ids)
