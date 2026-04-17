@@ -3041,7 +3041,8 @@
       "visit_reason": "Routine Visit,MGR/Charging Maintenance",
       "activities": "Routine Visit,MGR/Charging Maintenance,Science Kit Training/Distribution,Student Survey Team Visit",
       "visit_date": "2026-01-27",
-      "visitor": "Richard"
+      "visitor": "Richard",
+      "issue_id": "79d4e78cc06c"
     }
   ]
 }
