@@ -48,24 +48,41 @@ if (nzchar(id_resolved)) {
   }
 
   resolved_raw <- tryCatch(
-    read_sheet(id_resolved, col_types = "c"),
+    {
+      sheet <- read_sheet(id_resolved, col_types = "ccccccc")
+      # Force every column to character to avoid type mismatches
+      sheet |> mutate(across(everything(), as.character))
+    },
     error = function(e) {
       cat("  Note: Could not read resolved sheet:", e$message, "\n")
-      tibble(issue_id = character())
+      tibble(
+        issue_id = character(), school_name = character(),
+        issue_text = character(), visit_date = character(),
+        resolved_date = character(), resolved_by = character(),
+        resolution_notes = character()
+      )
     }
   )
 
-  # Ensure issue_id is character (Google Sheets may guess numeric)
-  resolved_raw <- resolved_raw |> mutate(issue_id = as.character(issue_id))
-  resolved_ids <- resolved_raw$issue_id
+  # Ensure issue_id column exists and is character
+  if (!"issue_id" %in% names(resolved_raw)) {
+    resolved_raw <- tibble(
+      issue_id = character(), resolved_date = character(),
+      resolved_by = character(), resolution_notes = character()
+    )
+  }
+
+  resolved_ids <- as.character(resolved_raw$issue_id)
 
   issues_open <- issues |> filter(!issue_id %in% resolved_ids)
+
+  resolved_for_join <- resolved_raw |>
+    mutate(issue_id = as.character(issue_id)) |>
+    select(any_of(c("issue_id", "resolved_date", "resolved_by", "resolution_notes")))
+
   issues_resolved <- issues |>
     filter(issue_id %in% resolved_ids) |>
-    left_join(
-      resolved_raw |> select(issue_id, resolved_date, resolved_by, resolution_notes),
-      by = "issue_id"
-    )
+    left_join(resolved_for_join, by = "issue_id")
 } else {
   cat("  Note: SHEET_RESOLVED_ISSUES not set, treating all issues as open\n")
   issues_open <- issues
