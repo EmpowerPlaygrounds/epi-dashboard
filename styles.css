@@ -108,6 +108,28 @@
   border-bottom: 1px solid #e9ecef;
 }
 
+/* Resolve button */
+.btn-resolve {
+  background: var(--epi-navy);
+  color: #fff;
+  border: none;
+  padding: 0.35rem 1rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.btn-resolve:hover {
+  background: #2a3f6b;
+}
+
+/* Resolved issue card */
+.issue-resolved {
+  border-left: 4px solid #28a745 !important;
+}
+
 /* AI Summary button */
 .btn-ai-summary {
   background: var(--epi-yellow);

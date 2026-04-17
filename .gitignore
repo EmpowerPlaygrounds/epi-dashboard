@@ -1,9 +1,10 @@
 # Environment and secrets
 .env
 
-data/clean/
-# Raw data (rebuilt from pipeline)
-data/raw/
+# Node
+node_modules/
+
+data/
 
 # Quarto intermediate files
 .quarto/

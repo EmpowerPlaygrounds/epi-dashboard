@@ -1,5 +1,8 @@
 {
   "name": "epi-dashboard",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "googleapis": "^144.0.0"
+  }
 }

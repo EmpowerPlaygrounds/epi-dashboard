@@ -3,6 +3,8 @@
 library(tidyverse)
 library(jsonlite)
 library(here)
+library(digest)
+library(googlesheets4)
 
 # ------------------------------------------------------------------
 # Create output directories
@@ -22,9 +24,57 @@ write_csv(clean_full,     here("data", "clean", "full_updates.csv"))
 issues <- clean_quick |>
   filter(!is.na(urgent_issues) & urgent_issues != "") |>
   filter(!str_to_lower(str_trim(urgent_issues)) %in% c("no", "none", "n/a", "na", "no.", "none.", "n/a.")) |>
-  select(school_name, urgent_issues, visit_reason, activities, observations, visit_date, visitor)
+  select(school_name, urgent_issues, visit_reason, activities, observations, visit_date, visitor) |>
+  mutate(
+    issue_id = map_chr(
+      paste(school_name, visit_date, urgent_issues),
+      ~ substr(digest(.x, algo = "md5"), 1, 12)
+    )
+  )
+
+# ------------------------------------------------------------------
+# Read resolved issues from Google Sheet (if configured)
+# ------------------------------------------------------------------
+id_resolved <- Sys.getenv("SHEET_RESOLVED_ISSUES")
+
+if (nzchar(id_resolved)) {
+  sa_key <- Sys.getenv("GOOGLE_SERVICE_ACCOUNT_KEY")
+  if (nzchar(sa_key)) {
+    tmp <- tempfile(fileext = ".json")
+    writeLines(sa_key, tmp)
+    gs4_auth(path = tmp)
+  } else {
+    gs4_deauth()
+  }
+
+  resolved_raw <- tryCatch(
+    read_sheet(id_resolved),
+    error = function(e) {
+      cat("  Note: Could not read resolved sheet:", e$message, "\n")
+      tibble(issue_id = character())
+    }
+  )
+
+  resolved_ids <- resolved_raw$issue_id
+
+  issues_open <- issues |> filter(!issue_id %in% resolved_ids)
+  issues_resolved <- issues |>
+    filter(issue_id %in% resolved_ids) |>
+    left_join(
+      resolved_raw |> select(issue_id, resolved_date, resolved_by, resolution_notes),
+      by = "issue_id"
+    )
+} else {
+  cat("  Note: SHEET_RESOLVED_ISSUES not set, treating all issues as open\n")
+  issues_open <- issues
+  issues_resolved <- issues |>
+    slice(0) |>
+    mutate(resolved_date = character(), resolved_by = character(), resolution_notes = character())
+}
 
 write_csv(issues, here("data", "clean", "issues.csv"))
+write_csv(issues_open, here("data", "clean", "issues_open.csv"))
+write_csv(issues_resolved, here("data", "clean", "issues_resolved.csv"))
 
 # ------------------------------------------------------------------
 # Per-school JSONs for the detail view

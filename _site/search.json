@@ -1,5 +1,82 @@
 [
   {
+    "objectID": "visits.html",
+    "href": "visits.html",
+    "title": "Visit Tracker",
+    "section": "",
+    "text": "Date Range:toApplyReset\n\n\n\n\n\n  Schools Visited\n  \n  \n\n\nVisit Log\n\n  \n\n\nVisits by School"
+  },
+  {
+    "objectID": "schools.html",
+    "href": "schools.html",
+    "title": "School Profiles",
+    "section": "",
+    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n  Print Reports\n\n\n\n  Select a School:\n  \n    — Choose a school —\n    Abrenya\nAdenya\nAdor Kope R/C Primary\nAfransua Dedewa MA Primary\nAkwanserem\nAkwansu\nAkyeremanteng\nAlorkpem Island\nAmuyaokope\nAnamenampa\nAnateem Sumbrungu\nApaah\nAtaampuutum A/B\nAttabui\nAzizakpem\nBahankra\nBegoro\nBepotumtum\nBomigo\nCommunity 3\nCommunity 9\nDagomba\nDedenya\nDedewa\nDomase\nEbourso\nEkorso Akwadum\nEssam\nFanterila\nFawotrikosie\nFerekoroba\nGalalia\nGloucester R.E.C. (Sierra Leone)\nGourcy Burkina Faso School\nImmanuel Christian Academy (Liberia)\nKoni Kablu\nKpala Government\nKpala Private\nKurasua #1 MA\nLuta\nMadavunu\nMamakrom\nMampong Shai\nMansokwa\nMantukwa\nMeyikpoi\nMinya\nMobia\nMosipanin\nMpaem\nNtomem\nNwawasua MA\nNwowom\nNyapienya\nNyariga Girls' School\nObani\nObelemanya\nObosonu\nOld Konkompe\nOyoko\nPaynesville Community (Liberia)\nPediatorkope\nSunyani\nTerhey\nTorjeh\nTreeplanting FBC (Sierra Leone)\nTsledom\nTuanikope\nTun Tun\nWangarakrom\nWatro (Watroso)\nWekpeti Abresu\nWenamda\nWurudu Wurudu\nYonguase\nYorogo-Asorogobisi\nZippo Nyuinyui\n  \n\n\n\n\n\n  \n  \n\n\n\n\nPrograms\n\n\n\nSchool Details\n\n  \n    Student Enrollment Breakdown\n    \n    No class data available\n  \n  \n\n\n\nNotes From Last Visit\n\n\nAI Summary\n\n  AI-powered summary of visit notes organized by strengths, challenges, and recommendations.\n  Generate AI Summary"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n  Download Data\n\n\n\n\n  \n    \n    \n      Dataset\n      \n        Quick School Updates\n        Full School Updates\n        New Projects\n        Student Surveys\n        School Overviews\n      \n    \n    \n      Date Range\n      \n        \n        to\n        \n      \n    \n    \n      Cancel\n      Download CSV\n    \n  \n\n\n\n\n  \n    \n    Field Visits\n  \n  \n    \n    New Projects\n  \n  \n    \n    Full Updates\n  \n  \n    \n    Student Surveys\n  \n  \n    \n    Open Issues"
+  },
+  {
+    "objectID": "index.html#school-map",
+    "href": "index.html#school-map",
+    "title": "Overview",
+    "section": "School Map",
+    "text": "School Map"
+  },
+  {
+    "objectID": "index.html#recent-school-visits",
+    "href": "index.html#recent-school-visits",
+    "title": "Overview",
+    "section": "Recent School Visits",
+    "text": "Recent School Visits\n\n\n\n  \n\n\n\nDate\nSchool\nStaff\nVisit Reason\nActivities"
+  },
+  {
+    "objectID": "index.html#recent-new-projects",
+    "href": "index.html#recent-new-projects",
+    "title": "Overview",
+    "section": "Recent New Projects",
+    "text": "Recent New Projects\n\n\n\n  \n\n\n\nDate\nSchool\nStaff\nProject Type"
+  },
+  {
+    "objectID": "index.html#programs-at-a-glance",
+    "href": "index.html#programs-at-a-glance",
+    "title": "Overview",
+    "section": "Programs at a Glance",
+    "text": "Programs at a Glance\n\n\n\n\n  \n    Program Reach\n    % of schools with each program\n    \n  \n  \n    Schools with Open Issues\n    Schools where field staff flagged urgent issues (in date range)"
+  },
+  {
+    "objectID": "surveys.html",
+    "href": "surveys.html",
+    "title": "Student Surveys",
+    "section": "",
+    "text": "Date Range:toApplyReset"
+  },
+  {
+    "objectID": "surveys.html#respondent-demographics",
+    "href": "surveys.html#respondent-demographics",
+    "title": "Student Surveys",
+    "section": "Respondent Demographics",
+    "text": "Respondent Demographics\n\n\nGender BreakdownSchools Represented in Survey0%\n\n\n\n\nFilter by School:All SchoolsAbrenya\nAdenya\nAdor Kope\nAdorkope\nAfransua Dedewa MA Primary\nAkwanserem\nAkwansu\nAkyeremanteng\nAlorkpem Island\nAmuyaokope\nAnamenampa\nAnateem Sumbrungu\nAnkwansu Anglican Basic School\nAnkwasu\nAtaampuutum A/B\nAttabui\nAzizakope\nBahankra\nBepotumtum\nBomigo\nCommunity School 3\nCommunity School 9\nDagomba\nDedenya\nDomase\nDomase D/A\nDomase D/A School\nEkorso Akwadum\nEssam\nEssam Golden Sunbeam Montessori School\nFatwakosie\nFawotrikosie\nGalalia\nKoni Kablu\nKpala Government School\nKpala Private School (IOHCA)\nKurasua #1 MA\nLuta\nMadavunu\nMamakrom\nMampong Shai\nMansokwa\nMantukwa\nMentkwa\nMinya\nMinya D/A Basic School\nMobia\nMongpong Shai\nMosipanin\nMpaem\nNtomem\nNwawasua MA\nNwowom\nNyapienya\nNyariga Girls School\nObane\nObelemanya\nObelemaya\nObosono\nObosono M/A\nObosonu\nOld Konkompe\nOther\nPediatorkope\nTerhey\nTodjer\nTseldom\nTsledom\nTuanikope\nTun Tun\nWangarakrom-Tarkuea\nWatro (Watroso)\nWekpeti Abresu\nWenamda\nWenamda D A\nWenamda D/A\nWurudu Wurudu\nYonguase\nYorogo-AsorogobisiOverall Program ParticipationAmong students with access to each program, the percentage who report actively using itKey InsightsDetailed breakdowns for each EPI program from student survey responsesLanterns & MGRLibrariesMenstrual KitsComputersScience Kits\n        Students Currently in a Lantern GroupPercentage of students in MGR schools who report being part of a lantern group this term\n        \n        \n      \n        Teacher Checks In With Lantern Groups\n        \n        \n      \n        Frequency of Lantern Group MeetingsHow often students report meeting with their group per week\n        \n        \n      \n        Experience as a Lantern LeaderHow current lantern leaders describe their leadership role\n        \n        \n      \n        Challenges With LanternsMost frequent problems students experience with the lanterns\n        \n        \n      \n        Book CheckoutPercentage of students that report being allowed to check out books from the library\n        \n        \n      \n        Library Visit FrequencyHow often students report using the library each week\n        \n        \n      \n        When Students Visit the LibraryHow students typically access the library\n        \n        \n      \n        How Many Girls Have Received a KitPercentage of menstruating girls that have received a kit from EPI\n        \n        \n      \n        How Often Girls Use Their KitsReported frequency of use among girls who have received a kit\n        \n        \n      \n        Benefits ExperiencedCount of the most common positive impacts girls experience from the kits\n        \n        \n      \n        Challenges ExperiencedCount of the most common difficulties girls report with the kits\n        \n        \n      \n        How Often Computers are Used Each Week\n        \n        \n      \n        Activities Computers are Used For\n        \n        \n      \n        Computer Use Outside of Class\n        \n        \n      \n        Subjects Computers Are Used For\n        \n        \n      \n        Science Kit UsagePercentage of students who report having used a science kit during the current term\n        \n        \n      \n        Science Kit Use FrequencyDistribution of how often students used the science kits the term\n        \n        \n      \n        Challenges Using Science KitsNumber of students reporting difficulties they experienced with the science kits"
+  },
+  {
+    "objectID": "print-reports.html",
+    "href": "print-reports.html",
+    "title": "Print School Reports",
+    "section": "",
+    "text": "Print School Profile Reports\n  \n    Select a date range to filter visit notes, then click Generate & Print.\n    Each school will appear on its own page. You can print to paper or save as PDF.\n  \n\n  \n    Date Range:\n    \n    to\n    \n  \n\n  Generate Reports\n  Print All"
+  },
+  {
+    "objectID": "issues.html",
+    "href": "issues.html",
+    "title": "Issues & Flags",
+    "section": "",
+    "text": "9Open IssuesCurrent IssuesUrgent issues flagged during field visits. Issue resolution will be available in a future update.Akwanserem2026-01-12 · RichardThe lantern group was recognized immediatelyVisit reason: Routine Visit, MGR/Charging MaintenanceBahankra2026-01-12 · RichardThe school borehole isn’t working wellVisit reason: Routine VisitDomase2026-01-12 · RichardImmediate training for the science kits programVisit reason: Routine Visit, Look at the borehole and the classroomAbrenya2026-01-14 · RichardI met with the Headmaster and the SMC chairman to finds ways to improve the use.Visit reason: Routine Visit, Initiate the process of building a computer LabAkwansu2026-01-19 · AlexNew charging stations because the JHS is far from the primary school block, we are in process of building a new charging station for the schoolVisit reason: Routine VisitBepotumtum2026-01-19 · RichardLeakage at the one of the windows of the lab. Rains come inside the lab.Visit reason: Computer Maintenance, Student Survey Team VisitTun Tun2026-01-27 · RichardParent teacher meeting to help the parents understand the lantern programVisit reason: Routine Visit, MGR/Charging MaintenanceEkorso Akwadum2026-02-12 · RichardThey are relocating to a new rooms shortlyVisit reason: Computer MaintenanceDagomba2026-02-23 · RichardIncrease of computers or improve current scheduleVisit reason: MGR/Charging Maintenance, Computer Maintenance, Science Kit Training/DistributionResolved IssuesNo resolved issues yet. The ability to resolve issues will be available in a future update.Summary\n\n\n\nSchool\nIssues Reported\n\n\n\n\nAbrenya\n1\n\n\nAkwanserem\n1\n\n\nAkwansu\n1\n\n\nBahankra\n1\n\n\nBepotumtum\n1\n\n\nDagomba\n1\n\n\nDomase\n1\n\n\nEkorso Akwadum\n1\n\n\nTun Tun\n1"
+  },
+  {
     "objectID": "deck/slides.html#empower-playgrounds-inc.",
     "href": "deck/slides.html#empower-playgrounds-inc.",
     "title": "EPI Data Dashboard",
@@ -47,75 +124,5 @@
     "title": "EPI Data Dashboard",
     "section": "Thank You",
     "text": "Thank You\n\nQuestions?"
-  },
-  {
-    "objectID": "visits.html",
-    "href": "visits.html",
-    "title": "Visit Tracker",
-    "section": "",
-    "text": "Date Range:toApplyReset\n\n\n\n\n\n  Schools Visited\n  \n  \n\n\nVisit Log\n\n  \n\n\nVisits by School"
-  },
-  {
-    "objectID": "schools.html",
-    "href": "schools.html",
-    "title": "School Profiles",
-    "section": "",
-    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n  Print Reports\n\n\n\n  Select a School:\n  \n    — Choose a school —\n    Abrenya\nAdenya\nAdor Kope R/C Primary\nAfransua Dedewa MA Primary\nAkwanserem\nAkwansu\nAkyeremanteng\nAlorkpem Island\nAmuyaokope\nAnamenampa\nAnateem Sumbrungu\nApaah\nAtaampuutum A/B\nAttabui\nAzizakpem\nBahankra\nBegoro\nBepotumtum\nBomigo\nCommunity 3\nCommunity 9\nDagomba\nDedenya\nDedewa\nDomase\nEbourso\nEkorso Akwadum\nEssam\nFanterila\nFawotrikosie\nFerekoroba\nGalalia\nGloucester R.E.C. (Sierra Leone)\nGourcy Burkina Faso School\nImmanuel Christian Academy (Liberia)\nKoni Kablu\nKpala Government\nKpala Private\nKurasua #1 MA\nLuta\nMadavunu\nMamakrom\nMampong Shai\nMansokwa\nMantukwa\nMeyikpoi\nMinya\nMobia\nMosipanin\nMpaem\nNtomem\nNwawasua MA\nNwowom\nNyapienya\nNyariga Girls' School\nObani\nObelemanya\nObosonu\nOld Konkompe\nOyoko\nPaynesville Community (Liberia)\nPediatorkope\nSunyani\nTerhey\nTorjeh\nTreeplanting FBC (Sierra Leone)\nTsledom\nTuanikope\nTun Tun\nWangarakrom\nWatro (Watroso)\nWekpeti Abresu\nWenamda\nWurudu Wurudu\nYonguase\nYorogo-Asorogobisi\nZippo Nyuinyui\n  \n\n\n\n\n\n  \n  \n\n\n\n\nPrograms\n\n\n\nSchool Details\n\n  \n    Student Enrollment Breakdown\n    \n    No class data available\n  \n  \n\n\n\nNotes From Last Visit\n\n\nAI Summary\n\n  AI-powered summary of visit notes organized by strengths, challenges, and recommendations.\n  Generate AI Summary"
-  },
-  {
-    "objectID": "surveys.html",
-    "href": "surveys.html",
-    "title": "Student Surveys",
-    "section": "",
-    "text": "Date Range:toApplyReset"
-  },
-  {
-    "objectID": "surveys.html#respondent-demographics",
-    "href": "surveys.html#respondent-demographics",
-    "title": "Student Surveys",
-    "section": "Respondent Demographics",
-    "text": "Respondent Demographics\n\n\nGender BreakdownSchools Represented in Survey0%\n\n\n\n\nFilter by School:All SchoolsAbrenya\nAdenya\nAdor Kope\nAdorkope\nAfransua Dedewa MA Primary\nAkwanserem\nAkwansu\nAkyeremanteng\nAlorkpem Island\nAmuyaokope\nAnamenampa\nAnateem Sumbrungu\nAnkwansu Anglican Basic School\nAnkwasu\nAtaampuutum A/B\nAttabui\nAzizakope\nBahankra\nBepotumtum\nBepotuntum\nBomigo\ncentral\nCommunity School 3\nCommunity school 9\nCommunity School 9\nDagomba\nDedenya\nDomase\nDomase D/A\nDomase D/A School\nEkorso Akwadum\nEssam\nEssam Golden Sunbeam Montessori School\nFatwakosie\nFawotirikosie\nFawotirkosie\nFawotrikosie\nGalalia\nKoni Kablu\nKpala\nKpala Government School\nKpala Private School (IOHCA)\nKurasua #1 MA\nLuta\nMadavunu\nmamakrom\nMamakrom\nMampong\nMampong Shai\nMansokwa\nMantukwa\nMentkwa\nMinya\nMinya D/A Basic School\nMobia\nModem m a\nMongpong Shai\nMosipanin\nMpaem\nNtomem\nNwawasua MA\nNwowom\nNyapienya\nNyariga Girls School\nObane\nObelemanya\nObelemaya\nObosono\nObosono M/A\nObosonu\nOld Konkompe\nOther\nPediatorkope\nTerhey\nTodjer\nTseldom\nTsledom\nTuanikope\nTun Tun\nTuntum\nWangarakrom\nWangarakrom-Tarkuea\nWatro (Watroso)\nWekpeti Abresu\nWenamda\nWenamda D A\nWenamda D/A\nWurudu Wurudu\nWuurudu Wurudu\nYonguase\nYorogo-AsorogobisiOverall Program ParticipationAmong students with access to each program, the percentage who report actively using itKey InsightsDetailed breakdowns for each EPI program from student survey responsesLanterns & MGRLibrariesMenstrual KitsComputersScience Kits\n        Students Currently in a Lantern GroupPercentage of students in MGR schools who report being part of a lantern group this term\n        \n        \n      \n        Teacher Checks In With Lantern Groups\n        \n        \n      \n        Frequency of Lantern Group MeetingsHow often students report meeting with their group per week\n        \n        \n      \n        Experience as a Lantern LeaderHow current lantern leaders describe their leadership role\n        \n        \n      \n        Challenges With LanternsMost frequent problems students experience with the lanterns\n        \n        \n      \n        Book CheckoutPercentage of students that report being allowed to check out books from the library\n        \n        \n      \n        Library Visit FrequencyHow often students report using the library each week\n        \n        \n      \n        When Students Visit the LibraryHow students typically access the library\n        \n        \n      \n        How Many Girls Have Received a KitPercentage of menstruating girls that have received a kit from EPI\n        \n        \n      \n        How Often Girls Use Their KitsReported frequency of use among girls who have received a kit\n        \n        \n      \n        Benefits ExperiencedCount of the most common positive impacts girls experience from the kits\n        \n        \n      \n        Challenges ExperiencedCount of the most common difficulties girls report with the kits\n        \n        \n      \n        How Often Computers are Used Each Week\n        \n        \n      \n        Activities Computers are Used For\n        \n        \n      \n        Computer Use Outside of Class\n        \n        \n      \n        Subjects Computers Are Used For\n        \n        \n      \n        Science Kit UsagePercentage of students who report having used a science kit during the current term\n        \n        \n      \n        Science Kit Use FrequencyDistribution of how often students used the science kits the term\n        \n        \n      \n        Challenges Using Science KitsNumber of students reporting difficulties they experienced with the science kits"
-  },
-  {
-    "objectID": "print-reports.html",
-    "href": "print-reports.html",
-    "title": "Print School Reports",
-    "section": "",
-    "text": "Print School Profile Reports\n  \n    Select a date range to filter visit notes, then click Generate & Print.\n    Each school will appear on its own page. You can print to paper or save as PDF.\n  \n\n  \n    Date Range:\n    \n    to\n    \n  \n\n  Generate Reports\n  Print All"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Overview",
-    "section": "",
-    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n  Download Data\n\n\n\n\n  \n    \n    \n      Dataset\n      \n        Quick School Updates\n        Full School Updates\n        New Projects\n        Student Surveys\n        School Overviews\n      \n    \n    \n      Date Range\n      \n        \n        to\n        \n      \n    \n    \n      Cancel\n      Download CSV\n    \n  \n\n\n\n\n  \n    \n    Field Visits\n  \n  \n    \n    New Projects\n  \n  \n    \n    Full Updates\n  \n  \n    \n    Student Surveys\n  \n  \n    \n    Open Issues"
-  },
-  {
-    "objectID": "index.html#school-map",
-    "href": "index.html#school-map",
-    "title": "Overview",
-    "section": "School Map",
-    "text": "School Map"
-  },
-  {
-    "objectID": "index.html#recent-new-projects",
-    "href": "index.html#recent-new-projects",
-    "title": "Overview",
-    "section": "Recent New Projects",
-    "text": "Recent New Projects\n\n\n\n  \n\n\n\nDate\nSchool\nStaff\nProject Type"
-  },
-  {
-    "objectID": "index.html#programs-at-a-glance",
-    "href": "index.html#programs-at-a-glance",
-    "title": "Overview",
-    "section": "Programs at a Glance",
-    "text": "Programs at a Glance\n\n\n\n\n  \n    Program Reach\n    % of schools with each program\n    \n  \n  \n    Schools with Open Issues\n    Schools where field staff flagged urgent issues (in date range)"
-  },
-  {
-    "objectID": "issues.html",
-    "href": "issues.html",
-    "title": "Issues & Flags",
-    "section": "",
-    "text": "9Open IssuesCurrent IssuesUrgent issues flagged during field visits. Issue resolution will be available in a future update.Akwanserem2026-01-12 · RichardThe lantern group was recognized immediatelyVisit reason: Routine Visit,MGR/Charging MaintenanceBahankra2026-01-12 · RichardThe school borehole isn’t working wellVisit reason: Routine VisitDomase2026-01-12 · RichardImmediate training for the science kits programVisit reason: Routine Visit,Look at the borehole and the classroomAbrenya2026-01-14 · RichardI met with the Headmaster and the SMC chairman to finds ways to improve the use.Visit reason: Routine Visit,Initiate the process of building a computer LabAkwansu2026-01-19 · AlexNew charging stations because the JHS is far from the primary school block, we are in process of building a new charging station for the schoolVisit reason: Routine VisitBepotumtum2026-01-19 · RichardLeakage at the one of the windows of the lab. Rains come inside the lab.Visit reason: Computer Maintenance,Student Survey Team VisitTun Tun2026-01-27 · RichardParent teacher meeting to help the parents understand the lantern programVisit reason: Routine Visit,MGR/Charging MaintenanceEkorso Akwadum2026-02-12 · RichardThey are relocating to a new rooms shortlyVisit reason: Computer MaintenanceDagomba2026-02-23 · RichardIncrease of computers or improve current scheduleVisit reason: MGR/Charging Maintenance,Computer Maintenance,Science Kit Training/DistributionResolved IssuesNo resolved issues yet. The ability to resolve issues will be available in a future update.Summary\n\n\n\nSchool\nIssues Reported\n\n\n\n\nAbrenya\n1\n\n\nAkwanserem\n1\n\n\nAkwansu\n1\n\n\nBahankra\n1\n\n\nBepotumtum\n1\n\n\nDagomba\n1\n\n\nDomase\n1\n\n\nEkorso Akwadum\n1\n\n\nTun Tun\n1"
   }
 ]

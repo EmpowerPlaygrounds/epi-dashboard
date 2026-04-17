@@ -16,6 +16,8 @@ jobs:
       SHEET_FULL_UPDATE: ${{ secrets.SHEET_FULL_UPDATE }}
       SHEET_STUDENT_SURVEY: ${{ secrets.SHEET_STUDENT_SURVEY }}
       SHEET_NEW_PROJECT: ${{ secrets.SHEET_NEW_PROJECT }}
+      SHEET_RESOLVED_ISSUES: ${{ secrets.SHEET_RESOLVED_ISSUES }}
+      GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
 
     steps:
       - name: Checkout repository
@@ -38,7 +40,7 @@ jobs:
             lib <- .libPaths()[1]
             cat("Installing to:", lib, "\n")
             options(repos = c(RSPM = "https://packagemanager.posit.co/cran/__linux__/jammy/latest", CRAN = "https://cloud.r-project.org"))
-            install.packages(c("tidyverse", "googlesheets4", "jsonlite", "here", "dotenv", "plotly", "leaflet", "htmltools", "DT"), lib = lib)
+            install.packages(c("tidyverse", "googlesheets4", "jsonlite", "here", "dotenv", "plotly", "leaflet", "htmltools", "DT", "digest"), lib = lib)
           '
 
       - name: Write .Renviron so all R processes find packages
@@ -52,8 +54,8 @@ jobs:
 
       - name: Create .env file from secrets
         run: |
-          printf 'SHEET_SCHOOLS_OVERVIEW="%s"\nSHEET_QUICK_UPDATE="%s"\nSHEET_FULL_UPDATE="%s"\nSHEET_STUDENT_SURVEY="%s"\nSHEET_NEW_PROJECT="%s"\n' \
-            "$SHEET_SCHOOLS_OVERVIEW" "$SHEET_QUICK_UPDATE" "$SHEET_FULL_UPDATE" "$SHEET_STUDENT_SURVEY" "$SHEET_NEW_PROJECT" > .env
+          printf 'SHEET_SCHOOLS_OVERVIEW="%s"\nSHEET_QUICK_UPDATE="%s"\nSHEET_FULL_UPDATE="%s"\nSHEET_STUDENT_SURVEY="%s"\nSHEET_NEW_PROJECT="%s"\nSHEET_RESOLVED_ISSUES="%s"\n' \
+            "$SHEET_SCHOOLS_OVERVIEW" "$SHEET_QUICK_UPDATE" "$SHEET_FULL_UPDATE" "$SHEET_STUDENT_SURVEY" "$SHEET_NEW_PROJECT" "$SHEET_RESOLVED_ISSUES" > .env
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
