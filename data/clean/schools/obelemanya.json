@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 1,
+    "n_visits": 2,
     "n_responses": 11,
     "pct_lantern": 0.1818,
     "pct_library": 0,
@@ -26,7 +26,7 @@
   },
   "visits": [
     {
-      "StartDate": "2023-08-24 07:04:10",
+      "StartDate": "2023-08-24 7:04:10",
       "Duration (in seconds)": "6292",
       "ResponseId": "R_ctz5O768j7MuwM4",
       "LocationLatitude": "6.316312",
@@ -35,6 +35,17 @@
       "school_name": "Obelemanya",
       "visit_reason": "Routine Program Evaluation,Surveyor Team Visit",
       "visit_date": "2023-08-24"
+    },
+    {
+      "StartDate": "2024-05-15 2:01:38",
+      "Duration (in seconds)": "1424",
+      "ResponseId": "R_hi9hxOvJFrAG4YN",
+      "LocationLatitude": "6.31608",
+      "LocationLongitude": "-0.01694",
+      "visitor": "George",
+      "school_name": "Obelemanya",
+      "visit_reason": "Routine Program Evaluation",
+      "visit_date": "2024-05-15"
     }
   ],
   "full_update": [
@@ -72,78 +83,7 @@
       "update_date": "2024-10-02"
     },
     {
-      "StartDate": "2023-03-14 04:01:09",
-      "Duration (in seconds)": "1161",
-      "ResponseId": "R_nG0Vs7DBIjSovDF",
-      "LocationLatitude": "5.912206",
-      "LocationLongitude": "-0.256356",
-      "Q1": "Richard",
-      "school_name": "Obelemanya",
-      "Q3": "Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
-      "Q5": "5300",
-      "Q6": "300",
-      "Q7": "17",
-      "Q8": "87",
-      "Q9": "28",
-      "Q11": "89",
-      "Q12": "34",
-      "Q14": "24",
-      "Q15": "30",
-      "Q20": "No",
-      "Q22": "Yes",
-      "Q23": "Lost,Broken",
-      "Q24": "12",
-      "Q25": "10",
-      "Q26": "Yes",
-      "Q30": "They don't use them",
-      "Q31_1": "3- This describes our school a little bit",
-      "Q31_2": "3- This describes our school a little bit",
-      "Q32": "No, they need a library",
-      "Q33": "Yes",
-      "Q34": "Yes, another organization or the government has given them some",
-      "Q35": "Yes, another organization or the government has given them something to provide clean water",
-      "Q36": "Yes, they already had enough classrooms or another organization has provided them",
-      "Q37": "Yes",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
-      "update_date": "2023-03-14"
-    },
-    {
-      "StartDate": "2023-03-22 07:21:55",
-      "Duration (in seconds)": "742",
-      "ResponseId": "R_bhMjsBuL32q1g93",
-      "LocationLatitude": "5.814526",
-      "LocationLongitude": "0.72805",
-      "Q1": "Richard",
-      "school_name": "Obelemanya",
-      "Q3": "Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
-      "Q5": "600",
-      "Q6": "167",
-      "Q7": "9",
-      "Q8": "35",
-      "Q9": "18",
-      "Q11": "30",
-      "Q12": "18",
-      "Q14": "25",
-      "Q15": "10",
-      "Q20": "No",
-      "Q22": "No",
-      "Q24": "22",
-      "Q25": "22",
-      "Q26": "Yes",
-      "Q30": "1-2 times in a term",
-      "Q31_1": "5- This describes our school",
-      "Q31_2": "5- This describes our school",
-      "Q32": "No, they need a library",
-      "Q33": "Yes",
-      "Q34": "Yes, another organization or the government has given them some",
-      "Q35": "Yes, another organization or the government has given them something to provide clean water",
-      "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
-      "Q37": "Yes",
-      "Q45": "Yes",
-      "update_date": "2023-03-22"
-    },
-    {
-      "StartDate": "2023-11-23 04:25:00",
+      "StartDate": "2023-11-23 4:25:00",
       "Duration (in seconds)": "1091",
       "ResponseId": "R_8kEX48NIoYygwSb",
       "LocationLatitude": "5.897865",
@@ -155,7 +95,7 @@
       "Q6": "267",
       "Q7": "14",
       "Q8": "75",
-      "Q9": ".20",
+      "Q9": "0.2",
       "Q11": "65",
       "Q12": "22",
       "Q14": "28",
@@ -179,7 +119,7 @@
   ],
   "surveys": [
     {
-      "StartDate": "2023-08-24 07:01:27",
+      "StartDate": "2023-08-24 7:01:27",
       "Duration (in seconds)": "799",
       "ResponseId": "R_0HINeAYpAiZK1gT",
       "Q1": "Gladys",
@@ -207,7 +147,7 @@
       "school_name": "Obelemanya"
     },
     {
-      "StartDate": "2023-08-24 07:14:49",
+      "StartDate": "2023-08-24 7:14:49",
       "Duration (in seconds)": "538",
       "ResponseId": "R_dXAqekIDdhQkDDb",
       "Q1": "Gladys",
@@ -226,7 +166,7 @@
       "school_name": "Obelemanya"
     },
     {
-      "StartDate": "2023-08-24 07:30:32",
+      "StartDate": "2023-08-24 7:30:32",
       "Duration (in seconds)": "533",
       "ResponseId": "R_jBcUcwrk8Iia7ux",
       "Q1": "Gladys",
@@ -254,7 +194,7 @@
       "school_name": "Obelemanya"
     },
     {
-      "StartDate": "2023-08-24 07:39:28",
+      "StartDate": "2023-08-24 7:39:28",
       "Duration (in seconds)": "730",
       "ResponseId": "R_l1E1UPi8oINdbOB",
       "Q1": "GLADYS",
@@ -280,7 +220,7 @@
       "school_name": "Obelemanya"
     },
     {
-      "StartDate": "2023-08-24 07:51:42",
+      "StartDate": "2023-08-24 7:51:42",
       "Duration (in seconds)": "499",
       "ResponseId": "R_onk2JvJitzTQ1HU",
       "Q1": "Gladys",
@@ -299,7 +239,7 @@
       "school_name": "Obelemanya"
     },
     {
-      "StartDate": "2023-08-24 08:00:07",
+      "StartDate": "2023-08-24 8:00:07",
       "Duration (in seconds)": "545",
       "ResponseId": "R_0oF6uADt5QKd8F4",
       "Q1": "Gladys",
@@ -318,7 +258,7 @@
       "school_name": "Obelemanya"
     },
     {
-      "StartDate": "2023-08-24 08:09:19",
+      "StartDate": "2023-08-24 8:09:19",
       "Duration (in seconds)": "476",
       "ResponseId": "R_h26dFWscKgACNon",
       "Q1": "Gladys",
@@ -337,7 +277,7 @@
       "school_name": "Obelemanya"
     },
     {
-      "StartDate": "2023-08-24 08:17:20",
+      "StartDate": "2023-08-24 8:17:20",
       "Duration (in seconds)": "611",
       "ResponseId": "R_3rmsTsLs7DUc0H7",
       "Q1": "Gladys",
@@ -362,7 +302,7 @@
       "school_name": "Obelemanya"
     },
     {
-      "StartDate": "2023-08-24 08:27:34",
+      "StartDate": "2023-08-24 8:27:34",
       "Duration (in seconds)": "544",
       "ResponseId": "R_67YBYnUxDjueroQ",
       "Q1": "Gladys",
@@ -387,7 +327,7 @@
       "school_name": "Obelemanya"
     },
     {
-      "StartDate": "2023-08-24 08:36:43",
+      "StartDate": "2023-08-24 8:36:43",
       "Duration (in seconds)": "503",
       "ResponseId": "R_jgTVsu0cC44EXfF",
       "Q1": "Gladys",
@@ -408,7 +348,7 @@
       "school_name": "Obelemanya"
     },
     {
-      "StartDate": "2021-11-02 02:15:42",
+      "StartDate": "2021-11-02 2:15:42",
       "Duration (in seconds)": "1590",
       "ResponseId": "R_4qn07vqCdpQehiX",
       "LocationLatitude": "6.541312",

@@ -26,7 +26,7 @@
   },
   "visits": [
     {
-      "StartDate": "2023-07-21 03:16:36",
+      "StartDate": "2023-07-21 3:16:36",
       "Duration (in seconds)": "236",
       "ResponseId": "R_beuAqzkrsGiLgdQ",
       "visitor": "Richard",
@@ -69,7 +69,7 @@
       "update_date": "2025-01-16"
     },
     {
-      "StartDate": "2023-11-16 04:28:19",
+      "StartDate": "2023-11-16 4:28:19",
       "Duration (in seconds)": "2155",
       "ResponseId": "R_jUwvss7oj3v8JBQ",
       "Q1": "George",
@@ -98,7 +98,7 @@
   ],
   "surveys": [
     {
-      "StartDate": "2023-03-22 05:38:10",
+      "StartDate": "2023-03-22 5:38:10",
       "Duration (in seconds)": "1859",
       "ResponseId": "R_k6ELBY3EVamZbq6",
       "LocationLatitude": "5.814494",
@@ -128,7 +128,7 @@
       "school_name": "Bomigo"
     },
     {
-      "StartDate": "2023-03-22 06:10:38",
+      "StartDate": "2023-03-22 6:10:38",
       "Duration (in seconds)": "1113",
       "ResponseId": "R_bSMwtXnZ5E5DEqE",
       "LocationLatitude": "5.814412",
@@ -151,7 +151,7 @@
       "school_name": "Bomigo"
     },
     {
-      "StartDate": "2023-03-22 06:29:20",
+      "StartDate": "2023-03-22 6:29:20",
       "Duration (in seconds)": "634",
       "ResponseId": "R_g2GIj1EdiXK57Wh",
       "LocationLatitude": "5.814383",
@@ -176,7 +176,7 @@
       "school_name": "Bomigo"
     },
     {
-      "StartDate": "2023-03-22 06:40:00",
+      "StartDate": "2023-03-22 6:40:00",
       "Duration (in seconds)": "915",
       "ResponseId": "R_l6T9Nqq39rxNQBG",
       "Q1": "Boateng Sandra",
@@ -205,7 +205,7 @@
       "school_name": "Bomigo"
     },
     {
-      "StartDate": "2023-03-22 06:55:21",
+      "StartDate": "2023-03-22 6:55:21",
       "Duration (in seconds)": "1076",
       "ResponseId": "R_0SSG2v7oXlicYVx",
       "Q1": "Boateng Sandra",
@@ -233,10 +233,10 @@
       "school_name": "Bomigo"
     },
     {
-      "StartDate": "2023-03-22 07:13:27",
+      "StartDate": "2023-03-22 7:13:27",
       "Duration (in seconds)": "927",
       "ResponseId": "R_0eGzI9jaulG6Wxw",
-      "Q1": "Boateng  Sandra",
+      "Q1": "Boateng Sandra",
       "school_selected": "Other",
       "school_other": "Bomigo",
       "Q3": "Male",

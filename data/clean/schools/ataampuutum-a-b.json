@@ -57,11 +57,11 @@
   ],
   "surveys": [
     {
-      "StartDate": "2019-03-21 01:47:06",
+      "StartDate": "2019-03-21 1:47:06",
       "Duration (in seconds)": "1338",
       "ResponseId": "R_aOSwTW7Pfq9ykUz",
-      "LocationLatitude": "10.8470200000000005502442945726215839385986328125",
-      "LocationLongitude": "-0.925532000000000021344703782233409583568572998046875",
+      "LocationLatitude": "10.84702",
+      "LocationLongitude": "-0.925532",
       "Q1": "Sarah",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -90,11 +90,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-03-21 02:09:30",
+      "StartDate": "2019-03-21 2:09:30",
       "Duration (in seconds)": "825",
       "ResponseId": "R_lsL6zp4B4RnrYq6",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -122,11 +122,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-03-21 02:23:21",
+      "StartDate": "2019-03-21 2:23:21",
       "Duration (in seconds)": "846",
       "ResponseId": "R_nBm7QWimHTgEDzP",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -155,11 +155,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-03-21 02:37:34",
+      "StartDate": "2019-03-21 2:37:34",
       "Duration (in seconds)": "782",
       "ResponseId": "R_1GweJaJF6dkJ1Ar",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -188,11 +188,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-03-21 02:50:43",
+      "StartDate": "2019-03-21 2:50:43",
       "Duration (in seconds)": "733",
       "ResponseId": "R_5kbweX9OMPvLctg",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Male",
@@ -215,11 +215,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-03-21 03:03:02",
+      "StartDate": "2019-03-21 3:03:02",
       "Duration (in seconds)": "857",
       "ResponseId": "R_gGElb230xvDPDPu",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -248,11 +248,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-03-21 03:17:27",
+      "StartDate": "2019-03-21 3:17:27",
       "Duration (in seconds)": "658",
       "ResponseId": "R_3FvHpTT1nsFktrm",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Male",
@@ -275,11 +275,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-03-21 03:28:32",
+      "StartDate": "2019-03-21 3:28:32",
       "Duration (in seconds)": "725",
       "ResponseId": "R_hkmBe17yNwquFKS",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Male",
@@ -302,11 +302,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-03-21 03:40:44",
+      "StartDate": "2019-03-21 3:40:44",
       "Duration (in seconds)": "645",
       "ResponseId": "R_6oEtieaqkBkGR4f",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -335,11 +335,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-03-21 03:51:36",
+      "StartDate": "2019-03-21 3:51:36",
       "Duration (in seconds)": "619",
       "ResponseId": "R_5DNSxGTczyDMzn8",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -369,11 +369,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-03-21 04:02:02",
+      "StartDate": "2019-03-21 4:02:02",
       "Duration (in seconds)": "721",
       "ResponseId": "R_4AKX6fIZsTLqccR",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -401,11 +401,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-03-21 04:14:12",
+      "StartDate": "2019-03-21 4:14:12",
       "Duration (in seconds)": "653",
       "ResponseId": "R_4EOwWpURAquoAgW",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -433,11 +433,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-12-03 05:18:59",
+      "StartDate": "2019-12-03 5:18:59",
       "Duration (in seconds)": "450",
       "ResponseId": "R_mvhhKuBENBkEf3Y",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Rita",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -461,11 +461,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-12-03 05:26:49",
+      "StartDate": "2019-12-03 5:26:49",
       "Duration (in seconds)": "444",
       "ResponseId": "R_chz4iHVlCJx1AIu",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Rita",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -487,11 +487,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-12-03 05:34:33",
+      "StartDate": "2019-12-03 5:34:33",
       "Duration (in seconds)": "421",
       "ResponseId": "R_lYnowKnbsp7SptC",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Rita",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -513,11 +513,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-12-03 05:44:08",
+      "StartDate": "2019-12-03 5:44:08",
       "Duration (in seconds)": "624",
       "ResponseId": "R_miTcNQvYH9thmKJ",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Rita",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -541,11 +541,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-12-03 05:55:01",
+      "StartDate": "2019-12-03 5:55:01",
       "Duration (in seconds)": "442",
       "ResponseId": "R_gH7wB63uUDan641",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Rita",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",
@@ -567,11 +567,11 @@
       "school_name": "Ataampuutum A/B"
     },
     {
-      "StartDate": "2019-12-03 06:03:05",
+      "StartDate": "2019-12-03 6:03:05",
       "Duration (in seconds)": "355",
       "ResponseId": "R_fiWhG4KGAOPrr3z",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Rita",
       "school_selected": "Ataampuutum A/B",
       "Q3": "Female",

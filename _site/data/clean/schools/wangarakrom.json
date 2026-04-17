@@ -17,17 +17,17 @@
     "Biofill Toilets": 0,
     "Light a Village": 0,
     "n_visits": 0,
-    "n_responses": 0,
-    "pct_lantern": "NA",
-    "pct_library": "NA",
-    "pct_menstrual": "NA",
-    "pct_computers": "NA",
+    "n_responses": 1,
+    "pct_lantern": 0,
+    "pct_library": "NaN",
+    "pct_menstrual": "NaN",
+    "pct_computers": "NaN",
     "n_issues": 0
   },
   "visits": [],
   "full_update": [
     {
-      "StartDate": "2023-10-10 06:40:38",
+      "StartDate": "2023-10-10 6:40:38",
       "Duration (in seconds)": "4476",
       "ResponseId": "R_bgpBt0MR6ve8NlQ",
       "LocationLatitude": "5.299919",
@@ -46,7 +46,6 @@
       "Q15": "15",
       "Q20": "Yes",
       "Q22": "Yes",
-      "Q23": "Lost",
       "Q24": "11",
       "Q25": "4",
       "Q26": "Yes",
@@ -62,6 +61,24 @@
       "update_date": "2023-10-10"
     }
   ],
-  "surveys": [],
+  "surveys": [
+    {
+      "StartDate": "2018-05-18 19:14:00",
+      "Q1": "Michael",
+      "school_selected": "Wangarakrom",
+      "Q3": "Female",
+      "Q4": "15",
+      "Q5": "JHS Form 3",
+      "Q6": "No",
+      "Q9": "Other",
+      "Q9_6_TEXT": "The teacher called some of the students to come and work with the kits",
+      "lantern_group": "No",
+      "Q23": "No",
+      "Q26": "No",
+      "Q29": "Other",
+      "Q29_5_TEXT": "Because I live afar I don't get to see where they meet and learn",
+      "school_name": "Wangarakrom"
+    }
+  ],
   "issues": []
 }

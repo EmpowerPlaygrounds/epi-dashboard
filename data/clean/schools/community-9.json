@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 0,
+    "n_visits": 1,
     "n_responses": 0,
     "pct_lantern": "NA",
     "pct_library": "NA",
@@ -24,10 +24,22 @@
     "pct_computers": "NA",
     "n_issues": 0
   },
-  "visits": [],
+  "visits": [
+    {
+      "StartDate": "2024-02-28 9:40:36",
+      "Duration (in seconds)": "424",
+      "ResponseId": "R_78L7Hk5Tuqzc7Xy",
+      "LocationLatitude": "5.121583",
+      "LocationLongitude": "-1.95155",
+      "visitor": "George",
+      "school_name": "Community 9",
+      "visit_reason": "MGR Maintenance,Routine Program Evaluation",
+      "visit_date": "2024-02-28"
+    }
+  ],
   "full_update": [
     {
-      "StartDate": "2023-10-11 08:21:23",
+      "StartDate": "2023-10-11 8:21:23",
       "Duration (in seconds)": "2079",
       "ResponseId": "R_4DSU1bsJjXcJtaP",
       "Q1": "George",
@@ -42,7 +54,7 @@
       "Q11": "5",
       "Q12": "10",
       "Q14": "Results yet",
-      "Q15": "Results  not yet",
+      "Q15": "Results not yet",
       "Q20": "No",
       "Q22": "No",
       "Q24": "9",

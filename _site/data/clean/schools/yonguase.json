@@ -16,25 +16,29 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 3,
-    "n_responses": 29,
-    "pct_lantern": 0.5862,
-    "pct_library": 0.5517,
+    "n_visits": 5,
+    "n_responses": 33,
+    "pct_lantern": 0.6364,
+    "pct_library": 0.2,
     "pct_menstrual": 0.5,
     "pct_computers": 0,
     "n_issues": 0
   },
   "visits": [
     {
-      "StartDate": "5/24/25 9:08",
+      "StartDate": "2025-05-24 9:08:10",
+      "Duration (in seconds)": "128",
+      "ResponseId": "R_lmuiTEdwxBkCAoQ",
+      "LocationLatitude": "5.041843",
+      "LocationLongitude": "-1.53767",
       "visitor": "Richard",
-      "Q1.5_6_TEXT": "Richard",
+      "Q1.5": "Richard",
       "school_name": "Yonguase",
       "visit_reason": "MGR Maintenance,Project Update Visit",
       "visit_date": "2025-05-24"
     },
     {
-      "StartDate": "2023-08-23 05:58:38",
+      "StartDate": "2023-08-23 5:58:38",
       "Duration (in seconds)": "6075",
       "ResponseId": "R_iRBJvi05WPE6pbU",
       "LocationLatitude": "6.232793",
@@ -45,16 +49,39 @@
       "visit_date": "2023-08-23"
     },
     {
-      "StartDate": "2019-07-16 05:03:37",
+      "StartDate": "2019-07-16 5:03:37",
       "Duration (in seconds)": "273",
       "ResponseId": "R_eSzuUsyQrAjX2ji",
-      "LocationLatitude": "6.2311759999999996040287442156113684177398681640625",
-      "LocationLongitude": "-0.057538999999999999868105504674531402997672557830810546875",
+      "LocationLatitude": "6.231176",
+      "LocationLongitude": "-0.057539",
       "visitor": "Isaac",
       "school_name": "Yonguase",
       "visit_reason": "Routine Program Evaluation,Menstrual kits distribution",
       "Q3_6_TEXT": "Menstrual kits distribution",
       "visit_date": "2019-07-16"
+    },
+    {
+      "StartDate": "2024-05-14 4:07:17",
+      "Duration (in seconds)": "708",
+      "ResponseId": "R_hj9jWQSNj6WRTJH",
+      "LocationLatitude": "6.231217",
+      "LocationLongitude": "-0.05743",
+      "visitor": "George",
+      "school_name": "Yonguase",
+      "visit_reason": "MGR Maintenance,Routine Program Evaluation",
+      "visit_date": "2024-05-14"
+    },
+    {
+      "StartDate": "2025-07-08 12:28:15",
+      "Duration (in seconds)": "132",
+      "ResponseId": "R_bGs0HRtwelWJDrP",
+      "LocationLatitude": "5.749227",
+      "LocationLongitude": "-0.18185",
+      "visitor": "Richard",
+      "Q1.5": "Richard,Peace,Other",
+      "school_name": "Yonguase",
+      "Q20": "12",
+      "visit_date": "2025-07-08"
     }
   ],
   "full_update": [
@@ -89,11 +116,76 @@
       "Q39": "No",
       "Q45": "Yes",
       "update_date": "2024-10-01"
+    },
+    {
+      "StartDate": "2023-03-02 4:07:11",
+      "Duration (in seconds)": "559",
+      "ResponseId": "R_cbLPk0m3Cx4jLs3",
+      "LocationLatitude": "6.231194",
+      "LocationLongitude": "-0.057426",
+      "Q1": "Richard",
+      "school_name": "Yonguase",
+      "Q3": "MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
+      "Q5": "1900",
+      "Q6": "190",
+      "Q7": "7",
+      "Q8": "40",
+      "Q9": "14",
+      "Q11": "40",
+      "Q12": "12",
+      "Q14": "31",
+      "Q15": "8",
+      "Q20": "No",
+      "Q22": "Yes",
+      "Q23": "0",
+      "Q24": "10",
+      "Q25": "10",
+      "Q26": "Yes",
+      "Q30": "1-2 times in a term",
+      "Q31_1": "5- This describes our school",
+      "Q31_2": "5- This describes our school",
+      "Q32": "Yes, EPI has given them a library",
+      "Q34": "Yes, another organization or the government has given them some",
+      "Q35": "Yes, another organization or the government has given them something to provide clean water",
+      "Q36": "Yes, they already had enough classrooms or another organization has provided them",
+      "Q37": "Yes",
+      "Q45": "Maybe in the future",
+      "update_date": "2023-03-02"
+    },
+    {
+      "StartDate": "2018-03-27 16:55:55",
+      "school_name": "Yonguase",
+      "Q3": "Project Update Visit",
+      "Q5": "Do not know",
+      "Q6": "166",
+      "Q7": "15",
+      "Q8": "90",
+      "Q9": "Yet to write BECE",
+      "Q11": "21",
+      "Q12": "N/A",
+      "Q15": "N/A",
+      "Q16": "0 - This school has a Junior High School",
+      "Q20": "Other",
+      "Q22": "No",
+      "Q23": "N/A- No lanterns are being reported lost, stolen, or broken",
+      "Q24": "N/A",
+      "Q25": "24",
+      "Q26": "Yes",
+      "Q30": "3 or more times in a term",
+      "Q31_1": "3- This describes our school a little bit",
+      "Q31_2": "3- This describes our school a little bit",
+      "Q32": "No, they need a library",
+      "Q33": "Yes",
+      "Q34": "Yes, another organization or the government has given them some",
+      "Q35": "No, this school needs a borehole or other clean water solution",
+      "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
+      "Q45": "Maybe in the future",
+      "update_date": "2018-03-27"
     }
   ],
   "surveys": [
     {
-      "StartDate": "9/16/2025 4:09:51",
+      "StartDate": "9/16/2025 4:52:58",
       "Duration (in seconds)": "286",
       "ResponseId": "R_32ojr2SHReZ4CA9",
       "LocationLatitude": "6.245534",
@@ -105,9 +197,9 @@
       "Q5": "JHS Form 3",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Hands-on learning,Enjoyable to play with",
+      "Q8": "Completing circuits with friends; Hands-on learning,Enjoyable to play with",
       "Q9": "Not enough kits",
-      "has_library": "Yes",
+      "has_library": "Yes, we have a structured library with books",
       "Q13": "Teacher brings books",
       "Q14": "Less than once a week",
       "Q15": "Yes",
@@ -120,7 +212,7 @@
       "Q24": "I find it difficult",
       "Q25": "3 x per week",
       "Q26": "Yes, asked verbally",
-      "Q27": "It help me learn during the evening which I was not able to before the lantern came.  Because it’s durable am not worried about not working.",
+      "Q27": "It help me learn during the evening which I was not able to before the lantern came. Because it’s durable am not worried about not working.",
       "Q28": "Other:",
       "Q30": "Yes",
       "menstrual_kit": "Yes",
@@ -131,7 +223,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "9/16/2025 4:51:07",
+      "StartDate": "9/16/2025 4:52:58",
       "Duration (in seconds)": "102",
       "ResponseId": "R_lvQROFb3i3QF3Mu",
       "LocationLatitude": "6.230913",
@@ -143,9 +235,9 @@
       "Q5": "Class 5",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Help to understand confusing concepts",
+      "Q8": "Connecting cables and parts by yourself; Helps with independence",
       "Q9": "Not allowed to use with freedom",
-      "has_library": "Yes",
+      "has_library": "Yes, we have a structured library with books",
       "Q13": "Never",
       "Q18": "I am not permitted to",
       "Q19": "Yes",
@@ -160,7 +252,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "9/16/2025 4:07:22",
+      "StartDate": "9/16/2025 4:52:58",
       "Duration (in seconds)": "143",
       "ResponseId": "R_26AnEFkLUTu9Dux",
       "LocationLatitude": "6.281836",
@@ -172,9 +264,9 @@
       "Q5": "JHS Form 2",
       "Q6": "Yes",
       "Q7": "3-4 times",
-      "Q8": "Hands-on learning,Help to understand confusing concepts,Enjoyable to play with",
-      "Q9": "Missing parts,Not enough kits",
-      "has_library": "Yes",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
+      "Q9": "None,Not enough kits",
+      "has_library": "Yes, we have a structured library with books",
       "Q13": "Teacher brings books",
       "Q14": "Less than once a week",
       "Q15": "No",
@@ -196,7 +288,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "9/16/2025 4:23:26",
+      "StartDate": "9/16/2025 4:52:58",
       "Duration (in seconds)": "619",
       "ResponseId": "R_7NCZLqLQd9rNQ8A",
       "LocationLatitude": "6.363546",
@@ -208,9 +300,9 @@
       "Q5": "Class 6",
       "Q6": "Yes",
       "Q7": "3-4 times",
-      "Q8": "Hands-on learning,Help to understand confusing concepts,Enjoyable to play with",
-      "Q9": "Missing parts,Not enough kits",
-      "has_library": "Yes",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
+      "Q9": "None,Not enough kits",
+      "has_library": "Yes, we have a structured library with books",
       "Q13": "Teacher brings books",
       "Q14": "I have never visited",
       "Q15": "I do not know",
@@ -229,7 +321,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "9/16/2025 4:17:02",
+      "StartDate": "9/16/2025 4:52:58",
       "Duration (in seconds)": "380",
       "ResponseId": "R_2fiixBrFwH6BvqU",
       "LocationLatitude": "6.218325",
@@ -241,9 +333,9 @@
       "Q5": "JHS Form 3",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Hands-on learning,Help to understand confusing concepts,Enjoyable to play with",
-      "Q9": "Missing parts,Not enough kits",
-      "has_library": "Yes",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
+      "Q9": "None,Not enough kits",
+      "has_library": "Yes, we have a structured library with books",
       "Q13": "Teacher brings books",
       "Q14": "I have never visited",
       "Q15": "No",
@@ -266,7 +358,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "9/16/2025 4:41:34",
+      "StartDate": "9/16/2025 4:52:58",
       "Duration (in seconds)": "188",
       "ResponseId": "R_azpqG4NDFynh1dx",
       "LocationLatitude": "6.230993",
@@ -278,9 +370,9 @@
       "Q5": "Class 6",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Hands-on learning",
+      "Q8": "Completing circuits with friends; Hands-on learning",
       "Q9": "Not allowed to use with freedom",
-      "has_library": "Yes",
+      "has_library": "Yes, we have a structured library with books",
       "Q13": "Never",
       "Q18": "I am not permitted to",
       "Q19": "Yes",
@@ -294,7 +386,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "9/16/2025 4:14:41",
+      "StartDate": "9/16/2025 4:52:58",
       "Duration (in seconds)": "133",
       "ResponseId": "R_oI1xVIo9jJWPcqw",
       "LocationLatitude": "6.22989",
@@ -306,9 +398,9 @@
       "Q5": "JHS Form 3",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Hands-on learning",
-      "Q9": "Missing parts",
-      "has_library": "Yes",
+      "Q8": "Completing circuits with friends; Hands-on learning",
+      "Q9": "None",
+      "has_library": "Yes, we have a structured library with books",
       "Q13": "Teacher brings books",
       "Q14": "1-2 times a week",
       "Q15": "I do not know",
@@ -331,7 +423,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "9/16/2025 4:36:13",
+      "StartDate": "9/16/2025 4:52:58",
       "Duration (in seconds)": "319",
       "ResponseId": "R_eMGQc4GCmjeaMtk",
       "LocationLatitude": "6.23106",
@@ -343,9 +435,9 @@
       "Q5": "JHS Form 1",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Hands-on learning,Help to understand confusing concepts,Enjoyable to play with",
-      "Q9": "Missing parts,Not enough kits",
-      "has_library": "Yes",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
+      "Q9": "None,Not enough kits",
+      "has_library": "Yes, we have a structured library with books",
       "Q13": "Teacher brings books",
       "Q14": "Less than once a week",
       "Q15": "I do not know",
@@ -363,7 +455,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "9/16/2025 4:47:32",
+      "StartDate": "9/16/2025 4:52:58",
       "Duration (in seconds)": "211",
       "ResponseId": "R_b8fHJhZkgWlYUaG",
       "LocationLatitude": "6.230952",
@@ -375,9 +467,9 @@
       "Q5": "Class 5",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Hands-on learning,Help to understand confusing concepts,Enjoyable to play with",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
       "Q9": "Not allowed to use with freedom,Not enough kits",
-      "has_library": "Yes",
+      "has_library": "Yes, we have a structured library with books",
       "Q13": "Teacher brings books",
       "Q14": "I have never visited",
       "Q15": "I do not know",
@@ -396,7 +488,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "9/16/2025 4:33:47",
+      "StartDate": "9/16/2025 4:52:58",
       "Duration (in seconds)": "144",
       "ResponseId": "R_97dbXHZ5qyPzjlt",
       "LocationLatitude": "6.231143",
@@ -408,9 +500,9 @@
       "Q5": "JHS Form 1",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Hands-on learning,Help to understand confusing concepts",
-      "Q9": "Missing parts,Not enough kits",
-      "has_library": "Yes",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence",
+      "Q9": "None,Not enough kits",
+      "has_library": "Yes, we have a structured library with books",
       "Q13": "Teacher brings books",
       "Q14": "I have never visited",
       "Q15": "I do not know",
@@ -457,7 +549,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-03-02 03:24:09",
+      "StartDate": "2023-03-02 3:24:09",
       "Duration (in seconds)": "1974",
       "ResponseId": "R_kxa4Qr6eX2jIzdY",
       "LocationLatitude": "6.231264",
@@ -481,7 +573,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-03-02 03:57:10",
+      "StartDate": "2023-03-02 3:57:10",
       "Duration (in seconds)": "540",
       "ResponseId": "R_dJ2GtHSPRXwZuHt",
       "LocationLatitude": "6.231263",
@@ -511,7 +603,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-03-02 04:06:15",
+      "StartDate": "2023-03-02 4:06:15",
       "Duration (in seconds)": "671",
       "ResponseId": "R_8ny3ljQueVWY537",
       "Q1": "Boateng Sandra",
@@ -533,7 +625,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-03-02 04:17:30",
+      "StartDate": "2023-03-02 4:17:30",
       "Duration (in seconds)": "979",
       "ResponseId": "R_7VLThtVChe5vXyo",
       "Q1": "Boateng Sandra",
@@ -561,7 +653,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-03-02 04:33:55",
+      "StartDate": "2023-03-02 4:33:55",
       "Duration (in seconds)": "447",
       "ResponseId": "R_nuhbPhovE1XwfP5",
       "Q1": "Boateng Sandra",
@@ -583,7 +675,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-03-02 04:41:27",
+      "StartDate": "2023-03-02 4:41:27",
       "Duration (in seconds)": "376",
       "ResponseId": "R_abvvTwZXCFAyhAD",
       "Q1": "Boateng Sandra",
@@ -611,7 +703,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-03-02 04:47:48",
+      "StartDate": "2023-03-02 4:47:48",
       "Duration (in seconds)": "1504",
       "ResponseId": "R_lAXnEgSExFxiQBp",
       "LocationLatitude": "6.231334",
@@ -635,7 +727,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-03-02 05:13:54",
+      "StartDate": "2023-03-02 5:13:54",
       "Duration (in seconds)": "822",
       "ResponseId": "R_nOLr0braNoNtyyY",
       "LocationLatitude": "6.231072",
@@ -664,7 +756,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-03-02 05:27:42",
+      "StartDate": "2023-03-02 5:27:42",
       "Duration (in seconds)": "616",
       "ResponseId": "R_fErbTsw9NRO2gkZ",
       "Q1": "Boateng Sandra",
@@ -690,7 +782,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-03-02 05:38:04",
+      "StartDate": "2023-03-02 5:38:04",
       "Duration (in seconds)": "565",
       "ResponseId": "R_4YWUxObShGThSqt",
       "Q1": "Boateng Sandra",
@@ -712,7 +804,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-03-02 05:47:41",
+      "StartDate": "2023-03-02 5:47:41",
       "Duration (in seconds)": "568",
       "ResponseId": "R_25qEb5QrS95cEuQ",
       "Q1": "Boateng Sandra",
@@ -737,7 +829,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-03-02 05:57:14",
+      "StartDate": "2023-03-02 5:57:14",
       "Duration (in seconds)": "552",
       "ResponseId": "R_jsVXqelsPlHEzlK",
       "Q1": "Boateng Sandra",
@@ -758,7 +850,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-08-23 05:43:02",
+      "StartDate": "2023-08-23 5:43:02",
       "Duration (in seconds)": "1649",
       "ResponseId": "R_b4Phpihg6YQYJUT",
       "LocationLatitude": "6.231433",
@@ -781,7 +873,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-08-23 06:10:36",
+      "StartDate": "2023-08-23 6:10:36",
       "Duration (in seconds)": "958",
       "ResponseId": "R_gVWbBZgumiuIQe1",
       "Q1": "Gladys",
@@ -809,7 +901,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-08-23 06:26:47",
+      "StartDate": "2023-08-23 6:26:47",
       "Duration (in seconds)": "904",
       "ResponseId": "R_bkCeX5kfZzbOMWX",
       "Q1": "Gladys",
@@ -832,7 +924,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-08-23 06:41:59",
+      "StartDate": "2023-08-23 6:41:59",
       "Duration (in seconds)": "954",
       "ResponseId": "R_0A7bEmgU9P3gUDb",
       "Q1": "Gladys",
@@ -860,7 +952,7 @@
       "school_name": "Yonguase"
     },
     {
-      "StartDate": "2023-08-23 06:57:56",
+      "StartDate": "2023-08-23 6:57:56",
       "Duration (in seconds)": "951",
       "ResponseId": "R_35uXt6eTfZxkJTf",
       "Q1": "Gladys",
@@ -903,6 +995,78 @@
       "Q26": "Yes",
       "Q27": "Reading,Homework,Exams,Remembering lessons,Dictation",
       "Q28": "No Problem",
+      "school_name": "Yonguase"
+    },
+    {
+      "StartDate": "2018-11-30 4:59:40",
+      "Q1": "Loretta",
+      "school_selected": "Yonguase M/A Basic School",
+      "Q3": "Male",
+      "Q4": "16",
+      "Q5": "JHS Form 2",
+      "Q6": "Yes",
+      "Q9": "Not enough science kits",
+      "lantern_group": "Yes",
+      "Q23": "Yes",
+      "Q26": "No",
+      "Q28": "Other",
+      "Q28_18_TEXT": "There is no issue",
+      "school_name": "Yonguase"
+    },
+    {
+      "StartDate": "2018-11-30 4:59:44",
+      "Q1": "Loretta",
+      "school_selected": "Yonguase M/A Basic School",
+      "Q3": "Female",
+      "Q4": "15",
+      "Q5": "JHS Form 1",
+      "Q6": "Yes",
+      "Q9": "No problems",
+      "lantern_group": "Yes",
+      "Q23": "No",
+      "Q26": "No",
+      "Q28": "Other",
+      "school_name": "Yonguase"
+    },
+    {
+      "StartDate": "2018-11-30 4:59:47",
+      "Q1": "Loretta",
+      "school_selected": "Yonguase M/A Basic School",
+      "Q3": "Male",
+      "Q4": "11",
+      "Q5": "Class 5",
+      "Q6": "No",
+      "Q9": "Teachers not allowing us to touch it ourselves",
+      "lantern_group": "Yes",
+      "Q23": "Yes",
+      "Q26": "Yes",
+      "Q28": "Other",
+      "school_name": "Yonguase"
+    },
+    {
+      "StartDate": "2025-10-14 6:15:32",
+      "Q1": "Alex",
+      "school_selected": "Yonguase M/A Basic School",
+      "Q3": "Female",
+      "Q4": "10",
+      "Q5": "Class 5",
+      "Q6": "Yes",
+      "Q7": "1-2 times",
+      "Q8": "Completing circuits with friends; Hands-on learning,Enjoyable to play with",
+      "Q9": "Other:",
+      "Q9_6_TEXT": "N/A",
+      "has_library": "2",
+      "Q11": "No, I have no access to reading materials",
+      "Q19": "Yes",
+      "lantern_group": "Yes",
+      "Q22": "5",
+      "Q23": "No, I have never been a lantern leader",
+      "Q25": "6 x per week",
+      "Q27": "It helps us to read",
+      "Q28": "Other:",
+      "Q28_18_TEXT": "N/A",
+      "Q30": "No",
+      "has_computers": "No",
       "school_name": "Yonguase"
     }
   ],

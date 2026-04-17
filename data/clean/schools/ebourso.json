@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 0,
+    "n_visits": 1,
     "n_responses": 0,
     "pct_lantern": "NA",
     "pct_library": "NA",
@@ -24,7 +24,19 @@
     "pct_computers": "NA",
     "n_issues": 0
   },
-  "visits": [],
+  "visits": [
+    {
+      "StartDate": "2024-03-14 3:49:35",
+      "Duration (in seconds)": "6065",
+      "ResponseId": "R_jO7Fq2DASIgWHNy",
+      "LocationLatitude": "7.601247",
+      "LocationLongitude": "-1.20547",
+      "visitor": "George",
+      "school_name": "Ebourso",
+      "visit_reason": "MGR Maintenance,Routine Program Evaluation",
+      "visit_date": "2024-03-14"
+    }
+  ],
   "full_update": [],
   "surveys": [],
   "issues": []

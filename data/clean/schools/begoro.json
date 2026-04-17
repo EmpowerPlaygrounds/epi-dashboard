@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 0,
+    "n_visits": 1,
     "n_responses": 0,
     "pct_lantern": "NA",
     "pct_library": "NA",
@@ -24,40 +24,22 @@
     "pct_computers": "NA",
     "n_issues": 0
   },
-  "visits": [],
+  "visits": [
+    {
+      "StartDate": "2024-05-07 3:15:51",
+      "Duration (in seconds)": "143",
+      "ResponseId": "R_bYBeTV4Wuz1jsDl",
+      "LocationLatitude": "6.372845",
+      "LocationLongitude": "-1.06353",
+      "visitor": "Richard",
+      "school_name": "Begoro",
+      "visit_reason": "Project Update Visit",
+      "visit_date": "2024-05-07"
+    }
+  ],
   "full_update": [
     {
-      "StartDate": "2023-02-14 06:42:53",
-      "Duration (in seconds)": "583",
-      "ResponseId": "R_dH87FQfxqjQPAcd",
-      "LocationLatitude": "6.305701",
-      "LocationLongitude": "-0.721928",
-      "Q1": "Richard",
-      "school_name": "Begoro",
-      "Q3": "MGR Maintenance,Surveyor Team Visit,Project Update Visit",
-      "Q5": "2000",
-      "Q6": "263",
-      "Q7": "67",
-      "Q8": "21",
-      "Q9": "21",
-      "Q11": "67",
-      "Q12": "20",
-      "Q14": "18",
-      "Q15": "N/A",
-      "Q20": "Yes",
-      "Q30": "They don't use them",
-      "Q31_1": "3- This describes our school a little bit",
-      "Q31_2": "3- This describes our school a little bit",
-      "Q32": "Yes, EPI has given them a library",
-      "Q34": "Yes, another organization or the government has given them some",
-      "Q35": "Yes, another organization or the government has given them something to provide clean water",
-      "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
-      "Q37": "Yes",
-      "Q45": "Maybe in the future",
-      "update_date": "2023-02-14"
-    },
-    {
-      "StartDate": "2023-10-24 07:07:54",
+      "StartDate": "2023-10-24 7:07:54",
       "Duration (in seconds)": "1549",
       "ResponseId": "R_hXn8JhvkiVa2O3d",
       "LocationLatitude": "6.295118",
@@ -87,7 +69,7 @@
       "update_date": "2023-10-24"
     },
     {
-      "StartDate": "2024-01-22 04:53:28",
+      "StartDate": "2024-01-22 4:53:28",
       "Duration (in seconds)": "767",
       "ResponseId": "R_gxiCv5Gc11AGqbl",
       "LocationLatitude": "6.297161",

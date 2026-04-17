@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 1,
+    "n_visits": 2,
     "n_responses": 9,
     "pct_lantern": 0.8889,
     "pct_library": 1,
@@ -26,7 +26,7 @@
   },
   "visits": [
     {
-      "StartDate": "2023-08-24 01:43:41",
+      "StartDate": "2023-08-24 1:43:41",
       "Duration (in seconds)": "3686",
       "ResponseId": "R_lRmQUdsl5C4zzTQ",
       "LocationLatitude": "6.215218",
@@ -35,6 +35,17 @@
       "school_name": "Tsledom",
       "visit_reason": "Routine Program Evaluation,Surveyor Team Visit",
       "visit_date": "2023-08-24"
+    },
+    {
+      "StartDate": "2024-05-14 8:30:13",
+      "Duration (in seconds)": "216",
+      "ResponseId": "R_diOzlNU9u6jj8WX",
+      "LocationLatitude": "6.215037",
+      "LocationLongitude": "-0.00494",
+      "visitor": "George",
+      "school_name": "Tsledom",
+      "visit_reason": "MGR Maintenance,Routine Program Evaluation",
+      "visit_date": "2024-05-14"
     }
   ],
   "full_update": [
@@ -74,7 +85,7 @@
   ],
   "surveys": [
     {
-      "StartDate": "2023-08-24 01:40:10",
+      "StartDate": "2023-08-24 1:40:10",
       "Duration (in seconds)": "764",
       "ResponseId": "R_0v9J29sZM48MWHk",
       "LocationLatitude": "6.215234",
@@ -101,7 +112,7 @@
       "school_name": "Tsledom"
     },
     {
-      "StartDate": "2023-08-24 01:53:13",
+      "StartDate": "2023-08-24 1:53:13",
       "Duration (in seconds)": "836",
       "ResponseId": "R_hYORRmuVFZzLtiu",
       "Q1": "Gladys",
@@ -127,7 +138,7 @@
       "school_name": "Tsledom"
     },
     {
-      "StartDate": "2023-08-24 02:07:31",
+      "StartDate": "2023-08-24 2:07:31",
       "Duration (in seconds)": "687",
       "ResponseId": "R_fa0s7JI0RRuRHPY",
       "Q1": "Gladys",
@@ -152,7 +163,7 @@
       "school_name": "Tsledom"
     },
     {
-      "StartDate": "2023-08-24 02:19:09",
+      "StartDate": "2023-08-24 2:19:09",
       "Duration (in seconds)": "992",
       "ResponseId": "R_7dIdiFmhT83cq1d",
       "Q1": "Gladys",
@@ -183,7 +194,7 @@
       "school_name": "Tsledom"
     },
     {
-      "StartDate": "2023-08-24 02:35:45",
+      "StartDate": "2023-08-24 2:35:45",
       "Duration (in seconds)": "868",
       "ResponseId": "R_hohineG9Wi5wSul",
       "Q1": "Gladys",
@@ -214,7 +225,7 @@
       "school_name": "Tsledom"
     },
     {
-      "StartDate": "2023-08-24 02:50:16",
+      "StartDate": "2023-08-24 2:50:16",
       "Duration (in seconds)": "590",
       "ResponseId": "R_9Voqu6YmlFeWaGN",
       "Q1": "Gladys",
@@ -239,7 +250,7 @@
       "school_name": "Tsledom"
     },
     {
-      "StartDate": "2023-08-24 03:00:21",
+      "StartDate": "2023-08-24 3:00:21",
       "Duration (in seconds)": "584",
       "ResponseId": "R_ilXMmi72Pt9FOLi",
       "Q1": "Gladys",
@@ -270,7 +281,7 @@
       "school_name": "Tsledom"
     },
     {
-      "StartDate": "2023-08-24 03:10:31",
+      "StartDate": "2023-08-24 3:10:31",
       "Duration (in seconds)": "500",
       "ResponseId": "R_hy8BpU3ACbeznEi",
       "LocationLatitude": "6.215214",
@@ -297,7 +308,7 @@
       "school_name": "Tsledom"
     },
     {
-      "StartDate": "2023-08-24 03:19:24",
+      "StartDate": "2023-08-24 3:19:24",
       "Duration (in seconds)": "593",
       "ResponseId": "R_75WQM8rouWldRYG",
       "Q1": "Gladys",

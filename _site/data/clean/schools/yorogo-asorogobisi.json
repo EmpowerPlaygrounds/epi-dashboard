@@ -26,22 +26,22 @@
   },
   "visits": [
     {
-      "StartDate": "2018-10-23 04:22:57",
+      "StartDate": "2018-10-23 4:22:57",
       "Duration (in seconds)": "303",
       "ResponseId": "R_o3FLbgTsSAXeRsO",
-      "LocationLatitude": "10.831607999999999236706571537069976329803466796875",
-      "LocationLongitude": "-0.86100699999999996681054881264572031795978546142578125",
+      "LocationLatitude": "10.831608",
+      "LocationLongitude": "-0.861007",
       "visitor": "Richard",
       "school_name": "Yorogo-Asorogobisi",
       "visit_reason": "MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
       "visit_date": "2018-10-23"
     },
     {
-      "StartDate": "2019-03-20 04:26:01",
+      "StartDate": "2019-03-20 4:26:01",
       "Duration (in seconds)": "2531",
       "ResponseId": "R_6aeA4S5RcHjub6f",
-      "LocationLatitude": "11.2143169999999994246309142909012734889984130859375",
-      "LocationLongitude": "-0.97684599999999999209165935099008493125438690185546875",
+      "LocationLatitude": "11.214317",
+      "LocationLongitude": "-0.976846",
       "visitor": "George",
       "school_name": "Yorogo-Asorogobisi",
       "visit_reason": "Routine Program Evaluation,Surveyor Team Visit,Science kits microscope",
@@ -86,11 +86,11 @@
   ],
   "surveys": [
     {
-      "StartDate": "2019-03-20 01:49:12",
+      "StartDate": "2019-03-20 1:49:12",
       "Duration (in seconds)": "1713",
       "ResponseId": "R_a4hq5iFPUMvsebV",
-      "LocationLatitude": "10.831652999999999309466147678904235363006591796875",
-      "LocationLongitude": "-0.8609059999999999490682967007160186767578125",
+      "LocationLatitude": "10.831653",
+      "LocationLongitude": "-0.860906",
       "Q1": "Sarah",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Male",
@@ -112,11 +112,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-03-20 02:17:50",
+      "StartDate": "2019-03-20 2:17:50",
       "Duration (in seconds)": "1043",
       "ResponseId": "R_bX4nqQFGpmfdnIl",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Female",
@@ -142,11 +142,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-03-20 02:35:18",
+      "StartDate": "2019-03-20 2:35:18",
       "Duration (in seconds)": "957",
       "ResponseId": "R_oad2EvboL5K56B1",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Female",
@@ -171,11 +171,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-03-20 02:51:21",
+      "StartDate": "2019-03-20 2:51:21",
       "Duration (in seconds)": "808",
       "ResponseId": "R_oDkrM5zrYnN1yN7",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Female",
@@ -199,11 +199,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-03-20 03:04:57",
+      "StartDate": "2019-03-20 3:04:57",
       "Duration (in seconds)": "733",
       "ResponseId": "R_lO8vhJIWNHQENVH",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Male",
@@ -222,11 +222,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-03-20 03:17:26",
+      "StartDate": "2019-03-20 3:17:26",
       "Duration (in seconds)": "1026",
       "ResponseId": "R_lbzkRryftEVdWWN",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Male",
@@ -245,11 +245,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-03-20 03:34:38",
+      "StartDate": "2019-03-20 3:34:38",
       "Duration (in seconds)": "1007",
       "ResponseId": "R_i2nIOXWxeJ3FBoq",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Female",
@@ -273,11 +273,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-03-20 03:51:32",
+      "StartDate": "2019-03-20 3:51:32",
       "Duration (in seconds)": "888",
       "ResponseId": "R_eRT91z2D1HmIrj2",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Female",
@@ -302,11 +302,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-03-20 04:06:28",
+      "StartDate": "2019-03-20 4:06:28",
       "Duration (in seconds)": "1050",
       "ResponseId": "R_bvcabrQP3b89zLh",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Female",
@@ -331,11 +331,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-03-20 04:24:02",
+      "StartDate": "2019-03-20 4:24:02",
       "Duration (in seconds)": "1020",
       "ResponseId": "R_i8pHkv4dikhbRgO",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Male",
@@ -353,11 +353,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-03-20 02:27:58",
+      "StartDate": "2019-03-20 2:27:58",
       "Duration (in seconds)": "1062",
       "ResponseId": "R_55IxvlPJQPkiqPe",
-      "LocationLatitude": "10.8316040000000004539515430224128067493438720703125",
-      "LocationLongitude": "-0.8610640000000000515711917614680714905261993408203125",
+      "LocationLatitude": "10.831604",
+      "LocationLongitude": "-0.861064",
       "Q1": "George",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Male",
@@ -375,11 +375,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-03-20 02:01:58",
+      "StartDate": "2019-03-20 2:01:58",
       "Duration (in seconds)": "1520",
       "ResponseId": "R_g5FwinSFsmeErM4",
-      "LocationLatitude": "10.8315719999999995337702785036526620388031005859375",
-      "LocationLongitude": "-0.861043000000000002813749233609996736049652099609375",
+      "LocationLatitude": "10.831572",
+      "LocationLongitude": "-0.861043",
       "Q1": "George",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Female",
@@ -404,11 +404,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-12-03 01:33:12",
+      "StartDate": "2019-12-03 1:33:12",
       "Duration (in seconds)": "319",
       "ResponseId": "R_l8U72734YZ9jobY",
-      "LocationLatitude": "10.8315819999999991551931088906712830066680908203125",
-      "LocationLongitude": "-0.86097400000000001707434194031520746648311614990234375",
+      "LocationLatitude": "10.831582",
+      "LocationLongitude": "-0.860974",
       "Q1": "Rita",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Female",
@@ -430,11 +430,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-12-03 01:40:27",
+      "StartDate": "2019-12-03 1:40:27",
       "Duration (in seconds)": "504",
       "ResponseId": "R_9ve9u80eXVtc9Hk",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Rita",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Male",
@@ -454,11 +454,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-12-03 01:51:36",
+      "StartDate": "2019-12-03 1:51:36",
       "Duration (in seconds)": "450",
       "ResponseId": "R_kVwUwM7zvpVCc7j",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Rita",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Female",
@@ -482,11 +482,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-12-03 02:00:05",
+      "StartDate": "2019-12-03 2:00:05",
       "Duration (in seconds)": "566",
       "ResponseId": "R_dpWHQPnaraiUv6R",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Rita",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Male",
@@ -506,11 +506,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-12-03 02:11:38",
+      "StartDate": "2019-12-03 2:11:38",
       "Duration (in seconds)": "538",
       "ResponseId": "R_ipn6maP7qycSb4j",
-      "LocationLatitude": "10.8316449999999999675992512493394315242767333984375",
-      "LocationLongitude": "-0.86100100000000001632116664040950126945972442626953125",
+      "LocationLatitude": "10.831645",
+      "LocationLongitude": "-0.861001",
       "Q1": "Rita",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Female",
@@ -534,11 +534,11 @@
       "school_name": "Yorogo-Asorogobisi"
     },
     {
-      "StartDate": "2019-12-03 02:22:28",
+      "StartDate": "2019-12-03 2:22:28",
       "Duration (in seconds)": "441",
       "ResponseId": "R_i8qakhRM1nmYQpj",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Rita",
       "school_selected": "Yorogo-Asorogobisi",
       "Q3": "Female",

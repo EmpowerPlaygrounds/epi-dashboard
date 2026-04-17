@@ -17,10 +17,10 @@
     "Biofill Toilets": 0,
     "Light a Village": 0,
     "n_visits": 3,
-    "n_responses": 130,
-    "pct_lantern": 0.5385,
-    "pct_library": 0.5846,
-    "pct_menstrual": 0.5,
+    "n_responses": 146,
+    "pct_lantern": 0.4863,
+    "pct_library": 0.5278,
+    "pct_menstrual": 0.4894,
     "pct_computers": 0,
     "n_issues": 0
   },
@@ -29,21 +29,25 @@
       "StartDate": "2026-01-26 5:08:58",
       "Duration (in seconds)": "117",
       "ResponseId": "R_idViDiMfYTCXwK4",
-      "LocationLatitude": "5.5545",
-      "LocationLongitude": "-0.1902",
+      "LocationLatitude": "6.323383",
+      "LocationLongitude": "-0.59341",
       "visitor": "Richard",
       "school_name": "Wekpeti Abresu",
-      "visit_reason": "Science Kit Training/Distribution, Student Survey Team Visit",
-      "activities": "Science Kit Training/Distribution, Student Survey Team Visit",
+      "visit_reason": "Science Kit Training/Distribution,Student Survey Team Visit",
+      "activities": "Science Kit Training/Distribution,Student Survey Team Visit",
       "Q21": "No",
       "Q23": "Yes",
       "Q24": "12",
-      "doing_well": "The  school been doing well with the science kits program.",
+      "doing_well": "The school been doing well with the science kits program.",
       "observations": "There new teachers who aren’t acquainted with the science kits. Therefore a teacher training was scheduled",
       "visit_date": "2026-01-26"
     },
     {
-      "StartDate": "1/16/25 2:02",
+      "StartDate": "2025-01-16 2:02:37",
+      "Duration (in seconds)": "108",
+      "ResponseId": "R_ifXbwreen7g6Jv3",
+      "LocationLatitude": "6.309045",
+      "LocationLongitude": "-0.67146",
       "visitor": "Richard",
       "Q1.5": "Richard",
       "school_name": "Wekpeti Abresu",
@@ -51,7 +55,7 @@
       "visit_date": "2025-01-16"
     },
     {
-      "StartDate": "2019-06-12 05:57:11",
+      "StartDate": "2019-06-12 5:57:11",
       "Duration (in seconds)": "4439",
       "ResponseId": "R_nkh1bCe4Zd0lEa6",
       "LocationLatitude": "8",
@@ -129,11 +133,45 @@
       "update_date": "2024-11-13"
     },
     {
-      "StartDate": "2019-01-29 01:53:40",
+      "StartDate": "2023-02-14 4:20:31",
+      "Duration (in seconds)": "2987",
+      "ResponseId": "R_i7FjpUdtuR7wpKl",
+      "LocationLatitude": "6.326831",
+      "LocationLongitude": "-0.677472",
+      "Q1": "Richard",
+      "school_name": "Wekpeti Abresu",
+      "Q3": "MGR Maintenance,Surveyor Team Visit,Project Update Visit",
+      "Q5": "1200",
+      "Q6": "120",
+      "Q7": "9",
+      "Q8": "77",
+      "Q9": "41",
+      "Q11": "41",
+      "Q12": "41",
+      "Q14": "19",
+      "Q15": "41",
+      "Q20": "No, but they have poles or power lines",
+      "Q22": "No",
+      "Q24": "0",
+      "Q25": "12",
+      "Q26": "Yes",
+      "Q30": "1-2 times in a term",
+      "Q31_1": "5- This describes our school",
+      "Q31_2": "5- This describes our school",
+      "Q32": "Yes, another organization or the government has given them a library",
+      "Q34": "Yes, another organization or the government has given them some",
+      "Q35": "Yes, EPI has helped them get access to clean water",
+      "Q36": "Yes, they already had enough classrooms or another organization has provided them",
+      "Q37": "No",
+      "Q45": "Maybe in the future",
+      "update_date": "2023-02-14"
+    },
+    {
+      "StartDate": "2019-01-29 1:53:40",
       "Duration (in seconds)": "1721",
       "ResponseId": "R_kCSuqUcfuEA3pT8",
-      "LocationLatitude": "6.309174999999999755573298898525536060333251953125",
-      "LocationLongitude": "-0.6715750000000000330402372128446586430072784423828125",
+      "LocationLatitude": "6.309175",
+      "LocationLongitude": "-0.671575",
       "Q1": "Richard",
       "school_name": "Wekpeti Abresu",
       "Q3": "MGR Maintenance,Surveyor Team Visit",
@@ -166,11 +204,11 @@
       "update_date": "2019-01-29"
     },
     {
-      "StartDate": "2019-02-28 08:52:37",
+      "StartDate": "2019-02-28 8:52:37",
       "Duration (in seconds)": "448",
       "ResponseId": "R_bVVtyAUPFuh3hnR",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Richard",
       "school_name": "Wekpeti Abresu",
       "Q3": "Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
@@ -202,11 +240,11 @@
       "update_date": "2019-02-28"
     },
     {
-      "StartDate": "2019-09-20 05:27:26",
+      "StartDate": "2019-09-20 5:27:26",
       "Duration (in seconds)": "638",
       "ResponseId": "R_n2iuCwy7rXSolFc",
-      "LocationLatitude": "6.30907600000000012840928320656530559062957763671875",
-      "LocationLongitude": "-0.6716889999999999805169181854580529034137725830078125",
+      "LocationLatitude": "6.309076",
+      "LocationLongitude": "-0.671689",
       "Q1": "Richard",
       "school_name": "Wekpeti Abresu",
       "Q3": "Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
@@ -238,11 +276,11 @@
       "update_date": "2019-09-20"
     },
     {
-      "StartDate": "2020-01-21 04:00:48",
+      "StartDate": "2020-01-21 4:00:48",
       "Duration (in seconds)": "646",
       "ResponseId": "R_9cP5l2BoXBKx8iW",
-      "LocationLatitude": "6.30923500000000014864554032101295888423919677734375",
-      "LocationLongitude": "-0.67163600000000001077893330148071981966495513916015625",
+      "LocationLatitude": "6.309235",
+      "LocationLongitude": "-0.671636",
       "Q1": "Richard",
       "school_name": "Wekpeti Abresu",
       "Q3": "MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
@@ -271,11 +309,11 @@
       "update_date": "2020-01-21"
     },
     {
-      "StartDate": "2021-10-18 04:12:35",
+      "StartDate": "2021-10-18 4:12:35",
       "Duration (in seconds)": "684",
       "ResponseId": "R_60PVuPedscfiey1",
-      "LocationLatitude": "6.30910900000000030019009500392712652683258056640625",
-      "LocationLongitude": "-0.6715910000000000490416596221621148288249969482421875",
+      "LocationLatitude": "6.309109",
+      "LocationLongitude": "-0.671591",
       "Q1": "Richard",
       "school_name": "Wekpeti Abresu",
       "Q3": "MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
@@ -656,7 +694,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2026-01-26 5:12:37",
+      "StartDate": "2026-01-26 5:13:55",
       "Duration (in seconds)": "65",
       "ResponseId": "R_h8e4yIkXkFGfbUl",
       "LocationLatitude": "5.5545",
@@ -666,34 +704,25 @@
       "school_other": "Wekpeti Abresu",
       "Q3": "Female",
       "Q4": "11",
-      "Q4_12_TEXT": "11",
       "Q5": "Class 4",
       "Q6": "Yes",
       "Q7": "1-2 times",
       "Q8": "Enjoyable to play with",
       "Q9": "None",
-      "Q9_6_TEXT": "None, Missing parts, Hard to understand, Not allowed to use with freedom, Not enough kits, Other:",
       "has_library": "Yes, we have a structured library with books",
       "Q13": "Teacher brings books",
       "Q14": "Less than once a week",
       "Q15": "Yes",
-      "Q16": "I like to read books, I like to learn new words",
-      "Q16_3_TEXT": "I like to read books, I like to learn new words",
-      "Q17": "What challenges have you experienced with the library?",
-      "Q12": "Where do you access books? (Ex: from home, from a friend or family member, from a teacher, etc.)",
+      "Q16": "I like to read books,I like to learn new words",
       "Q19": "Yes",
       "lantern_group": "No",
-      "Q27": "How have the lantern groups helped you? What do/did you enjoy about the lanterns?&nbsp;&nbsp;<div><\/div>",
       "Q29": "Group stopped",
-      "Q29_5_TEXT": "Group stopped",
       "Q30": "No",
       "has_computers": "No",
-      "Q42": "What do you enjoy about the computers?",
-      "Q43": "What challenges have you experienced with the computers?",
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2026-01-26 5:11:19",
+      "StartDate": "2026-01-26 5:13:55",
       "Duration (in seconds)": "75",
       "ResponseId": "R_kdpokvyGhavdkzb",
       "LocationLatitude": "5.5545",
@@ -703,34 +732,25 @@
       "school_other": "Wekpeti Abresu",
       "Q3": "Male",
       "Q4": "10",
-      "Q4_12_TEXT": "10",
       "Q5": "Class 4",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Completing circuits with friends; Hands-on learning, Connecting cables and parts by yourself; Helps with independence, Seeing the lights and sounds; Helps to understand electricity concepts, Enjoyable to play with",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Seeing the lights and sounds; Helps to understand electricity concepts,Enjoyable to play with",
       "Q9": "Not enough kits",
-      "Q9_6_TEXT": "None, Missing parts, Hard to understand, Not allowed to use with freedom, Not enough kits, Other:",
       "has_library": "Yes, we have a structured library with books",
       "Q13": "Teacher brings books",
       "Q14": "1-2 times a week",
       "Q15": "No",
-      "Q16": "I like to read books, I like to learn new words",
-      "Q16_3_TEXT": "I like to read books, I like to learn new words",
-      "Q17": "What challenges have you experienced with the library?",
-      "Q12": "Where do you access books? (Ex: from home, from a friend or family member, from a teacher, etc.)",
+      "Q16": "I like to read books,I like to learn new words",
+      "Q17": "The library is very small",
       "Q19": "Yes",
       "lantern_group": "No",
-      "Q27": "How have the lantern groups helped you? What do/did you enjoy about the lanterns?&nbsp;&nbsp;<div><\/div>",
       "Q29": "Group stopped",
-      "Q29_5_TEXT": "Group stopped",
-      "Q30": "Not applicable (male)",
       "has_computers": "No",
-      "Q42": "What do you enjoy about the computers?",
-      "Q43": "What challenges have you experienced with the computers?",
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2026-01-26 5:14:28",
+      "StartDate": "2026-01-26 5:16:56",
       "Duration (in seconds)": "97",
       "ResponseId": "R_5nQWPYQ46RT941O",
       "LocationLatitude": "5.5545",
@@ -740,30 +760,21 @@
       "school_other": "Wekpeti Abresu",
       "Q3": "Female",
       "Q4": "12",
-      "Q4_12_TEXT": "12",
       "Q5": "Class 4",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Completing circuits with friends; Hands-on learning, Connecting cables and parts by yourself; Helps with independence, Seeing the lights and sounds; Helps to understand electricity concepts, Enjoyable to play with",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Seeing the lights and sounds; Helps to understand electricity concepts,Enjoyable to play with",
       "Q9": "Not allowed to use with freedom",
-      "Q9_6_TEXT": "None, Missing parts, Hard to understand, Not allowed to use with freedom, Not enough kits, Other:",
       "has_library": "Yes, we have a structured library with books",
-      "Q13": "With class, Teacher brings books",
+      "Q13": "With class,Teacher brings books",
       "Q14": "Less than once a week",
       "Q15": "Yes",
-      "Q16": "I like to read books, I like to learn new words",
-      "Q16_3_TEXT": "I like to read books, I like to learn new words",
-      "Q17": "What challenges have you experienced with the library?",
-      "Q12": "Where do you access books? (Ex: from home, from a friend or family member, from a teacher, etc.)",
+      "Q16": "I like to read books,I like to learn new words",
+      "Q17": "The room is small to fit my class",
       "Q19": "Yes",
       "lantern_group": "No",
-      "Q27": "How have the lantern groups helped you? What do/did you enjoy about the lanterns?&nbsp;&nbsp;<div><\/div>",
       "Q29": "Group stopped",
-      "Q29_5_TEXT": "Group stopped",
-      "Q30": "Not applicable (male)",
       "has_computers": "No",
-      "Q42": "What do you enjoy about the computers?",
-      "Q43": "What challenges have you experienced with the computers?",
       "school_name": "Wekpeti Abresu"
     },
     {
@@ -804,7 +815,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 02:37:01",
+      "StartDate": "2023-02-14 2:37:01",
       "Duration (in seconds)": "1003",
       "ResponseId": "R_enomP3W2PG3rXoS",
       "LocationLatitude": "6.309201",
@@ -834,7 +845,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 02:53:48",
+      "StartDate": "2023-02-14 2:53:48",
       "Duration (in seconds)": "613",
       "ResponseId": "R_4qj40GuSvSLDTlK",
       "LocationLatitude": "5.5502",
@@ -858,7 +869,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 03:04:05",
+      "StartDate": "2023-02-14 3:04:05",
       "Duration (in seconds)": "808",
       "ResponseId": "R_2qrt5dX0ofnho01",
       "LocationLatitude": "5.5502",
@@ -890,7 +901,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 03:17:38",
+      "StartDate": "2023-02-14 3:17:38",
       "Duration (in seconds)": "752",
       "ResponseId": "R_dOIfY34bEithtD9",
       "LocationLatitude": "5.5502",
@@ -914,7 +925,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 03:30:15",
+      "StartDate": "2023-02-14 3:30:15",
       "Duration (in seconds)": "620",
       "ResponseId": "R_okVd5NhRmhVLgGA",
       "LocationLatitude": "5.5502",
@@ -945,7 +956,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 03:40:40",
+      "StartDate": "2023-02-14 3:40:40",
       "Duration (in seconds)": "667",
       "ResponseId": "R_hIvfvNjEcVqZ9MB",
       "LocationLatitude": "5.5502",
@@ -968,7 +979,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 03:51:50",
+      "StartDate": "2023-02-14 3:51:50",
       "Duration (in seconds)": "647",
       "ResponseId": "R_j6Mm1MSC7akxfrY",
       "LocationLatitude": "5.5502",
@@ -1000,7 +1011,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 04:02:41",
+      "StartDate": "2023-02-14 4:02:41",
       "Duration (in seconds)": "562",
       "ResponseId": "R_g0g2iaZ6zG5bIuL",
       "LocationLatitude": "5.5502",
@@ -1026,7 +1037,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 04:12:08",
+      "StartDate": "2023-02-14 4:12:08",
       "Duration (in seconds)": "687",
       "ResponseId": "R_cLQicpPPASCV4zu",
       "LocationLatitude": "5.5502",
@@ -1058,7 +1069,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 04:23:39",
+      "StartDate": "2023-02-14 4:23:39",
       "Duration (in seconds)": "523",
       "ResponseId": "R_0FyQjl3OcihTqNy",
       "LocationLatitude": "5.5502",
@@ -1085,7 +1096,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 04:32:27",
+      "StartDate": "2023-02-14 4:32:27",
       "Duration (in seconds)": "633",
       "ResponseId": "R_emdUJrs1MTruWFU",
       "LocationLatitude": "5.5502",
@@ -1117,7 +1128,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 04:43:04",
+      "StartDate": "2023-02-14 4:43:04",
       "Duration (in seconds)": "511",
       "ResponseId": "R_aJXs7kEvkYeTfsX",
       "LocationLatitude": "5.5502",
@@ -1144,7 +1155,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 04:51:42",
+      "StartDate": "2023-02-14 4:51:42",
       "Duration (in seconds)": "857",
       "ResponseId": "R_6I3t569EujaRCZS",
       "LocationLatitude": "5.5502",
@@ -1177,7 +1188,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 05:06:05",
+      "StartDate": "2023-02-14 5:06:05",
       "Duration (in seconds)": "509",
       "ResponseId": "R_8uJLWEaU8yVlCHt",
       "LocationLatitude": "5.5502",
@@ -1204,7 +1215,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 05:14:39",
+      "StartDate": "2023-02-14 5:14:39",
       "Duration (in seconds)": "880",
       "ResponseId": "R_aST6Ihkoh4LQ9GP",
       "LocationLatitude": "5.5502",
@@ -1236,7 +1247,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 05:29:24",
+      "StartDate": "2023-02-14 5:29:24",
       "Duration (in seconds)": "559",
       "ResponseId": "R_lskWRBLEAKESrMm",
       "LocationLatitude": "5.5502",
@@ -1262,7 +1273,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 05:38:48",
+      "StartDate": "2023-02-14 5:38:48",
       "Duration (in seconds)": "686",
       "ResponseId": "R_1Dc7voguFU7MbCj",
       "LocationLatitude": "5.5502",
@@ -1295,7 +1306,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-02-14 05:50:19",
+      "StartDate": "2023-02-14 5:50:19",
       "Duration (in seconds)": "654",
       "ResponseId": "R_eJduq0LH54hmcIn",
       "LocationLatitude": "5.5502",
@@ -1322,7 +1333,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-10-24 03:16:01",
+      "StartDate": "2023-10-24 3:16:01",
       "Duration (in seconds)": "1108",
       "ResponseId": "R_3gfN9p9m8MNpS7T",
       "LocationLatitude": "6.309191",
@@ -1347,10 +1358,10 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-10-24 03:34:46",
+      "StartDate": "2023-10-24 3:34:46",
       "Duration (in seconds)": "815",
       "ResponseId": "R_jm20CbNPFu9XgBB",
-      "Q1": "Narh  Evelyn",
+      "Q1": "Narh Evelyn",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
       "Q4": "10",
@@ -1371,7 +1382,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-10-24 03:48:40",
+      "StartDate": "2023-10-24 3:48:40",
       "Duration (in seconds)": "895",
       "ResponseId": "R_2P6RfNChSp5DpZW",
       "LocationLatitude": "6.310437",
@@ -1397,7 +1408,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-10-24 04:03:45",
+      "StartDate": "2023-10-24 4:03:45",
       "Duration (in seconds)": "596",
       "ResponseId": "R_o6o5prJmGvIsbcB",
       "Q1": "Narh Evelyn",
@@ -1420,7 +1431,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-10-24 04:13:56",
+      "StartDate": "2023-10-24 4:13:56",
       "Duration (in seconds)": "529",
       "ResponseId": "R_kSiodho8fepnu10",
       "Q1": "Narh Evelyn",
@@ -1444,7 +1455,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-10-24 04:22:54",
+      "StartDate": "2023-10-24 4:22:54",
       "Duration (in seconds)": "625",
       "ResponseId": "R_n2TTwNGOqg9yDuU",
       "Q1": "Narh Evelyn",
@@ -1467,7 +1478,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-10-24 04:33:31",
+      "StartDate": "2023-10-24 4:33:31",
       "Duration (in seconds)": "799",
       "ResponseId": "R_oxiQk2kfVaOjfOr",
       "Q1": "Narh Evelyn",
@@ -1491,7 +1502,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-10-24 04:46:59",
+      "StartDate": "2023-10-24 4:46:59",
       "Duration (in seconds)": "1091",
       "ResponseId": "R_3OI5EecleKXfGXv",
       "Q1": "Narh Evelyn",
@@ -1514,10 +1525,10 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-10-24 05:05:13",
+      "StartDate": "2023-10-24 5:05:13",
       "Duration (in seconds)": "727",
       "ResponseId": "R_eYkJcUEI7RhhqK7",
-      "Q1": "Narh  Evelyn",
+      "Q1": "Narh Evelyn",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
       "Q4": "12",
@@ -1538,7 +1549,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-10-24 05:17:22",
+      "StartDate": "2023-10-24 5:17:22",
       "Duration (in seconds)": "661",
       "ResponseId": "R_o8g5SFeQriZpvxP",
       "Q1": "Narh Evelyn",
@@ -1564,7 +1575,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-10-24 05:28:26",
+      "StartDate": "2023-10-24 5:28:26",
       "Duration (in seconds)": "772",
       "ResponseId": "R_aEFFKprO3CUJtzb",
       "Q1": "Narh Evelyn",
@@ -1593,7 +1604,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2023-10-24 05:41:23",
+      "StartDate": "2023-10-24 5:41:23",
       "Duration (in seconds)": "843",
       "ResponseId": "R_0uX6dvj1lRT8XWB",
       "Q1": "Narh Evelyn",
@@ -1618,7 +1629,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 03:38:31",
+      "StartDate": "2024-01-23 3:38:31",
       "Duration (in seconds)": "708",
       "ResponseId": "R_lURdOhSjcv2aK0L",
       "Q1": "Narh Evelyn",
@@ -1649,7 +1660,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 03:25:52",
+      "StartDate": "2024-01-23 3:25:52",
       "Duration (in seconds)": "664",
       "ResponseId": "R_9uE1zDno1x2myz8",
       "Q1": "Narh Evelyn",
@@ -1679,7 +1690,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 03:53:22",
+      "StartDate": "2024-01-23 3:53:22",
       "Duration (in seconds)": "514",
       "ResponseId": "R_mUwJIsYUNrUNXLM",
       "Q1": "Narh Evelyn",
@@ -1704,7 +1715,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 03:16:44",
+      "StartDate": "2024-01-23 3:16:44",
       "Duration (in seconds)": "541",
       "ResponseId": "R_2f225cxI2dW1BOE",
       "Q1": "Narh Evelyn",
@@ -1726,7 +1737,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 04:07:25",
+      "StartDate": "2024-01-23 4:07:25",
       "Duration (in seconds)": "458",
       "ResponseId": "R_nQwQleUJnizigLl",
       "LocationLatitude": "6.291647",
@@ -1759,7 +1770,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 04:16:28",
+      "StartDate": "2024-01-23 4:16:28",
       "Duration (in seconds)": "383",
       "ResponseId": "R_mcBKdsFBlwmLkZs",
       "LocationLatitude": "6.318602",
@@ -1786,7 +1797,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 04:23:03",
+      "StartDate": "2024-01-23 4:23:03",
       "Duration (in seconds)": "616",
       "ResponseId": "R_fS5kcH5Gw1oAgYz",
       "LocationLatitude": "6.288997",
@@ -1814,7 +1825,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 04:33:33",
+      "StartDate": "2024-01-23 4:33:33",
       "Duration (in seconds)": "574",
       "ResponseId": "R_dRcp7IiFOod590Z",
       "LocationLatitude": "6.326321",
@@ -1842,7 +1853,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 04:43:15",
+      "StartDate": "2024-01-23 4:43:15",
       "Duration (in seconds)": "545",
       "ResponseId": "R_g1HvEURhuk8JZNw",
       "LocationLatitude": "6.295168",
@@ -1869,7 +1880,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 04:52:25",
+      "StartDate": "2024-01-23 4:52:25",
       "Duration (in seconds)": "655",
       "ResponseId": "R_dsifSWgWbNftGWf",
       "LocationLatitude": "6.293578",
@@ -1897,7 +1908,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 05:03:24",
+      "StartDate": "2024-01-23 5:03:24",
       "Duration (in seconds)": "487",
       "ResponseId": "R_imNnZQpoxTWF1Gw",
       "LocationLatitude": "6.289869",
@@ -1924,7 +1935,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 05:11:39",
+      "StartDate": "2024-01-23 5:11:39",
       "Duration (in seconds)": "541",
       "ResponseId": "R_0lu97nqMu30VaIB",
       "LocationLatitude": "6.326341",
@@ -1952,7 +1963,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 05:20:52",
+      "StartDate": "2024-01-23 5:20:52",
       "Duration (in seconds)": "548",
       "ResponseId": "R_hxpRFYnJfsR6AK1",
       "LocationLatitude": "6.299209",
@@ -1977,7 +1988,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 05:30:06",
+      "StartDate": "2024-01-23 5:30:06",
       "Duration (in seconds)": "480",
       "ResponseId": "R_mE5rbvXhKZky9pw",
       "LocationLatitude": "6.327023",
@@ -2000,7 +2011,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2024-01-23 05:38:09",
+      "StartDate": "2024-01-23 5:38:09",
       "Duration (in seconds)": "655",
       "ResponseId": "R_lqg8c7dHRYs54mo",
       "LocationLatitude": "6.3014",
@@ -2022,11 +2033,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-01-29 02:56:28",
+      "StartDate": "2019-01-29 2:56:28",
       "Duration (in seconds)": "882",
       "ResponseId": "R_jX0iAToaHW4050M",
-      "LocationLatitude": "6.30912100000000020116885934839956462383270263671875",
-      "LocationLongitude": "-0.67167600000000005078248932477436028420925140380859375",
+      "LocationLatitude": "6.309121",
+      "LocationLongitude": "-0.671676",
       "Q1": "Richard",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2049,11 +2060,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-01-29 03:11:14",
+      "StartDate": "2019-01-29 3:11:14",
       "Duration (in seconds)": "1529",
       "ResponseId": "R_9UIftn7BGOkQfKB",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Richard",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2079,11 +2090,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-01-29 03:36:47",
+      "StartDate": "2019-01-29 3:36:47",
       "Duration (in seconds)": "1068",
       "ResponseId": "R_ayFw3WvMY7mU7MR",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Richard",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2103,11 +2114,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-01-29 02:48:53",
+      "StartDate": "2019-01-29 2:48:53",
       "Duration (in seconds)": "941",
       "ResponseId": "R_3fyCkHeqeosI5GI",
-      "LocationLatitude": "6.30921100000000034668801163206808269023895263671875",
-      "LocationLongitude": "-0.67160100000000000353139739672769792377948760986328125",
+      "LocationLatitude": "6.309211",
+      "LocationLongitude": "-0.671601",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2130,11 +2141,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-01-29 03:05:13",
+      "StartDate": "2019-01-29 3:05:13",
       "Duration (in seconds)": "661",
       "ResponseId": "R_3U6EcU4FFMWiClP",
-      "LocationLatitude": "6.309167999999999665305949747562408447265625",
-      "LocationLongitude": "-0.67157999999999995477395486886962316930294036865234375",
+      "LocationLatitude": "6.309168",
+      "LocationLongitude": "-0.67158",
       "Q1": "Blessings bonaki",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2156,11 +2167,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-01-29 03:16:45",
+      "StartDate": "2019-01-29 3:16:45",
       "Duration (in seconds)": "770",
       "ResponseId": "R_nI92u3IkVJIap2G",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2182,11 +2193,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-01-29 03:30:19",
+      "StartDate": "2019-01-29 3:30:19",
       "Duration (in seconds)": "657",
       "ResponseId": "R_6fgO9GpJrTkOcxt",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2209,11 +2220,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-01-29 03:47:41",
+      "StartDate": "2019-01-29 3:47:41",
       "Duration (in seconds)": "1091",
       "ResponseId": "R_2eQLIPJd5MWhIzR",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2234,11 +2245,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-01-29 04:07:02",
+      "StartDate": "2019-01-29 4:07:02",
       "Duration (in seconds)": "1095",
       "ResponseId": "R_cv0Lhm6Ii7guEAe",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2265,11 +2276,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-01-29 04:27:48",
+      "StartDate": "2019-01-29 4:27:48",
       "Duration (in seconds)": "1013",
       "ResponseId": "R_7ZmtkxsdWfZ2qcg",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2290,11 +2301,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-01-29 04:57:09",
+      "StartDate": "2019-01-29 4:57:09",
       "Duration (in seconds)": "1254",
       "ResponseId": "R_1jZQ5lUBKXN7YPM",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2319,11 +2330,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-01-29 05:20:50",
+      "StartDate": "2019-01-29 5:20:50",
       "Duration (in seconds)": "969",
       "ResponseId": "R_8pmuuPWW8RCE5X7",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2344,11 +2355,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-01-29 05:39:04",
+      "StartDate": "2019-01-29 5:39:04",
       "Duration (in seconds)": "696",
       "ResponseId": "R_cIXINIdhQE8oK5N",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2374,11 +2385,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 06:11:22",
+      "StartDate": "2019-06-12 6:11:22",
       "Duration (in seconds)": "857",
       "ResponseId": "R_hdfVvXhC7G652z5",
-      "LocationLatitude": "6.30913599999999963330310492892749607563018798828125",
-      "LocationLongitude": "-0.6716640000000000387814225177862681448459625244140625",
+      "LocationLatitude": "6.309136",
+      "LocationLongitude": "-0.671664",
       "Q1": "Joyce",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2398,11 +2409,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 06:26:13",
+      "StartDate": "2019-06-12 6:26:13",
       "Duration (in seconds)": "872",
       "ResponseId": "R_8vuftOYCaNlbIJK",
-      "LocationLatitude": "6.309160999999999575038600596599280834197998046875",
-      "LocationLongitude": "-0.67171700000000000851940740176360122859477996826171875",
+      "LocationLatitude": "6.309161",
+      "LocationLongitude": "-0.671717",
       "Q1": "Joyce",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2428,11 +2439,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 06:41:23",
+      "StartDate": "2019-06-12 6:41:23",
       "Duration (in seconds)": "545",
       "ResponseId": "R_g6pZzwWhPOdXUrK",
-      "LocationLatitude": "6.30917599999999989535126587725244462490081787109375",
-      "LocationLongitude": "-0.67168200000000000127187149701057933270931243896484375",
+      "LocationLatitude": "6.309176",
+      "LocationLongitude": "-0.671682",
       "Q1": "Joyce",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2450,11 +2461,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 06:51:12",
+      "StartDate": "2019-06-12 6:51:12",
       "Duration (in seconds)": "589",
       "ResponseId": "R_8zAimQ9syz3buUR",
-      "LocationLatitude": "6.3091910000000002156639311579056084156036376953125",
-      "LocationLongitude": "-0.67167200000000004678213372244499623775482177734375",
+      "LocationLatitude": "6.309191",
+      "LocationLongitude": "-0.671672",
       "Q1": "Joyce",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2478,11 +2489,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 07:01:38",
+      "StartDate": "2019-06-12 7:01:38",
       "Duration (in seconds)": "752",
       "ResponseId": "R_1HHNnZJdYZuPLLt",
-      "LocationLatitude": "6.309203000000000116642695502378046512603759765625",
-      "LocationLongitude": "-0.67166300000000001002575800157501362264156341552734375",
+      "LocationLatitude": "6.309203",
+      "LocationLongitude": "-0.671663",
       "Q1": "Joyce",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2502,11 +2513,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 07:14:43",
+      "StartDate": "2019-06-12 7:14:43",
       "Duration (in seconds)": "763",
       "ResponseId": "R_dpxhTXbDM4FrLnu",
-      "LocationLatitude": "6.30918799999999979633003022172488272190093994140625",
-      "LocationLongitude": "-0.6716779999999999972715158946812152862548828125",
+      "LocationLatitude": "6.309188",
+      "LocationLongitude": "-0.671678",
       "Q1": "Joyce",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2532,11 +2543,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 07:28:37",
+      "StartDate": "2019-06-12 7:28:37",
       "Duration (in seconds)": "702",
       "ResponseId": "R_6twZckA71FQTpX0",
-      "LocationLatitude": "6.3091869999999996565520632429979741573333740234375",
-      "LocationLongitude": "-0.67168700000000003402789161555119790136814117431640625",
+      "LocationLatitude": "6.309187",
+      "LocationLongitude": "-0.671687",
       "Q1": "Joyce",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2556,11 +2567,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 07:41:02",
+      "StartDate": "2019-06-12 7:41:02",
       "Duration (in seconds)": "540",
       "ResponseId": "R_0ZzO6w0WezCKEFD",
-      "LocationLatitude": "6.3091869999999996565520632429979741573333740234375",
-      "LocationLongitude": "-0.6716889999999999805169181854580529034137725830078125",
+      "LocationLatitude": "6.309187",
+      "LocationLongitude": "-0.671689",
       "Q1": "Joyce",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2584,11 +2595,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-11 06:31:28",
+      "StartDate": "2019-09-11 6:31:28",
       "Duration (in seconds)": "1443",
       "ResponseId": "R_fRARkJXrrZjEbUL",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2608,11 +2619,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-11 06:55:43",
+      "StartDate": "2019-09-11 6:55:43",
       "Duration (in seconds)": "1160",
       "ResponseId": "R_djF09NbKa2pwASk",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2632,11 +2643,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 03:37:25",
+      "StartDate": "2019-09-20 3:37:25",
       "Duration (in seconds)": "708",
       "ResponseId": "R_hjjtjOH9CjzuLd9",
-      "LocationLatitude": "6.30920699999999978757614371716044843196868896484375",
-      "LocationLongitude": "-0.67172799999999999176480969254043884575366973876953125",
+      "LocationLatitude": "6.309207",
+      "LocationLongitude": "-0.671728",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2662,11 +2673,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 03:49:26",
+      "StartDate": "2019-09-20 3:49:26",
       "Duration (in seconds)": "691",
       "ResponseId": "R_bDVLlYEy0X1TKGs",
-      "LocationLatitude": "6.3091530000000002331717041670344769954681396484375",
-      "LocationLongitude": "-0.67172299999999995900878957399982027709484100341796875",
+      "LocationLatitude": "6.309153",
+      "LocationLongitude": "-0.671723",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2692,11 +2703,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 04:01:09",
+      "StartDate": "2019-09-20 4:01:09",
       "Duration (in seconds)": "563",
       "ResponseId": "R_9hdIGYgHB11q8LY",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2722,11 +2733,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 04:10:43",
+      "StartDate": "2019-09-20 4:10:43",
       "Duration (in seconds)": "486",
       "ResponseId": "R_coUyzJZRH1I7U7Q",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2746,11 +2757,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 04:19:00",
+      "StartDate": "2019-09-20 4:19:00",
       "Duration (in seconds)": "448",
       "ResponseId": "R_dXkAHUIzsQA6bZO",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2769,11 +2780,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 04:26:40",
+      "StartDate": "2019-09-20 4:26:40",
       "Duration (in seconds)": "514",
       "ResponseId": "R_2pmWRXnWlYV7eh3",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2799,11 +2810,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 04:35:25",
+      "StartDate": "2019-09-20 4:35:25",
       "Duration (in seconds)": "392",
       "ResponseId": "R_m27LAzhBIFEqJI4",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2823,11 +2834,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 04:42:09",
+      "StartDate": "2019-09-20 4:42:09",
       "Duration (in seconds)": "660",
       "ResponseId": "R_c14VoF0tLoKTRSZ",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2853,11 +2864,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 04:53:20",
+      "StartDate": "2019-09-20 4:53:20",
       "Duration (in seconds)": "931",
       "ResponseId": "R_l7oCFmu5qjioxND",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2877,11 +2888,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 05:09:04",
+      "StartDate": "2019-09-20 5:09:04",
       "Duration (in seconds)": "654",
       "ResponseId": "R_e8BwlF0TEXnUR79",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2901,11 +2912,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 05:20:11",
+      "StartDate": "2019-09-20 5:20:11",
       "Duration (in seconds)": "583",
       "ResponseId": "R_5sH70GTtkRrvhmt",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2925,11 +2936,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 05:30:06",
+      "StartDate": "2019-09-20 5:30:06",
       "Duration (in seconds)": "529",
       "ResponseId": "R_nuL5W7uTdu8gRp1",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -2949,11 +2960,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 05:39:08",
+      "StartDate": "2019-09-20 5:39:08",
       "Duration (in seconds)": "536",
       "ResponseId": "R_edlK6ceoHTOU8SZ",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -2979,11 +2990,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 05:48:16",
+      "StartDate": "2019-09-20 5:48:16",
       "Duration (in seconds)": "431",
       "ResponseId": "R_byO2llejy5PLpED",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -3007,11 +3018,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 05:55:38",
+      "StartDate": "2019-09-20 5:55:38",
       "Duration (in seconds)": "780",
       "ResponseId": "R_3EWVkqZUWKHwCHq",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -3037,11 +3048,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 06:08:51",
+      "StartDate": "2019-09-20 6:08:51",
       "Duration (in seconds)": "483",
       "ResponseId": "R_iRogKzVPyb1VOoF",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Portia owusu",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -3060,11 +3071,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 06:14:16",
+      "StartDate": "2019-06-12 6:14:16",
       "Duration (in seconds)": "876",
       "ResponseId": "R_7F0EI4tiRLnlWQO",
-      "LocationLatitude": "6.309186000000000404952515964396297931671142578125",
-      "LocationLongitude": "-0.67157199999999994677324366421089507639408111572265625",
+      "LocationLatitude": "6.309186",
+      "LocationLongitude": "-0.671572",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -3090,11 +3101,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 06:30:43",
+      "StartDate": "2019-06-12 6:30:43",
       "Duration (in seconds)": "1121",
       "ResponseId": "R_7NlJ3E6oL5ZbSJu",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -3119,11 +3130,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 06:56:24",
+      "StartDate": "2019-06-12 6:56:24",
       "Duration (in seconds)": "626",
       "ResponseId": "R_jyhdxbjxLBvafOQ",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -3148,11 +3159,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 07:08:23",
+      "StartDate": "2019-06-12 7:08:23",
       "Duration (in seconds)": "890",
       "ResponseId": "R_gjG8rHZY6ytLMfm",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -3173,11 +3184,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 07:24:36",
+      "StartDate": "2019-06-12 7:24:36",
       "Duration (in seconds)": "891",
       "ResponseId": "R_3oPo11jXq1uMJlO",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -3202,11 +3213,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-06-12 07:42:43",
+      "StartDate": "2019-06-12 7:42:43",
       "Duration (in seconds)": "474",
       "ResponseId": "R_8wrwcLlzx64QM3P",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -3226,11 +3237,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 05:38:41",
+      "StartDate": "2019-09-20 5:38:41",
       "Duration (in seconds)": "793",
       "ResponseId": "R_2ocWSm5yiaeOXpJ",
-      "LocationLatitude": "6.30921399999999987784349286812357604503631591796875",
-      "LocationLongitude": "-0.67186000000000001275424210689379833638668060302734375",
+      "LocationLatitude": "6.309214",
+      "LocationLongitude": "-0.67186",
       "Q1": "Joyce",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Female",
@@ -3255,11 +3266,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 05:52:04",
+      "StartDate": "2019-09-20 5:52:04",
       "Duration (in seconds)": "983",
       "ResponseId": "R_cSy5KlNz818LJ6y",
-      "LocationLatitude": "6.30921600000000015739942682557739317417144775390625",
-      "LocationLongitude": "-0.671826999999999951995732772047631442546844482421875",
+      "LocationLatitude": "6.309216",
+      "LocationLongitude": "-0.671827",
       "Q1": "Joyce",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -3279,11 +3290,11 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2019-09-20 06:08:39",
+      "StartDate": "2019-09-20 6:08:39",
       "Duration (in seconds)": "635",
       "ResponseId": "R_eY3ZpoRJKIabZ27",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Joyce",
       "school_selected": "Wekpeti Abresu",
       "Q3": "Male",
@@ -3303,7 +3314,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2021-10-18 02:04:58",
+      "StartDate": "2021-10-18 2:04:58",
       "Duration (in seconds)": "886",
       "ResponseId": "R_9uF22gcupHi0ChN",
       "LocationLatitude": "51.2993",
@@ -3337,7 +3348,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2021-10-18 02:19:49",
+      "StartDate": "2021-10-18 2:19:49",
       "Duration (in seconds)": "783",
       "ResponseId": "R_4e9YCU2WR965pjo",
       "LocationLatitude": "51.2993",
@@ -3365,7 +3376,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2021-10-18 02:32:57",
+      "StartDate": "2021-10-18 2:32:57",
       "Duration (in seconds)": "845",
       "ResponseId": "R_jyMe3XmdzJxEYXR",
       "LocationLatitude": "51.2993",
@@ -3399,7 +3410,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2021-10-18 02:47:08",
+      "StartDate": "2021-10-18 2:47:08",
       "Duration (in seconds)": "1138",
       "ResponseId": "R_en5wpvmVrb2gv3r",
       "LocationLatitude": "6.309108",
@@ -3426,7 +3437,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2021-10-18 03:06:13",
+      "StartDate": "2021-10-18 3:06:13",
       "Duration (in seconds)": "907",
       "ResponseId": "R_nQmMysjRKq4BD5g",
       "LocationLatitude": "51.2993",
@@ -3458,7 +3469,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2021-10-18 03:21:25",
+      "StartDate": "2021-10-18 3:21:25",
       "Duration (in seconds)": "765",
       "ResponseId": "R_gynRejYw25ZNqcW",
       "LocationLatitude": "51.2993",
@@ -3491,7 +3502,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2021-10-18 03:34:16",
+      "StartDate": "2021-10-18 3:34:16",
       "Duration (in seconds)": "685",
       "ResponseId": "R_597v2UwhP0LWNMD",
       "LocationLatitude": "6.309109",
@@ -3519,7 +3530,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2021-10-18 03:45:48",
+      "StartDate": "2021-10-18 3:45:48",
       "Duration (in seconds)": "548",
       "ResponseId": "R_m4IMlv30EOup4qs",
       "LocationLatitude": "51.2993",
@@ -3547,7 +3558,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2022-06-20 02:35:29",
+      "StartDate": "2022-06-20 2:35:29",
       "Duration (in seconds)": "433",
       "ResponseId": "R_6e3HXTg9J07YStU",
       "LocationLatitude": "6.309256",
@@ -3578,7 +3589,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2022-06-20 02:42:47",
+      "StartDate": "2022-06-20 2:42:47",
       "Duration (in seconds)": "502",
       "ResponseId": "R_25coa9TtWwQW5HN",
       "LocationLatitude": "51.2993",
@@ -3602,7 +3613,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2022-06-20 02:51:14",
+      "StartDate": "2022-06-20 2:51:14",
       "Duration (in seconds)": "486",
       "ResponseId": "R_1Nmr6aHVM7BB8el",
       "LocationLatitude": "51.2993",
@@ -3632,7 +3643,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2022-06-20 02:59:24",
+      "StartDate": "2022-06-20 2:59:24",
       "Duration (in seconds)": "502",
       "ResponseId": "R_5H3jRjiLLcu5yJw",
       "LocationLatitude": "51.2993",
@@ -3656,7 +3667,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2022-06-20 03:07:50",
+      "StartDate": "2022-06-20 3:07:50",
       "Duration (in seconds)": "516",
       "ResponseId": "R_iaSKh1OD942WbNl",
       "LocationLatitude": "51.2993",
@@ -3686,7 +3697,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2022-06-20 03:16:30",
+      "StartDate": "2022-06-20 3:16:30",
       "Duration (in seconds)": "595",
       "ResponseId": "R_kmDajHvvcsQz7SL",
       "LocationLatitude": "6.309203",
@@ -3710,7 +3721,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2022-06-20 03:26:31",
+      "StartDate": "2022-06-20 3:26:31",
       "Duration (in seconds)": "606",
       "ResponseId": "R_0kb0aox7xTfxVCP",
       "LocationLatitude": "51.2993",
@@ -3734,7 +3745,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2022-06-20 03:36:43",
+      "StartDate": "2022-06-20 3:36:43",
       "Duration (in seconds)": "544",
       "ResponseId": "R_edozr8uU6lBBOCr",
       "LocationLatitude": "51.2993",
@@ -3758,7 +3769,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2022-06-20 03:45:51",
+      "StartDate": "2022-06-20 3:45:51",
       "Duration (in seconds)": "604",
       "ResponseId": "R_j563bAgibKsUUFV",
       "LocationLatitude": "51.2993",
@@ -3785,7 +3796,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2022-06-20 03:56:01",
+      "StartDate": "2022-06-20 3:56:01",
       "Duration (in seconds)": "631",
       "ResponseId": "R_5t2TfIbwsJvkyNL",
       "LocationLatitude": "51.2993",
@@ -3815,7 +3826,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2022-06-20 04:06:36",
+      "StartDate": "2022-06-20 4:06:36",
       "Duration (in seconds)": "664",
       "ResponseId": "R_nMceLMoD1gcz9rx",
       "LocationLatitude": "51.2993",
@@ -3841,7 +3852,7 @@
       "school_name": "Wekpeti Abresu"
     },
     {
-      "StartDate": "2022-06-20 04:17:45",
+      "StartDate": "2022-06-20 4:17:45",
       "Duration (in seconds)": "601",
       "ResponseId": "R_oG6SJ2ByCdnu6Nf",
       "LocationLatitude": "51.2993",
@@ -3868,6 +3879,352 @@
       "Q33": "I do not have a kit",
       "Q34": "I do not have a kit",
       "Q35": "Other",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2018-11-23 9:45:09",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Male",
+      "Q4": "16",
+      "Q5": "JHS Form 1",
+      "Q6": "Yes",
+      "Q9": "No problems",
+      "lantern_group": "No",
+      "Q23": "No",
+      "Q29": "Never assigned a group",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2018-11-23 9:45:12",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Female",
+      "Q4": "16",
+      "Q5": "JHS Form 1",
+      "Q6": "Yes",
+      "Q9": "Difficult to understand",
+      "lantern_group": "No",
+      "Q23": "No",
+      "Q26": "No",
+      "Q29": "Never assigned a group",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2025-10-01 10:02:56",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Male",
+      "Q4": "15",
+      "Q5": "JHS Form 2",
+      "Q6": "Yes",
+      "Q7": "3-4 times",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
+      "Q9": "None",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "With class,On my own",
+      "Q14": "1-2 times a week",
+      "Q15": "No",
+      "Q16": "I like to learn new words",
+      "Q17": "More reading books are needed",
+      "Q19": "Yes",
+      "lantern_group": "No",
+      "Q29": "Group stopped",
+      "has_computers": "No",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2025-10-01 10:02:56",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Female",
+      "Q4": "14",
+      "Q5": "JHS Form 2",
+      "Q6": "No",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "Never",
+      "Q18": "I don't like to visit",
+      "Q19": "Yes",
+      "lantern_group": "No",
+      "Q29": "Group stopped",
+      "Q30": "Yes",
+      "menstrual_kit": "No",
+      "Q35": "Disposable pad",
+      "has_computers": "No",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2025-10-01 10:02:56",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Female",
+      "Q4": "13",
+      "Q5": "Class 6",
+      "Q6": "Yes",
+      "Q7": "1-2 times",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
+      "Q9": "Not enough kits",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "Never",
+      "Q18": "I don't like to visit",
+      "Q19": "Yes",
+      "lantern_group": "No",
+      "Q29": "Group stopped",
+      "Q30": "No",
+      "has_computers": "No",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2025-10-01 10:02:56",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Female",
+      "Q4": "10",
+      "Q5": "Class 4",
+      "Q6": "No",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "With class",
+      "Q14": "I have never visited",
+      "Q15": "No",
+      "Q16": "Other:",
+      "Q16_3_TEXT": "I have not visited the library",
+      "Q17": "More book should be brought",
+      "Q19": "Yes",
+      "lantern_group": "No",
+      "Q29": "Group stopped",
+      "Q30": "No",
+      "has_computers": "No",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2025-10-01 10:02:56",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Female",
+      "Q4": "11",
+      "Q5": "Class 5",
+      "Q6": "No",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "With class,On my own",
+      "Q14": "1-2 times a week",
+      "Q15": "Yes",
+      "Q16": "I like to read books,I like to learn new words",
+      "Q17": "We need more tables and chairs. Also the books are not enough for us.",
+      "Q19": "Yes",
+      "lantern_group": "No",
+      "Q29": "Group stopped",
+      "Q30": "No",
+      "has_computers": "No",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2025-10-01 10:02:56",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Male",
+      "Q4": "10",
+      "Q5": "Class 4",
+      "Q6": "Yes",
+      "Q7": "1-2 times",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
+      "Q9": "None,Not enough kits",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "With class,On my own",
+      "Q14": "1-2 times a week",
+      "Q15": "Yes",
+      "Q16": "I like to learn new words",
+      "Q17": "We bend more reading books",
+      "Q19": "Yes",
+      "lantern_group": "No",
+      "Q29": "Group stopped",
+      "has_computers": "No",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2025-10-01 10:02:56",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Male",
+      "Q4": "10",
+      "Q5": "Class 6",
+      "Q6": "Yes",
+      "Q7": "1-2 times",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
+      "Q9": "None",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "With class,On my own",
+      "Q14": "1-2 times a week",
+      "Q15": "Yes",
+      "Q16": "I like to read books,I like to learn new words",
+      "Q17": "The room become congested because we are many",
+      "Q19": "Yes",
+      "lantern_group": "No",
+      "Q29": "Group stopped",
+      "has_computers": "No",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2025-10-01 10:02:56",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Male",
+      "Q4": "12",
+      "Q5": "Class 5",
+      "Q6": "No",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "With class,On my own",
+      "Q14": "1-2 times a week",
+      "Q15": "Yes",
+      "Q16": "I like to read books,I like to learn new words",
+      "Q17": "We are not allowed to visit on our free time",
+      "Q19": "Yes",
+      "lantern_group": "No",
+      "Q29": "Group stopped",
+      "has_computers": "No",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2025-10-01 10:02:56",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Male",
+      "Q4": "13",
+      "Q5": "JHS Form 1",
+      "Q6": "No",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "With class,On my own",
+      "Q14": "1-2 times a week",
+      "Q15": "Yes",
+      "Q16": "I like to read books,I like to learn new words",
+      "Q17": "The book are not that many so we are unable to read more.",
+      "Q19": "Yes",
+      "lantern_group": "No",
+      "Q29": "Never assigned",
+      "has_computers": "No",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2025-10-01 10:02:56",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Male",
+      "Q4": "15",
+      "Q5": "JHS Form 3",
+      "Q6": "Yes",
+      "Q7": "3-4 times",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
+      "Q9": "Not enough kits",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "With class,On my own",
+      "Q14": "Less than once a week",
+      "Q15": "Yes",
+      "Q16": "I like to read books,I like to learn new words",
+      "Q17": "The room is small to fit my entire class",
+      "Q19": "Yes",
+      "lantern_group": "No",
+      "Q29": "Group stopped",
+      "has_computers": "No",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2025-10-01 10:02:56",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Female",
+      "Q4": "15",
+      "Q5": "JHS Form 3",
+      "Q6": "Yes",
+      "Q7": "3-4 times",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
+      "Q9": "Not enough kits",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "With class,On my own",
+      "Q14": "1-2 times a week",
+      "Q15": "Yes",
+      "Q16": "I like to read books,I like to learn new words",
+      "Q17": "Need more reading books.",
+      "Q19": "Yes",
+      "lantern_group": "No",
+      "Q29": "Group stopped",
+      "Q30": "Yes",
+      "menstrual_kit": "Yes",
+      "Q32": "Sometimes",
+      "Q33": "I have learned more about my body and cycle,I no longer miss school because of my period,I feel more confident and comfortable when I have my period",
+      "Q34": "I have no challenges with the kit",
+      "has_computers": "No",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2025-10-01 10:02:56",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Female",
+      "Q4": "13",
+      "Q5": "JHS Form 1",
+      "Q6": "Yes",
+      "Q7": "3-4 times",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
+      "Q9": "None,Not enough kits",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "Never",
+      "Q18": "I have no interest in visiting",
+      "Q19": "Yes",
+      "lantern_group": "Yes",
+      "Q22": "6",
+      "Q23": "No, I have never been a lantern leader",
+      "Q25": "Every day",
+      "Q27": "I was able to learn and understand more. I became very good in reading",
+      "Q28": "Other:",
+      "Q30": "Yes",
+      "menstrual_kit": "No",
+      "Q35": "Disposable pad",
+      "has_computers": "No",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2025-10-01 10:02:56",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Male",
+      "Q4": "10",
+      "Q5": "Class 5",
+      "Q6": "Yes",
+      "Q7": "1-2 times",
+      "Q8": "Completing circuits with friends; Hands-on learning,Enjoyable to play with",
+      "Q9": "None,Not enough kits",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "With class,On my own",
+      "Q14": "Less than once a week",
+      "Q15": "Yes",
+      "Q16": "I like to read books,I like to learn new words",
+      "Q17": "The room is not spacious for us.",
+      "Q19": "Yes",
+      "lantern_group": "No",
+      "Q29": "Group stopped",
+      "has_computers": "No",
+      "school_name": "Wekpeti Abresu"
+    },
+    {
+      "StartDate": "2026-02-02 3:42:05",
+      "Q1": "Richard",
+      "school_selected": "Wekpeti Abresu",
+      "Q3": "Female",
+      "Q4": "13",
+      "Q5": "Class 5",
+      "Q6": "Yes",
+      "Q7": "1-2 times",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Seeing the lights and sounds; Helps to understand electricity concepts,Enjoyable to play with",
+      "Q9": "None",
+      "has_library": "Yes, we have a structured library with books",
+      "Q13": "On my own,Teacher brings books",
+      "Q14": "Less than once a week",
+      "Q15": "Yes",
+      "Q16": "I like to read books,I like to learn new words",
+      "Q19": "Yes",
+      "lantern_group": "No",
+      "Q29": "Group stopped",
+      "Q30": "No",
+      "has_computers": "No",
       "school_name": "Wekpeti Abresu"
     }
   ],

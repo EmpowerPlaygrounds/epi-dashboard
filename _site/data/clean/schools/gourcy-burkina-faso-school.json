@@ -27,7 +27,7 @@
   "visits": [],
   "full_update": [
     {
-      "StartDate": "2023-12-06 04:30:39",
+      "StartDate": "2023-12-06 4:30:39",
       "Duration (in seconds)": "1498",
       "ResponseId": "R_hn9kAArJVA7xDtC",
       "LocationLatitude": "7.29116",
@@ -42,11 +42,11 @@
       "Q9": "49",
       "Q11": "103",
       "Q12": "22",
-      "Q14": ".16",
+      "Q14": "0.16",
       "Q15": "22",
       "Q20": "No",
       "Q22": "Yes",
-      "Q23": "Broken",
+      "Q23": "5",
       "Q24": "23 broken 5 replaced",
       "Q25": "23",
       "Q26": "Yes",

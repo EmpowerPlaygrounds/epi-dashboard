@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 2,
+    "n_visits": 3,
     "n_responses": 1,
     "pct_lantern": 1,
     "pct_library": 1,
@@ -35,12 +35,28 @@
       "visit_date": "2024-10-25"
     },
     {
-      "StartDate": "3/27/25 5:17",
+      "StartDate": "2025-03-27 5:17:52",
+      "Duration (in seconds)": "131",
+      "ResponseId": "R_lw7v1wflRyl5tI5",
+      "LocationLatitude": "5.880009",
+      "LocationLongitude": "0.33682",
       "visitor": "Isaac",
-      "Q1.5_6_TEXT": "Alex",
+      "Q1.5": "Alex",
       "school_name": "Koni Kablu",
       "visit_reason": "Routine Program Evaluation",
       "visit_date": "2025-03-27"
+    },
+    {
+      "StartDate": "2024-10-25 3:43:45",
+      "Duration (in seconds)": "178",
+      "ResponseId": "R_atyIpBp1fJA4Koo",
+      "LocationLatitude": "5.880699",
+      "LocationLongitude": "0.337245",
+      "visitor": "Richard",
+      "Q1.5": "Richard,Alex,Other",
+      "Q1.5_6_TEXT": "Ben",
+      "school_name": "Koni Kablu",
+      "visit_date": "2024-10-25"
     }
   ],
   "full_update": [],

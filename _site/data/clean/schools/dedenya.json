@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 6,
+    "n_visits": 7,
     "n_responses": 50,
     "pct_lantern": 0,
     "pct_library": 0.12,
@@ -29,8 +29,8 @@
       "StartDate": "2026-01-27 3:13:13",
       "Duration (in seconds)": "957",
       "ResponseId": "R_7KhwjrfibX7poP8",
-      "LocationLatitude": "6.6816",
-      "LocationLongitude": "-1.6221",
+      "LocationLatitude": "5.862932",
+      "LocationLongitude": "0.032738",
       "visitor": "Alex",
       "Q1.5": "Peace",
       "school_name": "Dedenya",
@@ -48,13 +48,13 @@
       "StartDate": "2026-01-29 4:44:53",
       "Duration (in seconds)": "144",
       "ResponseId": "R_gsRf1mqgYuPYHiY",
-      "LocationLatitude": "5.5545",
-      "LocationLongitude": "-0.1902",
+      "LocationLatitude": "5.863968",
+      "LocationLongitude": "0.03302",
       "visitor": "Alex",
-      "Q1.5": "Peace, Akuvi",
+      "Q1.5": "Peace,Akuvi",
       "school_name": "Dedenya",
       "visit_reason": "Routine Visit",
-      "activities": "Computer Maintenance, Library books distribution",
+      "activities": "Computer Maintenance,Library books distribution",
       "Q4_6_TEXT": "Library books distribution",
       "Q11": "One or more computers were not working/turning on",
       "Q12": "Yes, but I had to replace a computer",
@@ -69,8 +69,8 @@
       "StartDate": "2026-02-26 3:21:24",
       "Duration (in seconds)": "129",
       "ResponseId": "R_3AaIv5XEItCpsxy",
-      "LocationLatitude": "5.5545",
-      "LocationLongitude": "-0.1902",
+      "LocationLatitude": "5.86338",
+      "LocationLongitude": "0.032458",
       "visitor": "Alex",
       "Q1.5": "Peace",
       "school_name": "Dedenya",
@@ -84,9 +84,13 @@
       "visit_date": "2026-02-26"
     },
     {
-      "StartDate": "4/9/25 2:22",
+      "StartDate": "2025-04-09 2:22:38",
+      "Duration (in seconds)": "212",
+      "ResponseId": "R_cjWOLgtivVT8wRJ",
+      "LocationLatitude": "5.862921",
+      "LocationLongitude": "0.031935",
       "visitor": "Peace",
-      "Q1.5_6_TEXT": "Alex",
+      "Q1.5": "Alex",
       "school_name": "Dedenya",
       "visit_reason": "MGR Maintenance,Routine Program Evaluation,Donation",
       "Q3_6_TEXT": "Donation",
@@ -102,15 +106,27 @@
       "visit_date": "2025-05-19"
     },
     {
-      "StartDate": "2019-02-14 04:55:22",
+      "StartDate": "2019-02-14 4:55:22",
       "Duration (in seconds)": "248",
       "ResponseId": "R_3legOSmRg1Sr7cc",
-      "LocationLatitude": "5.86333000000000037488234738702885806560516357421875",
-      "LocationLongitude": "0.032557000000000002604139126560767181217670440673828125",
+      "LocationLatitude": "5.86333",
+      "LocationLongitude": "0.032557",
       "visitor": "George",
       "school_name": "Dedenya",
       "visit_reason": "Routine Program Evaluation,Surveyor Team Visit",
       "visit_date": "2019-02-14"
+    },
+    {
+      "StartDate": "2025-05-19 6:35:11",
+      "Duration (in seconds)": "213",
+      "ResponseId": "R_c24vzmclc2CZsBM",
+      "LocationLatitude": "5.861224",
+      "LocationLongitude": "0.028862",
+      "visitor": "Other",
+      "Q1_6_TEXT": "Alex",
+      "Q1.5": "Alex",
+      "school_name": "Dedenya",
+      "visit_date": "2025-05-19"
     }
   ],
   "full_update": [
@@ -210,7 +226,7 @@
       "update_date": "2025-01-21"
     },
     {
-      "StartDate": "2023-10-23 03:34:53",
+      "StartDate": "2023-10-23 3:34:53",
       "Duration (in seconds)": "1464",
       "ResponseId": "R_hnz7aLlG2ZnjLnZ",
       "LocationLatitude": "5.862967",
@@ -241,7 +257,7 @@
       "update_date": "2023-10-23"
     },
     {
-      "StartDate": "2023-12-06 05:38:25",
+      "StartDate": "2023-12-06 5:38:25",
       "Duration (in seconds)": "1873",
       "ResponseId": "R_lYpLXcpNLjT0Vl2",
       "LocationLatitude": "7.281778",
@@ -274,11 +290,11 @@
       "update_date": "2023-12-06"
     },
     {
-      "StartDate": "2018-11-12 05:01:02",
+      "StartDate": "2018-11-12 5:01:02",
       "Duration (in seconds)": "1211",
       "ResponseId": "R_e1Ljncz3Z7M8dF0",
-      "LocationLatitude": "5.86291700000000037817926568095572292804718017578125",
-      "LocationLongitude": "0.032036000000000001974864716203228454105556011199951171875",
+      "LocationLatitude": "5.862917",
+      "LocationLongitude": "0.032036",
       "Q1": "George",
       "school_name": "Dedenya",
       "Q3": "Routine Program Evaluation",
@@ -308,11 +324,42 @@
       "Q37": "No",
       "Q45": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2018-11-12"
+    },
+    {
+      "StartDate": "2024-09-27 14:50:11",
+      "ResponseId": "R_mnDj8BSBiLsgVpU",
+      "LocationLatitude": "5.862975",
+      "LocationLongitude": "0.032101",
+      "Q1": "Richard",
+      "Q1.5": "Richard,Alex,Peace",
+      "school_name": "Dedenya",
+      "Q3": "Routine Program Evaluation,Project Update Visit",
+      "Q5": "4000",
+      "Q6": "478",
+      "Q7": "16",
+      "Q8": "159",
+      "Q9": "57",
+      "Q11": "165",
+      "Q12": "42",
+      "Q15": "N/A",
+      "Q18": "It works perfectly",
+      "Q20": "Yes",
+      "Q30": "3 or more times in a term",
+      "Q31_1": "5- This describes our school",
+      "Q31_2": "5- This describes our school",
+      "Q32": "Yes, EPI has given them a library",
+      "Q34": "Yes, EPI has helped build some",
+      "Q35": "Yes, another organization or the government has given them something to provide clean water",
+      "Q36": "Yes, they already had enough classrooms or another organization has provided them",
+      "Q37": "Yes",
+      "Q39": "No",
+      "Q45": "Yes",
+      "update_date": "2024-09-27"
     }
   ],
   "surveys": [
     {
-      "StartDate": "10/1/2025 3:57:59",
+      "StartDate": "10/1/2025 4:03:14",
       "Duration (in seconds)": "300",
       "ResponseId": "R_oj1EtCS3ur9VLpo",
       "LocationLatitude": "5.868794",
@@ -324,10 +371,10 @@
       "Q5": "JHS Form 3",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Hands-on learning,Help to understand confusing concepts,Enjoyable to play with",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
       "Q9": "Other:",
       "Q9_6_TEXT": "N/A",
-      "has_library": "No",
+      "has_library": "2",
       "Q11": "Yes, I have access to books",
       "Q13": "Never",
       "Q18": "Other:",
@@ -352,7 +399,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "10/1/2025 4:04:18",
+      "StartDate": "10/1/2025 4:09:30",
       "Duration (in seconds)": "267",
       "ResponseId": "R_7ttOvV8JT1b4LnE",
       "LocationLatitude": "5.862773",
@@ -364,10 +411,10 @@
       "Q5": "JHS Form 3",
       "Q6": "Yes",
       "Q7": "3-4 times",
-      "Q8": "Hands-on learning,Enjoyable to play with",
+      "Q8": "Completing circuits with friends; Hands-on learning,Enjoyable to play with",
       "Q9": "Other:",
       "Q9_6_TEXT": "N/A",
-      "has_library": "No",
+      "has_library": "2",
       "Q11": "Yes, I have access to books",
       "Q13": "Never",
       "Q18": "Other:",
@@ -387,7 +434,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "10/1/2025 4:09:00",
+      "StartDate": "10/1/2025 4:13:33",
       "Duration (in seconds)": "234",
       "ResponseId": "R_0wUoyYTply0qnwB",
       "LocationLatitude": "5.863273",
@@ -399,10 +446,10 @@
       "Q5": "JHS Form 2",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Hands-on learning,Help to understand confusing concepts,Enjoyable to play with",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
       "Q9": "Other:",
       "Q9_6_TEXT": "N/A",
-      "has_library": "No",
+      "has_library": "2",
       "Q11": "Yes, I have access to books",
       "Q13": "Never",
       "Q18": "I am not permitted to",
@@ -426,7 +473,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "10/1/2025 4:13:12",
+      "StartDate": "10/1/2025 4:16:36",
       "Duration (in seconds)": "198",
       "ResponseId": "R_kGdRIjwK9kvrUBd",
       "LocationLatitude": "5.863783",
@@ -438,10 +485,10 @@
       "Q5": "JHS Form 2",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Hands-on learning,Help to understand confusing concepts,Enjoyable to play with",
+      "Q8": "Completing circuits with friends; Hands-on learning,Connecting cables and parts by yourself; Helps with independence,Enjoyable to play with",
       "Q9": "Other:",
       "Q9_6_TEXT": "N/A",
-      "has_library": "No",
+      "has_library": "2",
       "Q11": "Yes, I have access to books",
       "Q13": "Never",
       "Q18": "Other:",
@@ -461,7 +508,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "10/1/2025 4:16:34",
+      "StartDate": "10/1/2025 4:21:44",
       "Duration (in seconds)": "296",
       "ResponseId": "R_7HoLx65sODWxHd7",
       "LocationLatitude": "5.863953",
@@ -473,10 +520,10 @@
       "Q5": "JHS Form 1",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Hands-on learning,Enjoyable to play with",
+      "Q8": "Completing circuits with friends; Hands-on learning,Enjoyable to play with",
       "Q9": "Other:",
       "Q9_6_TEXT": "N/A",
-      "has_library": "No",
+      "has_library": "2",
       "Q11": "Yes, I have access to books",
       "Q13": "Never",
       "Q18": "Other:",
@@ -501,7 +548,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "10/1/2025 4:21:44",
+      "StartDate": "10/1/2025 4:30:19",
       "Duration (in seconds)": "488",
       "ResponseId": "R_5FMUUzegMCvlWnC",
       "LocationLatitude": "5.863149",
@@ -512,7 +559,7 @@
       "Q4": "14",
       "Q5": "JHS Form 1",
       "Q6": "No",
-      "has_library": "No",
+      "has_library": "2",
       "Q11": "Yes, I have access to books",
       "Q13": "Never",
       "Q18": "Other:",
@@ -532,7 +579,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "10/1/2025 4:29:58",
+      "StartDate": "10/1/2025 4:34:26",
       "Duration (in seconds)": "238",
       "ResponseId": "R_4H99MveqUKJocGm",
       "LocationLatitude": "5.865926",
@@ -544,10 +591,10 @@
       "Q5": "Class 5",
       "Q6": "Yes",
       "Q7": "1-2 times",
-      "Q8": "Hands-on learning,Enjoyable to play with",
+      "Q8": "Completing circuits with friends; Hands-on learning,Enjoyable to play with",
       "Q9": "Other:",
       "Q9_6_TEXT": "N/A",
-      "has_library": "No",
+      "has_library": "2",
       "Q11": "No, I have no access to reading materials",
       "Q19": "Yes",
       "lantern_group": "No",
@@ -563,7 +610,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "10/1/2025 4:33:58",
+      "StartDate": "10/1/2025 4:37:29",
       "Duration (in seconds)": "205",
       "ResponseId": "R_oUg1s9og0ECWwkS",
       "LocationLatitude": "5.866298",
@@ -574,7 +621,7 @@
       "Q4": "13",
       "Q5": "Class 6",
       "Q6": "No",
-      "has_library": "No",
+      "has_library": "2",
       "Q11": "Yes, I have access to books",
       "Q13": "Never",
       "Q18": "I am not permitted to",
@@ -598,7 +645,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "10/1/2025 4:37:24",
+      "StartDate": "10/1/2025 4:40:33",
       "Duration (in seconds)": "158",
       "ResponseId": "R_mQ6cyoLF4HibNEK",
       "LocationLatitude": "5.862991",
@@ -609,7 +656,7 @@
       "Q4": "11",
       "Q5": "Class 5",
       "Q6": "No",
-      "has_library": "No",
+      "has_library": "2",
       "Q11": "Yes, I have access to books",
       "Q13": "Never",
       "Q18": "I am not permitted to,Other:",
@@ -630,7 +677,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "10/1/2025 4:40:04",
+      "StartDate": "10/1/2025 4:42:39",
       "Duration (in seconds)": "143",
       "ResponseId": "R_aKPvUsYSoamsrMh",
       "LocationLatitude": "5.866483",
@@ -641,7 +688,7 @@
       "Q4": "12",
       "Q5": "Class 6",
       "Q6": "No",
-      "has_library": "No",
+      "has_library": "2",
       "Q11": "No, I have no access to reading materials",
       "Q19": "Yes",
       "lantern_group": "No",
@@ -657,7 +704,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2023-03-15 05:20:58",
+      "StartDate": "2023-03-15 5:20:58",
       "Duration (in seconds)": "714",
       "ResponseId": "R_c8pwtNxmoMafwY6",
       "LocationLatitude": "5.88002",
@@ -679,7 +726,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2023-03-15 05:32:56",
+      "StartDate": "2023-03-15 5:32:56",
       "Duration (in seconds)": "965",
       "ResponseId": "R_nv8Z6pTP55u1Kdc",
       "LocationLatitude": "5.879061",
@@ -705,7 +752,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2023-03-15 05:49:05",
+      "StartDate": "2023-03-15 5:49:05",
       "Duration (in seconds)": "450",
       "ResponseId": "R_6AvrCrPYZujmerH",
       "LocationLatitude": "5.87252",
@@ -730,7 +777,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2023-03-15 04:40:19",
+      "StartDate": "2023-03-15 4:40:19",
       "Duration (in seconds)": "1887",
       "ResponseId": "R_4wyv2Q33d6dESYS",
       "LocationLatitude": "5.848629",
@@ -752,7 +799,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2023-03-15 05:11:48",
+      "StartDate": "2023-03-15 5:11:48",
       "Duration (in seconds)": "547",
       "ResponseId": "R_93BMY19gS5OQBVy",
       "LocationLatitude": "5.88352",
@@ -780,7 +827,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2023-03-15 05:02:18",
+      "StartDate": "2023-03-15 5:02:18",
       "Duration (in seconds)": "660",
       "ResponseId": "R_jrDK7vUKQYRqCE7",
       "LocationLatitude": "5.862972",
@@ -810,7 +857,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2023-03-15 05:14:07",
+      "StartDate": "2023-03-15 5:14:07",
       "Duration (in seconds)": "512",
       "ResponseId": "R_nzXWPzpyf7Zhf7C",
       "Q1": "SarahAdjetey",
@@ -832,7 +879,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2023-03-15 05:24:59",
+      "StartDate": "2023-03-15 5:24:59",
       "Duration (in seconds)": "562",
       "ResponseId": "R_kOTpVsiLN6U4OHS",
       "LocationLatitude": "5.863021",
@@ -862,7 +909,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2023-03-15 05:39:36",
+      "StartDate": "2023-03-15 5:39:36",
       "Duration (in seconds)": "588",
       "ResponseId": "R_9aeg2XKv8XIMtw2",
       "Q1": "SarahAdjetey",
@@ -885,7 +932,7 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2023-03-15 05:51:03",
+      "StartDate": "2023-03-15 5:51:03",
       "Duration (in seconds)": "416",
       "ResponseId": "R_beTQnlF0TuINZN3",
       "Q1": "SarahAdjetey",
@@ -913,11 +960,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2018-10-07 04:01:12",
+      "StartDate": "2018-10-07 4:01:12",
       "Duration (in seconds)": "0",
       "ResponseId": "R_nk9lop6obmjQBcQ",
-      "LocationLatitude": "6.5516290000000001469970811740495264530181884765625",
-      "LocationLongitude": "-0.760715999999999947789319776347838342189788818359375",
+      "LocationLatitude": "6.551629",
+      "LocationLongitude": "-0.760716",
       "Q1": "Joyce",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -936,11 +983,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-02-14 04:26:46",
+      "StartDate": "2019-02-14 4:26:46",
       "Duration (in seconds)": "1643",
       "ResponseId": "R_fQkDwnChPz9Dbvb",
-      "LocationLatitude": "5.86334499999999980701659296755678951740264892578125",
-      "LocationLongitude": "0.03256499999999999672706252340503851883113384246826171875",
+      "LocationLatitude": "5.863345",
+      "LocationLongitude": "0.032565",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -968,11 +1015,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-02-14 04:16:14",
+      "StartDate": "2019-02-14 4:16:14",
       "Duration (in seconds)": "625",
       "ResponseId": "R_b4OgW6aqhifemzt",
-      "LocationLatitude": "5.863353000000000037061909097246825695037841796875",
-      "LocationLongitude": "0.032516999999999997295052622803268604911863803863525390625",
+      "LocationLatitude": "5.863353",
+      "LocationLongitude": "0.032517",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -997,11 +1044,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-02-14 03:49:04",
+      "StartDate": "2019-02-14 3:49:04",
       "Duration (in seconds)": "829",
       "ResponseId": "R_90OwvzZMFrsJeMw",
-      "LocationLatitude": "5.86333099999999962648189466563053429126739501953125",
-      "LocationLongitude": "0.032711999999999998023358926957371295429766178131103515625",
+      "LocationLatitude": "5.863331",
+      "LocationLongitude": "0.032712",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1019,11 +1066,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-02-14 03:30:42",
+      "StartDate": "2019-02-14 3:30:42",
       "Duration (in seconds)": "1039",
       "ResponseId": "R_3sHIoRe7hyU3gP6",
-      "LocationLatitude": "5.86341800000000024084556571324355900287628173828125",
-      "LocationLongitude": "0.032673000000000000653255227689442108385264873504638671875",
+      "LocationLatitude": "5.863418",
+      "LocationLongitude": "0.032673",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -1049,11 +1096,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-02-14 03:27:26",
+      "StartDate": "2019-02-14 3:27:26",
       "Duration (in seconds)": "850",
       "ResponseId": "R_0Q4iVS3N2WpYel9",
-      "LocationLatitude": "5.8633439999999996672386259888298809528350830078125",
-      "LocationLongitude": "0.032606000000000003036237927744878106750547885894775390625",
+      "LocationLatitude": "5.863344",
+      "LocationLongitude": "0.032606",
       "Q1": "Michael Kofi Offeh",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1073,11 +1120,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-02-14 03:41:44",
+      "StartDate": "2019-02-14 3:41:44",
       "Duration (in seconds)": "1137",
       "ResponseId": "R_hyvhGXgrR3p4V7R",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Michael Kofi Offeh",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1100,11 +1147,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-02-14 04:02:38",
+      "StartDate": "2019-02-14 4:02:38",
       "Duration (in seconds)": "957",
       "ResponseId": "R_hWzh0P2sJnBy44H",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Michael Kofi Offeh",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1127,11 +1174,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-02-14 04:18:48",
+      "StartDate": "2019-02-14 4:18:48",
       "Duration (in seconds)": "983",
       "ResponseId": "R_gkCp3xBiQniv4ei",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Michael Kofi Offeh",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1154,11 +1201,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-02-14 04:38:02",
+      "StartDate": "2019-02-14 4:38:02",
       "Duration (in seconds)": "781",
       "ResponseId": "R_2Oo7U3GuH0yhjkm",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Michael Kofi Offeh",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1181,11 +1228,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 04:08:15",
+      "StartDate": "2019-06-28 4:08:15",
       "Duration (in seconds)": "2614",
       "ResponseId": "R_irBHV0Dzj7lvDEo",
-      "LocationLatitude": "5.8484499999999997044142219237983226776123046875",
-      "LocationLongitude": "0.04702800000000000035793590313915046863257884979248046875",
+      "LocationLatitude": "5.84845",
+      "LocationLongitude": "0.047028",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -1210,11 +1257,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 04:51:58",
+      "StartDate": "2019-06-28 4:51:58",
       "Duration (in seconds)": "488",
       "ResponseId": "R_mgg06nPSEGs41D7",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -1239,11 +1286,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 05:00:18",
+      "StartDate": "2019-06-28 5:00:18",
       "Duration (in seconds)": "745",
       "ResponseId": "R_gwdKpY0vxJjY784",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1262,11 +1309,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 05:12:51",
+      "StartDate": "2019-06-28 5:12:51",
       "Duration (in seconds)": "522",
       "ResponseId": "R_61kixmX126LYPBz",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1285,11 +1332,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 05:21:42",
+      "StartDate": "2019-06-28 5:21:42",
       "Duration (in seconds)": "768",
       "ResponseId": "R_4zFCdFMqPJ9O8PU",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -1313,11 +1360,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 05:34:39",
+      "StartDate": "2019-06-28 5:34:39",
       "Duration (in seconds)": "472",
       "ResponseId": "R_6Tb9Oi35S3e47z5",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -1336,11 +1383,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 05:42:38",
+      "StartDate": "2019-06-28 5:42:38",
       "Duration (in seconds)": "710",
       "ResponseId": "R_bqLDwIcoknL6TXw",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1359,11 +1406,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 05:54:36",
+      "StartDate": "2019-06-28 5:54:36",
       "Duration (in seconds)": "669",
       "ResponseId": "R_kpfVpm0tGPviioC",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1381,11 +1428,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 06:05:53",
+      "StartDate": "2019-06-28 6:05:53",
       "Duration (in seconds)": "528",
       "ResponseId": "R_cPt3QCwzLxP7T5z",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1404,11 +1451,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 06:14:52",
+      "StartDate": "2019-06-28 6:14:52",
       "Duration (in seconds)": "640",
       "ResponseId": "R_0UEDaqTlPQZW2cS",
-      "LocationLatitude": "5.550201416015625",
-      "LocationLongitude": "-0.2174072265625",
+      "LocationLatitude": "5.550201416",
+      "LocationLongitude": "-0.2174072266",
       "Q1": "Sarah",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -1428,11 +1475,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 06:18:06",
+      "StartDate": "2019-06-28 6:18:06",
       "Duration (in seconds)": "406",
       "ResponseId": "R_awnHyWA5lwBAs2I",
-      "LocationLatitude": "5.8627240000000000463842297904193401336669921875",
-      "LocationLongitude": "0.031842000000000002246647312631466775201261043548583984375",
+      "LocationLatitude": "5.862724",
+      "LocationLongitude": "0.031842",
       "Q1": "Amissah Victoria",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1450,11 +1497,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 06:08:51",
+      "StartDate": "2019-06-28 6:08:51",
       "Duration (in seconds)": "479",
       "ResponseId": "R_0Zifs4AmsU3I2N3",
-      "LocationLatitude": "5.86269699999999982509280016529373824596405029296875",
-      "LocationLongitude": "0.03184700000000000030819791163594345562160015106201171875",
+      "LocationLatitude": "5.862697",
+      "LocationLongitude": "0.031847",
       "Q1": "Amissah Victoria",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -1473,11 +1520,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 05:57:30",
+      "StartDate": "2019-06-28 5:57:30",
       "Duration (in seconds)": "645",
       "ResponseId": "R_eJaig4vqRLQGuAa",
-      "LocationLatitude": "5.86269400000000029393731892923824489116668701171875",
-      "LocationLongitude": "0.031835000000000002184918912462308071553707122802734375",
+      "LocationLatitude": "5.862694",
+      "LocationLongitude": "0.031835",
       "Q1": "Amissah Victoria",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1495,11 +1542,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 05:42:53",
+      "StartDate": "2019-06-28 5:42:53",
       "Duration (in seconds)": "693",
       "ResponseId": "R_5XZncAVUA8L3rGx",
-      "LocationLatitude": "5.8627330000000004162075128988362848758697509765625",
-      "LocationLongitude": "0.031891999999999996739941110490690334700047969818115234375",
+      "LocationLatitude": "5.862733",
+      "LocationLongitude": "0.031892",
       "Q1": "Amissah Victoria",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -1517,11 +1564,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 05:33:28",
+      "StartDate": "2019-06-28 5:33:28",
       "Duration (in seconds)": "516",
       "ResponseId": "R_0vUPvbKwYwcZ4EF",
-      "LocationLatitude": "5.8627120000000001454054654459469020366668701171875",
-      "LocationLongitude": "0.031877999999999996616484310152372927404940128326416015625",
+      "LocationLatitude": "5.862712",
+      "LocationLongitude": "0.031878",
       "Q1": "Amissah Victoria",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -1539,11 +1586,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 05:24:18",
+      "StartDate": "2019-06-28 5:24:18",
       "Duration (in seconds)": "504",
       "ResponseId": "R_3cLpZxWtaBCD1Wo",
-      "LocationLatitude": "5.862688999999999595047484035603702068328857421875",
-      "LocationLongitude": "0.031870000000000002493560913308101589791476726531982421875",
+      "LocationLatitude": "5.862689",
+      "LocationLongitude": "0.03187",
       "Q1": "Amissah Victoria",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -1562,11 +1609,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 05:14:50",
+      "StartDate": "2019-06-28 5:14:50",
       "Duration (in seconds)": "462",
       "ResponseId": "R_kNul1no1jaYsWv6",
-      "LocationLatitude": "5.8626909999999998746034179930575191974639892578125",
-      "LocationLongitude": "0.03184800000000000130828681221828446723520755767822265625",
+      "LocationLatitude": "5.862691",
+      "LocationLongitude": "0.031848",
       "Q1": "Amissah Victoria",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -1585,11 +1632,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 05:04:57",
+      "StartDate": "2019-06-28 5:04:57",
       "Duration (in seconds)": "566",
       "ResponseId": "R_0DBEe5CnkWngoJj",
-      "LocationLatitude": "5.86267500000000030269120543380267918109893798828125",
-      "LocationLongitude": "0.03186400000000000343192141372128389775753021240234375",
+      "LocationLatitude": "5.862675",
+      "LocationLongitude": "0.031864",
       "Q1": "Amissah Victoria",
       "school_selected": "Dedenya",
       "Q3": "Male",
@@ -1606,11 +1653,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 04:52:48",
+      "StartDate": "2019-06-28 4:52:48",
       "Duration (in seconds)": "569",
       "ResponseId": "R_0G54561XyewHoup",
-      "LocationLatitude": "5.862695999999999685314833186566829681396484375",
-      "LocationLongitude": "0.031880999999999999616751011899395962245762348175048828125",
+      "LocationLatitude": "5.862696",
+      "LocationLongitude": "0.031881",
       "Q1": "Amissah Victoria",
       "school_selected": "Dedenya",
       "Q3": "Female",
@@ -1629,11 +1676,11 @@
       "school_name": "Dedenya"
     },
     {
-      "StartDate": "2019-06-28 04:44:06",
+      "StartDate": "2019-06-28 4:44:06",
       "Duration (in seconds)": "449",
       "ResponseId": "R_4rDSrh9eFTdbTom",
-      "LocationLatitude": "5.848395000000000010231815394945442676544189453125",
-      "LocationLongitude": "0.047016000000000002234656903965515084564685821533203125",
+      "LocationLatitude": "5.848395",
+      "LocationLongitude": "0.047016",
       "Q1": "Amissah Victoria",
       "school_selected": "Dedenya",
       "Q3": "Female",
