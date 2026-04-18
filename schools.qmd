@@ -17,6 +17,13 @@ visits   <- read_csv(here("data", "clean", "visits.csv"), show_col_types = FALSE
 surveys  <- read_csv(here("data", "clean", "surveys.csv"), show_col_types = FALSE)
 issues   <- read_csv(here("data", "clean", "issues.csv"), show_col_types = FALSE)
 
+# Read open issues for the issues section
+issues_open <- if (file.exists(here("data", "clean", "issues_open.csv"))) {
+  read_csv(here("data", "clean", "issues_open.csv"), show_col_types = FALSE)
+} else {
+  issues
+}
+
 # Read full update data
 raw_full <- read_csv(here("data", "raw", "full_update.csv"), show_col_types = FALSE)
 clean_full <- raw_full |>
@@ -24,8 +31,13 @@ clean_full <- raw_full |>
   rename(school_name = Q2) |>
   mutate(school_name = str_trim(school_name))
 
-# Date range defaults
-date_min <- paste0(format(Sys.Date(), "%Y"), "-01-01")
+# Date range defaults: current school year (Aug 1 – Jul 31)
+school_year_start <- if (as.integer(format(Sys.Date(), "%m")) >= 8) {
+  paste0(format(Sys.Date(), "%Y"), "-08-01")
+} else {
+  paste0(as.integer(format(Sys.Date(), "%Y")) - 1, "-08-01")
+}
+date_min <- school_year_start
 date_max <- as.character(Sys.Date())
 
 # Build the full data object for all schools
@@ -42,7 +54,8 @@ for (name in sort(schools$school_name)) {
     info        = schools |> filter(school_name == name) |> as.list(),
     visits      = school_visits,
     full_update = clean_full |> filter(school_name == name) |> mutate(across(everything(), as.character)),
-    issues      = issues |> filter(school_name == name) |> mutate(across(everything(), as.character))
+    issues      = issues |> filter(school_name == name) |> mutate(across(everything(), as.character)),
+    open_issues = issues_open |> filter(school_name == name) |> mutate(across(everything(), as.character))
   )
 }
 
@@ -111,8 +124,13 @@ htmltools::HTML(paste0(
 </div>
 </div>
 
-<h3>Notes From Last Visit</h3>
+<h3 id="notes-header" style="cursor:pointer;" title="Click to view all visits for this school">Notes From Last Visit <span style="font-size:0.75rem; color:#999; font-weight:400;">(click to view all)</span></h3>
 <div id="school-visits" style="margin-bottom:1.5rem;"></div>
+
+<div id="open-issues-section" style="display:none; margin-bottom:1.5rem;">
+  <h3>Open Issues</h3>
+  <div id="school-open-issues"></div>
+</div>
 
 <h3>AI Summary</h3>
 <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem;">
@@ -284,10 +302,14 @@ function renderSchoolContent(slug, data) {
     if (latestUpdate.Q7) details += "<tr><td style=\\"font-weight:600;\\">Teachers</td><td>" + latestUpdate.Q7 + "</td></tr>";
     details += "</table>";
 
-    // Last year stats
+    // Last year stats — compute actual year label from school year
     var hasLastYear = latestUpdate.Q9 || latestUpdate.Q12 || latestUpdate.Q13 || (latestUpdate.Q15 && latestUpdate.Q15 !== "N/A");
     if (hasLastYear) {
-      details += \'<h5 style="margin:1.25rem 0 0.5rem; color:var(--epi-navy); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.05em; border-top:1px solid #e9ecef; padding-top:1rem;">Last Year</h5>\';
+      // Determine the "previous year" based on the date range start
+      var startDate = new Date(start + "T00:00:00");
+      var syStartYear = startDate.getMonth() >= 7 ? startDate.getFullYear() : startDate.getFullYear() - 1;
+      var prevYearLabel = "in " + syStartYear;
+      details += \'<h5 style="margin:1.25rem 0 0.5rem; color:var(--epi-navy); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.05em; border-top:1px solid #e9ecef; padding-top:1rem;">Academic Outcomes \' + prevYearLabel + \'</h5>\';
       details += \'<table class="dashboard-table">\';
       if (latestUpdate.Q9) details += "<tr><td style=\\"font-weight:600; width:250px;\\">Completed Primary to JHS</td><td>" + latestUpdate.Q9 + " students</td></tr>";
       if (latestUpdate.Q12) details += "<tr><td style=\\"font-weight:600;\\">BECE Test Takers</td><td>" + latestUpdate.Q12 + "</td></tr>";
@@ -301,9 +323,22 @@ function renderSchoolContent(slug, data) {
     detailsSection.style.display = "none";
   }
 
-  // Notes From Last Visit (most recent visit only)
-  if (Array.isArray(visits) && visits.length > 0) {
-    var v = visits[visits.length - 1];
+  // Notes From Last Visit — sort by date, take most recent
+  var sortedVisits = (Array.isArray(visits) ? visits.slice() : []).sort(function(a, b) {
+    var da = (a.visit_date || a.StartDate || "");
+    var db = (b.visit_date || b.StartDate || "");
+    return da < db ? -1 : da > db ? 1 : 0;
+  });
+
+  // Clickable header — links to visits page filtered to this school
+  var notesHeader = document.getElementById("notes-header");
+  notesHeader.onclick = function() {
+    var schoolName = encodeURIComponent(data.info.school_name);
+    window.location.href = "visits.html?school=" + schoolName;
+  };
+
+  if (sortedVisits.length > 0) {
+    var v = sortedVisits[sortedVisits.length - 1]; // most recent
     var date = v.visit_date || v.StartDate || "";
     var vhtml = \'<div style="background:#fff; border-radius:8px; padding:1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1rem;">\';
     vhtml += \'<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">\';
@@ -312,11 +347,46 @@ function renderSchoolContent(slug, data) {
     vhtml += "</div>";
     if (v.visit_reason) vhtml += \'<p style="font-size:0.9rem; margin:0.25rem 0;"><strong>Reason for visit:</strong> \' + v.visit_reason + "</p>";
     if (v.activities) vhtml += \'<p style="font-size:0.9rem; margin:0.25rem 0;"><strong>What was done:</strong> \' + v.activities + "</p>";
-    if (v.observations) vhtml += \'<p style="font-size:0.9rem; margin:0.25rem 0; color:#666;"><strong>Observations:</strong> \' + v.observations + "</p>";
+
+    // Strengths (Q26 / doing_well)
+    if (v.doing_well && v.doing_well !== "null") {
+      vhtml += \'<div style="background:#d4edda; border-radius:6px; padding:0.75rem; margin:0.75rem 0 0.5rem;">\';
+      vhtml += \'<p style="font-size:0.9rem; margin:0;"><strong style="color:#155724;">Strengths:</strong> \' + v.doing_well + "</p></div>";
+    }
+
+    // Challenges (Q27 / struggles)
+    if (v.struggles && v.struggles !== "null") {
+      vhtml += \'<div style="background:#fff3cd; border-radius:6px; padding:0.75rem; margin:0.5rem 0;">\';
+      vhtml += \'<p style="font-size:0.9rem; margin:0;"><strong style="color:#856404;">Challenges:</strong> \' + v.struggles + "</p></div>";
+    }
+
+    if (v.observations && v.observations !== "null") vhtml += \'<p style="font-size:0.9rem; margin:0.5rem 0 0; color:#666;"><strong>Observations:</strong> \' + v.observations + "</p>";
     vhtml += "</div>";
     document.getElementById("school-visits").innerHTML = vhtml;
   } else {
     document.getElementById("school-visits").innerHTML = \'<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><em style="color:#999;">No visits recorded in this date range</em></div>\';
+  }
+
+  // Open Issues section
+  var openIssues = data.open_issues || [];
+  var issuesSection = document.getElementById("open-issues-section");
+  var issuesContainer = document.getElementById("school-open-issues");
+  if (Array.isArray(openIssues) && openIssues.length > 0) {
+    issuesSection.style.display = "block";
+    var ihtml = "";
+    openIssues.forEach(function(issue) {
+      var issueSlug = (issue.school_name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
+      ihtml += \'<div style="background:#fff; border-radius:8px; padding:1rem 1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:0.75rem; border-left:4px solid #dc3545; cursor:pointer;" onclick="window.location.href=\\\'issues.html\\\'">\';
+      ihtml += \'<div style="display:flex; justify-content:space-between; align-items:center;">\';
+      ihtml += \'<p style="font-size:0.9rem; margin:0; color:#333;">\' + (issue.urgent_issues || "") + \'</p>\';
+      ihtml += \'<span style="color:#999; font-size:0.8rem; white-space:nowrap; margin-left:1rem;">\' + (issue.visit_date || "") + \'</span>\';
+      ihtml += \'</div>\';
+      if (issue.visitor) ihtml += \'<p style="font-size:0.8rem; margin:0.25rem 0 0; color:#999;">Flagged by \' + issue.visitor + \'</p>\';
+      ihtml += \'</div>\';
+    });
+    issuesContainer.innerHTML = ihtml;
+  } else {
+    issuesSection.style.display = "none";
   }
 
   loadCachedSummary(slug, data);
@@ -350,8 +420,9 @@ function loadCachedSummary(slug, data) {
   var currentHash = simpleHash(JSON.stringify(notes));
   var btn = document.getElementById("btn-generate-summary");
   if (cached && cached.hash === currentHash && cached.summary) {
+    var cachedFormatted = cached.summary.replace(/\\*\\*([^*]+)\\*\\*/g, "<strong>$1</strong>");
     document.getElementById("ai-summary").innerHTML =
-      \'<div style="white-space:pre-wrap; line-height:1.6;">\' + cached.summary + \'</div>\' +
+      \'<div style="white-space:pre-wrap; line-height:1.6;">\' + cachedFormatted + \'</div>\' +
       \'<p style="color:#999; font-size:0.75rem; margin-top:0.5rem;">Cached summary from \' + cached.date + \'</p>\';
     if (btn) btn.textContent = "Regenerate Summary";
   } else {
@@ -377,8 +448,9 @@ async function generateSummary(force) {
     var cached = null;
     try { cached = JSON.parse(localStorage.getItem(cacheKey)); } catch(e) {}
     if (cached && cached.hash === notesHash && cached.summary) {
+      var cachedFmt = cached.summary.replace(/\\*\\*([^*]+)\\*\\*/g, "<strong>$1</strong>");
       document.getElementById("ai-summary").innerHTML =
-        \'<div style="white-space:pre-wrap; line-height:1.6;">\' + cached.summary + \'</div>\' +
+        \'<div style="white-space:pre-wrap; line-height:1.6;">\' + cachedFmt + \'</div>\' +
         \'<p style="color:#999; font-size:0.75rem; margin-top:0.5rem;">Cached summary from \' + cached.date + \'</p>\';
       return;
     }
@@ -400,7 +472,9 @@ async function generateSummary(force) {
     if (result.error) {
       summaryDiv.innerHTML = \'<em style="color:#dc3545;">Error: \' + result.error + (result.details ? \' — \' + result.details : \'\') + \'</em>\';
     } else {
-      summaryDiv.innerHTML = \'<div style="white-space:pre-wrap; line-height:1.6;">\' + result.summary + \'</div>\';
+      // Convert markdown bold **text** to HTML <strong>
+      var formattedSummary = result.summary.replace(/\\*\\*([^*]+)\\*\\*/g, "<strong>$1</strong>");
+      summaryDiv.innerHTML = \'<div style="white-space:pre-wrap; line-height:1.6;">\' + formattedSummary + \'</div>\';
       // Cache the result
       try {
         localStorage.setItem("epi-summary-" + slug, JSON.stringify({
@@ -423,7 +497,8 @@ document.getElementById("btn-school-apply").addEventListener("click", function()
 });
 document.getElementById("btn-school-reset").addEventListener("click", function() {
   var now = new Date();
-  document.getElementById("school-date-start").value = now.getFullYear() + "-01-01";
+  var syYear = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
+  document.getElementById("school-date-start").value = syYear + "-08-01";
   document.getElementById("school-date-end").value = now.toISOString().slice(0, 10);
   if (currentSchool) renderSchoolContent(currentSchool._slug, currentSchool);
 });

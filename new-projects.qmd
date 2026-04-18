@@ -1,0 +1,261 @@
+---
+title: "New Projects"
+format:
+  html:
+    toc: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(jsonlite)
+library(here)
+
+projects <- read_csv(here("data", "clean", "new_projects.csv"), show_col_types = FALSE)
+schools  <- read_csv(here("data", "clean", "schools.csv"), show_col_types = FALSE)
+
+# Date range defaults: current school year (Aug 1 - Jul 31)
+school_year_start <- if (as.integer(format(Sys.Date(), "%m")) >= 8) {
+  paste0(format(Sys.Date(), "%Y"), "-08-01")
+} else {
+  paste0(as.integer(format(Sys.Date(), "%Y")) - 1, "-08-01")
+}
+date_min <- school_year_start
+date_max <- as.character(Sys.Date())
+
+# Known EPI school names (canonical list)
+known_schools <- schools$school_name
+
+# Build a simplified project list for client-side rendering
+proj_list <- projects |>
+  mutate(
+    project_date = as.character(project_date),
+    is_new_school = !(school_name %in% known_schools),
+    # Partnership info
+    has_partner = case_when(
+      `9` == "Yes" & !is.na(`9_2_TEXT`) & !`9_2_TEXT` %in% c("No", "NA", "") ~ TRUE,
+      TRUE ~ FALSE
+    ),
+    partner_name = if_else(has_partner, `9_2_TEXT`, NA_character_),
+    # Notes (Q67) - exclude "No" and empty
+    notes = if_else(
+      !is.na(`67`) & !`67` %in% c("No", "No.", "NA", "N/A", ""),
+      `67`, NA_character_
+    ),
+    # Build project-type-specific summary
+    summary = case_when(
+      # MGR Installation
+      str_detect(project_type, "MGR") ~ paste0(
+        if_else(!is.na(`12_1`), paste0(`12_1`, " lanterns distributed"), ""),
+        if_else(!is.na(`13`), paste0(", ", `13`, " lantern groups"), ""),
+        if_else(!is.na(`14`), paste0(" (~", `14`, " students/group)"), ""),
+        if_else(!is.na(`10`) & `10` == "Yes" & !is.na(`11`),
+          paste0(". MGR moved from ", `11`), ""),
+        if_else(!is.na(`17_1`), paste0(". ", `17_1`, " computers given"), "")
+      ),
+      # Solar
+      str_detect(project_type, "Solar") ~ paste0(
+        if_else(!is.na(`28`), paste0(`28`, " solar panels installed"), "Solar panels installed"),
+        if_else(!is.na(`12_1`), paste0(", ", `12_1`, " lanterns"), "")
+      ),
+      # Starlink
+      project_type == "Starlink" ~ paste0(
+        "Starlink installed",
+        if_else(!is.na(`21`) & `21` == "Yes", " in EPI computer lab", ""),
+        if_else(!is.na(`22`) & str_detect(`22`, "removed"), ". RACHEL device replaced", "")
+      ),
+      # Building Construction
+      str_detect(project_type, "Building") ~ paste0(
+        if_else(!is.na(`29`), `29`, "Building"),
+        if_else(!is.na(`30`), paste0(" (", `30`, " rooms)"), ""),
+        if_else(!is.na(`33_1`) & `33_1` != "0", paste0(". ", `33_1`, " science kits given"), ""),
+        if_else(!is.na(`36`) & `36` != "0", paste0(". Menstrual kits distributed"), "")
+      ),
+      # GROW Project
+      project_type == "GROW Project" ~ paste0(
+        "GROW Project",
+        if_else(!is.na(`47`) & str_detect(`47`, "Yes"), " with library books from EPI", ""),
+        if_else(!is.na(`50`) & !`50` %in% c("Nothing", "", "NA", "Other:"),
+          paste0(". Also distributed: ", str_remove(`50`, ",?\\s*Other:?\\s*")), "")
+      ),
+      # Fallback
+      TRUE ~ project_type
+    )
+  ) |>
+  # Clean up leading/trailing commas and spaces in summary
+  mutate(summary = str_remove(summary, "^,\\s*") |> str_remove(",\\s*$") |> str_squish()) |>
+  select(project_date, project_type, school_name, is_new_school, visitor,
+         has_partner, partner_name, summary, notes) |>
+  arrange(desc(project_date))
+
+proj_json <- toJSON(proj_list, auto_unbox = TRUE, na = "null")
+n_projects <- nrow(proj_list)
+```
+
+```{r}
+#| echo: false
+
+# Count project types for stat cards
+type_counts <- proj_list |>
+  mutate(type_short = case_when(
+    str_detect(project_type, "MGR") ~ "MGR",
+    str_detect(project_type, "Solar") ~ "Solar",
+    project_type == "Starlink" ~ "Starlink",
+    str_detect(project_type, "Building") ~ "Building",
+    project_type == "GROW Project" ~ "GROW",
+    TRUE ~ "Other"
+  )) |>
+  count(type_short) |>
+  deframe()
+
+htmltools::HTML(paste0(
+'<!-- Stat Cards -->
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap:1rem; max-width:700px; margin:0 auto 1.5rem;">
+  <div class="stat-card" style="padding:1rem;">
+    <span id="stat-total" class="stat-value" style="font-size:1.8rem; display:block;">', n_projects, '</span>
+    <span class="stat-label" style="font-size:0.75rem;">Total Projects</span>
+  </div>
+  <div class="stat-card" style="padding:1rem;">
+    <span id="stat-schools" class="stat-value" style="font-size:1.8rem; display:block;">', n_distinct(proj_list$school_name), '</span>
+    <span class="stat-label" style="font-size:0.75rem;">Schools</span>
+  </div>
+</div>
+
+<!-- Date Range Filter -->
+<div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-bottom:1.5rem; justify-content:center;">
+  <label style="font-weight:600; color:var(--epi-navy);">Date Range:</label>
+  <input type="date" id="date-start" value="', date_min, '" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
+  <span>to</span>
+  <input type="date" id="date-end" value="', date_max, '" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
+  <button id="btn-apply-dates" style="background:var(--epi-navy); color:#fff; border:none; padding:0.4rem 1rem; border-radius:4px; cursor:pointer; font-weight:600;">Apply</button>
+  <button id="btn-reset-dates" style="background:#e9ecef; color:#333; border:none; padding:0.4rem 1rem; border-radius:4px; cursor:pointer;">Reset</button>
+</div>
+
+<!-- Project Cards Container -->
+<div id="projects-container"></div>
+
+<script>
+var ALL_PROJECTS = ', proj_json, ';
+
+// Color mapping for project types
+var TYPE_COLORS = {
+  "Electricity Generating MGR Installation": {bg: "#fff3cd", border: "#ffc107", label: "MGR Installation"},
+  "Solar Project for Lanterns Specifically (No MGR)": {bg: "#d1ecf1", border: "#17a2b8", label: "Solar (Lanterns)"},
+  "Solar Project (not for lanterns)": {bg: "#d1ecf1", border: "#17a2b8", label: "Solar"},
+  "Starlink": {bg: "#e2e3f1", border: "#6f42c1", label: "Starlink"},
+  "Building Construction": {bg: "#f5d6cc", border: "#dc3545", label: "Building Construction"},
+  "GROW Project": {bg: "#d4edda", border: "#28a745", label: "GROW Project"},
+  "Science Kit Distribution": {bg: "#fde8d0", border: "#fd7e14", label: "Science Kits"},
+  "Menstrual Kit Distribution": {bg: "#f8d7da", border: "#e83e8c", label: "Menstrual Kits"}
+};
+
+function getTypeInfo(projectType) {
+  // Check for exact match first
+  if (TYPE_COLORS[projectType]) return TYPE_COLORS[projectType];
+  // Check for partial matches (for combined types like "Building,Science,Menstrual")
+  for (var key in TYPE_COLORS) {
+    if (projectType.indexOf(key) >= 0) return TYPE_COLORS[key];
+  }
+  return {bg: "#e9ecef", border: "#6c757d", label: projectType};
+}
+
+function makeProjectCard(p) {
+  var typeInfo = getTypeInfo(p.project_type);
+  var types = p.project_type.split(",");
+
+  var badgesHtml = "";
+  types.forEach(function(t) {
+    var info = getTypeInfo(t.trim());
+    badgesHtml += \'<span style="display:inline-block; background:\' + info.bg + \'; color:#333; border:1px solid \' + info.border + \'; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600; margin-right:0.35rem; margin-bottom:0.25rem;">\' + info.label + \'</span>\';
+  });
+
+  var html = \'<div style="background:#fff; border-radius:8px; padding:1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1rem; border-left:4px solid \' + typeInfo.border + \';">\';
+
+  // Header row: school name + date
+  html += \'<div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem; flex-wrap:wrap; gap:0.5rem;">\';
+  html += \'<div>\';
+  html += \'<span style="color:var(--epi-navy); font-weight:700; font-size:1.05rem;">\' + p.school_name + \'</span>\';
+  if (p.is_new_school) {
+    html += \' <span style="background:#dc3545; color:#fff; padding:0.1rem 0.5rem; border-radius:10px; font-size:0.7rem; font-weight:600;">NEW SCHOOL</span>\';
+  }
+  html += \'</div>\';
+  var dateStr = p.project_date || "";
+  if (dateStr) {
+    var d = new Date(dateStr + "T00:00:00");
+    dateStr = d.toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"});
+  }
+  html += \'<span style="color:#999; font-size:0.8rem; white-space:nowrap;">\' + dateStr + \'</span>\';
+  html += \'</div>\';
+
+  // Type badges
+  html += \'<div style="margin-bottom:0.5rem;">\' + badgesHtml + \'</div>\';
+
+  // Partner
+  if (p.has_partner && p.partner_name) {
+    html += \'<p style="font-size:0.85rem; margin:0.25rem 0; color:#555;"><strong>Partner:</strong> \' + p.partner_name + \'</p>\';
+  }
+
+  // Summary
+  if (p.summary && p.summary !== p.project_type) {
+    html += \'<p style="font-size:0.9rem; margin:0.4rem 0 0; color:#333;">\' + p.summary + \'</p>\';
+  }
+
+  // Notes
+  if (p.notes) {
+    html += \'<p style="font-size:0.85rem; margin:0.4rem 0 0; color:#666; font-style:italic;">Notes: \' + p.notes + \'</p>\';
+  }
+
+  // Visitor
+  if (p.visitor) {
+    html += \'<p style="font-size:0.8rem; margin:0.35rem 0 0; color:#aaa;">Recorded by \' + p.visitor + \'</p>\';
+  }
+
+  html += \'</div>\';
+  return html;
+}
+
+function renderProjects() {
+  var startDate = document.getElementById("date-start").value;
+  var endDate = document.getElementById("date-end").value;
+
+  var filtered = ALL_PROJECTS.filter(function(p) {
+    if (!p.project_date) return true;
+    if (startDate && p.project_date < startDate) return false;
+    if (endDate && p.project_date > endDate) return false;
+    return true;
+  });
+
+  // Update stat cards
+  document.getElementById("stat-total").textContent = filtered.length;
+  var uniqueSchools = {};
+  filtered.forEach(function(p) { uniqueSchools[p.school_name] = true; });
+  document.getElementById("stat-schools").textContent = Object.keys(uniqueSchools).length;
+
+  // Render cards
+  var container = document.getElementById("projects-container");
+  if (filtered.length === 0) {
+    container.innerHTML = \'<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;"><p style="color:#999; font-style:italic; margin:0;">No projects found in this date range.</p></div>\';
+    return;
+  }
+
+  var html = "";
+  filtered.forEach(function(p) {
+    html += makeProjectCard(p);
+  });
+  container.innerHTML = html;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  renderProjects();
+  document.getElementById("btn-apply-dates").addEventListener("click", renderProjects);
+  document.getElementById("btn-reset-dates").addEventListener("click", function() {
+    var now = new Date();
+    var syYear = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
+    document.getElementById("date-start").value = syYear + "-08-01";
+    document.getElementById("date-end").value = now.toISOString().slice(0, 10);
+    renderProjects();
+  });
+});
+</script>
+'))
+```

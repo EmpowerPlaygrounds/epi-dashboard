@@ -41,9 +41,14 @@ surveys <- surveys |>
 
 available_years <- sort(unique(surveys$survey_year[!is.na(surveys$survey_year)]))
 
-# Date range defaults
+# Date range defaults: current school year (Aug 1 – Jul 31)
 survey_dates <- as.Date(surveys$survey_date[!is.na(surveys$survey_date)])
-survey_date_min <- paste0(format(Sys.Date(), "%Y"), "-01-01")
+school_year_start <- if (as.integer(format(Sys.Date(), "%m")) >= 8) {
+  paste0(format(Sys.Date(), "%Y"), "-08-01")
+} else {
+  paste0(as.integer(format(Sys.Date(), "%Y")) - 1, "-08-01")
+}
+survey_date_min <- school_year_start
 survey_date_max <- as.character(Sys.Date())
 n_responses <- nrow(surveys)
 n_schools   <- n_distinct(surveys$school_name, na.rm = TRUE)
@@ -759,7 +764,8 @@ document.addEventListener("DOMContentLoaded", function() {
   var resetBtn = document.getElementById("btn-survey-reset");
   if (resetBtn) resetBtn.addEventListener("click", function() {
     var now = new Date();
-    document.getElementById("survey-date-start").value = now.getFullYear() + "-01-01";
+    var syYear = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
+    document.getElementById("survey-date-start").value = syYear + "-08-01";
     document.getElementById("survey-date-end").value = now.toISOString().slice(0, 10);
     renderAll();
   });

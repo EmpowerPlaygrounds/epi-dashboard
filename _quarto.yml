@@ -21,6 +21,8 @@ website:
         text: Visits
       - href: surveys.qmd
         text: Student Surveys
+      - href: new-projects.qmd
+        text: New Projects
       - href: issues.qmd
         text: Issues
 

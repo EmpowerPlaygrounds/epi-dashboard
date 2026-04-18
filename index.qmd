@@ -63,8 +63,13 @@ schools_json <- schools |>
          n_visits, n_responses, n_issues) |>
   toJSON(auto_unbox = TRUE)
 
-# Date range for selector defaults
-date_min <- paste0(format(Sys.Date(), "%Y"), "-01-01")
+# Date range defaults: current school year (Aug 1 – Jul 31)
+school_year_start <- if (as.integer(format(Sys.Date(), "%m")) >= 8) {
+  paste0(format(Sys.Date(), "%Y"), "-08-01")
+} else {
+  paste0(as.integer(format(Sys.Date(), "%Y")) - 1, "-08-01")
+}
+date_min <- school_year_start
 date_max <- as.character(Sys.Date())
 ```
 
@@ -118,26 +123,22 @@ htmltools::HTML(paste0(
 </div>
 
 <!-- Stat Cards -->
-<div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:1rem; margin-bottom:1.5rem;">
-  <div class="stat-card" style="text-align:center; padding:1.25rem;">
-    <span id="stat-visits" class="stat-value" style="font-size:2rem; display:block;"></span>
-    <span class="stat-label">Field Visits</span>
-  </div>
-  <div class="stat-card" style="text-align:center; padding:1.25rem;">
+<div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1rem; margin-bottom:1.5rem;">
+  <a href="new-projects.html" class="stat-card" style="text-align:center; padding:1.25rem; text-decoration:none; cursor:pointer; transition:transform 0.15s;">
     <span id="stat-projects" class="stat-value" style="font-size:2rem; display:block;"></span>
     <span class="stat-label">New Projects</span>
-  </div>
-  <div class="stat-card" style="text-align:center; padding:1.25rem;">
-    <span id="stat-full" class="stat-value" style="font-size:2rem; display:block;"></span>
-    <span class="stat-label">Full Updates</span>
-  </div>
-  <div class="stat-card" style="text-align:center; padding:1.25rem;">
-    <span id="stat-surveys" class="stat-value" style="font-size:2rem; display:block;"></span>
-    <span class="stat-label">Student Surveys</span>
-  </div>
-  <div class="stat-card" style="text-align:center; padding:1.25rem;">
+  </a>
+  <a href="visits.html" class="stat-card" style="text-align:center; padding:1.25rem; text-decoration:none; cursor:pointer; transition:transform 0.15s;">
+    <span id="stat-needs-update" class="stat-value" style="font-size:2rem; display:block; color:#dc3545;"></span>
+    <span class="stat-label">Need Full Updates</span>
+  </a>
+  <a href="issues.html" class="stat-card" style="text-align:center; padding:1.25rem; text-decoration:none; cursor:pointer; transition:transform 0.15s;">
     <span id="stat-issues" class="stat-value" style="font-size:2rem; display:block;"></span>
     <span class="stat-label">Open Issues</span>
+  </a>
+  <div class="stat-card" style="text-align:center; padding:1.25rem;">
+    <span id="stat-schools-visited" class="stat-value" style="font-size:2rem; display:block;"></span>
+    <span class="stat-label">Schools Visited</span>
   </div>
 </div>'
 ))
@@ -253,12 +254,23 @@ function renderDashboard() {
   var full     = ALL_FULL.filter(function(v) { return inRange(v.update_date, start, end); });
   var surveys  = ALL_SURVEYS.filter(function(v) { return inRange(v.survey_date, start, end); });
 
+  // Schools visited (any school with a quick update OR full update in range)
+  var visitedSchools = {};
+  visits.forEach(function(v) { if (v.school_name) visitedSchools[v.school_name] = true; });
+  full.forEach(function(f) { if (f.school_name) visitedSchools[f.school_name] = true; });
+  var nSchoolsVisited = Object.keys(visitedSchools).length;
+  var nTotalSchools = ALL_SCHOOLS.length;
+
+  // Schools needing full updates
+  var schoolsWithFullUpdate = {};
+  full.forEach(function(f) { if (f.school_name) schoolsWithFullUpdate[f.school_name] = true; });
+  var nNeedUpdate = nTotalSchools - Object.keys(schoolsWithFullUpdate).length;
+
   // Stat cards
-  document.getElementById('stat-visits').textContent   = visits.length;
   document.getElementById('stat-projects').textContent  = projects.length;
-  document.getElementById('stat-full').textContent      = full.length;
-  document.getElementById('stat-surveys').textContent   = surveys.length;
+  document.getElementById('stat-needs-update').textContent = nNeedUpdate;
   document.getElementById('stat-issues').textContent    = issues.length;
+  document.getElementById('stat-schools-visited').textContent = nSchoolsVisited + '/' + nTotalSchools;
 
   // Recent Projects table
   var sortedProjects = projects.slice().sort(function(a, b) {
@@ -359,7 +371,7 @@ function renderDashboard() {
 function openDownloadModal() {
   document.getElementById('dl-date-start').value = document.getElementById('date-start').value;
   document.getElementById('dl-date-end').value = document.getElementById('date-end').value;
-  document.getElementById('dl-dataset').value = 'visits';
+  document.getElementById('dl-dataset').value = 'quick';
   document.getElementById('dl-date-row').style.display = 'block';
   document.getElementById('download-modal').style.display = 'flex';
 }
@@ -471,7 +483,8 @@ window.addEventListener('load', function() {
 
   document.getElementById('btn-reset-dates').addEventListener('click', function() {
     var now = new Date();
-    document.getElementById('date-start').value = now.getFullYear() + '-01-01';
+    var syYear = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
+    document.getElementById('date-start').value = syYear + '-08-01';
     document.getElementById('date-end').value = now.toISOString().slice(0, 10);
     renderDashboard();
   });

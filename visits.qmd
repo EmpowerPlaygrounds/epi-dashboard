@@ -11,12 +11,20 @@ library(tidyverse)
 library(jsonlite)
 library(here)
 library(DT)
+library(lubridate)
 
 visits  <- read_csv(here("data", "clean", "visits.csv"), show_col_types = FALSE)
 schools <- read_csv(here("data", "clean", "schools.csv"), show_col_types = FALSE)
+full_updates <- read_csv(here("data", "clean", "full_updates.csv"), show_col_types = FALSE)
+surveys_raw  <- read_csv(here("data", "clean", "surveys.csv"), show_col_types = FALSE)
 
-# Date range defaults
-date_min <- paste0(format(Sys.Date(), "%Y"), "-01-01")
+# Date range defaults: current school year (Aug 1 – Jul 31)
+school_year_start <- if (as.integer(format(Sys.Date(), "%m")) >= 8) {
+  paste0(format(Sys.Date(), "%Y"), "-08-01")
+} else {
+  paste0(as.integer(format(Sys.Date(), "%Y")) - 1, "-08-01")
+}
+date_min <- school_year_start
 date_max <- as.character(Sys.Date())
 
 # All school names for the "0 visits" inclusion
@@ -32,21 +40,44 @@ visits_json_data <- visits |>
     activities
   )
 
+# Full updates: just school_name + update_date for tracking
+full_updates_json_data <- full_updates |>
+  transmute(
+    update_date = as.character(update_date),
+    school_name
+  ) |>
+  filter(!is.na(school_name), !is.na(update_date))
+
+# Surveys: school_name + date for tracking
+surveys_json_data <- surveys_raw |>
+  transmute(
+    survey_date = as.character(as.Date(coalesce(
+      mdy_hms(StartDate), ymd_hms(StartDate)
+    ))),
+    school_name
+  ) |>
+  filter(!is.na(school_name), !is.na(survey_date))
+
 visits_json <- toJSON(visits_json_data, auto_unbox = TRUE, na = "null")
 schools_json <- toJSON(all_school_names, auto_unbox = TRUE)
+full_updates_json <- toJSON(full_updates_json_data, auto_unbox = TRUE, na = "null")
+surveys_json <- toJSON(surveys_json_data, auto_unbox = TRUE, na = "null")
 n_total_schools <- length(all_school_names)
 ```
 
 ```{r}
 #| echo: false
 
-# Date range selector
+# Date range selector + school filter
 htmltools::HTML(paste0(
   '<div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">',
   '<label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>',
   '<input type="date" id="date-start" value="', date_min, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">',
   '<span style="color:#999;">to</span>',
   '<input type="date" id="date-end" value="', date_max, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">',
+  '<select id="school-filter" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem; max-width:200px;">',
+  '<option value="">All Schools</option>',
+  '</select>',
   '<button id="btn-apply-dates" style="background:var(--epi-navy); color:#fff; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Apply</button>',
   '<button id="btn-reset-dates" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer;">Reset</button>',
   '</div>'
@@ -56,13 +87,18 @@ htmltools::HTML(paste0(
 ```{r}
 #| echo: false
 
-# Pie chart + visit log + visits by school — all rendered via JS for year filtering
+# Pie chart + needs sections + visit log + visits by school
 htmltools::HTML(paste0(
 '<div style="max-width:380px; margin:0 auto 2rem; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;">
   <h4 style="margin-top:0; color:var(--epi-navy);">Schools Visited</h4>
   <canvas id="visited-pie" width="280" height="280"></canvas>
   <p id="visited-summary" style="color:#666; font-size:0.85rem; margin-top:0.75rem;"></p>
 </div>
+
+<!-- Schools Needing Full Updates -->
+<h2>Schools Needing Full Updates This Year</h2>
+<p style="color:#666; font-size:0.9rem; margin-bottom:0.75rem;">Schools that have not received a full school update during the current date range.</p>
+<div id="needs-update-container" style="margin-bottom:2rem;"></div>
 
 <h2>Visit Log</h2>
 <div id="visit-log-container" style="margin-bottom:2rem;">
@@ -81,6 +117,8 @@ htmltools::HTML(paste0(
 <script>
 var VISITS = ', visits_json, ';
 var ALL_SCHOOLS = ', schools_json, ';
+var FULL_UPDATES = ', full_updates_json, ';
+var SURVEYS = ', surveys_json, ';
 var N_TOTAL = ', n_total_schools, ';
 var visitedPieChart = null;
 var logDT = null;
@@ -92,14 +130,56 @@ function inRange(dateStr, start, end) {
   return d >= start && d <= end;
 }
 
+// Populate school filter dropdown with notification icons
+function populateSchoolFilter() {
+  var select = document.getElementById("school-filter");
+  var start = document.getElementById("date-start").value;
+  var end = document.getElementById("date-end").value;
+
+  // Determine which schools need full updates / surveys in this range
+  var schoolsWithFullUpdate = {};
+  FULL_UPDATES.forEach(function(u) {
+    if (inRange(u.update_date, start, end)) schoolsWithFullUpdate[u.school_name] = true;
+  });
+  var schoolsWithSurveys = {};
+  SURVEYS.forEach(function(s) {
+    if (inRange(s.survey_date, start, end)) schoolsWithSurveys[s.school_name] = true;
+  });
+
+  // Preserve current selection
+  var currentVal = select.value;
+  select.innerHTML = \'<option value="">All Schools</option>\';
+  ALL_SCHOOLS.forEach(function(name) {
+    var opt = document.createElement("option");
+    var needsUpdate = !schoolsWithFullUpdate[name];
+    var needsSurvey = !schoolsWithSurveys[name];
+    var icon = (needsUpdate || needsSurvey) ? "\u26A0\uFE0F " : "";
+    opt.value = name;
+    opt.textContent = icon + name;
+    select.appendChild(opt);
+  });
+  select.value = currentVal;
+}
+
 function renderVisitPage() {
   var start = document.getElementById("date-start").value;
   var end   = document.getElementById("date-end").value;
-  var filtered = VISITS.filter(function(v) { return inRange(v.visit_date, start, end); });
+  var schoolFilter = document.getElementById("school-filter").value;
+
+  populateSchoolFilter();
+
+  var filtered = VISITS.filter(function(v) {
+    if (!inRange(v.visit_date, start, end)) return false;
+    if (schoolFilter && v.school_name !== schoolFilter) return false;
+    return true;
+  });
 
   // --- Pie chart: % schools visited ---
   var visitedSchools = {};
-  filtered.forEach(function(v) { if (v.school_name) visitedSchools[v.school_name] = true; });
+  // For pie chart, always use all visits in range (ignore school filter)
+  VISITS.filter(function(v) { return inRange(v.visit_date, start, end); }).forEach(function(v) {
+    if (v.school_name) visitedSchools[v.school_name] = true;
+  });
   var nVisited = Object.keys(visitedSchools).length;
   var nNotVisited = N_TOTAL - nVisited;
 
@@ -134,6 +214,50 @@ function renderVisitPage() {
   var pctVisited = N_TOTAL > 0 ? Math.round(nVisited / N_TOTAL * 100) : 0;
   document.getElementById("visited-summary").textContent = nVisited + " of " + N_TOTAL + " schools visited (" + pctVisited + "%)";
 
+  // --- Schools Needing Full Updates ---
+  var schoolsWithFullUpdate = {};
+  FULL_UPDATES.forEach(function(u) {
+    if (inRange(u.update_date, start, end)) schoolsWithFullUpdate[u.school_name] = true;
+  });
+  var schoolsWithSurveys = {};
+  SURVEYS.forEach(function(s) {
+    if (inRange(s.survey_date, start, end)) schoolsWithSurveys[s.school_name] = true;
+  });
+
+  var needsUpdate = ALL_SCHOOLS.filter(function(name) {
+    return !schoolsWithFullUpdate[name];
+  });
+
+  var needsContainer = document.getElementById("needs-update-container");
+  if (needsUpdate.length === 0) {
+    needsContainer.innerHTML = \'<div style="background:#d4edda; border-radius:8px; padding:1rem 1.5rem; border-left:4px solid #28a745;"><p style="margin:0; color:#155724; font-weight:600;">All schools have received a full update!</p></div>\';
+  } else {
+    var needsHtml = \'<div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:0.75rem;">\';
+    needsUpdate.sort().forEach(function(name) {
+      var alsoNeedsSurvey = !schoolsWithSurveys[name];
+      var badges = \'<span style="background:#fff3cd; color:#856404; padding:0.1rem 0.4rem; border-radius:8px; font-size:0.7rem; font-weight:600;">Needs Full Update</span>\';
+      if (alsoNeedsSurvey) {
+        badges += \' <span style="background:#f8d7da; color:#721c24; padding:0.1rem 0.4rem; border-radius:8px; font-size:0.7rem; font-weight:600;">Needs Surveys</span>\';
+      }
+      var safeName = name.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+      needsHtml += \'<div class="needs-update-card" data-school="\' + safeName + \'" style="background:#fff; border-radius:6px; padding:0.75rem 1rem; box-shadow:0 1px 4px rgba(0,0,0,0.06); border-left:3px solid #ffc107; cursor:pointer;">\';
+      needsHtml += \'<div style="font-weight:600; color:var(--epi-navy); font-size:0.9rem; margin-bottom:0.3rem;">\' + name + \'</div>\';
+      needsHtml += badges;
+      needsHtml += \'</div>\';
+    });
+    needsHtml += \'</div>\';
+    needsHtml += \'<p style="color:#666; font-size:0.85rem; margin-top:0.75rem;">\' + needsUpdate.length + \' of \' + N_TOTAL + \' schools still need a full update. Click a school to filter.</p>\';
+    needsContainer.innerHTML = needsHtml;
+
+    // Add click handlers to needs-update cards
+    needsContainer.querySelectorAll(".needs-update-card").forEach(function(card) {
+      card.addEventListener("click", function() {
+        document.getElementById("school-filter").value = this.getAttribute("data-school");
+        renderVisitPage();
+      });
+    });
+  }
+
   // --- Visit Log DataTable ---
   if (logDT) { logDT.destroy(); document.getElementById("visit-log-table").innerHTML = ""; }
   var logData = filtered.map(function(v) {
@@ -159,7 +283,16 @@ function renderVisitPage() {
   var schoolCounts = {};
   ALL_SCHOOLS.forEach(function(s) { schoolCounts[s] = 0; });
   filtered.forEach(function(v) { if (v.school_name && schoolCounts.hasOwnProperty(v.school_name)) schoolCounts[v.school_name]++; });
-  var bySchoolData = Object.keys(schoolCounts).sort().map(function(s) { return [s, schoolCounts[s]]; });
+
+  var schoolList = schoolFilter ? [schoolFilter] : Object.keys(schoolCounts).sort();
+  var bySchoolData = schoolList.map(function(s) {
+    var needsFull = !schoolsWithFullUpdate[s];
+    var needsSurv = !schoolsWithSurveys[s];
+    var icons = "";
+    if (needsFull) icons += \'<span title="Needs full update" style="cursor:help;">\u26A0\uFE0F</span> \';
+    if (needsSurv) icons += \'<span title="Needs student surveys" style="cursor:help;">\uD83D\uDCCB</span> \';
+    return [icons + s, schoolCounts[s] || 0];
+  });
 
   bySchoolDT = jQuery("#visits-by-school-table").DataTable({
     data: bySchoolData,
@@ -175,12 +308,26 @@ function renderVisitPage() {
 
 // Initial render + event listeners
 document.addEventListener("DOMContentLoaded", function() {
+  // Check URL parameter for school filter (e.g., ?school=Adenya)
+  var params = new URLSearchParams(window.location.search);
+  var schoolParam = params.get("school");
+  if (schoolParam) {
+    var decoded = decodeURIComponent(schoolParam);
+    var select = document.getElementById("school-filter");
+    // Need to populate options first, then set value
+    populateSchoolFilter();
+    select.value = decoded;
+  }
+
   renderVisitPage();
   document.getElementById("btn-apply-dates").addEventListener("click", renderVisitPage);
+  document.getElementById("school-filter").addEventListener("change", renderVisitPage);
   document.getElementById("btn-reset-dates").addEventListener("click", function() {
     var now = new Date();
-    document.getElementById("date-start").value = now.getFullYear() + "-01-01";
+    var syYear = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
+    document.getElementById("date-start").value = syYear + "-08-01";
     document.getElementById("date-end").value = now.toISOString().slice(0, 10);
+    document.getElementById("school-filter").value = "";
     renderVisitPage();
   });
 });

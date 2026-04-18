@@ -22,9 +22,14 @@ clean_full <- raw_full |>
   rename(school_name = Q2) |>
   mutate(school_name = str_trim(school_name))
 
-# Date range defaults
+# Date range defaults: current school year (Aug 1 – Jul 31)
 visit_dates <- visits$visit_date[!is.na(visits$visit_date)]
-date_min <- paste0(format(Sys.Date(), "%Y"), "-01-01")
+school_year_start <- if (as.integer(format(Sys.Date(), "%m")) >= 8) {
+  paste0(format(Sys.Date(), "%Y"), "-08-01")
+} else {
+  paste0(as.integer(format(Sys.Date(), "%Y")) - 1, "-08-01")
+}
+date_min <- school_year_start
 date_max <- as.character(Sys.Date())
 
 # Build the full data object for all schools
