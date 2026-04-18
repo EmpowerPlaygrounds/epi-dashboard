@@ -95,10 +95,12 @@ htmltools::HTML(paste0(
   <p id="visited-summary" style="color:#666; font-size:0.85rem; margin-top:0.75rem;"></p>
 </div>
 
-<!-- Schools Needing Full Updates -->
-<h2>Schools Needing Full Updates This Year</h2>
-<p style="color:#666; font-size:0.9rem; margin-bottom:0.75rem;">Schools that have not received a full school update during the current date range.</p>
-<div id="needs-update-container" style="margin-bottom:2rem;"></div>
+<!-- Schools Still Needing Surveys -->
+<h2>Schools Still Needing Surveys This Year</h2>
+<p style="color:#666; font-size:0.9rem; margin-bottom:0.75rem;">Schools that still need a full school update or student surveys during the current date range.</p>
+<div id="needs-update-container" style="margin-bottom:2rem;">
+  <table id="needs-survey-table" class="display compact stripe" style="width:100%;"></table>
+</div>
 
 <h2>Visit Log</h2>
 <div id="visit-log-container" style="margin-bottom:2rem;">
@@ -123,6 +125,7 @@ var N_TOTAL = ', n_total_schools, ';
 var visitedPieChart = null;
 var logDT = null;
 var bySchoolDT = null;
+var needsDT = null;
 
 function inRange(dateStr, start, end) {
   if (!dateStr) return false;
@@ -228,33 +231,37 @@ function renderVisitPage() {
     return !schoolsWithFullUpdate[name];
   });
 
-  var needsContainer = document.getElementById("needs-update-container");
-  if (needsUpdate.length === 0) {
-    needsContainer.innerHTML = \'<div style="background:#d4edda; border-radius:8px; padding:1rem 1.5rem; border-left:4px solid #28a745;"><p style="margin:0; color:#155724; font-weight:600;">All schools have received a full update!</p></div>\';
-  } else {
-    var needsHtml = \'<div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:0.75rem;">\';
-    needsUpdate.sort().forEach(function(name) {
-      var alsoNeedsSurvey = !schoolsWithSurveys[name];
-      var badges = \'<span style="background:#fff3cd; color:#856404; padding:0.1rem 0.4rem; border-radius:8px; font-size:0.7rem; font-weight:600;">Needs Full Update</span>\';
-      if (alsoNeedsSurvey) {
-        badges += \' <span style="background:#f8d7da; color:#721c24; padding:0.1rem 0.4rem; border-radius:8px; font-size:0.7rem; font-weight:600;">Needs Surveys</span>\';
-      }
-      var safeName = name.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
-      needsHtml += \'<div class="needs-update-card" data-school="\' + safeName + \'" style="background:#fff; border-radius:6px; padding:0.75rem 1rem; box-shadow:0 1px 4px rgba(0,0,0,0.06); border-left:3px solid #ffc107; cursor:pointer;">\';
-      needsHtml += \'<div style="font-weight:600; color:var(--epi-navy); font-size:0.9rem; margin-bottom:0.3rem;">\' + name + \'</div>\';
-      needsHtml += badges;
-      needsHtml += \'</div>\';
-    });
-    needsHtml += \'</div>\';
-    needsHtml += \'<p style="color:#666; font-size:0.85rem; margin-top:0.75rem;">\' + needsUpdate.length + \' of \' + N_TOTAL + \' schools still need a full update. Click a school to filter.</p>\';
-    needsContainer.innerHTML = needsHtml;
+  // Build needs-survey table: schools that need either full update or student surveys
+  if (needsDT) { needsDT.destroy(); document.getElementById("needs-survey-table").innerHTML = ""; }
 
-    // Add click handlers to needs-update cards
-    needsContainer.querySelectorAll(".needs-update-card").forEach(function(card) {
-      card.addEventListener("click", function() {
-        document.getElementById("school-filter").value = this.getAttribute("data-school");
-        renderVisitPage();
-      });
+  var needsSomething = ALL_SCHOOLS.filter(function(name) {
+    return !schoolsWithFullUpdate[name] || !schoolsWithSurveys[name];
+  });
+
+  if (needsSomething.length === 0) {
+    document.getElementById("needs-update-container").innerHTML = \'<div style="background:#d4edda; border-radius:8px; padding:1rem 1.5rem; border-left:4px solid #28a745;"><p style="margin:0; color:#155724; font-weight:600;">All schools are up to date!</p></div>\';
+  } else {
+    var needsData = needsSomething.sort().map(function(name) {
+      var nf = !schoolsWithFullUpdate[name];
+      var ns = !schoolsWithSurveys[name];
+      return [
+        name,
+        nf ? \'<span style="color:#dc3545; font-size:1.1rem;" title="Still needed">\u2714</span>\' : \'<span style="color:#ccc;">—</span>\',
+        ns ? \'<span style="color:#dc3545; font-size:1.1rem;" title="Still needed">\u2714</span>\' : \'<span style="color:#ccc;">—</span>\'
+      ];
+    });
+
+    needsDT = jQuery("#needs-survey-table").DataTable({
+      data: needsData,
+      columns: [
+        { title: "School" },
+        { title: "Needs Full Update", className: "dt-center", width: "140px" },
+        { title: "Needs Student Surveys", className: "dt-center", width: "160px" }
+      ],
+      pageLength: 15,
+      order: [[0, "asc"]],
+      dom: "lfrtip",
+      language: { search: "Search:" }
     });
   }
 
