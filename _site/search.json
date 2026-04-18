@@ -53,14 +53,21 @@
     "href": "visits.html",
     "title": "Visit Tracker",
     "section": "",
-    "text": "Date Range:toApplyReset\n\n\n\n\n\n  Schools Visited\n  \n  \n\n\nVisit Log\n\n  \n\n\nVisits by School"
+    "text": "Date Range:toAll SchoolsApplyReset\n\n\n\n\n\n  Schools Visited\n  \n  \n\n\n\nSchools Needing Full Updates This Year\nSchools that have not received a full school update during the current date range.\n\n\nVisit Log\n\n  \n\n\nVisits by School"
   },
   {
     "objectID": "schools.html",
     "href": "schools.html",
     "title": "School Profiles",
     "section": "",
-    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n  Print Reports\n\n\n\n  Select a School:\n  \n    — Choose a school —\n    Abrenya\nAdenya\nAdor Kope R/C Primary\nAfransua Dedewa MA Primary\nAkwanserem\nAkwansu\nAkyeremanteng\nAlorkpem Island\nAmuyaokope\nAnamenampa\nAnateem Sumbrungu\nApaah\nAtaampuutum A/B\nAttabui\nAzizakpem\nBahankra\nBegoro\nBepotumtum\nBomigo\nCommunity 3\nCommunity 9\nDagomba\nDedenya\nDedewa\nDomase\nEbourso\nEkorso Akwadum\nEssam\nFanterila\nFawotrikosie\nFerekoroba\nGalalia\nGloucester R.E.C. (Sierra Leone)\nGourcy Burkina Faso School\nImmanuel Christian Academy (Liberia)\nKoni Kablu\nKpala Government\nKpala Private\nKurasua #1 MA\nLuta\nMadavunu\nMamakrom\nMampong Shai\nMansokwa\nMantukwa\nMeyikpoi\nMinya\nMobia\nMosipanin\nMpaem\nNtomem\nNwawasua MA\nNwowom\nNyapienya\nNyariga Girls' School\nObani\nObelemanya\nObosonu\nOld Konkompe\nOyoko\nPaynesville Community (Liberia)\nPediatorkope\nSunyani\nTerhey\nTorjeh\nTreeplanting FBC (Sierra Leone)\nTsledom\nTuanikope\nTun Tun\nWangarakrom\nWatro (Watroso)\nWekpeti Abresu\nWenamda\nWurudu Wurudu\nYonguase\nYorogo-Asorogobisi\nZippo Nyuinyui\n  \n\n\n\n\n\n  \n  \n\n\n\n\nPrograms\n\n\n\nSchool Details\n\n  \n    Student Enrollment Breakdown\n    \n    No class data available\n  \n  \n\n\n\nNotes From Last Visit\n\n\nAI Summary\n\n  AI-powered summary of visit notes organized by strengths, challenges, and recommendations.\n  Generate AI Summary"
+    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n  Print Reports\n\n\n\n  Select a School:\n  \n    — Choose a school —\n    Abrenya\nAdenya\nAdor Kope R/C Primary\nAfransua Dedewa MA Primary\nAkwanserem\nAkwansu\nAkyeremanteng\nAlorkpem Island\nAmuyaokope\nAnamenampa\nAnateem Sumbrungu\nApaah\nAtaampuutum A/B\nAttabui\nAzizakpem\nBahankra\nBegoro\nBepotumtum\nBomigo\nCommunity 3\nCommunity 9\nDagomba\nDedenya\nDedewa\nDomase\nEbourso\nEkorso Akwadum\nEssam\nFanterila\nFawotrikosie\nFerekoroba\nGalalia\nGloucester R.E.C. (Sierra Leone)\nGourcy Burkina Faso School\nImmanuel Christian Academy (Liberia)\nKoni Kablu\nKpala Government\nKpala Private\nKurasua #1 MA\nLuta\nMadavunu\nMamakrom\nMampong Shai\nMansokwa\nMantukwa\nMeyikpoi\nMinya\nMobia\nMosipanin\nMpaem\nNtomem\nNwawasua MA\nNwowom\nNyapienya\nNyariga Girls' School\nObani\nObelemanya\nObosonu\nOld Konkompe\nOyoko\nPaynesville Community (Liberia)\nPediatorkope\nSunyani\nTerhey\nTorjeh\nTreeplanting FBC (Sierra Leone)\nTsledom\nTuanikope\nTun Tun\nWangarakrom\nWatro (Watroso)\nWekpeti Abresu\nWenamda\nWurudu Wurudu\nYonguase\nYorogo-Asorogobisi\nZippo Nyuinyui\n  \n\n\n\n\n\n  \n  \n\n\n\n\nPrograms\n\n\n\nSchool Details\n\n  \n    Student Enrollment Breakdown\n    \n    No class data available\n  \n  \n\n\n\nNotes From Last Visit (click to view all)\n\n\n\n  Open Issues\n  \n\n\nAI Summary\n\n  AI-powered summary of visit notes organized by strengths, challenges, and recommendations.\n  Generate AI Summary"
+  },
+  {
+    "objectID": "new-projects.html",
+    "href": "new-projects.html",
+    "title": "New Projects",
+    "section": "",
+    "text": "16\n    Total Projects\n  \n  \n    13\n    Schools\n  \n\n\n\n\n  Date Range:\n  \n  to\n  \n  Apply\n  Reset"
   },
   {
     "objectID": "surveys.html",
@@ -88,7 +95,7 @@
     "href": "index.html",
     "title": "Overview",
     "section": "",
-    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n  Download Data\n\n\n\n\n  \n    \n    \n      Dataset\n      \n        Quick School Updates\n        Full School Updates\n        New Projects\n        Student Surveys\n        School Overviews\n      \n    \n    \n      Date Range\n      \n        \n        to\n        \n      \n    \n    \n      Cancel\n      Download CSV\n    \n  \n\n\n\n\n  \n    \n    Field Visits\n  \n  \n    \n    New Projects\n  \n  \n    \n    Full Updates\n  \n  \n    \n    Student Surveys\n  \n  \n    \n    Open Issues"
+    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n  Download Data\n\n\n\n\n  \n    \n    \n      Dataset\n      \n        Quick School Updates\n        Full School Updates\n        New Projects\n        Student Surveys\n        School Overviews\n      \n    \n    \n      Date Range\n      \n        \n        to\n        \n      \n    \n    \n      Cancel\n      Download CSV\n    \n  \n\n\n\n\n  \n    \n    New Projects\n  \n  \n    \n    Need Full Updates\n  \n  \n    \n    Open Issues\n  \n  \n    \n    Schools Visited"
   },
   {
     "objectID": "index.html#school-map",
@@ -116,6 +123,6 @@
     "href": "issues.html",
     "title": "Issues & Flags",
     "section": "",
-    "text": "9\n    Open Issues\n  \n  \n    0\n    Resolved\n  \n\n\n\nOpen Issues\nUrgent issues flagged during field visits. Click Resolve to mark an issue as addressed.\n\n\n\nResolved Issues\n\n\n\n\n  \n    Resolve Issue\n    \n    \n    \n      Your Name *\n      \n    \n    \n      Resolution Notes (optional)\n      \n    \n    \n    \n      Cancel\n      Confirm Resolution"
+    "text": "8\n    Open Issues\n  \n  \n    1\n    Resolved\n  \n\n\n\nOpen Issues\nUrgent issues flagged during field visits. Click Resolve to mark an issue as addressed.\n\n\n\nResolved Issues\n\n\n\n\n  \n    Resolve Issue\n    \n    \n    \n      Your Name *\n      \n    \n    \n      Resolution Notes (optional)\n      \n    \n    \n    \n      Cancel\n      Confirm Resolution"
   }
 ]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Issues &amp; Flags – EPI Data Dashboard</title>
+<title>New Projects – EPI Data Dashboard</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -113,11 +113,11 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Student Surveys</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./new-projects.html"> 
+    <a class="nav-link active" href="./new-projects.html" aria-current="page"> 
 <span class="menu-text">New Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./issues.html" aria-current="page"> 
+    <a class="nav-link" href="./issues.html"> 
 <span class="menu-text">Issues</span></a>
   </li>  
 </ul>
@@ -137,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Issues &amp; Flags</h1>
+<h1 class="title">New Projects</h1>
 </div>
 
 
@@ -157,182 +157,152 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 <div class="cell-output-display">
 <!-- Stat Cards -->
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; max-width:400px; margin:0 auto 2rem;">
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap:1rem; max-width:700px; margin:0 auto 1.5rem;">
   <div class="stat-card" style="padding:1rem;">
-    <span id="stat-open" class="stat-value" style="font-size:1.8rem; display:block;">8</span>
-    <span class="stat-label" style="font-size:0.75rem;">Open Issues</span>
+    <span id="stat-total" class="stat-value" style="font-size:1.8rem; display:block;">16</span>
+    <span class="stat-label" style="font-size:0.75rem;">Total Projects</span>
   </div>
   <div class="stat-card" style="padding:1rem;">
-    <span id="stat-resolved" class="stat-value" style="font-size:1.8rem; display:block; color:#28a745;">1</span>
-    <span class="stat-label" style="font-size:0.75rem;">Resolved</span>
+    <span id="stat-schools" class="stat-value" style="font-size:1.8rem; display:block;">13</span>
+    <span class="stat-label" style="font-size:0.75rem;">Schools</span>
   </div>
 </div>
 
-<!-- Open Issues -->
-<h2 class="anchored">Open Issues</h2>
-<p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">Urgent issues flagged during field visits. Click <strong>Resolve</strong> to mark an issue as addressed.</p>
-<div id="open-issues-container"></div>
-
-<!-- Resolved Issues -->
-<h2 class="anchored">Resolved Issues</h2>
-<div id="resolved-issues-container"></div>
-
-<!-- Resolve Modal -->
-<div id="resolve-modal" onclick="if(event.target===this)closeResolveModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
-  <div style="background:#fff; border-radius:12px; padding:2rem; max-width:480px; width:90%; box-shadow:0 8px 32px rgba(0,0,0,0.2);">
-    <h3 style="color:var(--epi-navy); margin-top:0; margin-bottom:0.5rem;" class="anchored">Resolve Issue</h3>
-    <p id="resolve-modal-school" style="font-weight:600; color:var(--epi-navy); margin-bottom:0.25rem;"></p>
-    <p id="resolve-modal-issue" style="color:#555; font-size:0.9rem; margin-bottom:1.25rem; padding:0.75rem; background:#f8f9fa; border-radius:4px; border-left:3px solid #dc3545;"></p>
-    <div style="margin-bottom:1rem;">
-      <label style="font-weight:600; color:var(--epi-navy); font-size:0.85rem; display:block; margin-bottom:0.35rem;">Your Name *</label>
-      <input type="text" id="resolve-by" placeholder="e.g. Richard" style="width:100%; padding:0.5rem; border:1px solid #ccc; border-radius:4px; font-size:0.9rem; box-sizing:border-box;">
-    </div>
-    <div style="margin-bottom:1.25rem;">
-      <label style="font-weight:600; color:var(--epi-navy); font-size:0.85rem; display:block; margin-bottom:0.35rem;">Resolution Notes (optional)</label>
-      <textarea id="resolve-notes" rows="3" placeholder="What was done to address this issue?" style="width:100%; padding:0.5rem; border:1px solid #ccc; border-radius:4px; font-size:0.9rem; resize:vertical; box-sizing:border-box;"></textarea>
-    </div>
-    <div id="resolve-error" style="display:none; color:#dc3545; font-size:0.85rem; margin-bottom:0.75rem;"></div>
-    <div style="display:flex; gap:0.75rem; justify-content:flex-end;">
-      <button onclick="closeResolveModal()" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.5rem 1.25rem; font-size:0.85rem; cursor:pointer;">Cancel</button>
-      <button id="btn-confirm-resolve" onclick="submitResolve()" style="background:#28a745; color:#fff; border:none; border-radius:4px; padding:0.5rem 1.25rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Confirm Resolution</button>
-    </div>
-  </div>
+<!-- Date Range Filter -->
+<div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-bottom:1.5rem; justify-content:center;">
+  <label style="font-weight:600; color:var(--epi-navy);">Date Range:</label>
+  <input type="date" id="date-start" value="2025-08-01" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
+  <span>to</span>
+  <input type="date" id="date-end" value="2026-04-18" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
+  <button id="btn-apply-dates" style="background:var(--epi-navy); color:#fff; border:none; padding:0.4rem 1rem; border-radius:4px; cursor:pointer; font-weight:600;">Apply</button>
+  <button id="btn-reset-dates" style="background:#e9ecef; color:#333; border:none; padding:0.4rem 1rem; border-radius:4px; cursor:pointer;">Reset</button>
 </div>
+
+<!-- Project Cards Container -->
+<div id="projects-container"></div>
 
 <script>
-var OPEN_ISSUES = [{"school_name":"Bahankra","urgent_issues":"The school borehole isn’t working well","visit_reason":"Routine Visit","activities":"Routine Visit","observations":null,"visit_date":"2026-01-12","visitor":"Richard","issue_id":"7987dcd738ac","slug":"bahankra"},{"school_name":"Domase","urgent_issues":"Immediate training for the science kits program","visit_reason":"Routine Visit,Look at the borehole and the classroom","activities":"Routine Visit","observations":"Student population are increasing. Their classroom isn’t sufficient to cater for the students body","visit_date":"2026-01-12","visitor":"Richard","issue_id":"69182b15ce94","slug":"domase"},{"school_name":"Abrenya","urgent_issues":"I met with the Headmaster and the SMC chairman to finds ways to improve the use.","visit_reason":"Routine Visit,Initiate the process of building a computer Lab","activities":"Routine Visit,Student Survey Team Visit","observations":"The school is doing well in academics. Since they got electricity recently. The school has wired all classroom with light and are doing night studies for the students who stay in close proximity","visit_date":"2026-01-14","visitor":"Richard","issue_id":"deccb47f041e","slug":"abrenya"},{"school_name":"Akwansu","urgent_issues":"New charging stations because the JHS is far from the primary school block, we are in process of building a new charging station for the school","visit_reason":"Routine Visit","activities":"Routine Visit,Science Kit Training/Distribution","observations":"None","visit_date":"2026-01-19","visitor":"Alex","issue_id":"c919b6321892","slug":"akwansu"},{"school_name":"Bepotumtum","urgent_issues":"Leakage at the one of the windows of the lab. Rains come inside the lab.","visit_reason":"Computer Maintenance,Student Survey Team Visit","activities":"Routine Visit,Computer Maintenance,Student Survey Team Visit","observations":null,"visit_date":"2026-01-19","visitor":"Richard","issue_id":"4c0febebf03b","slug":"bepotumtum"},{"school_name":"Tun Tun","urgent_issues":"Parent teacher meeting to help the parents understand the lantern program","visit_reason":"Routine Visit,MGR/Charging Maintenance","activities":"Routine Visit,MGR/Charging Maintenance,Science Kit Training/Distribution,Student Survey Team Visit","observations":null,"visit_date":"2026-01-27","visitor":"Richard","issue_id":"79d4e78cc06c","slug":"tun-tun"},{"school_name":"Ekorso Akwadum","urgent_issues":"They are relocating to a new rooms shortly","visit_reason":"Computer Maintenance","activities":"Computer Maintenance","observations":null,"visit_date":"2026-02-12","visitor":"Richard","issue_id":"09c7ca8732f8","slug":"ekorso-akwadum"},{"school_name":"Dagomba","urgent_issues":"Increase of computers or improve current schedule","visit_reason":"MGR/Charging Maintenance,Computer Maintenance,Science Kit Training/Distribution","activities":"MGR/Charging Maintenance","observations":null,"visit_date":"2026-02-23","visitor":"Richard","issue_id":"915e27a7110f","slug":"dagomba"}];
-var RESOLVED_ISSUES = [{"school_name":"Akwanserem","urgent_issues":"The lantern group was recognized immediately","visit_reason":"Routine Visit,MGR/Charging Maintenance","activities":"Routine Visit,MGR/Charging Maintenance","observations":null,"visit_date":"2026-01-12","visitor":"Richard","issue_id":"1c536a9b85a9","resolved_date":"2026-04-17","resolved_by":"Morgan","resolution_notes":"Looks like accidental entry","slug":"akwanserem"}];
-var currentResolveIssue = null;
+var ALL_PROJECTS = [{"project_date":"2026-03-17","project_type":"Starlink","school_name":"Alorkpem Island","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"Starlink installed in EPI computer lab. RACHEL device replaced","notes":null},{"project_date":"2026-03-14","project_type":"Building Construction","school_name":"Mobia","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"Teacher Bungalow (4 rooms)","notes":null},{"project_date":"2026-03-11","project_type":"Starlink","school_name":"Pediatorkope","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"Starlink installed in EPI computer lab. RACHEL device replaced","notes":null},{"project_date":"2026-03-11","project_type":"Starlink","school_name":"Pediatorkope","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"Starlink installed in EPI computer lab. RACHEL device replaced","notes":null},{"project_date":"2026-03-07","project_type":"GROW Project","school_name":"Pediatorkope","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-20","project_type":"GROW Project","school_name":"Anamenampa","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-20","project_type":"GROW Project","school_name":"Afransua Dedewa MA Primary","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-20","project_type":"GROW Project","school_name":"Dedenya","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-20","project_type":"GROW Project","school_name":"Fawotrikosie","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-20","project_type":"GROW Project","school_name":"Wurudu Wurudu","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-20","project_type":"GROW Project","school_name":"Amuyaokope","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-02","project_type":"Starlink","school_name":"Luta","is_new_school":false,"visitor":"Richard","has_partner":false,"partner_name":null,"summary":"Starlink installed in EPI computer lab","notes":null},{"project_date":"2026-01-26","project_type":"Electricity Generating MGR Installation","school_name":"Adenya","is_new_school":false,"visitor":"Isaac","has_partner":true,"partner_name":"Roberts Family Foundation","summary":"17 lanterns distributed, 10 lantern groups (~3 students/group). MGR moved from Attabui","notes":null},{"project_date":"2026-01-26","project_type":"Solar Project for Lanterns Specifically (No MGR)","school_name":"Adenya","is_new_school":false,"visitor":"Isaac","has_partner":false,"partner_name":null,"summary":"16 lanterns distributed","notes":null},{"project_date":"2026-01-26","project_type":"Solar Project (not for lanterns)","school_name":"Akwanserem","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"12 solar panels installed","notes":null},{"project_date":"2026-01-26","project_type":"Building Construction,Science Kit Distribution,Menstrual Kit Distribution","school_name":"Abrenya","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"Teacher Bungalow (4 rooms). 5 science kits given. Menstrual kits distributed","notes":null}];
 
-function makeIssueCard(issue, isResolved) {
-  var border = isResolved ? "border-left:4px solid #28a745;" : "border-left:4px solid #dc3545;";
-  var html = '<div id="issue-' + issue.issue_id + '" style="background:#fff; border-radius:8px; padding:1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1rem; ' + border + '">';
-  html += '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">';
-  html += '<a href="schools.html?school=' + (issue.slug || "") + '" style="color:var(--epi-navy); font-weight:700; font-size:1rem; text-decoration:none; border-bottom:1px dashed var(--epi-navy);">' + issue.school_name + '</a>';
-  var meta = (issue.visit_date || "");
-  if (issue.visitor) meta += " &middot; " + issue.visitor;
-  html += '<span style="color:#999; font-size:0.8rem;">' + meta + '</span>';
+// Color mapping for project types
+var TYPE_COLORS = {
+  "Electricity Generating MGR Installation": {bg: "#fff3cd", border: "#ffc107", label: "MGR Installation"},
+  "Solar Project for Lanterns Specifically (No MGR)": {bg: "#d1ecf1", border: "#17a2b8", label: "Solar (Lanterns)"},
+  "Solar Project (not for lanterns)": {bg: "#d1ecf1", border: "#17a2b8", label: "Solar"},
+  "Starlink": {bg: "#e2e3f1", border: "#6f42c1", label: "Starlink"},
+  "Building Construction": {bg: "#f5d6cc", border: "#dc3545", label: "Building Construction"},
+  "GROW Project": {bg: "#d4edda", border: "#28a745", label: "GROW Project"},
+  "Science Kit Distribution": {bg: "#fde8d0", border: "#fd7e14", label: "Science Kits"},
+  "Menstrual Kit Distribution": {bg: "#f8d7da", border: "#e83e8c", label: "Menstrual Kits"}
+};
+
+function getTypeInfo(projectType) {
+  // Check for exact match first
+  if (TYPE_COLORS[projectType]) return TYPE_COLORS[projectType];
+  // Check for partial matches (for combined types like "Building,Science,Menstrual")
+  for (var key in TYPE_COLORS) {
+    if (projectType.indexOf(key) >= 0) return TYPE_COLORS[key];
+  }
+  return {bg: "#e9ecef", border: "#6c757d", label: projectType};
+}
+
+function makeProjectCard(p) {
+  var typeInfo = getTypeInfo(p.project_type);
+  var types = p.project_type.split(",");
+
+  var badgesHtml = "";
+  types.forEach(function(t) {
+    var info = getTypeInfo(t.trim());
+    badgesHtml += '<span style="display:inline-block; background:' + info.bg + '; color:#333; border:1px solid ' + info.border + '; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600; margin-right:0.35rem; margin-bottom:0.25rem;">' + info.label + '</span>';
+  });
+
+  var html = '<div style="background:#fff; border-radius:8px; padding:1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1rem; border-left:4px solid ' + typeInfo.border + ';">';
+
+  // Header row: school name + date
+  html += '<div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem; flex-wrap:wrap; gap:0.5rem;">';
+  html += '<div>';
+  html += '<span style="color:var(--epi-navy); font-weight:700; font-size:1.05rem;">' + p.school_name + '</span>';
+  if (p.is_new_school) {
+    html += ' <span style="background:#dc3545; color:#fff; padding:0.1rem 0.5rem; border-radius:10px; font-size:0.7rem; font-weight:600;">NEW SCHOOL</span>';
+  }
+  html += '</div>';
+  var dateStr = p.project_date || "";
+  if (dateStr) {
+    var d = new Date(dateStr + "T00:00:00");
+    dateStr = d.toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"});
+  }
+  html += '<span style="color:#999; font-size:0.8rem; white-space:nowrap;">' + dateStr + '</span>';
   html += '</div>';
 
-  if (isResolved) {
-    html += '<p style="font-size:0.9rem; margin:0.25rem 0 0; color:#999; text-decoration:line-through;">' + issue.urgent_issues + '</p>';
-    html += '<details style="margin-top:0.5rem;"><summary style="cursor:pointer; font-size:0.85rem; color:var(--epi-navy); font-weight:600;">Resolution details</summary>';
-    html += '<div style="margin-top:0.5rem; padding:0.75rem; background:#f0faf0; border-radius:4px; font-size:0.85rem;">';
-    html += '<p style="margin:0 0 0.25rem;"><strong>Resolved by:</strong> ' + (issue.resolved_by || "—") + ' on ' + (issue.resolved_date || "—") + '</p>';
-    if (issue.resolution_notes) {
-      html += '<p style="margin:0;"><strong>Notes:</strong> ' + issue.resolution_notes + '</p>';
-    }
-    html += '</div></details>';
-  } else {
-    html += '<p style="font-size:0.9rem; margin:0.25rem 0 0; color:#333;">' + issue.urgent_issues + '</p>';
-    if (issue.visit_reason && issue.visit_reason !== "null") {
-      html += '<p style="font-size:0.8rem; margin:0.25rem 0 0; color:#999;">Visit reason: ' + issue.visit_reason + '</p>';
-    }
-    html += '<button class="btn-resolve" onclick="openResolveModal(\'' + issue.issue_id + '\')">Resolve</button>';
+  // Type badges
+  html += '<div style="margin-bottom:0.5rem;">' + badgesHtml + '</div>';
+
+  // Partner
+  if (p.has_partner && p.partner_name) {
+    html += '<p style="font-size:0.85rem; margin:0.25rem 0; color:#555;"><strong>Partner:</strong> ' + p.partner_name + '</p>';
+  }
+
+  // Summary
+  if (p.summary && p.summary !== p.project_type) {
+    html += '<p style="font-size:0.9rem; margin:0.4rem 0 0; color:#333;">' + p.summary + '</p>';
+  }
+
+  // Notes
+  if (p.notes) {
+    html += '<p style="font-size:0.85rem; margin:0.4rem 0 0; color:#666; font-style:italic;">Notes: ' + p.notes + '</p>';
+  }
+
+  // Visitor
+  if (p.visitor) {
+    html += '<p style="font-size:0.8rem; margin:0.35rem 0 0; color:#aaa;">Recorded by ' + p.visitor + '</p>';
   }
 
   html += '</div>';
   return html;
 }
 
-function renderIssues() {
-  var openHtml = "";
-  if (OPEN_ISSUES.length === 0) {
-    openHtml = '<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#28a745; font-weight:600; margin:0;">All issues have been resolved!</p></div>';
-  } else {
-    OPEN_ISSUES.forEach(function(issue) {
-      openHtml += makeIssueCard(issue, false);
-    });
-  }
-  document.getElementById("open-issues-container").innerHTML = openHtml;
+function renderProjects() {
+  var startDate = document.getElementById("date-start").value;
+  var endDate = document.getElementById("date-end").value;
 
-  var resolvedHtml = "";
-  if (RESOLVED_ISSUES.length === 0) {
-    resolvedHtml = '<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#999; font-style:italic; margin:0;">No resolved issues yet.</p></div>';
-  } else {
-    RESOLVED_ISSUES.forEach(function(issue) {
-      resolvedHtml += makeIssueCard(issue, true);
-    });
-  }
-  document.getElementById("resolved-issues-container").innerHTML = resolvedHtml;
+  var filtered = ALL_PROJECTS.filter(function(p) {
+    if (!p.project_date) return true;
+    if (startDate && p.project_date < startDate) return false;
+    if (endDate && p.project_date > endDate) return false;
+    return true;
+  });
 
-  document.getElementById("stat-open").textContent = OPEN_ISSUES.length;
-  document.getElementById("stat-resolved").textContent = RESOLVED_ISSUES.length;
-}
+  // Update stat cards
+  document.getElementById("stat-total").textContent = filtered.length;
+  var uniqueSchools = {};
+  filtered.forEach(function(p) { uniqueSchools[p.school_name] = true; });
+  document.getElementById("stat-schools").textContent = Object.keys(uniqueSchools).length;
 
-function openResolveModal(issueId) {
-  currentResolveIssue = OPEN_ISSUES.find(function(i) { return i.issue_id === issueId; });
-  if (!currentResolveIssue) return;
-  document.getElementById("resolve-modal-school").textContent = currentResolveIssue.school_name;
-  document.getElementById("resolve-modal-issue").textContent = currentResolveIssue.urgent_issues;
-  document.getElementById("resolve-by").value = "";
-  document.getElementById("resolve-notes").value = "";
-  document.getElementById("resolve-error").style.display = "none";
-  document.getElementById("btn-confirm-resolve").disabled = false;
-  document.getElementById("btn-confirm-resolve").textContent = "Confirm Resolution";
-  document.getElementById("resolve-modal").style.display = "flex";
-}
-
-function closeResolveModal() {
-  document.getElementById("resolve-modal").style.display = "none";
-  currentResolveIssue = null;
-}
-
-async function submitResolve() {
-  if (!currentResolveIssue) return;
-  var resolvedBy = document.getElementById("resolve-by").value.trim();
-  if (!resolvedBy) {
-    var errDiv = document.getElementById("resolve-error");
-    errDiv.textContent = "Please enter your name.";
-    errDiv.style.display = "block";
+  // Render cards
+  var container = document.getElementById("projects-container");
+  if (filtered.length === 0) {
+    container.innerHTML = '<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;"><p style="color:#999; font-style:italic; margin:0;">No projects found in this date range.</p></div>';
     return;
   }
 
-  var btn = document.getElementById("btn-confirm-resolve");
-  btn.disabled = true;
-  btn.textContent = "Submitting...";
-  document.getElementById("resolve-error").style.display = "none";
-
-  try {
-    var resp = await fetch("/api/resolve-issue", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        issue_id: currentResolveIssue.issue_id,
-        school_name: currentResolveIssue.school_name,
-        issue_text: currentResolveIssue.urgent_issues,
-        visit_date: currentResolveIssue.visit_date,
-        resolved_by: resolvedBy,
-        resolution_notes: document.getElementById("resolve-notes").value.trim()
-      })
-    });
-    var data = await resp.json();
-    if (!resp.ok || data.error) {
-      throw new Error(data.error || "Failed to resolve issue");
-    }
-
-    // Move issue from open to resolved
-    var resolved = Object.assign({}, currentResolveIssue, {
-      resolved_by: resolvedBy,
-      resolved_date: data.resolved_date,
-      resolution_notes: document.getElementById("resolve-notes").value.trim()
-    });
-    OPEN_ISSUES = OPEN_ISSUES.filter(function(i) { return i.issue_id !== currentResolveIssue.issue_id; });
-    RESOLVED_ISSUES.unshift(resolved);
-
-    closeResolveModal();
-    renderIssues();
-  } catch (err) {
-    var errDiv = document.getElementById("resolve-error");
-    errDiv.textContent = "Error: " + err.message;
-    errDiv.style.display = "block";
-    btn.disabled = false;
-    btn.textContent = "Confirm Resolution";
-  }
+  var html = "";
+  filtered.forEach(function(p) {
+    html += makeProjectCard(p);
+  });
+  container.innerHTML = html;
 }
 
-// Initial render
-document.addEventListener("DOMContentLoaded", renderIssues);
+document.addEventListener("DOMContentLoaded", function() {
+  renderProjects();
+  document.getElementById("btn-apply-dates").addEventListener("click", renderProjects);
+  document.getElementById("btn-reset-dates").addEventListener("click", function() {
+    var now = new Date();
+    var syYear = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
+    document.getElementById("date-start").value = syYear + "-08-01";
+    document.getElementById("date-end").value = now.toISOString().slice(0, 10);
+    renderProjects();
+  });
+});
 </script>
 
 </div>

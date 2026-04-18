@@ -38,6 +38,12 @@
   letter-spacing: 0.05em;
 }
 
+/* Clickable stat cards */
+a.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
 /* Program bar charts */
 .program-bar {
   background: #e9ecef;
