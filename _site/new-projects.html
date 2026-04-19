@@ -260,12 +260,6 @@ function renderProjects() {
     return true;
   });
 
-  // Update stat cards
-  document.getElementById("stat-total").textContent = filtered.length;
-  var uniqueSchools = {};
-  filtered.forEach(function(p) { uniqueSchools[p.school_name] = true; });
-  document.getElementById("stat-schools").textContent = Object.keys(uniqueSchools).length;
-
   // Render cards
   var container = document.getElementById("projects-container");
   if (filtered.length === 0) {
