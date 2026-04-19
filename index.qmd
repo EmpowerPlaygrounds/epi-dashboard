@@ -130,16 +130,16 @@ htmltools::HTML(paste0(
   </a>
   <a href="visits.html" class="stat-card" style="text-align:center; padding:1.25rem; text-decoration:none; cursor:pointer; transition:transform 0.15s;">
     <span id="stat-needs-update" class="stat-value" style="font-size:2rem; display:block; color:#dc3545;"></span>
-    <span class="stat-label">Need Full Updates</span>
+    <span class="stat-label">Schools Need Full Updates</span>
   </a>
   <a href="issues.html" class="stat-card" style="text-align:center; padding:1.25rem; text-decoration:none; cursor:pointer; transition:transform 0.15s;">
-    <span id="stat-issues" class="stat-value" style="font-size:2rem; display:block;"></span>
+    <span id="stat-issues" class="stat-value" style="font-size:2rem; display:block; color:#dc3545;"></span>
     <span class="stat-label">Open Issues</span>
   </a>
-  <div class="stat-card" style="text-align:center; padding:1.25rem;">
+  <a href="visits.html" class="stat-card" style="text-align:center; padding:1.25rem; text-decoration:none; cursor:pointer; transition:transform 0.15s;">
     <span id="stat-schools-visited" class="stat-value" style="font-size:2rem; display:block;"></span>
     <span class="stat-label">Schools Visited</span>
-  </div>
+  </a>
 </div>'
 ))
 ```
@@ -170,42 +170,16 @@ leaflet(schools_with_coords) |>
   )
 ```
 
-## Recent New Projects
-
-```{r}
-#| echo: false
-htmltools::HTML('
-<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:2rem;">
-  <table id="recent-projects-table" class="table table-striped" style="width:100%;">
-    <thead>
-      <tr>
-        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Date</th>
-        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">School</th>
-        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Staff</th>
-        <th style="background:var(--epi-navy); color:#fff; padding:0.75rem;">Project Type</th>
-      </tr>
-    </thead>
-    <tbody id="recent-projects-body"></tbody>
-  </table>
-</div>
-')
-```
-
 ## Programs at a Glance
 
 ```{r}
 #| echo: false
 htmltools::HTML('
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:2rem;">
+<div style="max-width:600px; margin:0 auto 2rem;">
   <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
     <h4 style="color:var(--epi-navy); margin-top:0;">Program Reach</h4>
     <p style="color:#999; font-size:0.8rem; margin-bottom:1rem;">% of schools with each program</p>
     <div id="program-bars"></div>
-  </div>
-  <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-    <h4 style="color:var(--epi-navy); margin-top:0;">Schools with Open Issues</h4>
-    <p style="color:#999; font-size:0.8rem; margin-bottom:1rem;">Schools where field staff flagged urgent issues (in date range)</p>
-    <div id="issues-summary"></div>
   </div>
 </div>
 ')
@@ -272,31 +246,6 @@ function renderDashboard() {
   document.getElementById('stat-issues').textContent    = issues.length;
   document.getElementById('stat-schools-visited').textContent = nSchoolsVisited + '/' + nTotalSchools;
 
-  // Recent Projects table
-  var sortedProjects = projects.slice().sort(function(a, b) {
-    return (b.project_date || '').localeCompare(a.project_date || '');
-  });
-  var projectsBody = document.getElementById('recent-projects-body');
-  projectsBody.innerHTML = '';
-  sortedProjects.forEach(function(p) {
-    var tr = document.createElement('tr');
-    tr.innerHTML =
-      '<td style="' + cs + '">' + (p.project_date || '') + '</td>' +
-      '<td style="' + cs + '">' + (p.school_name || '') + '</td>' +
-      '<td style="' + cs + '">' + (p.visitor || '') + '</td>' +
-      '<td style="' + cs + '">' + (p.project_type || '') + '</td>';
-    projectsBody.appendChild(tr);
-  });
-
-  if (projectsTable) { projectsTable.destroy(); projectsTable = null; }
-  if (typeof jQuery !== 'undefined' && jQuery.fn.DataTable) {
-    projectsTable = jQuery('#recent-projects-table').DataTable({
-      pageLength: 10,
-      order: [[0, 'desc']],
-      language: { search: 'Filter:' }
-    });
-  }
-
   // Program Reach bars
   var programCols = [
     { key: 'MGR', label: 'MGR (Merry-Go-Round)' },
@@ -326,45 +275,6 @@ function renderDashboard() {
       '</div></div>';
   });
   document.getElementById('program-bars').innerHTML = barsHtml;
-
-  // Schools with Open Issues
-  var schoolsWithIssues = [];
-  var seen = {};
-  issues.forEach(function(i) {
-    if (!seen[i.school_name]) {
-      seen[i.school_name] = true;
-      schoolsWithIssues.push(i.school_name);
-    }
-  });
-  var totalSchools = ALL_SCHOOLS.length;
-  var pctWithIssues = totalSchools > 0 ? Math.round((schoolsWithIssues.length / totalSchools) * 100) : 0;
-
-  var issuesHtml = '';
-  issuesHtml +=
-    '<div style="text-align:center; margin-bottom:1.5rem;">' +
-    '<span style="font-size:2rem; font-weight:700; color:var(--epi-navy);">' + schoolsWithIssues.length + '</span>' +
-    '<span style="font-size:0.9rem; color:#666;"> / ' + totalSchools + ' schools</span>' +
-    '<div style="font-size:0.85rem; color:#999;">(' + pctWithIssues + '% of schools have open issues)</div>' +
-    '</div>';
-
-  if (schoolsWithIssues.length > 0) {
-    schoolsWithIssues.sort();
-    schoolsWithIssues.forEach(function(name) {
-      var schoolIssues = issues.filter(function(i) { return i.school_name === name; });
-      var slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, '');
-      issuesHtml +=
-        '<div style="border-left:3px solid #dc3545; padding-left:0.75rem; margin-bottom:0.75rem;">' +
-        '<a href="schools.html?school=' + slug + '" style="color:var(--epi-navy); font-weight:600; font-size:0.9rem; text-decoration:none; border-bottom:1px dashed var(--epi-navy);">' + name + '</a>' +
-        '<span style="color:#999; font-size:0.8rem;"> (' + schoolIssues.length + ' issue' + (schoolIssues.length > 1 ? 's' : '') + ')</span>';
-      schoolIssues.forEach(function(iss) {
-        issuesHtml += '<div style="font-size:0.8rem; color:#555; margin-top:0.2rem;">' + iss.urgent_issues + '</div>';
-      });
-      issuesHtml += '</div>';
-    });
-  } else {
-    issuesHtml += '<p style="color:#999; font-style:italic;">No urgent issues flagged in this date range.</p>';
-  }
-  document.getElementById('issues-summary').innerHTML = issuesHtml;
 }
 
 // Download Data feature

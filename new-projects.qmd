@@ -95,33 +95,8 @@ n_projects <- nrow(proj_list)
 ```{r}
 #| echo: false
 
-# Count project types for stat cards
-type_counts <- proj_list |>
-  mutate(type_short = case_when(
-    str_detect(project_type, "MGR") ~ "MGR",
-    str_detect(project_type, "Solar") ~ "Solar",
-    project_type == "Starlink" ~ "Starlink",
-    str_detect(project_type, "Building") ~ "Building",
-    project_type == "GROW Project" ~ "GROW",
-    TRUE ~ "Other"
-  )) |>
-  count(type_short) |>
-  deframe()
-
 htmltools::HTML(paste0(
-'<!-- Stat Cards -->
-<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap:1rem; max-width:700px; margin:0 auto 1.5rem;">
-  <div class="stat-card" style="padding:1rem;">
-    <span id="stat-total" class="stat-value" style="font-size:1.8rem; display:block;">', n_projects, '</span>
-    <span class="stat-label" style="font-size:0.75rem;">Total Projects</span>
-  </div>
-  <div class="stat-card" style="padding:1rem;">
-    <span id="stat-schools" class="stat-value" style="font-size:1.8rem; display:block;">', n_distinct(proj_list$school_name), '</span>
-    <span class="stat-label" style="font-size:0.75rem;">Schools</span>
-  </div>
-</div>
-
-<!-- Date Range Filter -->
+'<!-- Date Range Filter -->
 <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-bottom:1.5rem; justify-content:center;">
   <label style="font-weight:600; color:var(--epi-navy);">Date Range:</label>
   <input type="date" id="date-start" value="', date_min, '" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -39,10 +39,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-832001d82d2599cba306249e96381318.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-51f10c164b8e96ed66b126fa4c7023c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -167,9 +167,9 @@ ul.task-list li input[type="checkbox"] {
   <p id="visited-summary" style="color:#666; font-size:0.85rem; margin-top:0.75rem;"></p>
 </div>
 
-<!-- Schools Still Needing Surveys -->
-<h2 class="anchored">Schools Still Needing Surveys This Year</h2>
-<p style="color:#666; font-size:0.9rem; margin-bottom:0.75rem;">Schools that still need a full school update or student surveys during the current date range.</p>
+<!-- Schools That Still Need A Full Update -->
+<h2 class="anchored">Schools That Still Need A Full Update</h2>
+<p style="color:#666; font-size:0.9rem; margin-bottom:0.75rem;">Schools that have not received a full school update during the current date range.</p>
 <div id="needs-update-container" style="margin-bottom:2rem;">
   <table id="needs-survey-table" class="display compact stripe" style="width:100%;"></table>
 </div>
@@ -303,32 +303,20 @@ function renderVisitPage() {
     return !schoolsWithFullUpdate[name];
   });
 
-  // Build needs-survey table: schools that need either full update or student surveys
+  // Build needs-update table: schools that still need a full update
   if (needsDT) { needsDT.destroy(); document.getElementById("needs-survey-table").innerHTML = ""; }
 
-  var needsSomething = ALL_SCHOOLS.filter(function(name) {
-    return !schoolsWithFullUpdate[name] || !schoolsWithSurveys[name];
-  });
-
-  if (needsSomething.length === 0) {
-    document.getElementById("needs-update-container").innerHTML = '<div style="background:#d4edda; border-radius:8px; padding:1rem 1.5rem; border-left:4px solid #28a745;"><p style="margin:0; color:#155724; font-weight:600;">All schools are up to date!</p></div>';
+  if (needsUpdate.length === 0) {
+    document.getElementById("needs-update-container").innerHTML = '<div style="background:#d4edda; border-radius:8px; padding:1rem 1.5rem; border-left:4px solid #28a745;"><p style="margin:0; color:#155724; font-weight:600;">All schools have received a full update!</p></div>';
   } else {
-    var needsData = needsSomething.sort().map(function(name) {
-      var nf = !schoolsWithFullUpdate[name];
-      var ns = !schoolsWithSurveys[name];
-      return [
-        name,
-        nf ? '<span style="color:#dc3545; font-size:1.1rem;" title="Still needed">✔</span>' : '<span style="color:#ccc;">—</span>',
-        ns ? '<span style="color:#dc3545; font-size:1.1rem;" title="Still needed">✔</span>' : '<span style="color:#ccc;">—</span>'
-      ];
+    var needsData = needsUpdate.sort().map(function(name) {
+      return [name];
     });
 
     needsDT = jQuery("#needs-survey-table").DataTable({
       data: needsData,
       columns: [
-        { title: "School" },
-        { title: "Needs Full Update", className: "dt-center", width: "140px" },
-        { title: "Needs Student Surveys", className: "dt-center", width: "160px" }
+        { title: "School" }
       ],
       pageLength: 15,
       order: [[0, "asc"]],
@@ -365,12 +353,7 @@ function renderVisitPage() {
 
   var schoolList = schoolFilter ? [schoolFilter] : Object.keys(schoolCounts).sort();
   var bySchoolData = schoolList.map(function(s) {
-    var needsFull = !schoolsWithFullUpdate[s];
-    var needsSurv = !schoolsWithSurveys[s];
-    var icons = "";
-    if (needsFull) icons += '<span title="Needs full update" style="cursor:help;">⚠️</span> ';
-    if (needsSurv) icons += '<span title="Needs student surveys" style="cursor:help;">📋</span> ';
-    return [icons + s, schoolCounts[s] || 0];
+    return [s, schoolCounts[s] || 0];
   });
 
   bySchoolDT = jQuery("#visits-by-school-table").DataTable({

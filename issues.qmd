@@ -1,5 +1,5 @@
 ---
-title: "Issues & Flags"
+title: "Issues"
 format:
   html:
     toc: false
@@ -48,23 +48,8 @@ resolved_json <- toJSON(issues_resolved, auto_unbox = TRUE, na = "null")
 ```{r}
 #| echo: false
 
-n_open <- nrow(issues_open)
-n_resolved <- nrow(issues_resolved)
-
 htmltools::HTML(paste0(
-'<!-- Stat Cards -->
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; max-width:400px; margin:0 auto 2rem;">
-  <div class="stat-card" style="padding:1rem;">
-    <span id="stat-open" class="stat-value" style="font-size:1.8rem; display:block;">', n_open, '</span>
-    <span class="stat-label" style="font-size:0.75rem;">Open Issues</span>
-  </div>
-  <div class="stat-card" style="padding:1rem;">
-    <span id="stat-resolved" class="stat-value" style="font-size:1.8rem; display:block; color:#28a745;">', n_resolved, '</span>
-    <span class="stat-label" style="font-size:0.75rem;">Resolved</span>
-  </div>
-</div>
-
-<!-- Open Issues -->
+'<!-- Open Issues -->
 <h2>Open Issues</h2>
 <p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">Urgent issues flagged during field visits. Click <strong>Resolve</strong> to mark an issue as addressed.</p>
 <div id="open-issues-container"></div>
