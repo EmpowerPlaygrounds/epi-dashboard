@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 0,
+    "n_visits": 1,
     "n_responses": 92,
     "pct_lantern": 0.6413,
     "pct_library": 0.0448,
@@ -24,7 +24,29 @@
     "pct_computers": 0,
     "n_issues": 0
   },
-  "visits": [],
+  "visits": [
+    {
+      "StartDate": "2026-03-12 5:03:14",
+      "Duration (in seconds)": "149",
+      "ResponseId": "R_bz6RZBaHv71PMFo",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard, Other:",
+      "Q1.5_6_TEXT": "Darian, Betsy and Lexix",
+      "school_name": "Mosipanin",
+      "visit_reason": "Routine Visit, Teacher interviews",
+      "Q3_6_TEXT": "Teacher interviews",
+      "activities": "Routine Visit, MGR/Charging Maintenance, Student Survey Team Visit",
+      "Q5": "The charging station/solar needed to be fixed",
+      "Q6": "No, I need other supplies and will have to come back another day",
+      "Q6.5": "No",
+      "Q7": "The charging ports aren’t functioning",
+      "doing_well": "Doing well with the Lantern program",
+      "struggles": "Maintaining and using of science kits",
+      "visit_date": "2026-03-12"
+    }
+  ],
   "full_update": [
     {
       "StartDate": "2019-03-21 3:36:24",

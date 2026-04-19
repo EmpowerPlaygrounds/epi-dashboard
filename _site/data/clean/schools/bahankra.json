@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 1,
     "Light a Village": 0,
-    "n_visits": 8,
+    "n_visits": 9,
     "n_responses": 170,
     "pct_lantern": 0.6845,
     "pct_library": 0.8125,
@@ -108,6 +108,23 @@
       "Q1.5": "Richard",
       "school_name": "Bahankra",
       "visit_date": "2025-03-25"
+    },
+    {
+      "StartDate": "2026-03-11 5:18:24",
+      "Duration (in seconds)": "137",
+      "ResponseId": "R_oByQOl1RkKn1woZ",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard, Other:",
+      "Q1.5_6_TEXT": "Darian, Betsy , lexis",
+      "school_name": "Bahankra",
+      "visit_reason": "Routine Visit, Teacher Bungalow survey",
+      "Q3_6_TEXT": "Teacher Bungalow survey",
+      "activities": "Student Survey Team Visit, Teacher Bungalow survey",
+      "Q4_6_TEXT": "Teacher Bungalow survey",
+      "doing_well": "Teaching with Science kits",
+      "visit_date": "2026-03-11"
     }
   ],
   "full_update": [

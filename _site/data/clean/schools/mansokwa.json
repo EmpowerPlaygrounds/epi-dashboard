@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 4,
+    "n_visits": 5,
     "n_responses": 31,
     "pct_lantern": 0.8387,
     "pct_library": 0.0323,
@@ -74,6 +74,25 @@
       "school_name": "Mansokwa",
       "visit_reason": "MGR Maintenance,Surveyor Team Visit",
       "visit_date": "2024-05-07"
+    },
+    {
+      "StartDate": "2026-03-05 5:28:58",
+      "Duration (in seconds)": "67",
+      "ResponseId": "R_5ebbAZQZiLLPnXQ",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "school_name": "Mansokwa",
+      "visit_reason": "MGR/Charging Maintenance, Lantern Replacement",
+      "activities": "MGR/Charging Maintenance, Lantern Replacement",
+      "Q5": "The charging station/solar needed to be fixed",
+      "Q6": "Yes, all problems were resolved",
+      "Q6.5": "Yes",
+      "Q8": "Yes",
+      "Q9": "2",
+      "Q10": "Broken",
+      "doing_well": "Lantern program is being used well.",
+      "visit_date": "2026-03-05"
     }
   ],
   "full_update": [

@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 6,
+    "n_visits": 7,
     "n_responses": 181,
     "pct_lantern": 0.6243,
     "pct_library": 0.6275,
@@ -87,6 +87,25 @@
       "Q1.5": "Richard",
       "school_name": "Dagomba",
       "visit_date": "2025-03-25"
+    },
+    {
+      "StartDate": "2026-03-12 5:05:56",
+      "Duration (in seconds)": "101",
+      "ResponseId": "R_h5sruHQTJs5Rj3K",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard, Other:",
+      "Q1.5_6_TEXT": "Darian, Betsy and Lexix",
+      "school_name": "Dagomba",
+      "visit_reason": "Teacher interviews",
+      "Q3_6_TEXT": "Teacher interviews",
+      "activities": "MGR/Charging Maintenance, Teacher interviews",
+      "Q4_6_TEXT": "Teacher interviews",
+      "Q5": "It wasn't spinning properly",
+      "Q6": "Partially, but it still needs more work",
+      "Q7": "The top head is broken and needs replacing",
+      "visit_date": "2026-03-12"
     }
   ],
   "full_update": [
