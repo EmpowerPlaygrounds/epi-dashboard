@@ -241,6 +241,11 @@ function inRange(dateStr, start, end) {
   return d >= start && d <= end;
 }
 
+function schoolLink(name) {
+  var slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
+  return '<a href="schools.html?school=' + slug + '" style="color:var(--epi-navy); font-weight:600; text-decoration:none; border-bottom:1px dashed var(--epi-navy);">' + name + '</a>';
+}
+
 // Populate school filter dropdown with notification icons
 function populateSchoolFilter() {
   var select = document.getElementById("school-filter");
@@ -309,7 +314,7 @@ function renderVisitPage() {
     document.getElementById("needs-update-container").innerHTML = '<div style="background:#d4edda; border-radius:8px; padding:1rem 1.5rem; border-left:4px solid #28a745;"><p style="margin:0; color:#155724; font-weight:600;">All schools have received a full update!</p></div>';
   } else {
     var needsData = needsUpdate.sort().map(function(name) {
-      return [name];
+      return [schoolLink(name)];
     });
 
     needsDT = jQuery("#needs-survey-table").DataTable({
@@ -327,7 +332,7 @@ function renderVisitPage() {
   // --- Visit Log DataTable ---
   if (logDT) { logDT.destroy(); document.getElementById("visit-log-table").innerHTML = ""; }
   var logData = filtered.map(function(v) {
-    return [v.visit_date || "", v.school_name || "", v.visitor || "", v.visit_reason || "", v.activities || ""];
+    return [v.visit_date || "", v.school_name ? schoolLink(v.school_name) : "", v.visitor || "", v.visit_reason || "", v.activities || ""];
   });
   logDT = jQuery("#visit-log-table").DataTable({
     data: logData,
@@ -352,7 +357,7 @@ function renderVisitPage() {
 
   var schoolList = schoolFilter ? [schoolFilter] : Object.keys(schoolCounts).sort();
   var bySchoolData = schoolList.map(function(s) {
-    return [s, schoolCounts[s] || 0];
+    return [schoolLink(s), schoolCounts[s] || 0];
   });
 
   bySchoolDT = jQuery("#visits-by-school-table").DataTable({
