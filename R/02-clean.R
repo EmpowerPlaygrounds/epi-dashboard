@@ -107,7 +107,7 @@ name_fixes <- c(
 )
 
 # Names to ignore during fuzzy matching (not real school names)
-ignore_names <- c("Other", "Other:", "central", "Modem m a")
+ignore_names <- c("Other", "Other:", "central", "Modem m a", "a")
 
 # ------------------------------------------------------------------
 # fix_school_name: 3-step name resolution
@@ -185,7 +185,7 @@ clean_quick <- raw_quick |>
       str_remove(activities, ",?\\s*Other:?")
     )
   ) |>
-  filter(!is.na(school_name) & school_name != "")
+  filter(!is.na(school_name) & school_name != "" & !school_name %in% ignore_names)
 
 # ------------------------------------------------------------------
 # Full Update — skip Qualtrics label row, clean school names
@@ -249,7 +249,7 @@ clean_newproj <- raw_newproj |>
     project_date = parse_date_time(StartDate, orders = c("mdY HMS", "Ymd HMS", "mdY HM")),
     project_date = as.Date(project_date)
   ) |>
-  filter(!is.na(school_name) & school_name != "")
+  filter(!is.na(school_name) & school_name != "" & !school_name %in% ignore_names)
 
 # ------------------------------------------------------------------
 # Diagnostic: report any school names that don't match canonical list
