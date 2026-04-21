@@ -1,6 +1,7 @@
 # 02-clean.R — Clean, fix typos, standardize school names
 
 library(tidyverse)
+library(stringdist)
 library(here)
 
 # ------------------------------------------------------------------
@@ -15,41 +16,141 @@ raw_newproj <- read_csv(here("data", "raw", "new_project.csv"), show_col_types =
 # ------------------------------------------------------------------
 # Schools Overview
 # ------------------------------------------------------------------
-# Drop corrupted/empty columns
+# Drop junk columns generically:
+#   - unnamed columns (readr auto-generates "...N" names)
+#   - columns whose name looks like a date (accidental spreadsheet entry)
 clean_schools <- raw_schools |>
-  select(-any_of(c("...17", "3/14/2026"))) |>
+  select(
+    -matches("^\\.\\.\\.\\d+$"),
+    -matches("^\\d{1,2}/\\d{1,2}/\\d{2,4}$")
+  ) |>
   rename(school_name = `School Name`) |>
   mutate(school_name = str_trim(school_name))
 
+# Canonical school names (the source of truth)
+canonical_names <- sort(unique(clean_schools$school_name))
+
 # ------------------------------------------------------------------
-# School name crosswalk — map typos/variants to canonical names
+# School name crosswalk — map known typos/variants to canonical names
 # Keys = variant found in data, Values = canonical name from Schools Overview
+# Add new entries here as you discover them.
 # ------------------------------------------------------------------
 name_fixes <- c(
-  # Typos in Quick Update
-  "Mepotumtum"                = "Bepotumtum",
-  "Nyienpeya"                 = "Nyapienya",
+  # --- Typos (1-2 character errors) ---
+  "Mepotumtum"                 = "Bepotumtum",
+  "Bepotuntum"                 = "Bepotumtum",
+  "Nyienpeya"                  = "Nyapienya",
+  "Akeyermanteng"              = "Akyeremanteng",
+  "Akeyeremateng"              = "Akyeremanteng",
+  "Ankwansrem"                 = "Akwanserem",
+  "Azizakope"                  = "Azizakpem",
+  "Mamkrom"                    = "Mamakrom",
+  "mamakrom"                   = "Mamakrom",
+  "Mentkwa"                    = "Mantukwa",
+  "Mosipani"                   = "Mosipanin",
+  "Obane"                      = "Obani",
+  "Oblemanya"                  = "Obelemanya",
+  "Obelemaya"                  = "Obelemanya",
+  "Obosono"                    = "Obosonu",
+  "Tseldom"                    = "Tsledom",
+  "Todjer"                     = "Torjeh",
+  "Ankwasu"                    = "Akwansu",
+  "Amaneampa"                  = "Anamenampa",
+  "Wuurudu Wurudu"             = "Wurudu Wurudu",
+  "Fawotirikosie"              = "Fawotrikosie",
+  "Fawotirkosie"               = "Fawotrikosie",
 
-  # Student Survey variants (longer/shorter forms)
-  "Afransua Dedewa"           = "Afransua Dedewa MA Primary",
-  "Akeyermanteng"             = "Akyeremanteng",
-  "Alorkpem"                  = "Alorkpem Island",
-  "Ekorso-Akuoadu"            = "Ekorso Akwadum",
-  "Kurasua #1 MA School"      = "Kurasua #1 MA",
-  "Mosipanin D/A Basic School" = "Mosipanin",
-  "Mpaem M/A Basic School"    = "Mpaem",
-  "Nwawasua MA School"        = "Nwawasua MA",
-  "Old KonKrompe"             = "Old Konkompe",
-  "TunTum"                    = "Tun Tun",
-  "Watroso"                   = "Watro (Watroso)",
-  "Yonguase M/A Basic School" = "Yonguase",
-  "Amaneampa"                 = "Anamenampa"
+  # --- Alternate spellings (>2 chars but confirmed matches) ---
+  "TunTum"                     = "Tun Tun",
+  "TumTum"                     = "Tun Tun",
+  "Tuntum"                     = "Tun Tun",
+  "Old KonKrompe"              = "Old Konkompe",
+  "Mongpong Shai"              = "Mampong Shai",
+  "Mampong"                    = "Mampong Shai",
+  "Fatwakosie"                 = "Fawotrikosie",
+  "Watroso"                    = "Watro (Watroso)",
+  "Kpala"                      = "Kpala Government",
+
+  # --- Longer/shorter formal name variants ---
+  "Adorkope"                         = "Ador Kope R/C Primary",
+  "Ador Kope"                        = "Ador Kope R/C Primary",
+  "Afransua Dedewa"                  = "Afransua Dedewa MA Primary",
+  "Afransua Dedewa M/A Primary School" = "Afransua Dedewa MA Primary",
+  "Akwanserem D/A Basic School"      = "Akwanserem",
+  "Alorkpem"                         = "Alorkpem Island",
+  "Ankwansu Anglican Basic School"   = "Akwansu",
+  "Ataampuutum"                      = "Ataampuutum A/B",
+  "Community School 3"               = "Community 3",
+  "Community School 9"               = "Community 9",
+  "Community school 9"               = "Community 9",
+  "Domase D/A"                       = "Domase",
+  "Domase D/A School"                = "Domase",
+  "Ekorso-Akuoadu"                   = "Ekorso Akwadum",
+  "Essam Golden Sunbeam Montessori School" = "Essam",
+  "Galalia D/A Primary School"       = "Galalia",
+  "Kpala Government School"          = "Kpala Government",
+  "Kpala Private School (IOHCA)"     = "Kpala Private",
+  "Kurasua #1 MA School"             = "Kurasua #1 MA",
+  "Minya D/A Basic School"           = "Minya",
+  "Mosipanin D/A Basic School"       = "Mosipanin",
+  "Mpaem M/A Basic School"           = "Mpaem",
+  "Nwawasua MA School"               = "Nwawasua MA",
+  "Nwawasua M/A School"              = "Nwawasua MA",
+  "Nyariga Girls School"             = "Nyariga Girls' School",
+  "Obosono M/A"                      = "Obosonu",
+  "Wenamda D A"                      = "Wenamda",
+  "Wenamda D/A"                      = "Wenamda",
+  "Wenamda D/A Primary School"       = "Wenamda",
+  "Wangarakrom-Tarkuea"              = "Wangarakrom",
+  "Yonguase M/A Basic School"        = "Yonguase",
+  "Zippo Nyuinyui R/C"               = "Zippo Nyuinyui"
 )
 
+# Names to ignore during fuzzy matching (not real school names)
+ignore_names <- c("Other", "Other:", "central", "Modem m a")
+
+# ------------------------------------------------------------------
+# fix_school_name: 3-step name resolution
+#   1. Apply known fixes from the crosswalk above
+#   2. Fuzzy-match remaining unknowns against canonical names
+#      - Auto-correct if string distance <= 2 (very close match)
+#      - Warn if distance 3-4 (possible match, needs human review)
+#   3. Leave anything else as-is (could be a genuinely new school)
+# ------------------------------------------------------------------
 fix_school_name <- function(x) {
   out <- str_trim(x)
+
+  # Step 1: apply known crosswalk
   idx <- match(out, names(name_fixes))
-  ifelse(!is.na(idx), name_fixes[idx], out)
+  out <- ifelse(!is.na(idx), name_fixes[idx], out)
+
+  # Step 2: fuzzy-match anything still not in the canonical list
+  unmatched <- !is.na(out) & out != "" &
+    !out %in% canonical_names &
+    !out %in% ignore_names
+  if (any(unmatched)) {
+    for (i in which(unmatched)) {
+      # Calculate string distances to all canonical names (case-insensitive)
+      dists <- stringdist(tolower(out[i]), tolower(canonical_names), method = "osa")
+      best_idx   <- which.min(dists)
+      best_dist  <- dists[best_idx]
+      best_match <- canonical_names[best_idx]
+
+      if (best_dist <= 2) {
+        # Close enough to auto-correct
+        cat("    [auto-fix] '", out[i], "' -> '", best_match,
+            "' (distance ", best_dist, ")\n", sep = "")
+        out[i] <- best_match
+      } else if (best_dist <= 4) {
+        # Possible match — warn so a human can verify
+        cat("    [WARNING] '", out[i], "' might be '", best_match,
+            "' (distance ", best_dist, ") — please verify\n", sep = "")
+      }
+      # distance > 4: likely a new school or very different name, leave as-is
+    }
+  }
+
+  out
 }
 
 # ------------------------------------------------------------------
@@ -148,5 +249,38 @@ clean_newproj <- raw_newproj |>
     project_date = as.Date(project_date)
   ) |>
   filter(!is.na(school_name) & school_name != "")
+
+# ------------------------------------------------------------------
+# Diagnostic: report any school names that don't match canonical list
+# ------------------------------------------------------------------
+all_survey_names <- bind_rows(
+  tibble(source = "quick_update", school_name = clean_quick$school_name),
+  tibble(source = "full_update",  school_name = clean_full$school_name),
+  tibble(source = "student_survey", school_name = clean_student$school_name),
+  tibble(source = "new_project",  school_name = clean_newproj$school_name)
+) |>
+  filter(!is.na(school_name) & school_name != "")
+
+unmatched_names <- all_survey_names |>
+  filter(!school_name %in% canonical_names) |>
+  filter(!school_name %in% ignore_names) |>
+  count(school_name, source, sort = TRUE)
+
+if (nrow(unmatched_names) == 0) {
+  cat("  All school names match the canonical list\n")
+} else {
+  cat("\n  *** UNMATCHED SCHOOL NAMES ***\n")
+  cat("  These names appear in survey data but not in Schools Overview.\n")
+  cat("  They may be typos (add to name_fixes) or genuinely new schools.\n\n")
+  for (i in seq_len(nrow(unmatched_names))) {
+    row <- unmatched_names[i, ]
+    # Show the closest canonical match for easy diagnosis
+    dists <- stringdist(tolower(row$school_name), tolower(canonical_names), method = "osa")
+    closest <- canonical_names[which.min(dists)]
+    cat("    '", row$school_name, "' (", row$n, "x in ", row$source,
+        ") — closest match: '", closest, "'\n", sep = "")
+  }
+  cat("\n")
+}
 
 cat("  Cleaned 5 datasets\n")
