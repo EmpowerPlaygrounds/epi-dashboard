@@ -334,7 +334,7 @@ function renderSchoolContent(slug, data) {
   var notesHeader = document.getElementById("notes-header");
   notesHeader.onclick = function() {
     var schoolName = encodeURIComponent(data.info.school_name);
-    window.location.href = "visits.html?school=" + schoolName;
+    window.location.href = "visits.html?school=" + schoolName + "&tab=visit-log";
   };
 
   if (sortedVisits.length > 0) {
@@ -376,7 +376,7 @@ function renderSchoolContent(slug, data) {
     var ihtml = "";
     openIssues.forEach(function(issue) {
       var issueSlug = (issue.school_name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
-      ihtml += \'<div style="background:#fff; border-radius:8px; padding:1rem 1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:0.75rem; border-left:4px solid #dc3545; cursor:pointer;" onclick="window.location.href=\\\'issues.html\\\'">\';
+      ihtml += \'<div style="background:#fff; border-radius:8px; padding:1rem 1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:0.75rem; border-left:4px solid #dc3545; cursor:pointer;" onclick="window.location.href=\\\'issues.html#issue-\' + (issue.issue_id || "") + \'\\\'">\';
       ihtml += \'<div style="display:flex; justify-content:space-between; align-items:center;">\';
       ihtml += \'<p style="font-size:0.9rem; margin:0; color:#333;">\' + (issue.urgent_issues || "") + \'</p>\';
       ihtml += \'<span style="color:#999; font-size:0.8rem; white-space:nowrap; margin-left:1rem;">\' + (issue.visit_date || "") + \'</span>\';

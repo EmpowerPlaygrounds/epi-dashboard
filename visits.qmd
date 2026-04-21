@@ -320,8 +320,12 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+  // Check URL parameter for tab (e.g., ?tab=visit-log)
+  var tabParam = params.get("tab");
+  var initialTab = (tabParam === "visit-log" || tabParam === "by-school") ? tabParam : "needs-update";
+
   renderVisitPage();
-  switchTab("needs-update"); // activate default tab styling
+  switchTab(initialTab);
   document.getElementById("btn-apply-dates").addEventListener("click", renderVisitPage);
   document.getElementById("school-filter").addEventListener("change", renderVisitPage);
   document.getElementById("btn-reset-dates").addEventListener("click", function() {
