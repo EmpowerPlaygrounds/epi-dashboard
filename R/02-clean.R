@@ -240,8 +240,9 @@ clean_newproj <- raw_newproj |>
   ) |>
   mutate(
     # Use new school name if not an existing EPI school
+    # (Qualtrics stores the full answer text, not just "No")
     school_name = case_when(
-      is_existing == "No" & !is.na(new_school) & new_school != "" ~ new_school,
+      str_detect(is_existing, "(?i)first time") & !is.na(new_school) & new_school != "" ~ new_school,
       TRUE ~ school_name
     ),
     school_name  = fix_school_name(school_name),

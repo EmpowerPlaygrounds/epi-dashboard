@@ -76,8 +76,7 @@ date_max <- as.character(Sys.Date())
 ```{r}
 #| echo: false
 htmltools::HTML(paste0(
-'<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+'<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
@@ -136,13 +135,6 @@ htmltools::HTML(paste0(
     <span id="stat-issues" class="stat-value" style="font-size:2rem; display:block; color:#dc3545;"></span>
     <span class="stat-label">Open Issues</span>
   </a>
-</div>
-
-<!-- Schools Visited Pie Chart -->
-<div style="max-width:380px; margin:0 auto 2rem; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;">
-  <h4 style="margin-top:0; color:var(--epi-navy);">Schools Visited</h4>
-  <canvas id="visited-pie" width="280" height="280"></canvas>
-  <p id="visited-summary" style="color:#666; font-size:0.85rem; margin-top:0.75rem;"></p>
 </div>'
 ))
 ```
@@ -213,9 +205,6 @@ function inRange(dateStr, start, end) {
   return d >= start && d <= end;
 }
 
-// Chart instance
-var visitedPieChart = null;
-
 // Main render function
 function renderDashboard() {
   var start = document.getElementById('date-start').value;
@@ -226,7 +215,6 @@ function renderDashboard() {
   var issues   = ALL_ISSUES.filter(function(v) { return inRange(v.visit_date, start, end); });
   var projects = ALL_PROJECTS.filter(function(v) { return inRange(v.project_date, start, end); });
   var full     = ALL_FULL.filter(function(v) { return inRange(v.update_date, start, end); });
-  var surveys  = ALL_SURVEYS.filter(function(v) { return inRange(v.survey_date, start, end); });
 
   // Schools needing full updates (only count canonical schools)
   var schoolsWithFullUpdate = {};
@@ -239,49 +227,6 @@ function renderDashboard() {
   document.getElementById('stat-projects').textContent  = projects.length;
   document.getElementById('stat-needs-update').textContent = nNeedUpdate;
   document.getElementById('stat-issues').textContent    = issues.length;
-
-  // Schools Visited pie chart (all 4 surveys: quick, full, student, projects)
-  var visitedSchools = {};
-  visits.forEach(function(v) { if (v.school_name) visitedSchools[v.school_name] = true; });
-  full.forEach(function(f) { if (f.school_name) visitedSchools[f.school_name] = true; });
-  surveys.forEach(function(s) { if (s.school_name) visitedSchools[s.school_name] = true; });
-  projects.forEach(function(p) { if (p.school_name) visitedSchools[p.school_name] = true; });
-
-  var nTotalSchools = ALL_SCHOOLS.length;
-  var nVisited = ALL_SCHOOLS.filter(function(s) {
-    return visitedSchools[s.school_name];
-  }).length;
-  var nNotVisited = nTotalSchools - nVisited;
-
-  if (visitedPieChart) visitedPieChart.destroy();
-  visitedPieChart = new Chart(document.getElementById('visited-pie'), {
-    type: 'pie',
-    data: {
-      labels: ['Visited (' + nVisited + ')', 'Not Visited (' + nNotVisited + ')'],
-      datasets: [{
-        data: [nVisited, nNotVisited],
-        backgroundColor: ['#1C2B4A', '#e9ecef']
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      plugins: {
-        legend: { position: 'bottom', labels: { font: { size: 12 } } },
-        tooltip: {
-          callbacks: {
-            label: function(ctx) {
-              var pct = nTotalSchools > 0 ? Math.round(ctx.raw / nTotalSchools * 100) : 0;
-              return ctx.label + ' - ' + pct + '%';
-            }
-          }
-        }
-      }
-    }
-  });
-
-  var pctVisited = nTotalSchools > 0 ? Math.round(nVisited / nTotalSchools * 100) : 0;
-  document.getElementById('visited-summary').textContent = nVisited + ' of ' + nTotalSchools + ' schools visited (' + pctVisited + '%)';
 
   // Program Reach bars
   var programCols = [

@@ -96,12 +96,15 @@ n_projects <- nrow(proj_list)
 #| echo: false
 
 htmltools::HTML(paste0(
-'<!-- Date Range Filter -->
+'<!-- Filters -->
 <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-bottom:1.5rem; justify-content:center;">
   <label style="font-weight:600; color:var(--epi-navy);">Date Range:</label>
   <input type="date" id="date-start" value="', date_min, '" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
   <span>to</span>
   <input type="date" id="date-end" value="', date_max, '" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
+  <select id="type-filter" style="padding:0.35rem 0.5rem; border:1px solid #ccc; border-radius:4px; max-width:220px;">
+    <option value="">All Project Types</option>
+  </select>
   <button id="btn-apply-dates" style="background:var(--epi-navy); color:#fff; border:none; padding:0.4rem 1rem; border-radius:4px; cursor:pointer; font-weight:600;">Apply</button>
   <button id="btn-reset-dates" style="background:#e9ecef; color:#333; border:none; padding:0.4rem 1rem; border-radius:4px; cursor:pointer;">Reset</button>
 </div>
@@ -189,14 +192,41 @@ function makeProjectCard(p) {
   return html;
 }
 
+// Populate project type dropdown from data
+function populateTypeFilter() {
+  var select = document.getElementById("type-filter");
+  var currentVal = select.value;
+  var types = {};
+  ALL_PROJECTS.forEach(function(p) {
+    if (p.project_type) {
+      // Split combined types (e.g. "Building Construction,Science Kit Distribution")
+      p.project_type.split(",").forEach(function(t) {
+        var trimmed = t.trim();
+        var info = getTypeInfo(trimmed);
+        types[trimmed] = info.label;
+      });
+    }
+  });
+  select.innerHTML = \'<option value="">All Project Types</option>\';
+  Object.keys(types).sort().forEach(function(key) {
+    var opt = document.createElement("option");
+    opt.value = key;
+    opt.textContent = types[key];
+    select.appendChild(opt);
+  });
+  select.value = currentVal;
+}
+
 function renderProjects() {
   var startDate = document.getElementById("date-start").value;
   var endDate = document.getElementById("date-end").value;
+  var typeFilter = document.getElementById("type-filter").value;
 
   var filtered = ALL_PROJECTS.filter(function(p) {
     if (!p.project_date) return true;
     if (startDate && p.project_date < startDate) return false;
     if (endDate && p.project_date > endDate) return false;
+    if (typeFilter && (!p.project_type || p.project_type.indexOf(typeFilter) < 0)) return false;
     return true;
   });
 
@@ -215,13 +245,16 @@ function renderProjects() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+  populateTypeFilter();
   renderProjects();
   document.getElementById("btn-apply-dates").addEventListener("click", renderProjects);
+  document.getElementById("type-filter").addEventListener("change", renderProjects);
   document.getElementById("btn-reset-dates").addEventListener("click", function() {
     var now = new Date();
     var syYear = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
     document.getElementById("date-start").value = syYear + "-08-01";
     document.getElementById("date-end").value = now.toISOString().slice(0, 10);
+    document.getElementById("type-filter").value = "";
     renderProjects();
   });
 });
