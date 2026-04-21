@@ -87,23 +87,41 @@ htmltools::HTML(paste0(
 ```{r}
 #| echo: false
 
-# Pie chart + needs sections + visit log + visits by school
+# Tabs + tables
 htmltools::HTML(paste0(
-'<!-- Schools That Still Need A Full Update -->
-<h2>Schools That Still Need A Full Update</h2>
-<p style="color:#666; font-size:0.9rem; margin-bottom:0.75rem;">Schools that have not received a full school update during the current date range.</p>
-<div id="needs-update-container" style="margin-bottom:2rem;">
-  <table id="needs-survey-table" class="display compact stripe" style="width:100%;"></table>
+'<!-- Tab Navigation -->
+<div id="visit-tabs" style="display:flex; gap:0; margin-bottom:0; border-bottom:2px solid #e9ecef;">
+  <button class="visit-tab active" data-tab="needs-update" style="flex:1; padding:0.75rem 1rem; border:none; background:none; font-size:0.9rem; font-weight:600; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.15s;">
+    Needs Full Update <span id="tab-count-needs" style="background:#dc3545; color:#fff; border-radius:10px; padding:0.1rem 0.5rem; font-size:0.75rem; margin-left:0.35rem;"></span>
+  </button>
+  <button class="visit-tab" data-tab="visit-log" style="flex:1; padding:0.75rem 1rem; border:none; background:none; font-size:0.9rem; font-weight:600; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.15s;">
+    Visit Log
+  </button>
+  <button class="visit-tab" data-tab="by-school" style="flex:1; padding:0.75rem 1rem; border:none; background:none; font-size:0.9rem; font-weight:600; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.15s;">
+    Visits by School
+  </button>
 </div>
 
-<h2>Visit Log</h2>
-<div id="visit-log-container" style="margin-bottom:2rem;">
-  <table id="visit-log-table" class="display compact stripe" style="width:100%;"></table>
+<!-- Tab: Needs Full Update -->
+<div id="tab-needs-update" class="visit-tab-content" style="padding-top:1rem;">
+  <p style="color:#666; font-size:0.9rem; margin-bottom:0.75rem;">Schools that have not received a full school update during the current date range.</p>
+  <div id="needs-update-container">
+    <table id="needs-survey-table" class="display compact stripe" style="width:100%;"></table>
+  </div>
 </div>
 
-<h2>Visits by School</h2>
-<div id="visits-by-school-container">
-  <table id="visits-by-school-table" class="display compact stripe" style="width:100%;"></table>
+<!-- Tab: Visit Log -->
+<div id="tab-visit-log" class="visit-tab-content" style="display:none; padding-top:1rem;">
+  <div id="visit-log-container">
+    <table id="visit-log-table" class="display compact stripe" style="width:100%;"></table>
+  </div>
+</div>
+
+<!-- Tab: Visits by School -->
+<div id="tab-by-school" class="visit-tab-content" style="display:none; padding-top:1rem;">
+  <div id="visits-by-school-container">
+    <table id="visits-by-school-table" class="display compact stripe" style="width:100%;"></table>
+  </div>
 </div>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -118,6 +136,32 @@ var N_TOTAL = ', n_total_schools, ';
 var logDT = null;
 var bySchoolDT = null;
 var needsDT = null;
+var activeTab = "needs-update";
+
+function switchTab(tabId) {
+  activeTab = tabId;
+  // Hide all tab content
+  document.querySelectorAll(".visit-tab-content").forEach(function(el) {
+    el.style.display = "none";
+  });
+  // Deactivate all tab buttons
+  document.querySelectorAll(".visit-tab").forEach(function(btn) {
+    btn.style.color = "#999";
+    btn.style.borderBottomColor = "transparent";
+  });
+  // Show selected tab content
+  document.getElementById("tab-" + tabId).style.display = "block";
+  // Activate selected tab button
+  var activeBtn = document.querySelector(".visit-tab[data-tab=\'" + tabId + "\']");
+  if (activeBtn) {
+    activeBtn.style.color = "var(--epi-navy)";
+    activeBtn.style.borderBottomColor = "var(--epi-navy)";
+  }
+  // Fix DataTable column widths after tab becomes visible
+  if (tabId === "visit-log" && logDT) logDT.columns.adjust();
+  if (tabId === "by-school" && bySchoolDT) bySchoolDT.columns.adjust();
+  if (tabId === "needs-update" && needsDT) needsDT.columns.adjust();
+}
 
 function inRange(dateStr, start, end) {
   if (!dateStr) return false;
@@ -185,6 +229,9 @@ function renderVisitPage() {
 
   // Build needs-update table: schools that still need a full update
   if (needsDT) { needsDT.destroy(); document.getElementById("needs-survey-table").innerHTML = ""; }
+
+  // Update tab badge count
+  document.getElementById("tab-count-needs").textContent = needsUpdate.length;
 
   if (needsUpdate.length === 0) {
     document.getElementById("needs-update-container").innerHTML = \'<div style="background:#d4edda; border-radius:8px; padding:1rem 1.5rem; border-left:4px solid #28a745;"><p style="margin:0; color:#155724; font-weight:600;">All schools have received a full update!</p></div>\';
@@ -261,7 +308,15 @@ document.addEventListener("DOMContentLoaded", function() {
     select.value = decoded;
   }
 
+  // Tab click listeners
+  document.querySelectorAll(".visit-tab").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      switchTab(this.getAttribute("data-tab"));
+    });
+  });
+
   renderVisitPage();
+  switchTab("needs-update"); // activate default tab styling
   document.getElementById("btn-apply-dates").addEventListener("click", renderVisitPage);
   document.getElementById("school-filter").addEventListener("change", renderVisitPage);
   document.getElementById("btn-reset-dates").addEventListener("click", function() {
