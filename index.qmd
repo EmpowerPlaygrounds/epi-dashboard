@@ -123,7 +123,7 @@ htmltools::HTML(paste0(
 </div>
 
 <!-- Stat Cards -->
-<div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1rem; margin-bottom:1.5rem;">
+<div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-bottom:1.5rem;">
   <a href="new-projects.html" class="stat-card" style="text-align:center; padding:1.25rem; text-decoration:none; cursor:pointer; transition:transform 0.15s;">
     <span id="stat-projects" class="stat-value" style="font-size:2rem; display:block;"></span>
     <span class="stat-label">New Projects</span>
@@ -136,10 +136,13 @@ htmltools::HTML(paste0(
     <span id="stat-issues" class="stat-value" style="font-size:2rem; display:block; color:#dc3545;"></span>
     <span class="stat-label">Open Issues</span>
   </a>
-  <a href="visits.html" class="stat-card" style="text-align:center; padding:1.25rem; text-decoration:none; cursor:pointer; transition:transform 0.15s;">
-    <span id="stat-schools-visited" class="stat-value" style="font-size:2rem; display:block;"></span>
-    <span class="stat-label">Schools Visited</span>
-  </a>
+</div>
+
+<!-- Schools Visited Pie Chart -->
+<div style="max-width:380px; margin:0 auto 2rem; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;">
+  <h4 style="margin-top:0; color:var(--epi-navy);">Schools Visited</h4>
+  <canvas id="visited-pie" width="280" height="280"></canvas>
+  <p id="visited-summary" style="color:#666; font-size:0.85rem; margin-top:0.75rem;"></p>
 </div>'
 ))
 ```
@@ -210,11 +213,8 @@ function inRange(dateStr, start, end) {
   return d >= start && d <= end;
 }
 
-// DataTable instances
-var projectsTable = null;
-
-// cell style
-var cs = 'padding:0.75rem; border-bottom:1px solid #e9ecef;';
+// Chart instance
+var visitedPieChart = null;
 
 // Main render function
 function renderDashboard() {
@@ -228,15 +228,6 @@ function renderDashboard() {
   var full     = ALL_FULL.filter(function(v) { return inRange(v.update_date, start, end); });
   var surveys  = ALL_SURVEYS.filter(function(v) { return inRange(v.survey_date, start, end); });
 
-  // Schools visited (any canonical school with a quick update OR full update in range)
-  var visitedSchools = {};
-  visits.forEach(function(v) { if (v.school_name) visitedSchools[v.school_name] = true; });
-  full.forEach(function(f) { if (f.school_name) visitedSchools[f.school_name] = true; });
-  var nTotalSchools = ALL_SCHOOLS.length;
-  var nSchoolsVisited = ALL_SCHOOLS.filter(function(s) {
-    return visitedSchools[s.school_name];
-  }).length;
-
   // Schools needing full updates (only count canonical schools)
   var schoolsWithFullUpdate = {};
   full.forEach(function(f) { if (f.school_name) schoolsWithFullUpdate[f.school_name] = true; });
@@ -248,7 +239,49 @@ function renderDashboard() {
   document.getElementById('stat-projects').textContent  = projects.length;
   document.getElementById('stat-needs-update').textContent = nNeedUpdate;
   document.getElementById('stat-issues').textContent    = issues.length;
-  document.getElementById('stat-schools-visited').textContent = nSchoolsVisited + '/' + nTotalSchools;
+
+  // Schools Visited pie chart (all 4 surveys: quick, full, student, projects)
+  var visitedSchools = {};
+  visits.forEach(function(v) { if (v.school_name) visitedSchools[v.school_name] = true; });
+  full.forEach(function(f) { if (f.school_name) visitedSchools[f.school_name] = true; });
+  surveys.forEach(function(s) { if (s.school_name) visitedSchools[s.school_name] = true; });
+  projects.forEach(function(p) { if (p.school_name) visitedSchools[p.school_name] = true; });
+
+  var nTotalSchools = ALL_SCHOOLS.length;
+  var nVisited = ALL_SCHOOLS.filter(function(s) {
+    return visitedSchools[s.school_name];
+  }).length;
+  var nNotVisited = nTotalSchools - nVisited;
+
+  if (visitedPieChart) visitedPieChart.destroy();
+  visitedPieChart = new Chart(document.getElementById('visited-pie'), {
+    type: 'pie',
+    data: {
+      labels: ['Visited (' + nVisited + ')', 'Not Visited (' + nNotVisited + ')'],
+      datasets: [{
+        data: [nVisited, nNotVisited],
+        backgroundColor: ['#1C2B4A', '#e9ecef']
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 12 } } },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              var pct = nTotalSchools > 0 ? Math.round(ctx.raw / nTotalSchools * 100) : 0;
+              return ctx.label + ' - ' + pct + '%';
+            }
+          }
+        }
+      }
+    }
+  });
+
+  var pctVisited = nTotalSchools > 0 ? Math.round(nVisited / nTotalSchools * 100) : 0;
+  document.getElementById('visited-summary').textContent = nVisited + ' of ' + nTotalSchools + ' schools visited (' + pctVisited + '%)';
 
   // Program Reach bars
   var programCols = [

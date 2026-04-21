@@ -89,13 +89,7 @@ htmltools::HTML(paste0(
 
 # Pie chart + needs sections + visit log + visits by school
 htmltools::HTML(paste0(
-'<div style="max-width:380px; margin:0 auto 2rem; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;">
-  <h4 style="margin-top:0; color:var(--epi-navy);">Schools Visited</h4>
-  <canvas id="visited-pie" width="280" height="280"></canvas>
-  <p id="visited-summary" style="color:#666; font-size:0.85rem; margin-top:0.75rem;"></p>
-</div>
-
-<!-- Schools That Still Need A Full Update -->
+'<!-- Schools That Still Need A Full Update -->
 <h2>Schools That Still Need A Full Update</h2>
 <p style="color:#666; font-size:0.9rem; margin-bottom:0.75rem;">Schools that have not received a full school update during the current date range.</p>
 <div id="needs-update-container" style="margin-bottom:2rem;">
@@ -112,7 +106,6 @@ htmltools::HTML(paste0(
   <table id="visits-by-school-table" class="display compact stripe" style="width:100%;"></table>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
@@ -122,7 +115,6 @@ var ALL_SCHOOLS = ', schools_json, ';
 var FULL_UPDATES = ', full_updates_json, ';
 var SURVEYS = ', surveys_json, ';
 var N_TOTAL = ', n_total_schools, ';
-var visitedPieChart = null;
 var logDT = null;
 var bySchoolDT = null;
 var needsDT = null;
@@ -176,46 +168,6 @@ function renderVisitPage() {
     if (schoolFilter && v.school_name !== schoolFilter) return false;
     return true;
   });
-
-  // --- Pie chart: % schools visited ---
-  var visitedSchools = {};
-  // For pie chart, always use all visits in range (ignore school filter)
-  VISITS.filter(function(v) { return inRange(v.visit_date, start, end); }).forEach(function(v) {
-    if (v.school_name) visitedSchools[v.school_name] = true;
-  });
-  var nVisited = Object.keys(visitedSchools).length;
-  var nNotVisited = N_TOTAL - nVisited;
-
-  if (visitedPieChart) visitedPieChart.destroy();
-  var canvas = document.getElementById("visited-pie");
-  visitedPieChart = new Chart(canvas, {
-    type: "pie",
-    data: {
-      labels: ["Visited (" + nVisited + ")", "Not Visited (" + nNotVisited + ")"],
-      datasets: [{
-        data: [nVisited, nNotVisited],
-        backgroundColor: ["#1C2B4A", "#e9ecef"]
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      plugins: {
-        legend: { position: "bottom", labels: { font: { size: 12 } } },
-        tooltip: {
-          callbacks: {
-            label: function(ctx) {
-              var pct = N_TOTAL > 0 ? Math.round(ctx.raw / N_TOTAL * 100) : 0;
-              return ctx.label + " - " + pct + "%";
-            }
-          }
-        }
-      }
-    }
-  });
-
-  var pctVisited = N_TOTAL > 0 ? Math.round(nVisited / N_TOTAL * 100) : 0;
-  document.getElementById("visited-summary").textContent = nVisited + " of " + N_TOTAL + " schools visited (" + pctVisited + "%)";
 
   // --- Schools Needing Full Updates ---
   var schoolsWithFullUpdate = {};
