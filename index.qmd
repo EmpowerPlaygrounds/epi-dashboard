@@ -228,17 +228,21 @@ function renderDashboard() {
   var full     = ALL_FULL.filter(function(v) { return inRange(v.update_date, start, end); });
   var surveys  = ALL_SURVEYS.filter(function(v) { return inRange(v.survey_date, start, end); });
 
-  // Schools visited (any school with a quick update OR full update in range)
+  // Schools visited (any canonical school with a quick update OR full update in range)
   var visitedSchools = {};
   visits.forEach(function(v) { if (v.school_name) visitedSchools[v.school_name] = true; });
   full.forEach(function(f) { if (f.school_name) visitedSchools[f.school_name] = true; });
-  var nSchoolsVisited = Object.keys(visitedSchools).length;
   var nTotalSchools = ALL_SCHOOLS.length;
+  var nSchoolsVisited = ALL_SCHOOLS.filter(function(s) {
+    return visitedSchools[s.school_name];
+  }).length;
 
-  // Schools needing full updates
+  // Schools needing full updates (only count canonical schools)
   var schoolsWithFullUpdate = {};
   full.forEach(function(f) { if (f.school_name) schoolsWithFullUpdate[f.school_name] = true; });
-  var nNeedUpdate = nTotalSchools - Object.keys(schoolsWithFullUpdate).length;
+  var nNeedUpdate = ALL_SCHOOLS.filter(function(s) {
+    return !schoolsWithFullUpdate[s.school_name];
+  }).length;
 
   // Stat cards
   document.getElementById('stat-projects').textContent  = projects.length;
