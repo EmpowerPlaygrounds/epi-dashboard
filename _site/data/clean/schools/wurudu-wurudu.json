@@ -17,8 +17,8 @@
     "Biofill Toilets": 1,
     "Light a Village": 0,
     "n_visits": 8,
-    "n_responses": 104,
-    "pct_lantern": 0.25,
+    "n_responses": 105,
+    "pct_lantern": 0.2571,
     "pct_library": 0.8036,
     "pct_menstrual": 0.68,
     "pct_computers": 1,
@@ -2108,6 +2108,21 @@
       "Q23": "No",
       "Q29": "Other",
       "Q29_5_TEXT": "Student has electricity at home",
+      "school_name": "Wurudu Wurudu"
+    },
+    {
+      "StartDate": "2018-04-18 16:12:31",
+      "Q1": "Michael Kofi Offeh",
+      "school_selected": "Wuurudu Wurudu",
+      "Q3": "Female",
+      "Q4": "14",
+      "Q5": "Class 4",
+      "Q6": "No",
+      "Q9": "Teachers not allowing us to touch it ourselves",
+      "lantern_group": "Yes",
+      "Q23": "Yes",
+      "Q28": "Other",
+      "Q28_18_TEXT": "No problem",
       "school_name": "Wurudu Wurudu"
     },
     {

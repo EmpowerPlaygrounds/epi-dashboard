@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 2,
+    "n_visits": 3,
     "n_responses": 19,
     "pct_lantern": 0.9474,
     "pct_library": 0,
@@ -61,9 +61,51 @@
       "struggles": "They are still struggling with the lantern program",
       "observations": "Lantern program is working well as it should. I met with the teachers and oriented them again.",
       "visit_date": "2026-01-19"
+    },
+    {
+      "StartDate": "5/13/25 10:23",
+      "visitor": "Richard",
+      "Q1.5_6_TEXT": "Richard",
+      "school_name": "Akwanserem",
+      "visit_reason": "MGR Maintenance,Routine Program Evaluation",
+      "visit_date": "2025-05-13"
     }
   ],
-  "full_update": [],
+  "full_update": [
+    {
+      "StartDate": "2/24/25 5:00",
+      "Q1": "Isaac",
+      "school_name": "Akwanserem",
+      "Q3": "MGR Maintenance,Project Update Visit",
+      "Q5": "710",
+      "Q6": "185",
+      "Q7": "9",
+      "Q8": "54",
+      "Q9": "15",
+      "Q11": "31",
+      "Q12": "0",
+      "Q14": "0",
+      "Q15": "0",
+      "Q18": "It has trouble spinning, need to be fixed",
+      "Q20": "No",
+      "Q22": "Yes",
+      "Q23": "Broken",
+      "Q24": "14",
+      "Q25": "14",
+      "Q26": "Yes",
+      "Q30": "1-2 times in a term",
+      "Q31_1": "1- This does not describe our school",
+      "Q31_2": "1- This does not describe our school",
+      "Q32": "No, they need a library",
+      "Q33": "No, they need a classroom block or building for their library",
+      "Q34": "No, this school needs a toilet",
+      "Q35": "No, this school needs a borehole or other clean water solution",
+      "Q36": "Yes, they already had enough classrooms or another organization has provided them",
+      "Q37": "Yes",
+      "Q39": "No",
+      "update_date": "2025-02-24"
+    }
+  ],
   "surveys": [
     {
       "StartDate": "9/15/2025 8:18:57",
