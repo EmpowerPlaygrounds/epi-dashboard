@@ -28,12 +28,12 @@
   "full_update": [
     {
       "StartDate": "2023-10-24 6:23:43",
+      "school_name": "Dedewa",
       "Duration (in seconds)": "424",
       "ResponseId": "R_dNkNElaJsl6nXR3",
       "LocationLatitude": "5.986562",
       "LocationLongitude": "0.357017",
       "Q1": "George",
-      "school_name": "Dedewa",
       "Q3": "Routine Program Evaluation",
       "Q6": "148",
       "Q7": "14",

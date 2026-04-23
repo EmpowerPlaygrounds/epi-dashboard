@@ -52,8 +52,8 @@
   "full_update": [
     {
       "StartDate": "10/9/24 2:04",
-      "Q1": "Richard, Alex",
       "school_name": "Nwawasua MA",
+      "Q1": "Richard, Alex",
       "Q3": "Routine Program Evaluation,Project Update Visit",
       "Q5": "1500",
       "Q6": "550",
@@ -80,12 +80,12 @@
     },
     {
       "StartDate": "2023-11-16 2:29:59",
+      "school_name": "Nwawasua MA",
       "Duration (in seconds)": "620",
       "ResponseId": "R_4LaOI3sqej6TlR0",
       "LocationLatitude": "5.903093",
       "LocationLongitude": "-0.522268",
       "Q1": "George",
-      "school_name": "Nwawasua MA",
       "Q3": "Routine Program Evaluation",
       "Q5": "700",
       "Q6": "158",
@@ -110,12 +110,12 @@
     },
     {
       "StartDate": "2019-09-18 2:45:57",
+      "school_name": "Nwawasua MA",
       "Duration (in seconds)": "8088",
       "ResponseId": "R_3IBJlgfnrNvnLOL",
       "LocationLatitude": "7.290934",
       "LocationLongitude": "-2.405226",
       "Q1": "George",
-      "school_name": "Nwawasua MA",
       "Q3": "Routine Program Evaluation,Surveyor Team Visit,Other",
       "Q3_5_TEXT": "Menstrual kits",
       "Q5": "1900",
@@ -147,8 +147,8 @@
     },
     {
       "StartDate": "2018-07-05 22:00:44",
-      "Q1": "George",
       "school_name": "Nwawasua MA",
+      "Q1": "George",
       "Q3": "Surveyor Team Visit",
       "Q5": "2000",
       "Q6": "465",

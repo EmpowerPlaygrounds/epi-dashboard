@@ -28,8 +28,8 @@
   "full_update": [
     {
       "StartDate": "11/25/24 5:18",
-      "Q1": "Alex, Richard",
       "school_name": "Zippo Nyuinyui",
+      "Q1": "Alex, Richard",
       "Q3": "Routine Program Evaluation,Project Update Visit",
       "Q5": "600",
       "Q6": "275",
@@ -60,12 +60,12 @@
     },
     {
       "StartDate": "2020-01-15 5:22:36",
+      "school_name": "Zippo Nyuinyui",
       "Duration (in seconds)": "508",
       "ResponseId": "R_8CVufmpSYPXhbsR",
       "LocationLatitude": "7.057897",
       "LocationLongitude": "0.120174",
       "Q1": "Richard",
-      "school_name": "Zippo Nyuinyui",
       "Q3": "Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
       "Q6": "240",
       "Q7": "9",

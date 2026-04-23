@@ -40,8 +40,8 @@
   "full_update": [
     {
       "StartDate": "11/20/24 7:45",
-      "Q1": "Alex",
       "school_name": "Ataampuutum A/B",
+      "Q1": "Alex",
       "Q3": "Routine Program Evaluation,Project Update Visit",
       "Q5": "700",
       "Q6": "271",
@@ -68,8 +68,8 @@
     },
     {
       "StartDate": "2018-06-20 21:59:41",
-      "Q1": "George",
       "school_name": "Ataampuutum A/B",
+      "Q1": "George",
       "Q5": "1000",
       "Q6": "293",
       "Q7": "12",

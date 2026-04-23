@@ -181,8 +181,8 @@
   "full_update": [
     {
       "StartDate": "9/26/24 4:10",
-      "Q1": "Richard,Alex,Peace",
       "school_name": "Akwansu",
+      "Q1": "Richard,Alex,Peace",
       "Q3": "Routine Program Evaluation,Project Update Visit",
       "Q6": "230",
       "Q7": "14",
@@ -213,12 +213,12 @@
     },
     {
       "StartDate": "2023-11-09 4:04:58",
+      "school_name": "Akwansu",
       "Duration (in seconds)": "4682",
       "ResponseId": "R_mgQjS6Li9aIrHG6",
       "LocationLatitude": "5.912259",
       "LocationLongitude": "-0.256448",
       "Q1": "George",
-      "school_name": "Akwansu",
       "Q3": "Routine Program Evaluation,Other",
       "Q3_5_TEXT": "Science kits microscope",
       "Q5": "1100",
@@ -249,12 +249,12 @@
     },
     {
       "StartDate": "2024-09-27 14:50:11",
+      "school_name": "Akwansu",
       "ResponseId": "R_dgGctVWHsFyV9fB",
       "LocationLatitude": "5.92466",
       "LocationLongitude": "-0.24971",
       "Q1": "Alex",
       "Q1.5": "Richard,Alex,Peace",
-      "school_name": "Akwansu",
       "Q3": "Routine Program Evaluation,Project Update Visit",
       "Q6": "230",
       "Q7": "14",

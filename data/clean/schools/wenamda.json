@@ -101,6 +101,7 @@
   "full_update": [
     {
       "StartDate": "10/6/2025 8:18:25",
+      "school_name": "Wenamda",
       "Duration (in seconds)": "224",
       "ResponseId": "R_kxp4ADlOy1E4hn8",
       "LocationLatitude": "6.990119",
@@ -108,7 +109,6 @@
       "Q1": "Richard",
       "Q1.5": "Alex,Peace,Other",
       "Q1.5_6_TEXT": "Akuvi",
-      "school_name": "Wenamda",
       "Q3": "MGR Maintenance,Routine Check In,Survey Students,Computer Training",
       "Q5": "439",
       "Q6": "400",
@@ -138,8 +138,8 @@
     },
     {
       "StartDate": "11/4/24 4:42",
-      "Q1": "Richard, Isaac, Alex, Peace, National Service Personel",
       "school_name": "Wenamda",
+      "Q1": "Richard, Isaac, Alex, Peace, National Service Personel",
       "Q3": "Routine Program Evaluation,Project Update Visit",
       "Q5": "760",
       "Q6": "369",
@@ -171,12 +171,12 @@
     },
     {
       "StartDate": "2019-09-24 4:22:54",
+      "school_name": "Wenamda",
       "Duration (in seconds)": "970",
       "ResponseId": "R_axQyrDd8SLW5Iht",
       "LocationLatitude": "6.990243",
       "LocationLongitude": "-1.099337",
       "Q1": "Richard",
-      "school_name": "Wenamda",
       "Q3": "Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
       "Q5": "736",
       "Q6": "227",

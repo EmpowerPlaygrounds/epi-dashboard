@@ -38,8 +38,8 @@
   "full_update": [
     {
       "StartDate": "1/16/25 2:29",
-      "Q1": "Alex, Peace",
       "school_name": "Bomigo",
+      "Q1": "Alex, Peace",
       "Q3": "MGR Maintenance,Routine Program Evaluation",
       "Q5": "700",
       "Q6": "130",
@@ -70,10 +70,10 @@
     },
     {
       "StartDate": "2023-11-16 4:28:19",
+      "school_name": "Bomigo",
       "Duration (in seconds)": "2155",
       "ResponseId": "R_jUwvss7oj3v8JBQ",
       "Q1": "George",
-      "school_name": "Bomigo",
       "Q3": "Routine Program Evaluation",
       "Q5": "650",
       "Q6": "142",

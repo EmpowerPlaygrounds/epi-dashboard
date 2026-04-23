@@ -87,8 +87,8 @@
   "full_update": [
     {
       "StartDate": "10/1/24 6:11",
-      "Q1": "Richard, Alex",
       "school_name": "Yonguase",
+      "Q1": "Richard, Alex",
       "Q3": "Routine Program Evaluation,Project Update Visit",
       "Q5": "1000",
       "Q6": "158",
@@ -119,12 +119,12 @@
     },
     {
       "StartDate": "2023-03-02 4:07:11",
+      "school_name": "Yonguase",
       "Duration (in seconds)": "559",
       "ResponseId": "R_cbLPk0m3Cx4jLs3",
       "LocationLatitude": "6.231194",
       "LocationLongitude": "-0.057426",
       "Q1": "Richard",
-      "school_name": "Yonguase",
       "Q3": "MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
       "Q5": "1900",
       "Q6": "190",

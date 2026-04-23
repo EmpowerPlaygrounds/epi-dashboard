@@ -62,12 +62,12 @@
   "full_update": [
     {
       "StartDate": "2023-05-25 6:37:35",
+      "school_name": "Wangarakrom",
       "Duration (in seconds)": "758",
       "ResponseId": "R_0W6Q5Y0HMWHCjMk",
       "LocationLatitude": "5.29984",
       "LocationLongitude": "-2.071878",
       "Q1": "George",
-      "school_name": "Wangarakrom",
       "Q3": "Routine Program Evaluation,Surveyor Team Visit",
       "Q5": "3800",
       "Q6": "384",
@@ -97,12 +97,12 @@
     },
     {
       "StartDate": "2023-10-10 6:40:38",
+      "school_name": "Wangarakrom",
       "Duration (in seconds)": "4476",
       "ResponseId": "R_bgpBt0MR6ve8NlQ",
       "LocationLatitude": "5.299919",
       "LocationLongitude": "-2.07194",
       "Q1": "George",
-      "school_name": "Wangarakrom",
       "Q3": "MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit",
       "Q5": "3000",
       "Q6": "350",
@@ -131,8 +131,8 @@
     },
     {
       "StartDate": "2018-06-13 21:54:59",
-      "Q1": "George",
       "school_name": "Wangarakrom",
+      "Q1": "George",
       "Q3": "Other",
       "Q3_5_TEXT": "Did survey for 17 students",
       "Q6": "236",
@@ -162,8 +162,8 @@
     },
     {
       "StartDate": "2018-07-24 21:03:54",
-      "Q1": "George",
       "school_name": "Wangarakrom",
+      "Q1": "George",
       "Q3": "MGR Maintenance",
       "Q5": "2000",
       "Q6": "240",

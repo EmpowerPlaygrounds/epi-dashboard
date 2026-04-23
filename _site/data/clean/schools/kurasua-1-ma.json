@@ -40,8 +40,8 @@
   "full_update": [
     {
       "StartDate": "10/9/24 3:04",
-      "Q1": "Richard, Alex",
       "school_name": "Kurasua #1 MA",
+      "Q1": "Richard, Alex",
       "Q3": "Routine Program Evaluation,Project Update Visit",
       "Q5": "500",
       "Q6": "240",
@@ -73,8 +73,8 @@
     },
     {
       "StartDate": "2018-07-05 22:00:41",
-      "Q1": "George",
       "school_name": "Kurasua #1 MA",
+      "Q1": "George",
       "Q3": "Surveyor Team Visit",
       "Q5": "1200",
       "Q6": "220",

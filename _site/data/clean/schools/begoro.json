@@ -40,12 +40,12 @@
   "full_update": [
     {
       "StartDate": "2023-10-24 7:07:54",
+      "school_name": "Begoro",
       "Duration (in seconds)": "1549",
       "ResponseId": "R_hXn8JhvkiVa2O3d",
       "LocationLatitude": "6.295118",
       "LocationLongitude": "-0.629748",
       "Q1": "Richard",
-      "school_name": "Begoro",
       "Q3": "MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
       "Q5": "800",
       "Q6": "194",
@@ -70,12 +70,12 @@
     },
     {
       "StartDate": "2024-01-22 4:53:28",
+      "school_name": "Begoro",
       "Duration (in seconds)": "767",
       "ResponseId": "R_gxiCv5Gc11AGqbl",
       "LocationLatitude": "6.297161",
       "LocationLongitude": "-0.689404",
       "Q1": "Richard",
-      "school_name": "Begoro",
       "Q3": "MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
       "Q5": "1600",
       "Q6": "240",

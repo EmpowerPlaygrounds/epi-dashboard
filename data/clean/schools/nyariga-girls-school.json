@@ -40,8 +40,8 @@
   "full_update": [
     {
       "StartDate": "11/20/24 7:15",
-      "Q1": "Richard, Isaac",
       "school_name": "Nyariga Girls' School",
+      "Q1": "Richard, Isaac",
       "Q3": "Routine Program Evaluation,Project Update Visit",
       "Q5": "600",
       "Q6": "450",
@@ -73,12 +73,12 @@
     },
     {
       "StartDate": "2018-10-22 6:21:11",
+      "school_name": "Nyariga Girls' School",
       "Duration (in seconds)": "707",
       "ResponseId": "R_8hixYcJNAEhJXzE",
       "LocationLatitude": "10.860982",
       "LocationLongitude": "-0.900253",
       "Q1": "Richard",
-      "school_name": "Nyariga Girls' School",
       "Q3": "MGR Maintenance,Surveyor Team Visit",
       "Q5": "2000",
       "Q6": "115",
@@ -109,8 +109,8 @@
     },
     {
       "StartDate": "2018-06-20 21:59:35",
-      "Q1": "George",
       "school_name": "Nyariga Girls' School",
+      "Q1": "George",
       "Q3": "Other",
       "Q3_5_TEXT": "Days for Girls kits",
       "Q5": "1500",

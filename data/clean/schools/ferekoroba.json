@@ -28,12 +28,12 @@
   "full_update": [
     {
       "StartDate": "2023-10-27 4:41:44",
+      "school_name": "Ferekoroba",
       "Duration (in seconds)": "1451",
       "ResponseId": "R_9dbMN5kl2zVyM1Y",
       "LocationLatitude": "6.220658",
       "LocationLongitude": "-0.347632",
       "Q1": "Richard",
-      "school_name": "Ferekoroba",
       "Q3": "MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit,Project Update Visit",
       "Q5": "900",
       "Q6": "114",

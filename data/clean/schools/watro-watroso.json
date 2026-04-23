@@ -72,6 +72,7 @@
   "full_update": [
     {
       "StartDate": "10/14/2025 6:25:16",
+      "school_name": "Watro (Watroso)",
       "Duration (in seconds)": "727",
       "ResponseId": "R_3cjfRUcxt0iP5aA",
       "LocationLatitude": "7.647276",
@@ -79,7 +80,6 @@
       "Q1": "Richard",
       "Q1.5": "Richard,Alex,Peace,Other",
       "Q1.5_6_TEXT": "Akuvi",
-      "school_name": "Watro (Watroso)",
       "Q3": "Routine Check In,Survey Students,Computer Training",
       "Q5": "2500",
       "Q6": "420",
@@ -107,8 +107,8 @@
     },
     {
       "StartDate": "10/7/24 5:09",
-      "Q1": "Richard, Alex",
       "school_name": "Watro (Watroso)",
+      "Q1": "Richard, Alex",
       "Q3": "Routine Program Evaluation,Project Update Visit",
       "Q5": "1500",
       "Q6": "262",

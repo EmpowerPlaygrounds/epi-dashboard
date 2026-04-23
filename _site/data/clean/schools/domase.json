@@ -91,6 +91,7 @@
   "full_update": [
     {
       "StartDate": "10/6/2025 6:38:53",
+      "school_name": "Domase",
       "Duration (in seconds)": "246",
       "ResponseId": "R_9FeLMdm48Tggnn7",
       "LocationLatitude": "6.865513",
@@ -98,7 +99,6 @@
       "Q1": "Richard",
       "Q1.5": "Alex,Peace,Other",
       "Q1.5_6_TEXT": "Akuvi",
-      "school_name": "Domase",
       "Q3": "Routine Check In,Survey Students,Computer Training",
       "Q5": "1400",
       "Q6": "210",
@@ -130,12 +130,12 @@
     },
     {
       "StartDate": "2023-11-13 3:41:40",
+      "school_name": "Domase",
       "Duration (in seconds)": "665",
       "ResponseId": "R_iCS50c3lhR4ND2m",
       "LocationLatitude": "6.865386",
       "LocationLongitude": "-1.217725",
       "Q1": "George",
-      "school_name": "Domase",
       "Q3": "Routine Program Evaluation",
       "Q5": "900",
       "Q6": "149",
