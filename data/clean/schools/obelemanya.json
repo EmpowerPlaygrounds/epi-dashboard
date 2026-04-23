@@ -79,7 +79,7 @@
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "No",
       "Q39": "No",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2024-10-02"
     },
     {
@@ -113,7 +113,7 @@
       "Q35": "Yes, EPI has helped them get access to clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2023-11-23"
     },
     {
@@ -148,7 +148,7 @@
       "Q35": "No, this school needs a borehole or other clean water solution",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "No",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2019-07-04"
     }
   ],

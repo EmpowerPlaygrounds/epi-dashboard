@@ -156,7 +156,7 @@
       "Q41": "No",
       "Q43": "23/08/2025",
       "Q44": "Yes",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2025-09-24"
     },
     {
@@ -213,7 +213,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "Yes",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2023-02-14"
     },
     {
@@ -249,7 +249,7 @@
       "Q35": "Yes, EPI has helped them get access to clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2021-10-18"
     },
     {
@@ -286,7 +286,7 @@
       "Q35": "Yes, EPI has helped them get access to clean water",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "Other",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2022-06-20"
     },
     {
@@ -318,7 +318,7 @@
       "Q34": "Yes, another organization or the government has given them some",
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2018-06-13"
     }
   ],

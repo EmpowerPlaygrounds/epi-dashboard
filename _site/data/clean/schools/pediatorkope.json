@@ -16,13 +16,13 @@
     "Solar Power": 1,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 7,
+    "n_visits": 10,
     "n_responses": 231,
     "pct_lantern": 0.5022,
     "pct_library": 0.8387,
     "pct_menstrual": 0.7292,
     "pct_computers": 1,
-    "n_issues": 0
+    "n_issues": 3
   },
   "visits": [
     {
@@ -104,6 +104,68 @@
       "Q1.5": "Alex",
       "school_name": "Pediatorkope",
       "visit_date": "2025-06-30"
+    },
+    {
+      "StartDate": "2026-03-11 8:05:43",
+      "Duration (in seconds)": "121",
+      "ResponseId": "R_6SMOkZ0sV6ptrtQ",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Peace, Akuvi",
+      "school_name": "Pediatorkope",
+      "visit_reason": "Routine Visit, Starlink installation",
+      "Q3_6_TEXT": "Starlink installation",
+      "activities": "Starlink installation",
+      "Q4_6_TEXT": "Starlink installation",
+      "doing_well": "They are doing well at using the facilities",
+      "struggles": "There are no problems",
+      "urgent_issues": "No",
+      "observations": "None",
+      "visit_date": "2026-03-11"
+    },
+    {
+      "StartDate": "2026-03-09 5:29:46",
+      "Duration (in seconds)": "148",
+      "ResponseId": "R_2SwKckY6ivxWbF8",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "school_name": "Pediatorkope",
+      "visit_reason": "MGR/Charging Maintenance, Computer Maintenance",
+      "activities": "MGR/Charging Maintenance, Computer Maintenance",
+      "Q5": "Other:",
+      "Q5_4_TEXT": "Repositioning",
+      "Q6": "Yes, all problems were resolved",
+      "Q11": "One or more computers were not working/turning on",
+      "Q12": "Yes, but I had to replace a computer",
+      "Q13": "5",
+      "doing_well": "They are doing well",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-03-09"
+    },
+    {
+      "StartDate": "2026-03-02 3:58:27",
+      "Duration (in seconds)": "112",
+      "ResponseId": "R_aLtG0fLsNdx5HVS",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Peace, Akuvi",
+      "school_name": "Pediatorkope",
+      "visit_reason": "Computer Maintenance, Menstrual Kit Distribution",
+      "activities": "Computer Maintenance, Menstrual Kit Distribution",
+      "Q11": "One or more computers were not working/turning on",
+      "Q12": "Yes, but I had to replace a computer",
+      "Q13": "3",
+      "Q20": "13",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "None",
+      "visit_date": "2026-03-02"
     }
   ],
   "full_update": [
@@ -138,7 +200,7 @@
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
       "Q39": "No",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2024-09-17"
     },
     {
@@ -205,7 +267,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, EPI has built enough classrooms for them to use",
       "Q37": "Yes",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2023-10-20"
     },
     {
@@ -242,7 +304,7 @@
       "Q35": "No, this school needs a borehole or other clean water solution",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2019-10-08"
     },
     {
@@ -273,7 +335,7 @@
       "Q34": "Yes, another organization or the government has given them some",
       "Q35": "No, this school needs a borehole or other clean water solution",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2018-03-28"
     }
   ],

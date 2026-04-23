@@ -143,7 +143,7 @@
       "Q36": "Yes, EPI has built enough classrooms for them to use",
       "Q37": "Yes",
       "Q39": "No",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2024-09-18"
     },
     {
@@ -208,7 +208,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, EPI has built enough classrooms for them to use",
       "Q37": "Yes",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2023-10-23"
     },
     {
@@ -239,7 +239,7 @@
       "Q34": "Yes, another organization or the government has given them some",
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2018-07-11"
     }
   ],

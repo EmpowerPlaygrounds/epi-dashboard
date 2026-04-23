@@ -86,7 +86,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Other",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2023-10-24"
     },
     {
@@ -123,7 +123,7 @@
       "Q35": "No, this school needs a borehole or other clean water solution",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "No",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2020-01-14"
     }
   ],

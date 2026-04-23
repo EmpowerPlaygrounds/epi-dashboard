@@ -84,7 +84,7 @@
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "Yes",
       "Q39": "No",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2024-10-07"
     },
     {
@@ -118,7 +118,7 @@
       "Q33": "No, they need a classroom block or building for their library",
       "Q34": "No, this school needs a toilet",
       "Q35": "No, this school needs a borehole or other clean water solution",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2018-11-14"
     }
   ],

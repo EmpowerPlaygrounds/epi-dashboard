@@ -87,7 +87,7 @@
       "Q34": "No, this school needs a toilet",
       "Q35": "No, this school needs a borehole or other clean water solution",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2018-07-13"
     }
   ],

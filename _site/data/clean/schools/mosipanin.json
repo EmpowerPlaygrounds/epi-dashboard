@@ -51,7 +51,6 @@
     {
       "StartDate": "10/7/2025 3:35:53",
       "school_name": "Mosipanin",
-      "Q2_69_TEXT": "Mosipanin",
       "Duration (in seconds)": "226",
       "ResponseId": "R_7ZkgXP2Ltb9Hp1w",
       "LocationLatitude": "7.122943",
@@ -84,7 +83,7 @@
       "Q36": "Yes, EPI has built enough classrooms for them to use",
       "Q37": "Yes",
       "Q39": "No",
-      "Q45": "No",
+      "recommend_project": "No",
       "update_date": "2025-10-07"
     },
     {
@@ -115,7 +114,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "No",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2019-03-21"
     },
     {
@@ -152,7 +151,7 @@
       "Q35": "Yes, EPI has helped them get access to clean water",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "No",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2019-05-21"
     },
     {
@@ -189,7 +188,7 @@
       "Q35": "Yes, EPI has helped them get access to clean water",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "No",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2019-10-04"
     }
   ],

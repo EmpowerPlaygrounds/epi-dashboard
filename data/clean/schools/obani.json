@@ -77,7 +77,7 @@
       "Q34": "Yes, another organization or the government has given them some",
       "Q35": "No, this school needs a borehole or other clean water solution",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2018-07-11"
     }
   ],

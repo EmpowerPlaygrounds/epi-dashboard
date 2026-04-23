@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 11,
+    "n_visits": 12,
     "n_responses": 145,
     "pct_lantern": 0.669,
     "pct_library": 0.5781,
     "pct_menstrual": 0.6296,
     "pct_computers": 0,
-    "n_issues": 2
+    "n_issues": 3
   },
   "visits": [
     {
@@ -166,6 +166,22 @@
       "Q1.5": "Alex",
       "school_name": "Adenya",
       "visit_date": "2025-05-29"
+    },
+    {
+      "StartDate": "2026-04-23 4:11:00",
+      "Duration (in seconds)": "102",
+      "ResponseId": "R_5PdG9hdf1pDPFvn",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "school_name": "Adenya",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit",
+      "doing_well": "They are doing well with our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "School has just reopened and students and settling in",
+      "visit_date": "2026-04-23"
     }
   ],
   "full_update": [
@@ -198,7 +214,7 @@
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
       "Q39": "No",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2024-09-26"
     },
     {
@@ -232,7 +248,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2023-02-20"
     },
     {
@@ -269,7 +285,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2019-02-28"
     },
     {
@@ -304,7 +320,7 @@
       "Q34": "No, this school needs a toilet",
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q37": "Yes",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2019-05-27"
     },
     {
@@ -340,7 +356,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2019-09-30"
     },
     {
@@ -371,7 +387,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "Yes",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2020-02-11"
     },
     {
@@ -408,7 +424,7 @@
       "Q35": "No, this school needs a borehole or other clean water solution",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "Other",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2022-06-16"
     },
     {
@@ -443,7 +459,7 @@
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
       "Q39": "No",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2024-09-27"
     }
   ],

@@ -16,13 +16,13 @@
     "Solar Power": 1,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 3,
+    "n_visits": 4,
     "n_responses": 119,
     "pct_lantern": 0.7009,
     "pct_library": 0.5781,
     "pct_menstrual": 0.7407,
     "pct_computers": 1,
-    "n_issues": 1
+    "n_issues": 2
   },
   "visits": [
     {
@@ -68,6 +68,27 @@
       "Q1.5": "Alex",
       "school_name": "Alorkpem Island",
       "visit_date": "2025-07-15"
+    },
+    {
+      "StartDate": "2026-03-02 6:38:14",
+      "Duration (in seconds)": "156",
+      "ResponseId": "R_6svSFysdjhS2FPT",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Peace, Akuvi",
+      "school_name": "Alorkpem Island",
+      "visit_reason": "Computer Maintenance, Menstrual Kit Distribution",
+      "activities": "Computer Maintenance, Menstrual Kit Distribution",
+      "Q11": "One or more computers would not connect to the RACHEL",
+      "Q12": "Yes, but I had to replace a computer",
+      "Q13": "2",
+      "Q20": "4",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-03-02"
     }
   ],
   "full_update": [
@@ -104,7 +125,7 @@
       "Q41": "No",
       "Q43": "27/02/2024",
       "Q44": "Yes",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2024-09-17"
     },
     {
@@ -166,7 +187,7 @@
       "Q34": "Yes, another organization or the government has given them some",
       "Q35": "No, this school needs a borehole or other clean water solution",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2018-06-13"
     }
   ],

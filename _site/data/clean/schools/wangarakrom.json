@@ -92,7 +92,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "No",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2023-05-25"
     },
     {
@@ -126,7 +126,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Other",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2023-10-10"
     },
     {
@@ -157,7 +157,7 @@
       "Q34": "Yes, another organization or the government has given them some",
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2018-06-13"
     },
     {
@@ -188,7 +188,7 @@
       "Q34": "Yes, another organization or the government has given them some",
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2018-07-24"
     }
   ],

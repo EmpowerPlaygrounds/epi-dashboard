@@ -121,7 +121,7 @@
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
       "Q39": "No",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2025-09-17"
     },
     {
@@ -153,7 +153,7 @@
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
       "Q39": "No",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2024-09-16"
     },
     {
@@ -187,7 +187,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, EPI has built enough classrooms for them to use",
       "Q37": "Yes",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2023-04-14"
     },
     {
@@ -220,7 +220,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, EPI has built enough classrooms for them to use",
       "Q37": "Yes",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2023-10-24"
     },
     {
@@ -256,7 +256,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "No",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2018-11-02"
     },
     {
@@ -293,7 +293,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2019-02-28"
     },
     {
@@ -328,7 +328,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "Yes",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2019-10-18"
     }
   ],

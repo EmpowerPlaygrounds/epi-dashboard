@@ -71,7 +71,6 @@
     {
       "StartDate": "10/7/2025 5:19:39",
       "school_name": "Tun Tun",
-      "Q2_69_TEXT": "Tuntum",
       "Duration (in seconds)": "231",
       "ResponseId": "R_3pdOWYb4BY2O4Zi",
       "LocationLatitude": "7.125686",
@@ -105,7 +104,7 @@
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
       "Q39": "No",
-      "Q45": "No",
+      "recommend_project": "No",
       "update_date": "2025-10-07"
     },
     {
@@ -218,7 +217,7 @@
       "Q35": "Yes, EPI has helped them get access to clean water",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "No",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2019-03-21"
     },
     {
@@ -255,7 +254,7 @@
       "Q35": "Yes, EPI has helped them get access to clean water",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "No",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2019-05-22"
     },
     {
@@ -290,7 +289,7 @@
       "Q35": "Yes, EPI has helped them get access to clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2019-10-04"
     }
   ],

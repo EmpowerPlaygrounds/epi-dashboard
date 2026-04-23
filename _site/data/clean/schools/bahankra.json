@@ -164,7 +164,7 @@
       "Q36": "Yes, EPI has built enough classrooms for them to use",
       "Q37": "Yes",
       "Q39": "No",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2025-10-06"
     },
     {
@@ -201,7 +201,7 @@
       "Q35": "Yes, EPI has helped them get access to clean water",
       "Q36": "Yes, EPI has built enough classrooms for them to use",
       "Q37": "Yes",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2019-09-25"
     },
     {
@@ -232,7 +232,7 @@
       "Q34": "Yes, EPI has helped build some",
       "Q35": "Yes, EPI has helped them get access to clean water",
       "Q36": "Yes, EPI has built enough classrooms for them to use",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2018-06-11"
     },
     {
@@ -263,7 +263,7 @@
       "Q34": "Yes, EPI has helped build some",
       "Q35": "Yes, EPI has helped them get access to clean water",
       "Q36": "Yes, EPI has built enough classrooms for them to use",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2018-06-13"
     }
   ],

@@ -125,7 +125,7 @@
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "Yes",
       "Q39": "No",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2025-10-06"
     },
     {
@@ -158,7 +158,7 @@
       "Q35": "Yes, EPI has helped them get access to clean water",
       "Q36": "Yes, EPI has built enough classrooms for them to use",
       "Q37": "Yes",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2023-11-13"
     }
   ],

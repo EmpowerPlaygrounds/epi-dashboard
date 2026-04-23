@@ -112,7 +112,7 @@
       "Q42": "3 have broken down currently",
       "Q43": "18-08-2025",
       "Q44": "Yes",
-      "Q45": "No",
+      "recommend_project": "No",
       "update_date": "2025-09-18"
     },
     {
@@ -174,7 +174,7 @@
       "Q35": "No, this school needs a borehole or other clean water solution",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2023-02-15"
     },
     {
@@ -211,7 +211,7 @@
       "Q35": "No, this school needs a borehole or other clean water solution",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "No",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2019-01-18"
     },
     {
@@ -245,7 +245,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "Yes",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2019-09-26"
     },
     {
@@ -282,7 +282,7 @@
       "Q35": "No, this school needs a borehole or other clean water solution",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "Yes",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2020-01-20"
     },
     {
@@ -319,7 +319,7 @@
       "Q35": "No, this school needs a borehole or other clean water solution",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Other",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2022-06-21"
     }
   ],

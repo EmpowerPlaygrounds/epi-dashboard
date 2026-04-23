@@ -143,7 +143,7 @@
       "Q35": "Yes, EPI has helped them get access to clean water",
       "Q36": "Yes, EPI has built enough classrooms for them to use",
       "Q37": "No",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2019-03-25"
     },
     {
@@ -180,7 +180,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "No",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2019-11-05"
     }
   ],

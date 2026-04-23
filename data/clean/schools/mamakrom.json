@@ -140,7 +140,7 @@
       "Q37": "Yes",
       "Q38": "3 months",
       "Q39": "No",
-      "Q45": "No",
+      "recommend_project": "No",
       "update_date": "2026-01-22"
     },
     {
@@ -204,7 +204,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, they already had enough classrooms or another organization has provided them",
       "Q37": "Yes",
-      "Q45": "No, they do not need anything or they need to work on their lantern program more.",
+      "recommend_project": "No, they do not need anything or they need to work on their lantern program more.",
       "update_date": "2023-11-10"
     }
   ],

@@ -91,7 +91,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "Yes, EPI has built enough classrooms for them to use",
       "Q37": "Other",
-      "Q45": "Maybe in the future",
+      "recommend_project": "Maybe in the future",
       "update_date": "2023-10-11"
     },
     {
@@ -127,7 +127,7 @@
       "Q35": "Yes, another organization or the government has given them something to provide clean water",
       "Q36": "No, this school needs more classrooms or an upgrade to their current buildings",
       "Q37": "No",
-      "Q45": "Yes",
+      "recommend_project": "Yes",
       "update_date": "2018-12-05"
     }
   ],
