@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -39,10 +39,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-832001d82d2599cba306249e96381318.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-51f10c164b8e96ed66b126fa4c7023c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -156,6 +156,19 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="cell">
 <div class="cell-output-display no-overflow-x">
+<!-- Tab Navigation -->
+<div id="project-tabs" style="display:flex; gap:0; margin-bottom:0; border-bottom:2px solid #e9ecef;">
+  <button class="proj-tab active" data-tab="completed" style="flex:1; padding:0.75rem 1rem; border:none; background:none; font-size:0.9rem; font-weight:600; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.15s;">
+    Completed Projects
+  </button>
+  <button class="proj-tab" data-tab="recommended" style="flex:1; padding:0.75rem 1rem; border:none; background:none; font-size:0.9rem; font-weight:600; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.15s;">
+    Recommended Projects <span id="tab-count-rec" style="background:#28a745; color:#fff; border-radius:10px; padding:0.1rem 0.5rem; font-size:0.75rem; margin-left:0.35rem;"></span>
+  </button>
+</div>
+
+<!-- Tab: Completed Projects -->
+<div id="tab-completed" class="proj-tab-content" style="padding-top:1rem;">
+
 <!-- Filters -->
 <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-bottom:1.5rem; justify-content:center;">
   <label style="font-weight:600; color:var(--epi-navy);">Date Range:</label>
@@ -171,9 +184,26 @@ ul.task-list li input[type="checkbox"] {
 
 <!-- Project Cards Container -->
 <div id="projects-container"></div>
+</div>
+
+<!-- Tab: Recommended Projects -->
+<div id="tab-recommended" class="proj-tab-content" style="display:none; padding-top:1rem;">
+  <p style="color:#666; font-size:0.9rem; margin-bottom:0.5rem;">Schools recommended for new projects during full school updates. Includes MGR swap recommendations (replacing power-generating MGRs with non-generating MGRs as communities gain electricity).</p>
+  <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-bottom:1rem; justify-content:center;">
+    <select id="rec-filter" style="padding:0.35rem 0.5rem; border:1px solid #ccc; border-radius:4px; max-width:220px;">
+      <option value="">All Recommendations</option>
+      <option value="Yes">Yes — Recommended</option>
+      <option value="Maybe">Maybe / Maybe in the future</option>
+      <option value="No">Not Recommended</option>
+      <option value="mgr-swap">MGR Swap Recommended</option>
+    </select>
+  </div>
+  <div id="recommended-container"></div>
+</div>
 
 <script>
 var ALL_PROJECTS = [{"project_date":"2026-03-24","project_type":"Science Kit Distribution, Menstrual Kit Distribution","school_name":"Avadre Besic school","is_new_school":true,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"Science Kit Distribution, Menstrual Kit Distribution","notes":"Bo"},{"project_date":"2026-03-17","project_type":"Starlink","school_name":"Alorkpem Island","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"Starlink installed in EPI computer lab. RACHEL device replaced","notes":null},{"project_date":"2026-03-14","project_type":"Building Construction","school_name":"Mobia","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"Teacher Bungalow (4 rooms)","notes":null},{"project_date":"2026-03-11","project_type":"Starlink","school_name":"Pediatorkope","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"Starlink installed in EPI computer lab. RACHEL device replaced","notes":null},{"project_date":"2026-03-11","project_type":"Starlink","school_name":"Pediatorkope","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"Starlink installed in EPI computer lab. RACHEL device replaced","notes":null},{"project_date":"2026-03-07","project_type":"GROW Project","school_name":"Pediatorkope","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-20","project_type":"GROW Project","school_name":"Anamenampa","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-20","project_type":"GROW Project","school_name":"Afransua Dedewa MA Primary","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-20","project_type":"GROW Project","school_name":"Dedenya","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-20","project_type":"GROW Project","school_name":"Fawotrikosie","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-20","project_type":"GROW Project","school_name":"Wurudu Wurudu","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-20","project_type":"GROW Project","school_name":"Amuyaokope","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"GROW Project with library books from EPI","notes":null},{"project_date":"2026-02-02","project_type":"Starlink","school_name":"Luta","is_new_school":false,"visitor":"Richard","has_partner":false,"partner_name":null,"summary":"Starlink installed in EPI computer lab","notes":null},{"project_date":"2026-01-30","project_type":"Electricity Generating MGR Installation","school_name":"Apaah","is_new_school":false,"visitor":"Isaac","has_partner":true,"partner_name":"Alexis omman","summary":"24 lanterns distributed, 8 lantern groups (~12 students/group). MGR moved from Dedenya","notes":null},{"project_date":"2026-01-26","project_type":"Electricity Generating MGR Installation","school_name":"Adenya","is_new_school":false,"visitor":"Isaac","has_partner":true,"partner_name":"Roberts Family Foundation","summary":"17 lanterns distributed, 10 lantern groups (~3 students/group). MGR moved from Attabui","notes":null},{"project_date":"2026-01-26","project_type":"Non-Generating MGR Installation","school_name":"Ddada","is_new_school":true,"visitor":"Isaac","has_partner":false,"partner_name":null,"summary":"","notes":null},{"project_date":"2026-01-26","project_type":"Solar Project for Lanterns Specifically (No MGR)","school_name":"Adenya","is_new_school":false,"visitor":"Isaac","has_partner":false,"partner_name":null,"summary":"16 lanterns distributed","notes":null},{"project_date":"2026-01-26","project_type":"Solar Project (not for lanterns)","school_name":"Akwanserem","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"12 solar panels installed","notes":null},{"project_date":"2026-01-26","project_type":"Computer Lab,RACHEL Device","school_name":"Abrenya","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"Computer Lab,RACHEL Device","notes":null},{"project_date":"2026-01-26","project_type":"Building Construction,Science Kit Distribution,Menstrual Kit Distribution","school_name":"Abrenya","is_new_school":false,"visitor":"Alex","has_partner":false,"partner_name":null,"summary":"Teacher Bungalow (4 rooms). 5 science kits given. Menstrual kits distributed","notes":null}];
+var ALL_RECOMMENDED = [{"school_name":"Abrenya","update_date":"2025-10-02","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Adenya","update_date":"2024-09-27","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Ador Kope R/C Primary","update_date":"2023-10-24","recommend_project":"No, they do not need anything or they need to work on their lantern program more.","recommended_types":null,"recommend_mgr_swap":null,"visitor":"George"},{"school_name":"Afransua Dedewa MA Primary","update_date":"2023-11-08","recommend_project":"No, they do not need anything or they need to work on their lantern program more.","recommended_types":null,"recommend_mgr_swap":null,"visitor":"George"},{"school_name":"Akwansu","update_date":"2024-09-27","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Alex"},{"school_name":"Akyeremanteng","update_date":"2024-10-01","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Alex, Richard, Peace"},{"school_name":"Alorkpem Island","update_date":"2024-09-17","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Isaac,Richard,Alex"},{"school_name":"Amuyaokope","update_date":"2025-09-17","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Alex"},{"school_name":"Anamenampa","update_date":"2024-09-27","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard,Peace"},{"school_name":"Ataampuutum A/B","update_date":"2018-06-20","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"George"},{"school_name":"Attabui","update_date":"2025-09-23","recommend_project":"Maybe","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Alex"},{"school_name":"Azizakpem","update_date":"2024-09-17","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Isaac,Richard,Peace"},{"school_name":"Bahankra","update_date":"2025-10-06","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Isaac"},{"school_name":"Begoro","update_date":"2023-10-24","recommend_project":"Maybe in the future","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Bepotumtum","update_date":"2025-09-18","recommend_project":"No","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Bomigo","update_date":"2023-11-16","recommend_project":"Maybe in the future","recommended_types":null,"recommend_mgr_swap":null,"visitor":"George"},{"school_name":"Community 3","update_date":"2023-10-11","recommend_project":"Maybe in the future","recommended_types":null,"recommend_mgr_swap":null,"visitor":"George"},{"school_name":"Community 9","update_date":"2023-10-11","recommend_project":"Maybe in the future","recommended_types":null,"recommend_mgr_swap":null,"visitor":"George"},{"school_name":"Dagomba","update_date":"2019-09-24","recommend_project":"Maybe in the future","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Dedenya","update_date":"2024-09-27","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Dedewa","update_date":"2023-10-24","recommend_project":"No, they do not need anything or they need to work on their lantern program more.","recommended_types":null,"recommend_mgr_swap":null,"visitor":"George"},{"school_name":"Domase","update_date":"2025-10-06","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Ekorso Akwadum","update_date":"2025-09-24","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Essam","update_date":"2019-11-05","recommend_project":"Maybe in the future","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Fawotrikosie","update_date":"2024-10-15","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard, Alex"},{"school_name":"Ferekoroba","update_date":"2023-10-27","recommend_project":"Maybe in the future","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Galalia","update_date":"2019-10-10","recommend_project":"Maybe in the future","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Gourcy Burkina Faso School","update_date":"2023-12-06","recommend_project":"No, they do not need anything or they need to work on their lantern program more.","recommended_types":null,"recommend_mgr_swap":null,"visitor":"George"},{"school_name":"Kpala Government","update_date":"2018-07-13","recommend_project":"Maybe in the future","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Kpala Private","update_date":"2020-01-16","recommend_project":"Maybe in the future","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Kurasua #1 MA","update_date":"2024-10-09","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard, Alex"},{"school_name":"Luta","update_date":"2025-09-17","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Alex"},{"school_name":"Madavunu","update_date":"2025-09-17","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Alex"},{"school_name":"Mamakrom","update_date":"2026-01-22","recommend_project":"No","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Alex"},{"school_name":"Mampong Shai","update_date":"2024-09-27","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Mansokwa","update_date":"2025-09-29","recommend_project":"No","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Minya","update_date":"2024-09-18","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Isaac,Richard,Peace"},{"school_name":"Mobia","update_date":"2023-11-13","recommend_project":"No, they do not need anything or they need to work on their lantern program more.","recommended_types":null,"recommend_mgr_swap":null,"visitor":"George"},{"school_name":"Mosipanin","update_date":"2025-10-07","recommend_project":"No","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Mpaem","update_date":"2019-09-19","recommend_project":"Maybe in the future","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Ntomem","update_date":"2023-10-24","recommend_project":"Maybe in the future","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Nwawasua MA","update_date":"2024-10-09","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard, Alex"},{"school_name":"Nwowom","update_date":"2024-10-07","recommend_project":"No, they do not need anything or they need to work on their lantern program more.","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard, Peace"},{"school_name":"Nyapienya","update_date":"2024-09-27","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Nyariga Girls' School","update_date":"2018-10-22","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Obani","update_date":"2018-07-11","recommend_project":"No, they do not need anything or they need to work on their lantern program more.","recommended_types":null,"recommend_mgr_swap":null,"visitor":"George"},{"school_name":"Obelemanya","update_date":"2024-10-02","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard, Peace"},{"school_name":"Obosonu","update_date":"2024-09-27","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Alex"},{"school_name":"Old Konkompe","update_date":"2025-10-14","recommend_project":"No","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Other","update_date":"2018-06-14","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Isaac"},{"school_name":"Pediatorkope","update_date":"2024-09-17","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Isaac,Richard,Peace"},{"school_name":"Terhey","update_date":"2025-09-17","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Alex"},{"school_name":"Tsledom","update_date":"2024-10-02","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard, Alex"},{"school_name":"Tuanikope","update_date":"2018-07-24","recommend_project":"No, they do not need anything or they need to work on their lantern program more.","recommended_types":null,"recommend_mgr_swap":null,"visitor":"George"},{"school_name":"Tun Tun","update_date":"2025-10-07","recommend_project":"No","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Wangarakrom","update_date":"2023-10-10","recommend_project":"No, they do not need anything or they need to work on their lantern program more.","recommended_types":null,"recommend_mgr_swap":null,"visitor":"George"},{"school_name":"Watro (Watroso)","update_date":"2025-10-14","recommend_project":"No","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Wekpeti Abresu","update_date":"2025-09-24","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Wenamda","update_date":"2025-10-06","recommend_project":"No","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"},{"school_name":"Wurudu Wurudu","update_date":"2025-09-18","recommend_project":"Maybe","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Alex"},{"school_name":"Yonguase","update_date":"2024-10-01","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard, Alex"},{"school_name":"Yorogo-Asorogobisi","update_date":"2024-10-01","recommend_project":"Yes","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Alex,Peace"},{"school_name":"Zippo Nyuinyui","update_date":"2020-01-15","recommend_project":"Maybe in the future","recommended_types":null,"recommend_mgr_swap":null,"visitor":"Richard"}];
 
 // Color mapping for project types
 var TYPE_COLORS = {
@@ -212,7 +242,8 @@ function makeProjectCard(p) {
   // Header row: school name + date
   html += '<div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem; flex-wrap:wrap; gap:0.5rem;">';
   html += '<div>';
-  html += '<span style="color:var(--epi-navy); font-weight:700; font-size:1.05rem;">' + p.school_name + '</span>';
+  var slug = p.school_name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
+  html += '<a href="schools.html?school=' + slug + '" style="color:var(--epi-navy); font-weight:700; font-size:1.05rem; text-decoration:none; border-bottom:1px dashed var(--epi-navy);">' + p.school_name + '</a>';
   if (p.is_new_school) {
     html += ' <span style="background:#dc3545; color:#fff; padding:0.1rem 0.5rem; border-radius:10px; font-size:0.7rem; font-weight:600;">NEW SCHOOL</span>';
   }
@@ -304,7 +335,104 @@ function renderProjects() {
   container.innerHTML = html;
 }
 
+// --- Tab Switching ---
+function switchProjTab(tabId) {
+  document.querySelectorAll(".proj-tab-content").forEach(function(el) { el.style.display = "none"; });
+  document.querySelectorAll(".proj-tab").forEach(function(btn) { btn.style.color = "#999"; btn.style.borderBottomColor = "transparent"; });
+  document.getElementById("tab-" + tabId).style.display = "block";
+  var activeBtn = document.querySelector(".proj-tab[data-tab='" + tabId + "']");
+  if (activeBtn) { activeBtn.style.color = "var(--epi-navy)"; activeBtn.style.borderBottomColor = "var(--epi-navy)"; }
+}
+
+// --- Recommended Projects Rendering ---
+function makeRecCard(r) {
+  var statusColor = r.recommend_project === "Yes" ? "#28a745" : (r.recommend_project === "No" || (r.recommend_project && r.recommend_project.indexOf("No,") === 0)) ? "#6c757d" : "#ffc107";
+  var borderColor = statusColor;
+  var slug = r.school_name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
+
+  var html = '<div style="background:#fff; border-radius:8px; padding:1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1rem; border-left:4px solid ' + borderColor + ';">';
+
+  // Header: school name + date
+  html += '<div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem; flex-wrap:wrap; gap:0.5rem;">';
+  html += '<a href="schools.html?school=' + slug + '" style="color:var(--epi-navy); font-weight:700; font-size:1.05rem; text-decoration:none; border-bottom:1px dashed var(--epi-navy);">' + r.school_name + '</a>';
+  var dateStr = r.update_date || "";
+  if (dateStr) { var d = new Date(dateStr + "T00:00:00"); dateStr = d.toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"}); }
+  html += '<span style="color:#999; font-size:0.8rem; white-space:nowrap;">' + dateStr + '</span>';
+  html += '</div>';
+
+  // Recommendation status
+  var statusIcon = r.recommend_project === "Yes" ? "\u2705" : (r.recommend_project === "No" || (r.recommend_project && r.recommend_project.indexOf("No,") === 0)) ? "\u274C" : "\u26A0\uFE0F";
+  html += '<p style="margin:0 0 0.35rem; font-size:0.9rem;"><strong>Recommendation:</strong> <span style="color:' + statusColor + '; font-weight:600;">' + statusIcon + " " + r.recommend_project + '</span></p>';
+
+  // Specific project types
+  if (r.recommended_types) {
+    var types = r.recommended_types.split(",");
+    var badgesHtml = "";
+    types.forEach(function(t) {
+      var trimmed = t.trim();
+      if (trimmed) badgesHtml += '<span style="display:inline-block; background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600; margin-right:0.35rem; margin-bottom:0.25rem;">' + trimmed + '</span>';
+    });
+    if (badgesHtml) html += '<div style="margin:0.35rem 0;"><strong style="font-size:0.85rem;">Suggested:</strong> ' + badgesHtml + '</div>';
+  }
+
+  // MGR swap
+  if (r.recommend_mgr_swap && r.recommend_mgr_swap !== "NA" && r.recommend_mgr_swap !== "") {
+    var swapColor = r.recommend_mgr_swap === "Yes" ? "#dc3545" : "#6c757d";
+    html += '<p style="margin:0.35rem 0 0; font-size:0.85rem;"><span style="display:inline-block; background:#fff3cd; color:#856404; border:1px solid #ffc107; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600;">MGR Swap: ' + r.recommend_mgr_swap + '</span></p>';
+  }
+
+  // Visitor
+  if (r.visitor) {
+    html += '<p style="font-size:0.8rem; margin:0.35rem 0 0; color:#aaa;">Reported by ' + r.visitor + '</p>';
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function renderRecommended() {
+  var filter = document.getElementById("rec-filter").value;
+  var container = document.getElementById("recommended-container");
+
+  var filtered = ALL_RECOMMENDED.filter(function(r) {
+    if (!filter) return true;
+    if (filter === "Yes") return r.recommend_project === "Yes";
+    if (filter === "Maybe") return r.recommend_project && (r.recommend_project.indexOf("Maybe") >= 0);
+    if (filter === "No") return r.recommend_project === "No" || (r.recommend_project && r.recommend_project.indexOf("No,") === 0);
+    if (filter === "mgr-swap") return r.recommend_mgr_swap && r.recommend_mgr_swap !== "NA" && r.recommend_mgr_swap !== "";
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = '<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;"><p style="color:#999; font-style:italic; margin:0;">No recommendations match this filter.</p></div>';
+    return;
+  }
+
+  // Sort: Yes first, then Maybe, then No
+  var order = {"Yes": 0, "Maybe": 1, "Maybe in the future": 1};
+  filtered.sort(function(a, b) {
+    var oa = order[a.recommend_project] !== undefined ? order[a.recommend_project] : 2;
+    var ob = order[b.recommend_project] !== undefined ? order[b.recommend_project] : 2;
+    if (oa !== ob) return oa - ob;
+    return (a.school_name || "").localeCompare(b.school_name || "");
+  });
+
+  var html = "";
+  filtered.forEach(function(r) { html += makeRecCard(r); });
+  container.innerHTML = html;
+}
+
 document.addEventListener("DOMContentLoaded", function() {
+  // Tab click listeners
+  document.querySelectorAll(".proj-tab").forEach(function(btn) {
+    btn.addEventListener("click", function() { switchProjTab(this.getAttribute("data-tab")); });
+  });
+
+  // Update recommended count badge
+  var yesCount = ALL_RECOMMENDED.filter(function(r) { return r.recommend_project === "Yes"; }).length;
+  document.getElementById("tab-count-rec").textContent = yesCount;
+
+  // Completed projects tab
   populateTypeFilter();
   renderProjects();
   document.getElementById("btn-apply-dates").addEventListener("click", renderProjects);
@@ -317,6 +445,16 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("type-filter").value = "";
     renderProjects();
   });
+
+  // Recommended projects tab
+  renderRecommended();
+  document.getElementById("rec-filter").addEventListener("change", renderRecommended);
+
+  // Check URL params for tab
+  var params = new URLSearchParams(window.location.search);
+  var tabParam = params.get("tab");
+  if (tabParam === "recommended") switchProjTab("recommended");
+  else switchProjTab("completed");
 });
 </script>
 

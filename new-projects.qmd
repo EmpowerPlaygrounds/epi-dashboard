@@ -11,8 +11,9 @@ library(tidyverse)
 library(jsonlite)
 library(here)
 
-projects <- read_csv(here("data", "clean", "new_projects.csv"), show_col_types = FALSE)
-schools  <- read_csv(here("data", "clean", "schools.csv"), show_col_types = FALSE)
+projects      <- read_csv(here("data", "clean", "new_projects.csv"), show_col_types = FALSE)
+schools       <- read_csv(here("data", "clean", "schools.csv"), show_col_types = FALSE)
+recommended   <- read_csv(here("data", "clean", "recommended_projects.csv"), show_col_types = FALSE)
 
 # Date range defaults: current school year (Aug 1 - Jul 31)
 school_year_start <- if (as.integer(format(Sys.Date(), "%m")) >= 8) {
@@ -90,13 +91,38 @@ proj_list <- projects |>
 
 proj_json <- toJSON(proj_list, auto_unbox = TRUE, na = "null")
 n_projects <- nrow(proj_list)
+
+# Recommended projects: keep most recent per school, simplify for JSON
+rec_list <- recommended |>
+  mutate(update_date = as.character(update_date)) |>
+  group_by(school_name) |>
+  slice_max(update_date, n = 1, with_ties = FALSE) |>
+  ungroup() |>
+  select(school_name, update_date, recommend_project, recommended_types,
+         recommend_mgr_swap, visitor) |>
+  arrange(school_name)
+
+rec_json <- toJSON(rec_list, auto_unbox = TRUE, na = "null")
 ```
 
 ```{r}
 #| echo: false
 
 htmltools::HTML(paste0(
-'<!-- Filters -->
+'<!-- Tab Navigation -->
+<div id="project-tabs" style="display:flex; gap:0; margin-bottom:0; border-bottom:2px solid #e9ecef;">
+  <button class="proj-tab active" data-tab="completed" style="flex:1; padding:0.75rem 1rem; border:none; background:none; font-size:0.9rem; font-weight:600; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.15s;">
+    Completed Projects
+  </button>
+  <button class="proj-tab" data-tab="recommended" style="flex:1; padding:0.75rem 1rem; border:none; background:none; font-size:0.9rem; font-weight:600; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.15s;">
+    Recommended Projects <span id="tab-count-rec" style="background:#28a745; color:#fff; border-radius:10px; padding:0.1rem 0.5rem; font-size:0.75rem; margin-left:0.35rem;"></span>
+  </button>
+</div>
+
+<!-- Tab: Completed Projects -->
+<div id="tab-completed" class="proj-tab-content" style="padding-top:1rem;">
+
+<!-- Filters -->
 <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-bottom:1.5rem; justify-content:center;">
   <label style="font-weight:600; color:var(--epi-navy);">Date Range:</label>
   <input type="date" id="date-start" value="', date_min, '" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
@@ -111,9 +137,26 @@ htmltools::HTML(paste0(
 
 <!-- Project Cards Container -->
 <div id="projects-container"></div>
+</div>
+
+<!-- Tab: Recommended Projects -->
+<div id="tab-recommended" class="proj-tab-content" style="display:none; padding-top:1rem;">
+  <p style="color:#666; font-size:0.9rem; margin-bottom:0.5rem;">Schools recommended for new projects during full school updates. Includes MGR swap recommendations (replacing power-generating MGRs with non-generating MGRs as communities gain electricity).</p>
+  <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-bottom:1rem; justify-content:center;">
+    <select id="rec-filter" style="padding:0.35rem 0.5rem; border:1px solid #ccc; border-radius:4px; max-width:220px;">
+      <option value="">All Recommendations</option>
+      <option value="Yes">Yes \u2014 Recommended</option>
+      <option value="Maybe">Maybe / Maybe in the future</option>
+      <option value="No">Not Recommended</option>
+      <option value="mgr-swap">MGR Swap Recommended</option>
+    </select>
+  </div>
+  <div id="recommended-container"></div>
+</div>
 
 <script>
 var ALL_PROJECTS = ', proj_json, ';
+var ALL_RECOMMENDED = ', rec_json, ';
 
 // Color mapping for project types
 var TYPE_COLORS = {
@@ -152,7 +195,8 @@ function makeProjectCard(p) {
   // Header row: school name + date
   html += \'<div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem; flex-wrap:wrap; gap:0.5rem;">\';
   html += \'<div>\';
-  html += \'<span style="color:var(--epi-navy); font-weight:700; font-size:1.05rem;">\' + p.school_name + \'</span>\';
+  var slug = p.school_name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
+  html += \'<a href="schools.html?school=\' + slug + \'" style="color:var(--epi-navy); font-weight:700; font-size:1.05rem; text-decoration:none; border-bottom:1px dashed var(--epi-navy);">\' + p.school_name + \'</a>\';
   if (p.is_new_school) {
     html += \' <span style="background:#dc3545; color:#fff; padding:0.1rem 0.5rem; border-radius:10px; font-size:0.7rem; font-weight:600;">NEW SCHOOL</span>\';
   }
@@ -244,7 +288,104 @@ function renderProjects() {
   container.innerHTML = html;
 }
 
+// --- Tab Switching ---
+function switchProjTab(tabId) {
+  document.querySelectorAll(".proj-tab-content").forEach(function(el) { el.style.display = "none"; });
+  document.querySelectorAll(".proj-tab").forEach(function(btn) { btn.style.color = "#999"; btn.style.borderBottomColor = "transparent"; });
+  document.getElementById("tab-" + tabId).style.display = "block";
+  var activeBtn = document.querySelector(".proj-tab[data-tab=\'" + tabId + "\']");
+  if (activeBtn) { activeBtn.style.color = "var(--epi-navy)"; activeBtn.style.borderBottomColor = "var(--epi-navy)"; }
+}
+
+// --- Recommended Projects Rendering ---
+function makeRecCard(r) {
+  var statusColor = r.recommend_project === "Yes" ? "#28a745" : (r.recommend_project === "No" || (r.recommend_project && r.recommend_project.indexOf("No,") === 0)) ? "#6c757d" : "#ffc107";
+  var borderColor = statusColor;
+  var slug = r.school_name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
+
+  var html = \'<div style="background:#fff; border-radius:8px; padding:1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1rem; border-left:4px solid \' + borderColor + \';">\';
+
+  // Header: school name + date
+  html += \'<div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem; flex-wrap:wrap; gap:0.5rem;">\';
+  html += \'<a href="schools.html?school=\' + slug + \'" style="color:var(--epi-navy); font-weight:700; font-size:1.05rem; text-decoration:none; border-bottom:1px dashed var(--epi-navy);">\' + r.school_name + \'</a>\';
+  var dateStr = r.update_date || "";
+  if (dateStr) { var d = new Date(dateStr + "T00:00:00"); dateStr = d.toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"}); }
+  html += \'<span style="color:#999; font-size:0.8rem; white-space:nowrap;">\' + dateStr + \'</span>\';
+  html += \'</div>\';
+
+  // Recommendation status
+  var statusIcon = r.recommend_project === "Yes" ? "\\u2705" : (r.recommend_project === "No" || (r.recommend_project && r.recommend_project.indexOf("No,") === 0)) ? "\\u274C" : "\\u26A0\\uFE0F";
+  html += \'<p style="margin:0 0 0.35rem; font-size:0.9rem;"><strong>Recommendation:</strong> <span style="color:\' + statusColor + \'; font-weight:600;">\' + statusIcon + " " + r.recommend_project + \'</span></p>\';
+
+  // Specific project types
+  if (r.recommended_types) {
+    var types = r.recommended_types.split(",");
+    var badgesHtml = "";
+    types.forEach(function(t) {
+      var trimmed = t.trim();
+      if (trimmed) badgesHtml += \'<span style="display:inline-block; background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600; margin-right:0.35rem; margin-bottom:0.25rem;">\' + trimmed + \'</span>\';
+    });
+    if (badgesHtml) html += \'<div style="margin:0.35rem 0;"><strong style="font-size:0.85rem;">Suggested:</strong> \' + badgesHtml + \'</div>\';
+  }
+
+  // MGR swap
+  if (r.recommend_mgr_swap && r.recommend_mgr_swap !== "NA" && r.recommend_mgr_swap !== "") {
+    var swapColor = r.recommend_mgr_swap === "Yes" ? "#dc3545" : "#6c757d";
+    html += \'<p style="margin:0.35rem 0 0; font-size:0.85rem;"><span style="display:inline-block; background:#fff3cd; color:#856404; border:1px solid #ffc107; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600;">MGR Swap: \' + r.recommend_mgr_swap + \'</span></p>\';
+  }
+
+  // Visitor
+  if (r.visitor) {
+    html += \'<p style="font-size:0.8rem; margin:0.35rem 0 0; color:#aaa;">Reported by \' + r.visitor + \'</p>\';
+  }
+
+  html += \'</div>\';
+  return html;
+}
+
+function renderRecommended() {
+  var filter = document.getElementById("rec-filter").value;
+  var container = document.getElementById("recommended-container");
+
+  var filtered = ALL_RECOMMENDED.filter(function(r) {
+    if (!filter) return true;
+    if (filter === "Yes") return r.recommend_project === "Yes";
+    if (filter === "Maybe") return r.recommend_project && (r.recommend_project.indexOf("Maybe") >= 0);
+    if (filter === "No") return r.recommend_project === "No" || (r.recommend_project && r.recommend_project.indexOf("No,") === 0);
+    if (filter === "mgr-swap") return r.recommend_mgr_swap && r.recommend_mgr_swap !== "NA" && r.recommend_mgr_swap !== "";
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = \'<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;"><p style="color:#999; font-style:italic; margin:0;">No recommendations match this filter.</p></div>\';
+    return;
+  }
+
+  // Sort: Yes first, then Maybe, then No
+  var order = {"Yes": 0, "Maybe": 1, "Maybe in the future": 1};
+  filtered.sort(function(a, b) {
+    var oa = order[a.recommend_project] !== undefined ? order[a.recommend_project] : 2;
+    var ob = order[b.recommend_project] !== undefined ? order[b.recommend_project] : 2;
+    if (oa !== ob) return oa - ob;
+    return (a.school_name || "").localeCompare(b.school_name || "");
+  });
+
+  var html = "";
+  filtered.forEach(function(r) { html += makeRecCard(r); });
+  container.innerHTML = html;
+}
+
 document.addEventListener("DOMContentLoaded", function() {
+  // Tab click listeners
+  document.querySelectorAll(".proj-tab").forEach(function(btn) {
+    btn.addEventListener("click", function() { switchProjTab(this.getAttribute("data-tab")); });
+  });
+
+  // Update recommended count badge
+  var yesCount = ALL_RECOMMENDED.filter(function(r) { return r.recommend_project === "Yes"; }).length;
+  document.getElementById("tab-count-rec").textContent = yesCount;
+
+  // Completed projects tab
   populateTypeFilter();
   renderProjects();
   document.getElementById("btn-apply-dates").addEventListener("click", renderProjects);
@@ -257,6 +398,16 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("type-filter").value = "";
     renderProjects();
   });
+
+  // Recommended projects tab
+  renderRecommended();
+  document.getElementById("rec-filter").addEventListener("change", renderRecommended);
+
+  // Check URL params for tab
+  var params = new URLSearchParams(window.location.search);
+  var tabParam = params.get("tab");
+  if (tabParam === "recommended") switchProjTab("recommended");
+  else switchProjTab("completed");
 });
 </script>
 '))

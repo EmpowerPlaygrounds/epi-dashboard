@@ -20,6 +20,18 @@ write_csv(clean_student,  here("data", "clean", "surveys.csv"))
 write_csv(clean_newproj,  here("data", "clean", "new_projects.csv"))
 write_csv(clean_full,     here("data", "clean", "full_updates.csv"))
 
+# Recommended projects: extract from full updates where recommendation was given
+recommended_projects <- clean_full |>
+  filter(!is.na(recommend_project) & recommend_project != "") |>
+  filter(!str_detect(recommend_project, "^-?\\d")) |>  # remove junk numeric values
+  filter(!is.na(school_name) & school_name != "") |>
+  select(school_name, update_date, recommend_project, recommended_types,
+         recommend_mgr_swap, Q1) |>
+  rename(visitor = Q1) |>
+  arrange(desc(update_date))
+
+write_csv(recommended_projects, here("data", "clean", "recommended_projects.csv"))
+
 # Issues: extract urgent issues from visit data (exclude No/None/N/A)
 issues <- clean_quick |>
   filter(!is.na(urgent_issues) & urgent_issues != "") |>

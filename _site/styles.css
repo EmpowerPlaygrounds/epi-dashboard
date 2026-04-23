@@ -39,7 +39,8 @@
 }
 
 /* Clickable stat cards */
-a.stat-card:hover {
+a.stat-card:hover,
+a.stat-card-link:hover .stat-card {
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }

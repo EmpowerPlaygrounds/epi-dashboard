@@ -24,12 +24,8 @@ issues_open <- if (file.exists(here("data", "clean", "issues_open.csv"))) {
   issues
 }
 
-# Read full update data
-raw_full <- read_csv(here("data", "raw", "full_update.csv"), show_col_types = FALSE)
-clean_full <- raw_full |>
-  slice(-1) |>
-  rename(school_name = Q2) |>
-  mutate(school_name = str_trim(school_name))
+# Read cleaned full update data (includes renamed columns from 02-clean.R)
+clean_full <- read_csv(here("data", "clean", "full_updates.csv"), show_col_types = FALSE)
 
 # Date range defaults: current school year (Aug 1 – Jul 31)
 school_year_start <- if (as.integer(format(Sys.Date(), "%m")) >= 8) {
@@ -132,6 +128,11 @@ htmltools::HTML(paste0(
   <div id="school-open-issues"></div>
 </div>
 
+<div id="recommended-projects-section" style="display:none; margin-bottom:1.5rem;">
+  <h3>Recommended Projects</h3>
+  <div id="school-recommended-projects"></div>
+</div>
+
 <h3>AI Summary</h3>
 <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem;">
   <p style="color:#666; font-size:0.9rem; margin-bottom:0.75rem;">AI-powered summary of visit notes organized by strengths, challenges, and recommendations.</p>
@@ -176,12 +177,55 @@ function loadSchool(slug) {
   }
   var data = ALL_SCHOOLS[slug];
   if (!data) {
-    document.getElementById("school-detail").style.display = "none";
+    // Show a friendly message for schools not yet in the system
+    var detail = document.getElementById("school-detail");
+    detail.style.display = "block";
+    // Unslug the name for display (best guess: capitalize words, replace dashes with spaces)
+    var displayName = slug.replace(/-/g, " ").replace(/\\b\\w/g, function(c) { return c.toUpperCase(); });
+    document.getElementById("school-name").textContent = displayName;
+    document.getElementById("school-meta").innerHTML = "";
+    document.getElementById("info-cards").innerHTML = \'<div style="background:#fff3cd; border-radius:8px; padding:1.25rem; border-left:4px solid #ffc107; grid-column:1/-1;"><p style="margin:0; color:#856404; font-size:0.95rem;"><strong>No information available yet.</strong> This school is not currently in the EPI database. Data will appear here once the school is added to the Schools Overview.</p></div>\';
+    document.getElementById("school-programs").innerHTML = "";
+    // Hide all content sections below the info cards
+    var sectionsToHide = ["school-details-section", "open-issues-section", "recommended-projects-section"];
+    sectionsToHide.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.style.display = "none";
+    });
+    // Hide elements that don\'t have a wrapper div (h3 headings + their content)
+    var programsH3 = document.getElementById("school-programs").previousElementSibling;
+    if (programsH3 && programsH3.tagName === "H3") programsH3.style.display = "none";
+    document.getElementById("school-programs").style.display = "none";
+    var notesHeader = document.getElementById("notes-header");
+    if (notesHeader) notesHeader.style.display = "none";
+    var schoolVisits = document.getElementById("school-visits");
+    if (schoolVisits) schoolVisits.style.display = "none";
+    // Hide AI Summary section (h3 + container div)
+    var aiSummaryContainer = document.getElementById("ai-summary");
+    if (aiSummaryContainer) {
+      var aiWrapper = aiSummaryContainer.parentElement;
+      if (aiWrapper) {
+        if (aiWrapper.previousElementSibling && aiWrapper.previousElementSibling.tagName === "H3") {
+          aiWrapper.previousElementSibling.style.display = "none";
+        }
+        aiWrapper.style.display = "none";
+      }
+    }
     return;
   }
   currentSchool = data;
   currentSchool._slug = slug;
   document.getElementById("school-detail").style.display = "block";
+
+  // Re-show sections that may have been hidden by an unknown-school view
+  var programsEl = document.getElementById("school-programs");
+  if (programsEl) { programsEl.style.display = ""; if (programsEl.previousElementSibling && programsEl.previousElementSibling.tagName === "H3") programsEl.previousElementSibling.style.display = ""; }
+  var notesHeader = document.getElementById("notes-header");
+  if (notesHeader) notesHeader.style.display = "";
+  var schoolVisits = document.getElementById("school-visits");
+  if (schoolVisits) schoolVisits.style.display = "";
+  var aiSummaryEl = document.getElementById("ai-summary");
+  if (aiSummaryEl) { var aiW = aiSummaryEl.parentElement; if (aiW) { aiW.style.display = ""; if (aiW.previousElementSibling && aiW.previousElementSibling.tagName === "H3") aiW.previousElementSibling.style.display = ""; } }
 
   var info = data.info;
 
@@ -221,9 +265,12 @@ function renderSchoolContent(slug, data) {
   if (latestUpdate && latestUpdate.Q5) {
     cards += makeCard(parseInt(latestUpdate.Q5).toLocaleString(), "Estimated Community Population", ICONS.community);
   }
-  cards += makeCard(visits.length, "Visit(s) in Range", ICONS.visits);
+  var schoolEncoded = encodeURIComponent(info.school_name);
+  cards += \'<a href="visits.html?school=\' + schoolEncoded + \'&tab=visit-log" style="text-decoration:none; cursor:pointer; transition:transform 0.15s;" class="stat-card-link">\' + makeCard(visits.length, "Visit(s) in Range", ICONS.visits) + \'</a>\';
+  var openIssuesList = data.open_issues || [];
   if (info.n_issues > 0) {
-    cards += makeCard(info.n_issues, "Open Issues", ICONS.issues);
+    var issueAnchor = openIssuesList.length > 0 && openIssuesList[0].issue_id ? "#issue-" + openIssuesList[0].issue_id : "";
+    cards += \'<a href="issues.html\' + issueAnchor + \'" style="text-decoration:none; cursor:pointer; transition:transform 0.15s;" class="stat-card-link">\' + makeCard(info.n_issues, "Open Issues", ICONS.issues) + \'</a>\';
   }
   document.getElementById("info-cards").innerHTML = cards;
 
@@ -387,6 +434,48 @@ function renderSchoolContent(slug, data) {
     issuesContainer.innerHTML = ihtml;
   } else {
     issuesSection.style.display = "none";
+  }
+
+  // Recommended Projects section
+  var recSection = document.getElementById("recommended-projects-section");
+  var recContainer = document.getElementById("school-recommended-projects");
+  var fullUpdates = data.full_update || [];
+  // Get the most recent full update that has a project recommendation
+  var recUpdates = fullUpdates.filter(function(u) {
+    return u.recommend_project && u.recommend_project !== "" && !/^-?\\d/.test(u.recommend_project);
+  });
+  if (recUpdates.length > 0) {
+    recSection.style.display = "block";
+    // Sort by date descending and take the most recent
+    recUpdates.sort(function(a, b) { return (b.update_date || "").localeCompare(a.update_date || ""); });
+    var latest = recUpdates[0];
+    var recHtml = \'<div style="background:#fff; border-radius:8px; padding:1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); border-left:4px solid \'
+      + (latest.recommend_project === "Yes" ? "#28a745" : latest.recommend_project === "No" || latest.recommend_project.indexOf("No,") === 0 ? "#6c757d" : "#ffc107")
+      + \';">\';
+    // Recommendation status
+    var statusColor = latest.recommend_project === "Yes" ? "#28a745" : latest.recommend_project === "No" || latest.recommend_project.indexOf("No,") === 0 ? "#6c757d" : "#ffc107";
+    var statusIcon = latest.recommend_project === "Yes" ? "\\u2705" : latest.recommend_project === "No" || latest.recommend_project.indexOf("No,") === 0 ? "\\u274C" : "\\u26A0\\uFE0F";
+    recHtml += \'<p style="margin:0 0 0.5rem; font-size:0.95rem;"><strong>Recommended for new project:</strong> <span style="color:\' + statusColor + \'; font-weight:600;">\' + statusIcon + " " + latest.recommend_project + \'</span></p>\';
+    // Specific project types if available
+    if (latest.recommended_types && latest.recommended_types !== "") {
+      var types = latest.recommended_types.split(",");
+      var badgesHtml = "";
+      types.forEach(function(t) {
+        var trimmed = t.trim();
+        if (trimmed) badgesHtml += \'<span style="display:inline-block; background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.8rem; font-weight:600; margin-right:0.35rem; margin-bottom:0.25rem;">\' + trimmed + \'</span>\';
+      });
+      if (badgesHtml) recHtml += \'<div style="margin-top:0.5rem;">\' + badgesHtml + \'</div>\';
+    }
+    // MGR swap recommendation
+    if (latest.recommend_mgr_swap && latest.recommend_mgr_swap !== "" && latest.recommend_mgr_swap !== "NA") {
+      recHtml += \'<p style="margin:0.5rem 0 0; font-size:0.9rem;"><strong>Recommend MGR swap:</strong> \' + latest.recommend_mgr_swap + \' <span style="color:#999; font-size:0.8rem;">(replace power-generating MGR with non-generating)</span></p>\';
+    }
+    // Date and visitor
+    recHtml += \'<p style="margin:0.5rem 0 0; font-size:0.8rem; color:#999;">From full update on \' + (latest.update_date || "unknown date") + \'</p>\';
+    recHtml += \'</div>\';
+    recContainer.innerHTML = recHtml;
+  } else {
+    recSection.style.display = "none";
   }
 
   loadCachedSummary(slug, data);

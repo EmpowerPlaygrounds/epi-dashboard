@@ -193,11 +193,23 @@ clean_quick <- raw_quick |>
 clean_full <- raw_full |>
   slice(-1) |>
   filter(!str_detect(StartDate, fixed("{")) | is.na(StartDate)) |>
-  rename(school_name = Q2) |>
+  rename(
+    school_name         = Q2,
+    recommend_mgr_swap  = Q27,
+    recommend_project   = Q45,
+    recommended_types   = Q82,
+    recommended_other   = Q82_13_TEXT
+  ) |>
   mutate(
     school_name = fix_school_name(school_name),
     update_date = parse_date_time(StartDate, orders = c("mdY HMS", "Ymd HMS", "mdY HM", "mdy HM")),
     update_date = as.Date(update_date),
+    # Clean up "Other:" in recommended project types
+    recommended_types = if_else(
+      !is.na(recommended_other) & recommended_other != "",
+      str_replace(recommended_types, "Other:?", recommended_other),
+      str_remove(recommended_types, ",?\\s*Other:?")
+    ),
     across(where(is.character), str_trim)
   )
 
