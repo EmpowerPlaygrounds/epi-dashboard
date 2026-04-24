@@ -146,8 +146,7 @@ htmltools::HTML(paste0(
 
 <!-- Tab: Recommended Projects -->
 <div id="tab-recommended" class="proj-tab-content" style="display:none; padding-top:1rem;">
-  <h3 style="color:var(--epi-navy); margin-top:0; margin-bottom:0.25rem;">Schools recommended to be reviewed for new projects.</h3>
-  <p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">Includes MGR swap recommendations (replacing power-generating MGRs with non-generating MGRs as communities gain electricity).</p>
+  <h3 style="color:var(--epi-navy); margin-top:0; margin-bottom:1rem;">Schools recommended to be reviewed for new projects.</h3>
   <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-bottom:1.5rem; justify-content:center;">
     <label style="font-weight:600; color:var(--epi-navy);">Date Range:</label>
     <input type="date" id="rec-date-start" value="', date_min, '" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
@@ -325,11 +324,11 @@ function makeRecCard(r) {
   html += \'<span style="color:#999; font-size:0.8rem; white-space:nowrap;">\' + dateStr + \'</span>\';
   html += \'</div>\';
 
-  // Recommendation status — show "Unspecified" if no project types are listed
+  // Recommendation status — show "Unspecified" (grey) if no project types are listed
   var hasTypes = r.recommended_types && String(r.recommended_types).trim() !== "";
-  var statusIcon = isYes ? "\\u2705" : "\\u26A0\\uFE0F";
   var statusLabel = hasTypes ? r.recommend_project : "Unspecified";
-  html += \'<p style="margin:0 0 0.35rem; font-size:0.9rem;"><strong>Recommendation:</strong> <span style="color:\' + statusColor + \'; font-weight:600;">\' + statusIcon + " " + statusLabel + \'</span></p>\';
+  var labelColor = hasTypes ? statusColor : "#6c757d";
+  html += \'<p style="margin:0 0 0.35rem; font-size:0.9rem;"><strong>Recommendation:</strong> <span style="color:\' + labelColor + \'; font-weight:600;">\' + statusLabel + \'</span></p>\';
 
   // Specific project types
   if (hasTypes) {
