@@ -324,22 +324,20 @@ function makeRecCard(r) {
   html += \'<span style="color:#999; font-size:0.8rem; white-space:nowrap;">\' + dateStr + \'</span>\';
   html += \'</div>\';
 
-  // Recommendation status — show "Unspecified" (grey) if no project types are listed
+  // Recommendation: show specific project types as badges, or "Unspecified" in grey if none
   var hasTypes = r.recommended_types && String(r.recommended_types).trim() !== "";
-  var statusLabel = hasTypes ? r.recommend_project : "Unspecified";
-  var labelColor = hasTypes ? statusColor : "#6c757d";
-  html += \'<p style="margin:0 0 0.35rem; font-size:0.9rem;"><strong>Recommendation:</strong> <span style="color:\' + labelColor + \'; font-weight:600;">\' + statusLabel + \'</span></p>\';
-
-  // Specific project types
+  html += \'<div style="margin:0 0 0.35rem; font-size:0.9rem; display:flex; align-items:center; flex-wrap:wrap; gap:0.35rem;">\';
+  html += \'<strong>Recommendation:</strong>\';
   if (hasTypes) {
     var types = String(r.recommended_types).split(",");
-    var badgesHtml = "";
     types.forEach(function(t) {
       var trimmed = t.trim();
-      if (trimmed) badgesHtml += \'<span style="display:inline-block; background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600; margin-right:0.35rem; margin-bottom:0.25rem;">\' + trimmed + \'</span>\';
+      if (trimmed) html += \' <span style="display:inline-block; background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600;">\' + trimmed + \'</span>\';
     });
-    if (badgesHtml) html += \'<div style="margin:0.35rem 0;"><strong style="font-size:0.85rem;">Suggested:</strong> \' + badgesHtml + \'</div>\';
+  } else {
+    html += \' <span style="color:#6c757d; font-weight:600;">Unspecified</span>\';
   }
+  html += \'</div>\';
 
   // MGR swap
   if (r.recommend_mgr_swap && r.recommend_mgr_swap !== "NA" && r.recommend_mgr_swap !== "") {
