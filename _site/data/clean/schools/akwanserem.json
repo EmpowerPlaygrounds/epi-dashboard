@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 3,
+    "n_visits": 4,
     "n_responses": 19,
     "pct_lantern": 0.9474,
     "pct_library": 0,
@@ -69,6 +69,23 @@
       "school_name": "Akwanserem",
       "visit_reason": "MGR Maintenance,Routine Program Evaluation",
       "visit_date": "2025-05-13"
+    },
+    {
+      "StartDate": "2026-04-24 5:13:47",
+      "Duration (in seconds)": "124",
+      "ResponseId": "R_1QWnr4UmJ7cpkMv",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "school_name": "Akwanserem",
+      "visit_reason": "Routine Visit, MGR/Charging Maintenance",
+      "activities": "Routine Visit, MGR/Charging Maintenance",
+      "Q5": "The charging station/solar needed to be fixed",
+      "Q6": "No, I need other supplies and will have to come back another day",
+      "Q6.5": "Yes",
+      "Q7": "The battery need charging",
+      "doing_well": "Lantern group is well organized. Though it’s the first week, science kits has been used.",
+      "visit_date": "2026-04-24"
     }
   ],
   "full_update": [

@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 3,
+    "n_visits": 4,
     "n_responses": 233,
     "pct_lantern": 0.2661,
     "pct_library": 0.0307,
@@ -66,6 +66,23 @@
       "school_name": "Ntomem",
       "visit_reason": "Project Update Visit",
       "visit_date": "2025-05-24"
+    },
+    {
+      "StartDate": "2026-04-24 5:16:00",
+      "Duration (in seconds)": "132",
+      "ResponseId": "R_7Cqy7UymCiFvhFo",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "school_name": "Ntomem",
+      "visit_reason": "MGR/Charging Maintenance",
+      "activities": "MGR/Charging Maintenance",
+      "Q5": "The charging station/solar needed to be fixed",
+      "Q6": "Yes, all problems were resolved",
+      "Q6.5": "No",
+      "doing_well": "Students are week organized and there a New Primary headmaster.",
+      "struggles": "Due to large student body, lantern group had been a challenge",
+      "visit_date": "2026-04-24"
     }
   ],
   "full_update": [
