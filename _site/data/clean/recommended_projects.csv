@@ -1,23 +1,25 @@
 school_name,update_date,recommend_project,recommended_types,recommend_mgr_swap,visitor
+Adenya,2026-04-23,Yes,Computers,NA,Alex
+Pediatorkope,2026-03-02,No,NA,NA,Alex
 Mamakrom,2026-01-22,No,NA,NA,Alex
 Old Konkompe,2025-10-14,No,NA,NA,Richard
 Watro (Watroso),2025-10-14,No,NA,NA,Richard
-Tun Tun,2025-10-07,No,NA,NA,Richard
 Mosipanin,2025-10-07,No,NA,NA,Richard
+Tun Tun,2025-10-07,No,NA,NA,Richard
 Bahankra,2025-10-06,Yes,NA,NA,Isaac
-Wenamda,2025-10-06,No,NA,NA,Richard
 Domase,2025-10-06,Yes,NA,NA,Richard
+Wenamda,2025-10-06,No,NA,NA,Richard
 Abrenya,2025-10-02,Yes,NA,NA,Richard
 Mansokwa,2025-09-29,No,NA,NA,Richard
-Ekorso Akwadum,2025-09-24,Yes,NA,NA,Richard
 Wekpeti Abresu,2025-09-24,Yes,NA,NA,Richard
+Ekorso Akwadum,2025-09-24,Yes,NA,NA,Richard
 Attabui,2025-09-23,Maybe,NA,NA,Alex
-Wurudu Wurudu,2025-09-18,Maybe,NA,NA,Alex
 Bepotumtum,2025-09-18,No,NA,NA,Richard
-Luta,2025-09-17,Yes,NA,NA,Alex
-Madavunu,2025-09-17,Yes,NA,NA,Alex
-Terhey,2025-09-17,Yes,NA,NA,Alex
+Wurudu Wurudu,2025-09-18,Maybe,NA,NA,Alex
 Amuyaokope,2025-09-17,Yes,NA,NA,Alex
+Terhey,2025-09-17,Yes,NA,NA,Alex
+Madavunu,2025-09-17,Yes,NA,NA,Alex
+Luta,2025-09-17,Yes,NA,NA,Alex
 Wurudu Wurudu,2024-10-15,Yes,NA,NA,"Richard, Alex"
 Fawotrikosie,2024-10-15,Yes,NA,NA,"Richard, Alex"
 Nwawasua MA,2024-10-09,Yes,NA,NA,"Richard, Alex"
@@ -39,13 +41,13 @@ Obosonu,2024-09-27,Yes,NA,NA,Alex
 Adenya,2024-09-27,Yes,NA,NA,Richard
 Mampong Shai,2024-09-27,Yes,NA,NA,Richard
 Anamenampa,2024-09-27,Yes,NA,NA,Alex
+Adenya,2024-09-26,Yes,NA,NA,"Richard,Alex,Peace"
 Attabui,2024-09-26,Yes,NA,NA,"Richard,Alex,Peace"
 Akwansu,2024-09-26,Yes,NA,NA,"Richard,Alex,Peace"
 Obosonu,2024-09-26,Yes,NA,NA,"Richard,Alex"
-Adenya,2024-09-26,Yes,NA,NA,"Richard,Alex,Peace"
 Nyapienya,2024-09-25,Yes,NA,NA,"Richard,Alex,Peace"
-Dedenya,2024-09-25,Yes,NA,NA,"Richard,Alex,Peace"
 Mampong Shai,2024-09-25,Yes,NA,NA,"Richard,Alex,Peace"
+Dedenya,2024-09-25,Yes,NA,NA,"Richard,Alex,Peace"
 Minya,2024-09-18,Yes,NA,NA,"Isaac,Richard,Peace"
 Azizakpem,2024-09-17,Yes,NA,NA,"Isaac,Richard,Peace"
 Alorkpem Island,2024-09-17,Yes,NA,NA,"Isaac,Richard,Alex"
@@ -67,10 +69,10 @@ Akwansu,2023-11-09,"No, they do not need anything or they need to work on their 
 Afransua Dedewa MA Primary,2023-11-08,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
 Nyapienya,2023-11-01,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
 Ferekoroba,2023-10-27,Maybe in the future,NA,NA,Richard
-Ntomem,2023-10-24,Maybe in the future,NA,NA,Richard
-Begoro,2023-10-24,Maybe in the future,NA,NA,Richard
 Madavunu,2023-10-24,Yes,NA,NA,George
+Ntomem,2023-10-24,Maybe in the future,NA,NA,Richard
 Dedewa,2023-10-24,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
+Begoro,2023-10-24,Maybe in the future,NA,NA,Richard
 Ador Kope R/C Primary,2023-10-24,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
 Dedenya,2023-10-23,Maybe in the future,NA,NA,George
 Mampong Shai,2023-10-23,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
@@ -88,9 +90,9 @@ Luta,2023-04-12,Maybe in the future,NA,NA,Richard
 Bomigo,2023-03-22,Yes,NA,NA,Richard
 Akwansu,2023-03-14,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,Richard
 Yonguase,2023-03-02,Maybe in the future,NA,NA,Richard
+Ntomem,2023-02-20,Maybe in the future,NA,NA,Isaac
 Attabui,2023-02-20,Yes,NA,NA,Richard
 Adenya,2023-02-20,Maybe in the future,NA,NA,Richard
-Ntomem,2023-02-20,Maybe in the future,NA,NA,Isaac
 Bepotumtum,2023-02-15,Yes,NA,NA,Richard
 Wekpeti Abresu,2023-02-14,Maybe in the future,NA,NA,Richard
 Ekorso Akwadum,2023-02-14,Maybe in the future,NA,NA,Richard
@@ -124,14 +126,14 @@ Galalia,2019-10-10,Maybe in the future,NA,NA,Richard
 Pediatorkope,2019-10-08,Maybe in the future,NA,NA,Richard
 Amuyaokope,2019-10-07,Maybe in the future,NA,NA,Richard
 Tun Tun,2019-10-04,Maybe in the future,NA,NA,Richard
-Mosipanin,2019-10-04,Maybe in the future,NA,NA,Richard
 Wurudu Wurudu,2019-10-04,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
+Mosipanin,2019-10-04,Maybe in the future,NA,NA,Richard
 Adenya,2019-09-30,Maybe in the future,NA,NA,Richard
 Bepotumtum,2019-09-26,Maybe in the future,NA,NA,Richard
 Bahankra,2019-09-25,Maybe in the future,NA,NA,Richard
 Wenamda,2019-09-24,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,Richard
-Dagomba,2019-09-24,Maybe in the future,NA,NA,Richard
 Community 3,2019-09-24,Maybe in the future,NA,NA,George
+Dagomba,2019-09-24,Maybe in the future,NA,NA,Richard
 Wekpeti Abresu,2019-09-20,Maybe in the future,NA,NA,Richard
 Afransua Dedewa MA Primary,2019-09-20,Yes,NA,NA,George
 Mpaem,2019-09-19,Maybe in the future,NA,NA,Richard
@@ -143,8 +145,8 @@ Ntomem,2019-05-23,Maybe in the future,NA,NA,Richard
 Tun Tun,2019-05-22,Maybe in the future,NA,NA,Richard
 Mosipanin,2019-05-21,Maybe in the future,NA,NA,Richard
 Essam,2019-03-25,Maybe in the future,NA,NA,Richard
-Tun Tun,2019-03-21,Yes,NA,NA,Richard
 Mosipanin,2019-03-21,Yes,NA,NA,Richard
+Tun Tun,2019-03-21,Yes,NA,NA,Richard
 Dagomba,2019-03-20,Maybe in the future,NA,NA,Richard
 Adenya,2019-02-28,Maybe in the future,NA,NA,Richard
 Akyeremanteng,2019-02-28,Yes,NA,NA,Richard
@@ -155,19 +157,19 @@ Terhey,2019-02-28,"No, they do not need anything or they need to work on their l
 Akyeremanteng,2019-02-01,Maybe in the future,NA,NA,Richard
 Wekpeti Abresu,2019-01-29,Yes,NA,NA,Richard
 Bepotumtum,2019-01-18,Maybe in the future,NA,NA,Richard
-Community 9,2018-12-05,Yes,NA,NA,George
 Community 3,2018-12-05,Maybe in the future,NA,NA,George
+Community 9,2018-12-05,Yes,NA,NA,George
 Nwowom,2018-11-14,Yes,NA,NA,George
 Old Konkompe,2018-11-13,Yes,NA,NA,George
 Old Konkompe,2018-11-13,Yes,NA,NA,George
-Dedenya,2018-11-12,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
 Mampong Shai,2018-11-12,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
-Terhey,2018-11-02,Yes,NA,NA,George
+Dedenya,2018-11-12,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
 Madavunu,2018-11-02,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
+Terhey,2018-11-02,Yes,NA,NA,George
 Dagomba,2018-10-25,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
-Afransua Dedewa MA Primary,2018-10-23,Yes,NA,NA,George
-Luta,2018-10-23,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
 Amuyaokope,2018-10-23,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
+Luta,2018-10-23,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George
+Afransua Dedewa MA Primary,2018-10-23,Yes,NA,NA,George
 Nyariga Girls' School,2018-10-22,Yes,NA,NA,Richard
 Mpaem,2018-10-18,Yes,NA,NA,George
 Wangarakrom,2018-07-24,"No, they do not need anything or they need to work on their lantern program more.",NA,NA,George

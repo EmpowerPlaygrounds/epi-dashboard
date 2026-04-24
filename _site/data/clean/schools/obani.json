@@ -26,17 +26,6 @@
   },
   "visits": [
     {
-      "StartDate": "2022-11-29 8:28:03",
-      "Duration (in seconds)": "151",
-      "ResponseId": "R_eYuHD8lDpjWgize",
-      "LocationLatitude": "5.802334",
-      "LocationLongitude": "0.59557",
-      "visitor": "George",
-      "school_name": "Obani",
-      "visit_reason": "Routine Program Evaluation,Surveyor Team Visit",
-      "visit_date": "2022-11-29"
-    },
-    {
       "StartDate": "2019-06-12 7:02:08",
       "Duration (in seconds)": "789",
       "ResponseId": "R_dzOZQMw5WjRvh3U",
@@ -46,6 +35,17 @@
       "school_name": "Obani",
       "visit_reason": "Routine Program Evaluation,Surveyor Team Visit",
       "visit_date": "2019-06-12"
+    },
+    {
+      "StartDate": "2022-11-29 8:28:03",
+      "Duration (in seconds)": "151",
+      "ResponseId": "R_eYuHD8lDpjWgize",
+      "LocationLatitude": "5.802334",
+      "LocationLongitude": "0.59557",
+      "visitor": "George",
+      "school_name": "Obani",
+      "visit_reason": "Routine Program Evaluation,Surveyor Team Visit",
+      "visit_date": "2022-11-29"
     }
   ],
   "full_update": [
