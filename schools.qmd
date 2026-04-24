@@ -103,6 +103,8 @@ htmltools::HTML(paste0(
   <p id="school-meta" style="margin:0; opacity:0.85;"></p>
 </div>
 
+<div id="needs-update-banner" style="display:none; background:#fff3cd; border-left:4px solid #F5B800; padding:0.75rem 1rem; border-radius:6px; margin-bottom:1rem; color:#856404; font-size:0.95rem;"></div>
+
 <div id="info-cards" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:1rem; margin-bottom:1.5rem;"></div>
 
 <h3>Programs</h3>
@@ -187,6 +189,8 @@ function loadSchool(slug) {
     document.getElementById("info-cards").innerHTML = \'<div style="background:#fff3cd; border-radius:8px; padding:1.25rem; border-left:4px solid #ffc107; grid-column:1/-1;"><p style="margin:0; color:#856404; font-size:0.95rem;"><strong>No information available yet.</strong> This school is not currently in the EPI database. Data will appear here once the school is added to the Schools Overview.</p></div>\';
     document.getElementById("school-programs").innerHTML = "";
     // Hide all content sections below the info cards
+    var needsBanner = document.getElementById("needs-update-banner");
+    if (needsBanner) needsBanner.style.display = "none";
     var sectionsToHide = ["school-details-section", "open-issues-section", "recommended-projects-section"];
     sectionsToHide.forEach(function(id) {
       var el = document.getElementById(id);
@@ -255,6 +259,28 @@ function renderSchoolContent(slug, data) {
       var d = v.visit_date || v.StartDate || "";
       return inRange(d, start, end);
     });
+  }
+
+  // Needs Full Update indicator
+  var banner = document.getElementById("needs-update-banner");
+  var allFullUpdates = Array.isArray(data.full_update) ? data.full_update : [];
+  var updatesInRange = allFullUpdates.filter(function(u) { return inRange(u.update_date, start, end); });
+  if (updatesInRange.length === 0) {
+    var lastUpdateDate = null;
+    if (allFullUpdates.length > 0) {
+      var sortedFU = allFullUpdates.slice().sort(function(a, b) { return (b.update_date || "").localeCompare(a.update_date || ""); });
+      lastUpdateDate = sortedFU[0].update_date;
+    }
+    var msg = \'<strong>\\u26A0 Needs a full update</strong> \';
+    if (lastUpdateDate) {
+      msg += \'&mdash; last full update: \' + lastUpdateDate;
+    } else {
+      msg += \'&mdash; no full updates on record\';
+    }
+    banner.innerHTML = msg;
+    banner.style.display = "block";
+  } else {
+    banner.style.display = "none";
   }
 
   // Info Cards
