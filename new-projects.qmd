@@ -92,9 +92,14 @@ proj_list <- projects |>
 proj_json <- toJSON(proj_list, auto_unbox = TRUE, na = "null")
 n_projects <- nrow(proj_list)
 
-# Recommended projects: keep most recent per school, simplify for JSON
+# Recommended projects: keep most recent per school, exclude "No" responses
 rec_list <- recommended |>
   mutate(update_date = as.character(update_date)) |>
+  # Drop "No" responses (including "No, they do not need anything..." variants)
+  filter(!is.na(recommend_project) & recommend_project != "") |>
+  filter(recommend_project != "No") |>
+  filter(!str_detect(recommend_project, "^No,")) |>
+  filter(!str_detect(recommend_project, "^No\\s")) |>
   group_by(school_name) |>
   slice_max(update_date, n = 1, with_ties = FALSE) |>
   ungroup() |>
@@ -141,15 +146,21 @@ htmltools::HTML(paste0(
 
 <!-- Tab: Recommended Projects -->
 <div id="tab-recommended" class="proj-tab-content" style="display:none; padding-top:1rem;">
-  <p style="color:#666; font-size:0.9rem; margin-bottom:0.5rem;">Schools recommended for new projects during full school updates. Includes MGR swap recommendations (replacing power-generating MGRs with non-generating MGRs as communities gain electricity).</p>
-  <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-bottom:1rem; justify-content:center;">
+  <h3 style="color:var(--epi-navy); margin-top:0; margin-bottom:0.25rem;">Schools recommended to be reviewed for new projects.</h3>
+  <p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">Includes MGR swap recommendations (replacing power-generating MGRs with non-generating MGRs as communities gain electricity).</p>
+  <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-bottom:1.5rem; justify-content:center;">
+    <label style="font-weight:600; color:var(--epi-navy);">Date Range:</label>
+    <input type="date" id="rec-date-start" value="', date_min, '" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
+    <span>to</span>
+    <input type="date" id="rec-date-end" value="', date_max, '" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
     <select id="rec-filter" style="padding:0.35rem 0.5rem; border:1px solid #ccc; border-radius:4px; max-width:220px;">
       <option value="">All Recommendations</option>
-      <option value="Yes">Yes \u2014 Recommended</option>
-      <option value="Maybe">Maybe / Maybe in the future</option>
-      <option value="No">Not Recommended</option>
+      <option value="Yes">Recommended</option>
+      <option value="Maybe">Maybe</option>
       <option value="mgr-swap">MGR Swap Recommended</option>
     </select>
+    <button id="btn-apply-rec" style="background:var(--epi-navy); color:#fff; border:none; padding:0.4rem 1rem; border-radius:4px; cursor:pointer; font-weight:600;">Apply</button>
+    <button id="btn-reset-rec" style="background:#e9ecef; color:#333; border:none; padding:0.4rem 1rem; border-radius:4px; cursor:pointer;">Reset</button>
   </div>
   <div id="recommended-container"></div>
 </div>
@@ -299,7 +310,8 @@ function switchProjTab(tabId) {
 
 // --- Recommended Projects Rendering ---
 function makeRecCard(r) {
-  var statusColor = r.recommend_project === "Yes" ? "#28a745" : (r.recommend_project === "No" || (r.recommend_project && r.recommend_project.indexOf("No,") === 0)) ? "#6c757d" : "#ffc107";
+  var isYes = r.recommend_project === "Yes";
+  var statusColor = isYes ? "#28a745" : "#ffc107";
   var borderColor = statusColor;
   var slug = r.school_name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
 
@@ -313,13 +325,15 @@ function makeRecCard(r) {
   html += \'<span style="color:#999; font-size:0.8rem; white-space:nowrap;">\' + dateStr + \'</span>\';
   html += \'</div>\';
 
-  // Recommendation status
-  var statusIcon = r.recommend_project === "Yes" ? "\\u2705" : (r.recommend_project === "No" || (r.recommend_project && r.recommend_project.indexOf("No,") === 0)) ? "\\u274C" : "\\u26A0\\uFE0F";
-  html += \'<p style="margin:0 0 0.35rem; font-size:0.9rem;"><strong>Recommendation:</strong> <span style="color:\' + statusColor + \'; font-weight:600;">\' + statusIcon + " " + r.recommend_project + \'</span></p>\';
+  // Recommendation status — show "Unspecified" if no project types are listed
+  var hasTypes = r.recommended_types && String(r.recommended_types).trim() !== "";
+  var statusIcon = isYes ? "\\u2705" : "\\u26A0\\uFE0F";
+  var statusLabel = hasTypes ? r.recommend_project : "Unspecified";
+  html += \'<p style="margin:0 0 0.35rem; font-size:0.9rem;"><strong>Recommendation:</strong> <span style="color:\' + statusColor + \'; font-weight:600;">\' + statusIcon + " " + statusLabel + \'</span></p>\';
 
   // Specific project types
-  if (r.recommended_types) {
-    var types = r.recommended_types.split(",");
+  if (hasTypes) {
+    var types = String(r.recommended_types).split(",");
     var badgesHtml = "";
     types.forEach(function(t) {
       var trimmed = t.trim();
@@ -345,14 +359,19 @@ function makeRecCard(r) {
 
 function renderRecommended() {
   var filter = document.getElementById("rec-filter").value;
+  var startDate = document.getElementById("rec-date-start").value;
+  var endDate = document.getElementById("rec-date-end").value;
   var container = document.getElementById("recommended-container");
 
   var filtered = ALL_RECOMMENDED.filter(function(r) {
+    // Date range filter
+    if (startDate && r.update_date && r.update_date < startDate) return false;
+    if (endDate && r.update_date && r.update_date > endDate) return false;
+    // Status filter
     if (!filter) return true;
     if (filter === "Yes") return r.recommend_project === "Yes";
     if (filter === "Maybe") return r.recommend_project && (r.recommend_project.indexOf("Maybe") >= 0);
-    if (filter === "No") return r.recommend_project === "No" || (r.recommend_project && r.recommend_project.indexOf("No,") === 0);
-    if (filter === "mgr-swap") return r.recommend_mgr_swap && r.recommend_mgr_swap !== "NA" && r.recommend_mgr_swap !== "";
+    if (filter === "mgr-swap") return r.recommend_mgr_swap === "Yes";
     return true;
   });
 
@@ -402,6 +421,15 @@ document.addEventListener("DOMContentLoaded", function() {
   // Recommended projects tab
   renderRecommended();
   document.getElementById("rec-filter").addEventListener("change", renderRecommended);
+  document.getElementById("btn-apply-rec").addEventListener("click", renderRecommended);
+  document.getElementById("btn-reset-rec").addEventListener("click", function() {
+    var now = new Date();
+    var syYear = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
+    document.getElementById("rec-date-start").value = syYear + "-08-01";
+    document.getElementById("rec-date-end").value = now.toISOString().slice(0, 10);
+    document.getElementById("rec-filter").value = "";
+    renderRecommended();
+  });
 
   // Check URL params for tab
   var params = new URLSearchParams(window.location.search);
