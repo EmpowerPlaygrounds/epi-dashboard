@@ -45,6 +45,12 @@ a.stat-card-link:hover .stat-card {
   box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }
 
+/* Clickable recommended projects card */
+a.rec-card-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12) !important;
+}
+
 /* Program bar charts */
 .program-bar {
   background: #e9ecef;

@@ -449,9 +449,9 @@ function renderSchoolContent(slug, data) {
     // Sort by date descending and take the most recent
     recUpdates.sort(function(a, b) { return (b.update_date || "").localeCompare(a.update_date || ""); });
     var latest = recUpdates[0];
-    var recHtml = \'<div style="background:#fff; border-radius:8px; padding:1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); border-left:4px solid \'
+    var recHtml = \'<a href="new-projects.html?tab=recommended" class="rec-card-link" style="display:block; text-decoration:none; color:inherit; background:#fff; border-radius:8px; padding:1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); border-left:4px solid \'
       + (latest.recommend_project === "Yes" ? "#28a745" : latest.recommend_project === "No" || latest.recommend_project.indexOf("No,") === 0 ? "#6c757d" : "#ffc107")
-      + \';">\';
+      + \'; transition:transform 0.15s, box-shadow 0.15s;">\';
     // Recommendation status
     var statusColor = latest.recommend_project === "Yes" ? "#28a745" : latest.recommend_project === "No" || latest.recommend_project.indexOf("No,") === 0 ? "#6c757d" : "#ffc107";
     var statusIcon = latest.recommend_project === "Yes" ? "\\u2705" : latest.recommend_project === "No" || latest.recommend_project.indexOf("No,") === 0 ? "\\u274C" : "\\u26A0\\uFE0F";
@@ -472,7 +472,7 @@ function renderSchoolContent(slug, data) {
     }
     // Date and visitor
     recHtml += \'<p style="margin:0.5rem 0 0; font-size:0.8rem; color:#999;">From full update on \' + (latest.update_date || "unknown date") + \'</p>\';
-    recHtml += \'</div>\';
+    recHtml += \'</a>\';
     recContainer.innerHTML = recHtml;
   } else {
     recSection.style.display = "none";
