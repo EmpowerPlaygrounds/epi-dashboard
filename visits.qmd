@@ -195,11 +195,8 @@ function populateSchoolFilter() {
   select.innerHTML = \'<option value="">All Schools</option>\';
   ALL_SCHOOLS.forEach(function(name) {
     var opt = document.createElement("option");
-    var needsUpdate = !schoolsWithFullUpdate[name];
-    var needsSurvey = !schoolsWithSurveys[name];
-    var icon = (needsUpdate || needsSurvey) ? "\u26A0\uFE0F " : "";
     opt.value = name;
-    opt.textContent = icon + name;
+    opt.textContent = name;
     select.appendChild(opt);
   });
   select.value = currentVal;
