@@ -419,12 +419,11 @@ function renderRecommended() {
     return;
   }
 
-  // Sort: Yes first, then Maybe, then No
-  var order = {"Yes": 0, "Maybe": 1, "Maybe in the future": 1};
+  // Sort: most recent update_date first, then alphabetically by school name as a tiebreaker
   filtered.sort(function(a, b) {
-    var oa = order[a.recommend_project] !== undefined ? order[a.recommend_project] : 2;
-    var ob = order[b.recommend_project] !== undefined ? order[b.recommend_project] : 2;
-    if (oa !== ob) return oa - ob;
+    var da = a.update_date || "";
+    var db = b.update_date || "";
+    if (da !== db) return db.localeCompare(da);
     return (a.school_name || "").localeCompare(b.school_name || "");
   });
 

@@ -446,6 +446,12 @@ function renderSchoolContent(slug, data) {
   var issuesContainer = document.getElementById("school-open-issues");
   if (Array.isArray(openIssues) && openIssues.length > 0) {
     issuesSection.style.display = "block";
+    // Sort by visit_date descending (most recent first)
+    openIssues = openIssues.slice().sort(function(a, b) {
+      var da = a.visit_date || "";
+      var db = b.visit_date || "";
+      return db.localeCompare(da);
+    });
     var ihtml = "";
     openIssues.forEach(function(issue) {
       var issueSlug = (issue.school_name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");

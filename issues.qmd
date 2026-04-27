@@ -116,12 +116,19 @@ function makeIssueCard(issue, isResolved) {
   return html;
 }
 
+function sortByDateDesc(a, b) {
+  var da = a.visit_date || "";
+  var db = b.visit_date || "";
+  if (da !== db) return db.localeCompare(da);
+  return (a.school_name || "").localeCompare(b.school_name || "");
+}
+
 function renderIssues() {
   var openHtml = "";
   if (OPEN_ISSUES.length === 0) {
     openHtml = \'<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#28a745; font-weight:600; margin:0;">All issues have been resolved!</p></div>\';
   } else {
-    OPEN_ISSUES.forEach(function(issue) {
+    OPEN_ISSUES.slice().sort(sortByDateDesc).forEach(function(issue) {
       openHtml += makeIssueCard(issue, false);
     });
   }
@@ -131,7 +138,7 @@ function renderIssues() {
   if (RESOLVED_ISSUES.length === 0) {
     resolvedHtml = \'<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#999; font-style:italic; margin:0;">No resolved issues yet.</p></div>\';
   } else {
-    RESOLVED_ISSUES.forEach(function(issue) {
+    RESOLVED_ISSUES.slice().sort(sortByDateDesc).forEach(function(issue) {
       resolvedHtml += makeIssueCard(issue, true);
     });
   }
