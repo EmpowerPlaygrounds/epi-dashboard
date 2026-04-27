@@ -317,6 +317,13 @@ async function submitResolve() {
 
     closeResolveModal();
     renderIssues();
+
+    // Show a temporary toast so the user knows the site rebuild was triggered
+    if (data.rebuildTriggered) {
+      showToast("Issue resolved. Site is updating — others will see this in a minute or two.");
+    } else {
+      showToast("Issue resolved. The change will be visible to others after the next scheduled update.");
+    }
   } catch (err) {
     var errDiv = document.getElementById("resolve-error");
     errDiv.textContent = "Error: " + err.message;
@@ -324,6 +331,21 @@ async function submitResolve() {
     btn.disabled = false;
     btn.textContent = "Confirm Resolution";
   }
+}
+
+function showToast(message) {
+  var existing = document.getElementById("epi-toast");
+  if (existing) existing.remove();
+  var toast = document.createElement("div");
+  toast.id = "epi-toast";
+  toast.textContent = message;
+  toast.style.cssText = "position:fixed; bottom:1.5rem; left:50%; transform:translateX(-50%); background:#1C2B4A; color:#fff; padding:0.85rem 1.25rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.2); font-size:0.9rem; max-width:90%; z-index:10000; opacity:0; transition:opacity 0.2s;";
+  document.body.appendChild(toast);
+  requestAnimationFrame(function() { toast.style.opacity = "1"; });
+  setTimeout(function() {
+    toast.style.opacity = "0";
+    setTimeout(function() { toast.remove(); }, 250);
+  }, 5000);
 }
 
 // Initial render
