@@ -16,13 +16,13 @@
     "Solar Power": 1,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 4,
+    "n_visits": 5,
     "n_responses": 119,
     "pct_lantern": 0.7009,
     "pct_library": 0.5781,
     "pct_menstrual": 0.7407,
     "pct_computers": 1,
-    "n_issues": 2
+    "n_issues": 3
   },
   "visits": [
     {
@@ -89,6 +89,23 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-03-17"
+    },
+    {
+      "StartDate": "2026-04-27 6:33:18",
+      "Duration (in seconds)": "110",
+      "ResponseId": "R_adRRK8l1sLbrj9D",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Peace, Akuvi",
+      "school_name": "Alorkpem Island",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit",
+      "doing_well": "They are doing well in all our programs",
+      "struggles": "No",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-04-27"
     }
   ],
   "full_update": [

@@ -16,13 +16,13 @@
     "Solar Power": 1,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 10,
+    "n_visits": 11,
     "n_responses": 231,
     "pct_lantern": 0.5022,
     "pct_library": 0.8387,
     "pct_menstrual": 0.7292,
     "pct_computers": 1,
-    "n_issues": 3
+    "n_issues": 4
   },
   "visits": [
     {
@@ -166,6 +166,23 @@
       "urgent_issues": "No",
       "observations": "None",
       "visit_date": "2026-03-11"
+    },
+    {
+      "StartDate": "2026-04-27 4:25:35",
+      "Duration (in seconds)": "199",
+      "ResponseId": "R_21mg72DB6z5IC57",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Peace, Akuvi",
+      "school_name": "Pediatorkope",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit",
+      "doing_well": "They are doing well with all programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "Two set of computers and five mouse have been stolen.",
+      "visit_date": "2026-04-27"
     }
   ],
   "full_update": [
