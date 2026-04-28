@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 5,
+    "n_visits": 6,
     "n_responses": 146,
     "pct_lantern": 0.6027,
     "pct_library": 0.1132,
@@ -83,6 +83,22 @@
       "urgent_issues": "I met with the Headmaster and the SMC chairman to finds ways to improve the use.",
       "observations": "The school is doing well in academics. Since they got electricity recently. The school has wired all classroom with light and are doing night studies for the students who stay in close proximity",
       "visit_date": "2026-01-14"
+    },
+    {
+      "StartDate": "2026-04-27 4:34:54",
+      "Duration (in seconds)": "172",
+      "ResponseId": "R_6W5hPB0luZWo0ww",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Isaac, Richard",
+      "school_name": "Abrenya",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit",
+      "doing_well": "Doing well in our programs.",
+      "struggles": "Enrollment",
+      "observations": "Preparing for the building of the computer lab.",
+      "visit_date": "2026-04-27"
     }
   ],
   "full_update": [

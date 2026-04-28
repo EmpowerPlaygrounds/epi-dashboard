@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 3,
+    "n_visits": 4,
     "n_responses": 146,
     "pct_lantern": 0.4863,
     "pct_library": 0.5278,
@@ -64,6 +64,21 @@
       "doing_well": "The school been doing well with the science kits program.",
       "observations": "There new teachers who aren’t acquainted with the science kits. Therefore a teacher training was scheduled",
       "visit_date": "2026-01-26"
+    },
+    {
+      "StartDate": "2026-04-27 3:33:15",
+      "Duration (in seconds)": "219",
+      "ResponseId": "R_7wLauUl5OBLMMEC",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Isaac, Richard",
+      "school_name": "Wekpeti Abresu",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit",
+      "doing_well": "Well organized in academic work.",
+      "observations": "Preparing for computer labs.",
+      "visit_date": "2026-04-27"
     }
   ],
   "full_update": [
