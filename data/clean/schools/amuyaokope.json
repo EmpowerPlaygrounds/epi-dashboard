@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 6,
+    "n_visits": 8,
     "n_responses": 90,
     "pct_lantern": 0.3111,
     "pct_library": 0.5062,
     "pct_menstrual": 0.28,
     "pct_computers": 1,
-    "n_issues": 2
+    "n_issues": 4
   },
   "visits": [
     {
@@ -108,6 +108,41 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-02-17"
+    },
+    {
+      "StartDate": "2026-04-28 3:02:48",
+      "Duration (in seconds)": "164",
+      "ResponseId": "R_lKtmbDQOcvLdVzt",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Peace, Akuvi",
+      "school_name": "Amuyaokope",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit",
+      "doing_well": "They are doing well with our programs, they have new science lab that is making the use of science easy and more accessible",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-04-28"
+    },
+    {
+      "StartDate": "2026-04-28 3:05:38",
+      "Duration (in seconds)": "204",
+      "ResponseId": "R_8P3zw46pW5vkAw6",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Peace, Akuvi",
+      "school_name": "Amuyaokope",
+      "visit_reason": "Routine Visit, Menstrual Kit Distribution",
+      "activities": "Menstrual Kit Distribution",
+      "Q20": "38",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-04-28"
     }
   ],
   "full_update": [
