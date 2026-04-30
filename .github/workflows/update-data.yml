@@ -6,6 +6,12 @@ on:
     - cron: "0 6 * * *"
   workflow_dispatch: # Allow manual trigger from GitHub Actions tab
 
+# Serialize concurrent runs so the API-triggered rebuilds (one per resolved
+# issue) don't race against each other or the daily cron when committing.
+concurrency:
+  group: update-dashboard-data
+  cancel-in-progress: false
+
 jobs:
   update-data:
     runs-on: ubuntu-latest
@@ -75,4 +81,19 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -f _site/ data/clean/
           git commit -m "Auto-update dashboard data $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git push
+
+          # Pull-rebase-push with retries to handle the case where another
+          # commit (manual push, parallel workflow, etc.) lands between our
+          # rebase and our push. Five attempts with a short jittered backoff.
+          for attempt in 1 2 3 4 5; do
+            echo "Push attempt $attempt..."
+            git pull --rebase --autostash origin main || true
+            if git push; then
+              echo "Push succeeded on attempt $attempt"
+              exit 0
+            fi
+            sleep $((RANDOM % 8 + 3))
+          done
+
+          echo "Failed to push after 5 attempts"
+          exit 1
