@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 1,
     "Light a Village": 0,
-    "n_visits": 9,
+    "n_visits": 10,
     "n_responses": 170,
     "pct_lantern": 0.6845,
     "pct_library": 0.8125,
     "pct_menstrual": 0.8269,
     "pct_computers": 0,
-    "n_issues": 1
+    "n_issues": 2
   },
   "visits": [
     {
@@ -125,6 +125,28 @@
       "Q4_6_TEXT": "Teacher Bungalow survey",
       "doing_well": "Teaching with Science kits",
       "visit_date": "2026-03-11"
+    },
+    {
+      "StartDate": "2026-04-29 10:11:53",
+      "Duration (in seconds)": "223",
+      "ResponseId": "R_iZOxBEOUF60OSiy",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard",
+      "school_name": "Bahankra",
+      "visit_reason": "Routine Visit, Lantern Replacement",
+      "activities": "Routine Visit, MGR/Charging Maintenance, Lantern Replacement",
+      "Q5": "The charging station/solar needed to be fixed",
+      "Q6": "Yes, all problems were resolved",
+      "Q6.5": "No",
+      "Q8": "Yes",
+      "Q9": "2",
+      "Q10": "Broken",
+      "doing_well": "This school is doing well on all our projects and programs. I like how they are always proactive in reporting issues promptly.",
+      "urgent_issues": "The issue with the teachers bungalow is still not resolved.",
+      "observations": "There is a construction of CHIP compound close to the school. Information is that it will provide health care for the community",
+      "visit_date": "2026-04-29"
     }
   ],
   "full_update": [
@@ -4285,6 +4307,16 @@
       "visit_date": "2026-01-12",
       "visitor": "Richard",
       "issue_id": "7987dcd738ac"
+    },
+    {
+      "school_name": "Bahankra",
+      "urgent_issues": "The issue with the teachers bungalow is still not resolved.",
+      "visit_reason": "Routine Visit, Lantern Replacement",
+      "activities": "Routine Visit, MGR/Charging Maintenance, Lantern Replacement",
+      "observations": "There is a construction of CHIP compound close to the school. Information is that it will provide health care for the community",
+      "visit_date": "2026-04-29",
+      "visitor": "Richard",
+      "issue_id": "b881ea29ada5"
     }
   ]
 }

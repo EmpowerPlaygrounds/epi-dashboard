@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 7,
+    "n_visits": 8,
     "n_responses": 197,
     "pct_lantern": 0.178,
     "pct_library": 0.7767,
@@ -120,6 +120,23 @@
       "struggles": "Teachers using the same room as staff common room",
       "urgent_issues": "They are relocating to a new rooms shortly",
       "visit_date": "2026-02-12"
+    },
+    {
+      "StartDate": "2026-04-29 10:15:43",
+      "Duration (in seconds)": "161",
+      "ResponseId": "R_khXlSPqgrjimDy1",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard",
+      "school_name": "Ekorso Akwadum",
+      "visit_reason": "Routine Visit, Lantern Replacement",
+      "activities": "Routine Visit, Computer Maintenance",
+      "Q11": "One or more computers were not working/turning on",
+      "Q12": "No, I took the computer with me for it to be fixed, and will have to bring it back",
+      "Q14": "1",
+      "doing_well": "The school is doing well in all our programs and projects are well taken care of. The use of ICT caught my attention, they are making very good use of it and the students are happy being at the lab.",
+      "visit_date": "2026-04-29"
     }
   ],
   "full_update": [
