@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 4,
+    "n_visits": 5,
     "n_responses": 233,
     "pct_lantern": 0.2661,
     "pct_library": 0.0307,
@@ -83,6 +83,26 @@
       "doing_well": "Students are week organized and there a New Primary headmaster.",
       "struggles": "Due to large student body, lantern group had been a challenge",
       "visit_date": "2026-04-24"
+    },
+    {
+      "StartDate": "2026-04-30 4:15:53",
+      "Duration (in seconds)": "161",
+      "ResponseId": "R_g43NvEKFw5GuLuH",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard",
+      "school_name": "Ntomem",
+      "visit_reason": "Routine Visit, MGR/Charging Maintenance",
+      "activities": "Routine Visit, MGR/Charging Maintenance, Lantern Replacement",
+      "Q5": "It wasn't spinning properly",
+      "Q6": "Partially, but it still needs more work",
+      "Q7": "The spinning part is partially not spinning any stop intermittently.",
+      "Q8": "No",
+      "doing_well": "Doing well in our programs",
+      "struggles": "Large number of students makes difficult in lantern grouping.",
+      "observations": "Study population is increasing",
+      "visit_date": "2026-04-30"
     }
   ],
   "full_update": [
