@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 2,
+    "n_visits": 3,
     "n_responses": 55,
     "pct_lantern": 0.2,
     "pct_library": 0.8148,
@@ -50,6 +50,25 @@
       "struggles": "Enrollment",
       "observations": "The school is beginning to rise up. Enrollment is still increasing. I saw two students being admitted",
       "visit_date": "2026-01-21"
+    },
+    {
+      "StartDate": "2026-05-04 10:21:00",
+      "Duration (in seconds)": "187",
+      "ResponseId": "R_gaPwn3VzRtWcXGB",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard",
+      "school_name": "Essam",
+      "visit_reason": "Routine Visit, Full Update Survey",
+      "activities": "Routine Visit, Science Kit Training/Distribution, Full Update Survey",
+      "Q21": "No",
+      "Q23": "Yes",
+      "Q24": "5",
+      "doing_well": "Using the merry go round a lot.",
+      "struggles": "The school is not using much of programs.",
+      "observations": "The school is not doing in terms of enrollment. They currently do not have all levels. Mostly are the nursery and kindergarten",
+      "visit_date": "2026-05-04"
     }
   ],
   "full_update": [

@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 0,
+    "n_visits": 1,
     "n_responses": 0,
     "pct_lantern": "NA",
     "pct_library": "NA",
@@ -24,7 +24,23 @@
     "pct_computers": "NA",
     "n_issues": 0
   },
-  "visits": [],
+  "visits": [
+    {
+      "StartDate": "2026-04-30 9:28:41",
+      "Duration (in seconds)": "75",
+      "ResponseId": "R_hKONFXF1HrSA97t",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard",
+      "school_name": "Zippo Nyuinyui",
+      "visit_reason": "Routine Visit, Full Update Survey",
+      "activities": "Routine Visit, Full Update Survey",
+      "doing_well": "The use of science kits",
+      "struggles": "Teachers effectiveness in running our programs",
+      "visit_date": "2026-04-30"
+    }
+  ],
   "full_update": [
     {
       "StartDate": "2020-01-15 5:22:36",

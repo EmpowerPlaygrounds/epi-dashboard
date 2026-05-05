@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 1,
+    "n_visits": 2,
     "n_responses": 93,
     "pct_lantern": 0.6129,
     "pct_library": 0.127,
@@ -36,6 +36,21 @@
       "school_name": "Akyeremanteng",
       "Q20": "12",
       "visit_date": "2025-07-08"
+    },
+    {
+      "StartDate": "2026-04-30 9:27:30",
+      "Duration (in seconds)": "68",
+      "ResponseId": "R_j4th9nQ59PFTgUY",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard",
+      "school_name": "Akyeremanteng",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit",
+      "doing_well": "Doing well in all our programs",
+      "struggles": "Student population is decreasing",
+      "visit_date": "2026-04-30"
     }
   ],
   "full_update": [

@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 12,
+    "n_visits": 13,
     "n_responses": 49,
     "pct_lantern": 0.3673,
     "pct_library": 0.1765,
     "pct_menstrual": 0.5,
     "pct_computers": 1,
-    "n_issues": 3
+    "n_issues": 4
   },
   "visits": [
     {
@@ -187,6 +187,24 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-03-12"
+    },
+    {
+      "StartDate": "2026-05-04 5:02:26",
+      "Duration (in seconds)": "189",
+      "ResponseId": "R_mJaLZdREa7E69K6",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "school_name": "Afransua Dedewa MA Primary",
+      "visit_reason": "Preparing the computer lab for reroofing",
+      "Q3_6_TEXT": "Preparing the computer lab for reroofing",
+      "activities": "Preparing the computer lab for reroofing",
+      "Q4_6_TEXT": "Preparing the computer lab for reroofing",
+      "doing_well": "None at the moment",
+      "struggles": "No",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-05-04"
     }
   ],
   "full_update": [
