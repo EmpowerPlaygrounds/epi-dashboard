@@ -194,7 +194,7 @@ clean_full <- raw_full |>
   slice(-1) |>
   filter(!str_detect(StartDate, fixed("{")) | is.na(StartDate)) |>
   rename(
-    school_name         = Q2,
+    school_name         = `Q2.5`,
     recommend_mgr_swap  = Q27,
     recommend_project   = Q45,
     recommended_types   = Q82,

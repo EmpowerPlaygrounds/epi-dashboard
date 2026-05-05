@@ -19,7 +19,7 @@ visits   <- read_csv(here("data", "clean", "visits.csv"), show_col_types = FALSE
 raw_full <- read_csv(here("data", "raw", "full_update.csv"), show_col_types = FALSE)
 clean_full <- raw_full |>
   slice(-1) |>
-  rename(school_name = Q2) |>
+  rename(school_name = `Q2.5`) |>
   mutate(school_name = str_trim(school_name))
 
 # Date range defaults: current school year (Aug 1 – Jul 31)
