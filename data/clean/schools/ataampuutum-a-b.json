@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 1,
+    "n_visits": 2,
     "n_responses": 18,
     "pct_lantern": 0.5556,
     "pct_library": 0.6667,
@@ -35,6 +35,19 @@
       "school_name": "Ataampuutum A/B",
       "visit_reason": "MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit",
       "visit_date": "2019-03-21"
+    },
+    {
+      "StartDate": "2026-05-13 2:35:51",
+      "Duration (in seconds)": "75",
+      "ResponseId": "R_7VjP3hqwQ0RQMZL",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "school_name": "Ataampuutum A/B",
+      "visit_reason": "Routine Visit, Full Update Survey",
+      "activities": "Routine Visit, Full Update Survey",
+      "struggles": "Students attending school due to mining",
+      "visit_date": "2026-05-13"
     }
   ],
   "full_update": [

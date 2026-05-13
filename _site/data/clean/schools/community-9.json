@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 3,
+    "n_visits": 4,
     "n_responses": 41,
     "pct_lantern": 0.8537,
     "pct_library": 0.1316,
@@ -57,6 +57,20 @@
       "school_name": "Community 9",
       "visit_reason": "MGR Maintenance,Routine Program Evaluation",
       "visit_date": "2024-02-28"
+    },
+    {
+      "StartDate": "2026-05-13 2:38:32",
+      "Duration (in seconds)": "48",
+      "ResponseId": "R_otmLvHMu9Ae9tug",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "school_name": "Community 9",
+      "visit_reason": "Routine Visit, Full Update Survey",
+      "activities": "Routine Visit, Full Update Survey",
+      "doing_well": "The use of our lantern program",
+      "struggles": "Student attendance due to mining activities",
+      "visit_date": "2026-05-13"
     }
   ],
   "full_update": [
