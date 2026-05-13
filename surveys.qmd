@@ -709,7 +709,7 @@ function renderSchoolsRepresented(data) {
   var schoolSet = {};
   data.forEach(function(d) { if (d.school_name) schoolSet[d.school_name] = true; });
   var nSchools = Object.keys(schoolSet).length;
-  var totalSchools = SCHOOL_NAMES.length;
+  var totalSchools = N_TOTAL_SCHOOLS;
   var pct = totalSchools > 0 ? Math.round(nSchools / totalSchools * 100) : 0;
 
   var fill = document.getElementById("schools-represented-fill");
@@ -815,6 +815,7 @@ insights_html <- paste0(
   '<script>',
   'var SURVEY_DATA = ', survey_json, ';\n',
   'var SCHOOL_NAMES = ', school_names_json, ';\n',
+  'var N_TOTAL_SCHOOLS = ', n_total_schools, ';\n',
   js_code,
   '</script>'
 )
