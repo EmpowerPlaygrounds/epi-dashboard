@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 9,
+    "n_visits": 10,
     "n_responses": 31,
     "pct_lantern": 0.2258,
     "pct_library": 0.6774,
     "pct_menstrual": 0.7692,
     "pct_computers": 1,
-    "n_issues": 1
+    "n_issues": 2
   },
   "visits": [
     {
@@ -126,6 +126,25 @@
       "urgent_issues": "No",
       "observations": "None",
       "visit_date": "2026-01-19"
+    },
+    {
+      "StartDate": "2026-05-12 5:29:25",
+      "Duration (in seconds)": "157",
+      "ResponseId": "R_3prUrcc1fOVBGAP",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Isaac",
+      "school_name": "Obosonu",
+      "visit_reason": "Routine Visit",
+      "activities": "MGR/Charging Maintenance",
+      "Q5": "It wasn't spinning properly",
+      "Q6": "Yes, all problems were resolved",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "Their solar station have been off for some time now.\nIt donated by another organization.",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-05-12"
     }
   ],
   "full_update": [

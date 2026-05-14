@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 4,
+    "n_visits": 5,
     "n_responses": 80,
     "pct_lantern": 0.2875,
     "pct_library": 0,
     "pct_menstrual": 0.9259,
     "pct_computers": 0,
-    "n_issues": 1
+    "n_issues": 2
   },
   "visits": [
     {
@@ -81,6 +81,24 @@
       "urgent_issues": "N/A",
       "observations": "Every thing is going on well",
       "visit_date": "2026-01-15"
+    },
+    {
+      "StartDate": "2026-05-13 5:32:33",
+      "Duration (in seconds)": "213",
+      "ResponseId": "R_bb0vTzOGYasm6OH",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "school_name": "Madavunu",
+      "visit_reason": "Routine Visit",
+      "activities": "MGR/Charging Maintenance",
+      "Q5": "The charging station/solar needed to be fixed",
+      "Q6.5": "No",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "They will do well with library books",
+      "urgent_issues": "No",
+      "observations": "They using the science kits very well, most of the students are excited using it.",
+      "visit_date": "2026-05-13"
     }
   ],
   "full_update": [

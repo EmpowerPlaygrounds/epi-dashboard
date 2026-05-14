@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 12,
+    "n_visits": 13,
     "n_responses": 27,
     "pct_lantern": 0.3704,
     "pct_library": 0,
     "pct_menstrual": 0.2,
     "pct_computers": 0,
-    "n_issues": 2
+    "n_issues": 3
   },
   "visits": [
     {
@@ -176,6 +176,23 @@
       "urgent_issues": "None",
       "observations": "None",
       "visit_date": "2026-01-19"
+    },
+    {
+      "StartDate": "2026-05-12 5:27:03",
+      "Duration (in seconds)": "138",
+      "ResponseId": "R_bwLT2SvtyI2VPNn",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Isaac",
+      "school_name": "Akwansu",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-05-12"
     }
   ],
   "full_update": [
