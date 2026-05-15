@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 1,
     "Light a Village": 0,
-    "n_visits": 8,
+    "n_visits": 9,
     "n_responses": 105,
     "pct_lantern": 0.2571,
     "pct_library": 0.8036,
     "pct_menstrual": 0.68,
     "pct_computers": 1,
-    "n_issues": 2
+    "n_issues": 3
   },
   "visits": [
     {
@@ -133,6 +133,23 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-02-16"
+    },
+    {
+      "StartDate": "2026-05-14 5:09:55",
+      "Duration (in seconds)": "125",
+      "ResponseId": "R_2W2yurQR2Qgo0FT",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Isaac",
+      "school_name": "Wurudu Wurudu",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-05-14"
     }
   ],
   "full_update": [

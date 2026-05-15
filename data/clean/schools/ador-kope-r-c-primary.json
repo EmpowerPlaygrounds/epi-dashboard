@@ -16,7 +16,7 @@
     "Solar Power": 1,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 0,
+    "n_visits": 1,
     "n_responses": 23,
     "pct_lantern": 0.7391,
     "pct_library": 1,
@@ -24,7 +24,23 @@
     "pct_computers": "NaN",
     "n_issues": 0
   },
-  "visits": [],
+  "visits": [
+    {
+      "StartDate": "2026-05-14 14:06:08",
+      "Duration (in seconds)": "112",
+      "ResponseId": "R_nyi78QKLcAC39ag",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard",
+      "school_name": "Ador Kope R/C Primary",
+      "visit_reason": "Routine Visit, Full Update Survey",
+      "activities": "Routine Visit, Full Update Survey",
+      "doing_well": "School is doing well in using our project and programs",
+      "struggles": "Inadequate classroom poses significant challenge in teaching and learning",
+      "visit_date": "2026-05-14"
+    }
+  ],
   "full_update": [
     {
       "StartDate": "2020-01-14 6:38:04",

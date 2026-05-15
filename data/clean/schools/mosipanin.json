@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 1,
+    "n_visits": 2,
     "n_responses": 92,
     "pct_lantern": 0.6413,
     "pct_library": 0.0448,
@@ -45,6 +45,26 @@
       "doing_well": "Doing well with the Lantern program",
       "struggles": "Maintaining and using of science kits",
       "visit_date": "2026-03-12"
+    },
+    {
+      "StartDate": "2026-05-14 14:12:06",
+      "Duration (in seconds)": "156",
+      "ResponseId": "R_d76KiEOgHCFD0i3",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard",
+      "school_name": "Mosipanin",
+      "visit_reason": "Routine Visit, MGR/Charging Maintenance, Lantern Replacement, New Project",
+      "activities": "Routine Visit, MGR/Charging Maintenance, Lantern Replacement, New Project (specify):",
+      "Q5": "The charging station/solar needed to be fixed",
+      "Q6": "Yes, all problems were resolved",
+      "Q6.5": "No",
+      "Q8": "Yes",
+      "Q9": "2",
+      "Q10": "Broken",
+      "doing_well": "The use of science kits has really improved. Students now have confidence in doing most the projects outlined in the guide with very little support from teachers",
+      "visit_date": "2026-05-14"
     }
   ],
   "full_update": [
