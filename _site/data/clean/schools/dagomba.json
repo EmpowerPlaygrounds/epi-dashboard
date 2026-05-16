@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 7,
+    "n_visits": 8,
     "n_responses": 181,
     "pct_lantern": 0.6243,
     "pct_library": 0.6275,
     "pct_menstrual": 0.8235,
     "pct_computers": 1,
-    "n_issues": 1
+    "n_issues": 2
   },
   "visits": [
     {
@@ -106,6 +106,25 @@
       "Q6": "Partially, but it still needs more work",
       "Q7": "The top head is broken and needs replacing",
       "visit_date": "2026-03-12"
+    },
+    {
+      "StartDate": "2026-05-15 12:16:48",
+      "Duration (in seconds)": "195",
+      "ResponseId": "R_f5YTAzGpwbn2xid",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "school_name": "Dagomba",
+      "visit_reason": "MGR/Charging Maintenance",
+      "activities": "MGR/Charging Maintenance, Computer Maintenance",
+      "Q5": "The railings had come loose, Needed to be repositioned",
+      "Q6": "Yes, all problems were resolved",
+      "Q11": "One or more computers were not working/turning on",
+      "Q12": "Yes, it is all functioning",
+      "doing_well": "The school is doing well at the use of computer lab, helping students with various computer related topics",
+      "struggles": "The use of Science kits",
+      "urgent_issues": "Teacher training",
+      "visit_date": "2026-05-15"
     }
   ],
   "full_update": [
@@ -4640,6 +4659,15 @@
       "visit_date": "2026-02-23",
       "visitor": "Richard",
       "issue_id": "915e27a7110f"
+    },
+    {
+      "school_name": "Dagomba",
+      "urgent_issues": "Teacher training",
+      "visit_reason": "MGR/Charging Maintenance",
+      "activities": "MGR/Charging Maintenance, Computer Maintenance",
+      "visit_date": "2026-05-15",
+      "visitor": "Richard",
+      "issue_id": "541810e35dbf"
     }
   ]
 }

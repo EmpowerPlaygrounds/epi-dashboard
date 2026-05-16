@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 7,
+    "n_visits": 8,
     "n_responses": 48,
     "pct_lantern": 0.875,
     "pct_library": 0,
@@ -96,6 +96,24 @@
       "doing_well": "The doing well with all our programs especially the library project. They are keeping the books are and allow the kids to visit the library on their own.",
       "struggles": "Science kits have not been used as ought to",
       "visit_date": "2026-02-24"
+    },
+    {
+      "StartDate": "2026-05-15 12:29:34",
+      "Duration (in seconds)": "123",
+      "ResponseId": "R_bpgSGi9XvBMcG9m",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "school_name": "Wenamda",
+      "visit_reason": "Routine Visit, MGR/Charging Maintenance",
+      "activities": "Routine Visit, MGR/Charging Maintenance, Lantern Replacement",
+      "Q5": "It wasn't spinning properly",
+      "Q6": "Yes, all problems were resolved",
+      "Q8": "Yes",
+      "Q9": "2",
+      "Q10": "Broken",
+      "doing_well": "Doing well in our program but do well in lantern program.  The use of the library is commendable",
+      "visit_date": "2026-05-15"
     }
   ],
   "full_update": [
