@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 4,
+    "n_visits": 5,
     "n_responses": 141,
     "pct_lantern": 0.0426,
     "pct_library": 0.3607,
     "pct_menstrual": 0.6842,
     "pct_computers": 0,
-    "n_issues": 2
+    "n_issues": 3
   },
   "visits": [
     {
@@ -83,6 +83,27 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-02-26"
+    },
+    {
+      "StartDate": "2026-05-18 4:34:47",
+      "Duration (in seconds)": "240",
+      "ResponseId": "R_3YM0PC8SXgiKSAi",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "school_name": "Mampong Shai",
+      "visit_reason": "Routine Visit",
+      "activities": "MGR/Charging Maintenance, Science Kit Training/Distribution",
+      "Q5": "It wasn't spinning properly, The railings had come loose",
+      "Q6": "Yes, all problems were resolved",
+      "Q21": "No",
+      "Q23": "Yes",
+      "Q24": "1",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-05-18"
     }
   ],
   "full_update": [

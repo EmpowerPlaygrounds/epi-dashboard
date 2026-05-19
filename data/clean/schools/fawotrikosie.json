@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 7,
+    "n_visits": 8,
     "n_responses": 122,
     "pct_lantern": 0.1557,
     "pct_library": 0.8507,
     "pct_menstrual": 0.5263,
     "pct_computers": 1,
-    "n_issues": 2
+    "n_issues": 3
   },
   "visits": [
     {
@@ -129,6 +129,26 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-02-16"
+    },
+    {
+      "StartDate": "2026-05-14 6:01:31",
+      "Duration (in seconds)": "143",
+      "ResponseId": "R_6a8hnezvmPvixhz",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Other:",
+      "Q1.5_6_TEXT": "Kwame",
+      "school_name": "Fawotrikosie",
+      "visit_reason": "Routine Visit, Computer Maintenance",
+      "activities": "Computer Maintenance",
+      "Q11": "One or more computers were not working/turning on",
+      "Q12": "Yes, it is all functioning",
+      "doing_well": "They are doing well with our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-05-14"
     }
   ],
   "full_update": [
