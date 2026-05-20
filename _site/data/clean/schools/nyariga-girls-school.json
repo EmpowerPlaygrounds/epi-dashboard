@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 1,
+    "n_visits": 2,
     "n_responses": 22,
     "pct_lantern": 0.3182,
     "pct_library": 0.2727,
@@ -35,6 +35,20 @@
       "school_name": "Nyariga Girls' School",
       "visit_reason": "MGR Maintenance,Routine Program Evaluation,Surveyor Team Visit",
       "visit_date": "2019-03-20"
+    },
+    {
+      "StartDate": "2026-05-19 12:16:16",
+      "Duration (in seconds)": "79",
+      "ResponseId": "R_dVevFQgBCyG3e1a",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard",
+      "school_name": "Nyariga Girls' School",
+      "visit_reason": "Routine Visit, Full Update Survey",
+      "activities": "Routine Visit, Full Update Survey",
+      "doing_well": "The school is doing very well in all of our programs",
+      "visit_date": "2026-05-19"
     }
   ],
   "full_update": [

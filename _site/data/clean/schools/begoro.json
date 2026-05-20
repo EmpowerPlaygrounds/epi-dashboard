@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 1,
+    "n_visits": 2,
     "n_responses": 0,
     "pct_lantern": "NA",
     "pct_library": "NA",
     "pct_menstrual": "NA",
     "pct_computers": "NA",
-    "n_issues": 0
+    "n_issues": 1
   },
   "visits": [
     {
@@ -35,6 +35,25 @@
       "school_name": "Begoro",
       "visit_reason": "Project Update Visit",
       "visit_date": "2024-05-07"
+    },
+    {
+      "StartDate": "2026-05-18 4:59:25",
+      "Duration (in seconds)": "319",
+      "ResponseId": "R_jl6V0T9AJUxKPpq",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "school_name": "Begoro",
+      "visit_reason": "Routine Visit, Computer Maintenance",
+      "activities": "Routine Visit, Computer Maintenance",
+      "Q11": "One or more monitors would not turn on (computer was fine)",
+      "Q12": "No, I took the computer with me for it to be fixed, and will have to bring it back",
+      "Q14": "10",
+      "doing_well": "Student population and staffing is great",
+      "struggles": "The school was not using our computers that’s due tablets given them. However the tablet did not last long. When they decided to use the computer majority weren’t turning on.",
+      "urgent_issues": "Staff meeting about the use of our projects.",
+      "observations": "Though the school is doing well academically, they are to appreciate our effort in helping them augment what they are doing. Especially in the ICT field",
+      "visit_date": "2026-05-18"
     }
   ],
   "full_update": [
@@ -99,5 +118,16 @@
     }
   ],
   "surveys": [],
-  "issues": []
+  "issues": [
+    {
+      "school_name": "Begoro",
+      "urgent_issues": "Staff meeting about the use of our projects.",
+      "visit_reason": "Routine Visit, Computer Maintenance",
+      "activities": "Routine Visit, Computer Maintenance",
+      "observations": "Though the school is doing well academically, they are to appreciate our effort in helping them augment what they are doing. Especially in the ICT field",
+      "visit_date": "2026-05-18",
+      "visitor": "Richard",
+      "issue_id": "a66265861d20"
+    }
+  ]
 }

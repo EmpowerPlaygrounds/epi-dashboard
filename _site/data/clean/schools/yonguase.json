@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 5,
+    "n_visits": 6,
     "n_responses": 33,
     "pct_lantern": 0.6364,
     "pct_library": 0.2,
@@ -82,6 +82,21 @@
       "school_name": "Yonguase",
       "Q20": "12",
       "visit_date": "2025-07-08"
+    },
+    {
+      "StartDate": "2026-05-19 12:27:56",
+      "Duration (in seconds)": "119",
+      "ResponseId": "R_aZAg0x0sjUBLnCe",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "school_name": "Yonguase",
+      "visit_reason": "Routine Visit, MGR/Charging Maintenance",
+      "activities": "Routine Visit, MGR/Charging Maintenance",
+      "Q5": "It wasn't spinning properly, The railings had come loose",
+      "Q6": "Yes, all problems were resolved",
+      "doing_well": "Schools is doing well in running our programs. The headmaster is very dedicated to EPI programs because he has increased students participation and overall performance of the school",
+      "visit_date": "2026-05-19"
     }
   ],
   "full_update": [
