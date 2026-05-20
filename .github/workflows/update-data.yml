@@ -6,6 +6,11 @@ on:
     - cron: "0 6 * * *"
   workflow_dispatch: # Allow manual trigger from GitHub Actions tab
 
+# Required after transfer to an org: grant the default GITHUB_TOKEN
+# write access so the workflow can commit and push back to the repo.
+permissions:
+  contents: write
+
 # Serialize concurrent runs so the API-triggered rebuilds (one per resolved
 # issue) don't race against each other or the daily cron when committing.
 concurrency:
