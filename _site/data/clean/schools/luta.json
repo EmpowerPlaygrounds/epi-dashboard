@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 7,
+    "n_visits": 8,
     "n_responses": 71,
     "pct_lantern": 0.1143,
     "pct_library": 0.3443,
     "pct_menstrual": 0.4211,
     "pct_computers": 1,
-    "n_issues": 2
+    "n_issues": 3
   },
   "visits": [
     {
@@ -123,6 +123,25 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-01-30"
+    },
+    {
+      "StartDate": "2026-05-19 4:06:17",
+      "Duration (in seconds)": "77",
+      "ResponseId": "R_kSOGKZkuGGOI8tE",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Isaac, Peace, Akuvi",
+      "school_name": "Luta",
+      "visit_reason": "Routine Visit",
+      "activities": "Computer Maintenance",
+      "Q11": "One or more computers were not working/turning on",
+      "Q12": "Yes, it is all functioning",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "No",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-05-19"
     }
   ],
   "full_update": [

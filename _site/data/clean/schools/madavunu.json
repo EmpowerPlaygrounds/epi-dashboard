@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 5,
+    "n_visits": 6,
     "n_responses": 80,
     "pct_lantern": 0.2875,
     "pct_library": 0,
     "pct_menstrual": 0.9259,
     "pct_computers": 0,
-    "n_issues": 2
+    "n_issues": 3
   },
   "visits": [
     {
@@ -99,6 +99,26 @@
       "urgent_issues": "No",
       "observations": "They using the science kits very well, most of the students are excited using it.",
       "visit_date": "2026-05-13"
+    },
+    {
+      "StartDate": "2026-05-19 3:29:59",
+      "Duration (in seconds)": "138",
+      "ResponseId": "R_kTgXo5Ju6aFv1kz",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Isaac, Peace, Akuvi",
+      "school_name": "Madavunu",
+      "visit_reason": "Routine Visit",
+      "activities": "Lantern Replacement",
+      "Q8": "Yes",
+      "Q9": "7",
+      "Q10": "Broken",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "No",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-05-19"
     }
   ],
   "full_update": [
