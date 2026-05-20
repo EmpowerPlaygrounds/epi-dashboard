@@ -1,8 +1,8 @@
 # EPI Data Dashboard
 
-A Quarto + R dashboard for **Empower Playgrounds Inc. (EPI)** that consolidates field visit reports, student surveys, project records, and school metadata into an interactive website. Built as the final project for GLHLTH 562 at Duke University.
+A Quarto + R dashboard for **Empower Playgrounds Inc. (EPI)** that consolidates field visit reports, student surveys, project records, and school metadata into an interactive website. 
 
-Live pages: **Overview** | **School Profiles** | **Visits** | **Student Surveys** | **Issues** | **Print Reports**
+Live pages: **Overview** | **School Profiles** | **Visits** | **Student Surveys** | **Print Reports** | **Issues** | **New Projects**
 
 ---
 
