@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 8,
+    "n_visits": 9,
     "n_responses": 197,
     "pct_lantern": 0.178,
     "pct_library": 0.7767,
@@ -137,6 +137,26 @@
       "Q14": "1",
       "doing_well": "The school is doing well in all our programs and projects are well taken care of. The use of ICT caught my attention, they are making very good use of it and the students are happy being at the lab.",
       "visit_date": "2026-04-29"
+    },
+    {
+      "StartDate": "2026-05-22 7:07:30",
+      "Duration (in seconds)": "330",
+      "ResponseId": "R_m4SPExdiDfsuiQ7",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard",
+      "school_name": "Ekorso Akwadum",
+      "visit_reason": "Computer Maintenance",
+      "activities": "Computer Maintenance, Computer Training",
+      "Q11": "One or more computers were not working/turning on",
+      "Q12": "Yes, it is all functioning",
+      "Q16": "Rachel Training and ways to utilize Rachel device for teaching and learning",
+      "Q17": "15",
+      "Q18": "Yes",
+      "Q19": "All of basic 8 students were present, 10 students from the upper primary. They demonstrated how the use of ICT can help in their lessons.",
+      "doing_well": "Doing well in all our projects and keep good eye on them. Strong participation from school management and strong community support",
+      "visit_date": "2026-05-22"
     }
   ],
   "full_update": [

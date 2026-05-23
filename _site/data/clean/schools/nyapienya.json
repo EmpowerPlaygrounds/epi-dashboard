@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 1,
     "Light a Village": 0,
-    "n_visits": 9,
+    "n_visits": 10,
     "n_responses": 105,
     "pct_lantern": 0.7905,
     "pct_library": 0.5965,
     "pct_menstrual": 0.4762,
     "pct_computers": 0,
-    "n_issues": 1
+    "n_issues": 2
   },
   "visits": [
     {
@@ -137,6 +137,28 @@
       "struggles": "Library",
       "urgent_issues": "No",
       "visit_date": "2026-01-28"
+    },
+    {
+      "StartDate": "2026-05-20 5:17:15",
+      "Duration (in seconds)": "657",
+      "ResponseId": "R_1GyTufOfJPkEY1O",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "school_name": "Nyapienya",
+      "visit_reason": "Lantern Replacement, Science Kit Training/Distribution",
+      "activities": "Lantern Replacement, Science Kit Training/Distribution",
+      "Q8": "Yes",
+      "Q9": "2",
+      "Q10": "Broken",
+      "Q21": "No",
+      "Q23": "Yes",
+      "Q24": "1",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "No",
+      "urgent_issues": "No",
+      "observations": "There was an ongoing PTA meeting in the school at the time of my visit, part of the discussions was reminding  parents to always allow their children to meet and study together using the lanterns provided by empowerplaygrounds, some parents also express their appreciation to empowerplaygrounds.",
+      "visit_date": "2026-05-20"
     }
   ],
   "full_update": [

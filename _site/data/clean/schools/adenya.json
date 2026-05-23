@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 12,
+    "n_visits": 13,
     "n_responses": 145,
     "pct_lantern": 0.669,
     "pct_library": 0.5781,
     "pct_menstrual": 0.6296,
     "pct_computers": 0,
-    "n_issues": 3
+    "n_issues": 4
   },
   "visits": [
     {
@@ -182,6 +182,22 @@
       "urgent_issues": "No",
       "observations": "School has just reopened and students and settling in",
       "visit_date": "2026-04-23"
+    },
+    {
+      "StartDate": "2026-05-21 4:59:26",
+      "Duration (in seconds)": "57",
+      "ResponseId": "R_hHuGB17CEuWMcJA",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "school_name": "Adenya",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "No",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-05-21"
     }
   ],
   "full_update": [
