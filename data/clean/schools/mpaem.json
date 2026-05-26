@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 9,
+    "n_visits": 10,
     "n_responses": 136,
     "pct_lantern": 0.5778,
     "pct_library": 0.1932,
@@ -138,6 +138,29 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-02-10"
+    },
+    {
+      "StartDate": "2026-05-25 13:05:50",
+      "Duration (in seconds)": "355",
+      "ResponseId": "R_8oByMXRoPnoltUa",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard",
+      "school_name": "Mpaem",
+      "visit_reason": "Routine Visit, Computer Maintenance, Computer Training",
+      "activities": "Computer Maintenance, Computer Training, Science Kit Training/Distribution",
+      "Q11": "One or more computers would not connect to the RACHEL",
+      "Q12": "Yes, it is all functioning",
+      "Q16": "Training was based on the use of laboratory for additional training and learning",
+      "Q17": "10",
+      "Q18": "No",
+      "Q21": "No",
+      "Q23": "Yes",
+      "Q24": "10",
+      "doing_well": "They have improved on using the science kits. Also the use of the laboratory for extra support for students who wants to learn typing.",
+      "observations": "I observe that some students volunteer to help clean the lab every day. \n\nSome students visit the lab at the free time, they chose to learn more whiles other students play.",
+      "visit_date": "2026-05-25"
     }
   ],
   "full_update": [

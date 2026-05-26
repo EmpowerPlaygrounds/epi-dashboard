@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 7,
+    "n_visits": 8,
     "n_responses": 10,
     "pct_lantern": 1,
     "pct_library": "NaN",
     "pct_menstrual": 0.6667,
     "pct_computers": 0,
-    "n_issues": 2
+    "n_issues": 3
   },
   "visits": [
     {
@@ -132,6 +132,29 @@
       "activities": "We visited with academic city students",
       "Q4_6_TEXT": "We visited with academic city students",
       "visit_date": "2026-02-25"
+    },
+    {
+      "StartDate": "2026-05-25 4:22:47",
+      "Duration (in seconds)": "261",
+      "ResponseId": "R_klPpsBobEFOIyvP",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "school_name": "Anamenampa",
+      "visit_reason": "Routine Visit",
+      "activities": "Lantern Replacement, Science Kit Training/Distribution, Grow projects",
+      "Q4_6_TEXT": "Grow projects",
+      "Q8": "Yes",
+      "Q9": "2",
+      "Q10": "Broken",
+      "Q21": "No",
+      "Q23": "Yes",
+      "Q24": "2",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "No",
+      "urgent_issues": "No",
+      "observations": "The have adjusted the school timetable to include library period, to enable the students participate in the grow project",
+      "visit_date": "2026-05-25"
     }
   ],
   "full_update": [
