@@ -128,10 +128,6 @@
     "slug": "galalia"
   },
   {
-    "name": "Gloucester R.E.C. (Sierra Leone)",
-    "slug": "gloucester-r-e-c-sierra-leone"
-  },
-  {
     "name": "Gourcy Burkina Faso School",
     "slug": "gourcy-burkina-faso-school"
   },
@@ -194,6 +190,10 @@
   {
     "name": "Mosipanin",
     "slug": "mosipanin"
+  },
+  {
+    "name": "Mountain Rural Community (Sierra Leone)",
+    "slug": "mountain-rural-community-sierra-leone"
   },
   {
     "name": "Mpaem",

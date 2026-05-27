@@ -1,4 +1,4 @@
-School Name,Region,EPI Start Year,Latitude,Longitude,MGR,Non-Generating MGR,Feminine Hygiene Kits,Science Kits,Library,Computer,Construction Projects,Boreholes,Solar Power,Biofill Toilets,Light a Village,...17,3/14/2026
+School Name,Region,EPI Start Year,Latitude,Longitude,MGR,Non-Generating MGR,Feminine Hygiene Kits,Science Kits,Library,Computer,Construction Projects,Boreholes,Solar Power,Biofill Toilets,Light a Village,...17,5/26/2026
 Abrenya,Eastern,2012,6.324242861,-0.583628271,1,0,1,1,0,0,1,1,0,0,0,NA,NA
 Adenya,Eastern,2010,5.965312,-0.175099,1,0,1,1,1,0,0,0,0,0,0,NA,NA
 Ador Kope R/C Primary,Greater Accra,2019,7.114074,0.125415,1,0,1,1,0,1,0,0,1,0,0,NA,NA
@@ -31,7 +31,6 @@ Fanterila,Mali,2008,11.359305,-6.041992,1,0,1,1,0,0,0,0,0,0,0,NA,NA
 Fawotrikosie,Eastern,2016,5.961812,-0.537674,1,0,1,1,1,1,2,1,0,0,0,NA,NA
 Ferekoroba,Mali,2015,11.959291,-7.862025,1,0,1,1,0,0,0,0,0,0,0,NA,NA
 Galalia,Eastern,2014,6.691096,0.09821,1,0,1,1,0,0,1,0,0,0,0,NA,NA
-Gloucester R.E.C. (Sierra Leone),NA,2025,8.431133,-13.222986,0,0,1,0,0,0,0,0,0,0,0,NA,NA
 Gourcy Burkina Faso School,Burkina Faso,2017,13.219534,-2.347177,1,0,1,1,0,0,0,0,0,0,0,NA,NA
 Immanuel Christian Academy (Liberia),NA,2025,6.259301,-10.708433,0,0,1,0,0,0,0,0,0,0,0,NA,NA
 Koni Kablu,Greater Accra,2008,5.876078,0.337461,0,0,0,1,0,0,0,1,0,0,0,NA,NA
@@ -48,6 +47,7 @@ Meyikpoi,Eastern,2015,7.03562,0.097393,1,0,1,1,0,0,0,0,0,0,0,NA,NA
 Minya,Greater Accra,2008,5.817278,0.318109,1,0,1,1,0,0,1,1,0,0,0,NA,NA
 Mobia,Ashanti,2023,NA,NA,1,0,1,1,1,0,1,1,0,0,0,NA,NA
 Mosipanin,Ashanti,2017,NA,NA,1,0,1,1,0,0,1,0,0,0,0,NA,NA
+Mountain Rural Community (Sierra Leone),NA,2025,8.8136287,-12.0911511,0,0,1,0,0,0,0,0,0,0,0,NA,NA
 Mpaem,Eastern,2014,6.158015,-0.337939,1,0,1,1,1,1,1,1,0,0,0,NA,NA
 Ntomem,Eastern,2012,6.5372,0.60592,1,0,1,1,0,0,0,0,0,0,0,NA,NA
 Nwawasua MA,Bono,2014,7.342513,-2.340941,1,0,1,1,0,0,0,0,0,0,0,NA,NA
