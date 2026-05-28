@@ -154,6 +154,26 @@ fix_school_name <- function(x) {
 }
 
 # ------------------------------------------------------------------
+# parse_sheet_date: handle BOTH text timestamps and Google Sheets serial
+# numbers.
+#   - Qualtrics' API writes dates as text, e.g. "2026-05-11 9:29:00".
+#   - Manually entered/pasted cells become real date VALUES, which
+#     googlesheets4 (reading with col_types = "c") returns as serial
+#     numbers like "46153.395" (days since 1899-12-30). Those fail normal
+#     parsing, so update_date becomes NA and the row silently drops out of
+#     the dashboard. This coalesces both forms into a proper datetime.
+# ------------------------------------------------------------------
+parse_sheet_date <- function(x, orders = c("Ymd HMS", "mdY HMS", "Ymd HM", "mdy HM")) {
+  parsed <- parse_date_time(x, orders = orders, quiet = TRUE)
+  serial <- suppressWarnings(as.numeric(x))
+  needs_serial <- is.na(parsed) & !is.na(serial)
+  parsed[needs_serial] <- as.POSIXct(
+    serial[needs_serial] * 86400, origin = "1899-12-30", tz = "UTC"
+  )
+  parsed
+}
+
+# ------------------------------------------------------------------
 # Quick Update — skip Qualtrics label row, clean names
 # ------------------------------------------------------------------
 clean_quick <- raw_quick |>
@@ -171,8 +191,7 @@ clean_quick <- raw_quick |>
   ) |>
   mutate(
     school_name  = fix_school_name(school_name),
-    visit_date   = parse_date_time(StartDate, orders = c("Ymd HMS", "mdY HMS", "Ymd HM", "mdy HM")),
-    visit_date   = as.Date(visit_date),
+    visit_date   = as.Date(parse_sheet_date(StartDate, orders = c("Ymd HMS", "mdY HMS", "Ymd HM", "mdy HM"))),
     # Replace "Other:" with the actual write-in text
     visit_reason = if_else(
       !is.na(Q3_6_TEXT) & Q3_6_TEXT != "",
@@ -202,8 +221,7 @@ clean_full <- raw_full |>
   ) |>
   mutate(
     school_name = fix_school_name(school_name),
-    update_date = parse_date_time(StartDate, orders = c("mdY HMS", "Ymd HMS", "mdY HM", "mdy HM")),
-    update_date = as.Date(update_date),
+    update_date = as.Date(parse_sheet_date(StartDate, orders = c("mdY HMS", "Ymd HMS", "mdY HM", "mdy HM"))),
     # Clean up "Other:" in recommended project types
     recommended_types = if_else(
       !is.na(recommended_other) & recommended_other != "",
@@ -258,7 +276,7 @@ clean_newproj <- raw_newproj |>
       TRUE ~ school_name
     ),
     school_name  = fix_school_name(school_name),
-    project_date = parse_date_time(StartDate, orders = c("mdY HMS", "Ymd HMS", "mdY HM")),
+    project_date = parse_sheet_date(StartDate, orders = c("mdY HMS", "Ymd HMS", "mdY HM")),
     project_date = as.Date(project_date)
   ) |>
   filter(!is.na(school_name) & school_name != "" & !school_name %in% ignore_names)
