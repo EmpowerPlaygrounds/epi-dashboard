@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 8,
+    "n_visits": 9,
     "n_responses": 207,
     "pct_lantern": 0.2415,
     "pct_library": 0.8261,
     "pct_menstrual": 0.5918,
     "pct_computers": 1,
-    "n_issues": 4
+    "n_issues": 5
   },
   "visits": [
     {
@@ -152,6 +152,27 @@
       "urgent_issues": "No",
       "observations": "School has reopened.",
       "visit_date": "2026-04-23"
+    },
+    {
+      "StartDate": "2026-06-01 4:36:28",
+      "Duration (in seconds)": "258",
+      "ResponseId": "R_0EwxBRZSsNgZyb4",
+      "LocationLatitude": "6.6816",
+      "LocationLongitude": "-1.6221",
+      "visitor": "Alex",
+      "school_name": "Attabui",
+      "visit_reason": "Computer Maintenance, Computer Training",
+      "activities": "Computer Maintenance, Computer Training",
+      "Q11": "One or more computers were not working/turning on",
+      "Q12": "Yes, it is all functioning",
+      "Q16": "Booting and connecting issues",
+      "Q17": "2",
+      "Q18": "No",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "N/A",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-06-01"
     }
   ],
   "full_update": [
