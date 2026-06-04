@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 10,
+    "n_visits": 11,
     "n_responses": 145,
     "pct_lantern": 0.5417,
     "pct_library": 0.1753,
     "pct_menstrual": 0.5143,
     "pct_computers": 1,
-    "n_issues": 1
+    "n_issues": 2
   },
   "visits": [
     {
@@ -161,6 +161,21 @@
       "doing_well": "They have improved on using the science kits. Also the use of the laboratory for extra support for students who wants to learn typing.",
       "observations": "I observe that some students volunteer to help clean the lab every day. \n\nSome students visit the lab at the free time, they chose to learn more whiles other students play.",
       "visit_date": "2026-05-25"
+    },
+    {
+      "StartDate": "2026-06-03 13:41:19",
+      "Duration (in seconds)": "158",
+      "ResponseId": "R_2TOerc4INHTjsQT",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "school_name": "Mpaem",
+      "visit_reason": "Full update",
+      "Q3_6_TEXT": "Full update",
+      "activities": "Full Update Survey",
+      "doing_well": "The school is doing well in academics and has improved on teaching and learning. They also have a great interest in all of EPI project in their school",
+      "urgent_issues": "Develop a separate charging station for the JHS",
+      "visit_date": "2026-06-03"
     }
   ],
   "full_update": [
@@ -3890,5 +3905,15 @@
       "school_name": "Mpaem"
     }
   ],
-  "issues": []
+  "issues": [
+    {
+      "school_name": "Mpaem",
+      "urgent_issues": "Develop a separate charging station for the JHS",
+      "visit_reason": "Full update",
+      "activities": "Full Update Survey",
+      "visit_date": "2026-06-03",
+      "visitor": "Richard",
+      "issue_id": "eecd2736d67f"
+    }
+  ]
 }

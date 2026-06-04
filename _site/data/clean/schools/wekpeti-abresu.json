@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 4,
+    "n_visits": 5,
     "n_responses": 146,
     "pct_lantern": 0.4863,
     "pct_library": 0.5278,
@@ -79,6 +79,20 @@
       "doing_well": "Well organized in academic work.",
       "observations": "Preparing for computer labs.",
       "visit_date": "2026-04-27"
+    },
+    {
+      "StartDate": "2026-06-03 13:31:58",
+      "Duration (in seconds)": "107",
+      "ResponseId": "R_7Fv2pWcSpq3qrgu",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "school_name": "Wekpeti Abresu",
+      "visit_reason": "New Project Preparation/Check In",
+      "activities": "New Project Preparation/Check In",
+      "doing_well": "Doing well in maintaining a smooth running of all our projects",
+      "observations": "The community has taken keen interest in making sure the school is doing well.",
+      "visit_date": "2026-06-03"
     }
   ],
   "full_update": [

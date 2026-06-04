@@ -16,7 +16,7 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 9,
+    "n_visits": 10,
     "n_responses": 197,
     "pct_lantern": 0.178,
     "pct_library": 0.7767,
@@ -157,6 +157,24 @@
       "Q19": "All of basic 8 students were present, 10 students from the upper primary. They demonstrated how the use of ICT can help in their lessons.",
       "doing_well": "Doing well in all our projects and keep good eye on them. Strong participation from school management and strong community support",
       "visit_date": "2026-05-22"
+    },
+    {
+      "StartDate": "2026-06-03 13:28:42",
+      "Duration (in seconds)": "193",
+      "ResponseId": "R_hBJag9CDueHe6iR",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "school_name": "Ekorso Akwadum",
+      "visit_reason": "Computer Maintenance",
+      "activities": "Computer Maintenance",
+      "Q11": "The RACHEL was not functioning, One or more computers were not working/turning on, Other:",
+      "Q11_5_TEXT": "Move the lab to new location",
+      "Q12": "No, I took the computer with me for it to be fixed, and will have to bring it back",
+      "Q14": "1",
+      "doing_well": "Maintaining the lab has been very exceptionally successful",
+      "observations": "We relocated the lab to new location, providing more space for the students",
+      "visit_date": "2026-06-03"
     }
   ],
   "full_update": [
