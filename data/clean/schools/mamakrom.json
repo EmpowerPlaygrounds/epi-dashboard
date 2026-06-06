@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 5,
+    "n_visits": 6,
     "n_responses": 165,
     "pct_lantern": 0.3152,
     "pct_library": 0.6774,
     "pct_menstrual": 0.4118,
     "pct_computers": 0,
-    "n_issues": 1
+    "n_issues": 2
   },
   "visits": [
     {
@@ -96,6 +96,29 @@
       "urgent_issues": "No",
       "observations": "None",
       "visit_date": "2026-01-22"
+    },
+    {
+      "StartDate": "2026-06-02 5:37:58",
+      "Duration (in seconds)": "152",
+      "ResponseId": "R_4boDeF2QFWtjBtg",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Peace, Akuvi",
+      "school_name": "Mamakrom",
+      "visit_reason": "MGR/Charging Maintenance, Lantern Replacement, Menstrual Kit Distribution",
+      "activities": "MGR/Charging Maintenance, Lantern Replacement, Menstrual Kit Distribution",
+      "Q5": "It wasn't spinning properly",
+      "Q6": "Yes, all problems were resolved",
+      "Q8": "Yes",
+      "Q9": "4",
+      "Q10": "Broken",
+      "Q20": "18",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "No",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-06-02"
     }
   ],
   "full_update": [
