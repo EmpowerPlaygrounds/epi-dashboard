@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 7,
+    "n_visits": 8,
     "n_responses": 80,
     "pct_lantern": 0.2875,
     "pct_library": 0,
     "pct_menstrual": 0.9259,
     "pct_computers": 0,
-    "n_issues": 4
+    "n_issues": 5
   },
   "visits": [
     {
@@ -137,6 +137,27 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-06-04"
+    },
+    {
+      "StartDate": "2026-06-11 4:35:51",
+      "Duration (in seconds)": "169",
+      "ResponseId": "R_hXFHm6qGXIN0y7g",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Isaac, Richard, Alex, Peace, Akuvi, Other:",
+      "Q1.5_6_TEXT": "Sanfords",
+      "school_name": "Madavunu",
+      "visit_reason": "New Project",
+      "activities": "Computer Training, GROW Project, New Project (specify):",
+      "Q16": "Practicing the science kits",
+      "Q17": "10",
+      "Q18": "No",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-06-11"
     }
   ],
   "full_update": [
