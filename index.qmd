@@ -16,7 +16,7 @@ library(htmltools)
 schools     <- read_csv(here("data", "clean", "schools.csv"), show_col_types = FALSE)
 visits      <- read_csv(here("data", "clean", "visits.csv"), show_col_types = FALSE)
 surveys     <- read_csv(here("data", "clean", "surveys.csv"), show_col_types = FALSE)
-issues      <- read_csv(here("data", "clean", "issues.csv"), show_col_types = FALSE)
+issues      <- read_csv(here("data", "clean", "issues_open.csv"), show_col_types = FALSE)
 new_projects <- read_csv(here("data", "clean", "new_projects.csv"), show_col_types = FALSE)
 full_updates <- read_csv(here("data", "clean", "full_updates.csv"), show_col_types = FALSE)
 
