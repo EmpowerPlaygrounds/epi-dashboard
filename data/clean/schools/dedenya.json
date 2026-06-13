@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 8,
+    "n_visits": 9,
     "n_responses": 50,
     "pct_lantern": 0,
     "pct_library": 0.12,
     "pct_menstrual": 0.3333,
     "pct_computers": 1,
-    "n_issues": 4
+    "n_issues": 5
   },
   "visits": [
     {
@@ -148,6 +148,27 @@
       "urgent_issues": "No",
       "observations": "The grow project had started well",
       "visit_date": "2026-05-18"
+    },
+    {
+      "StartDate": "2026-06-12 7:18:01",
+      "Duration (in seconds)": "264",
+      "ResponseId": "R_dgsoklgU9nSMZGG",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Richard, Alex, Peace, Akuvi, Other:",
+      "Q1.5_6_TEXT": "Kwame",
+      "school_name": "Dedenya",
+      "visit_reason": "Computer Maintenance, Menstrual Kit Distribution",
+      "activities": "Computer Maintenance, Menstrual Kit Distribution",
+      "Q11": "One or more computers were not working/turning on",
+      "Q12": "Yes, it is all functioning",
+      "Q20": "43",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-06-12"
     }
   ],
   "full_update": [

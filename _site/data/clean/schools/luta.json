@@ -16,13 +16,13 @@
     "Solar Power": 0,
     "Biofill Toilets": 0,
     "Light a Village": 0,
-    "n_visits": 8,
+    "n_visits": 9,
     "n_responses": 71,
     "pct_lantern": 0.1143,
     "pct_library": 0.3443,
     "pct_menstrual": 0.4211,
     "pct_computers": 1,
-    "n_issues": 3
+    "n_issues": 4
   },
   "visits": [
     {
@@ -142,6 +142,25 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-05-19"
+    },
+    {
+      "StartDate": "2026-06-11 6:44:20",
+      "Duration (in seconds)": "334",
+      "ResponseId": "R_cquOI76wrOogELQ",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Richard",
+      "school_name": "Luta",
+      "visit_reason": "Routine Visit, Computer Maintenance",
+      "activities": "Routine Visit, Computer Maintenance",
+      "Q11": "One or more computers were not working/turning on",
+      "Q12": "Yes, it is all functioning",
+      "doing_well": "They are doing well our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "The teachers are happy with the star link installed by empowerplaygrounds in the school and how it has help with teaching and learning",
+      "visit_date": "2026-06-11"
     }
   ],
   "full_update": [
