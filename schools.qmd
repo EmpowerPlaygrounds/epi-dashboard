@@ -312,7 +312,9 @@ function renderSchoolContent(slug, data) {
     "Boreholes": "Boreholes",
     "Solar Power": "Solar Power",
     "Biofill Toilets": "Biofill Toilets",
-    "Light a Village": "Light a Village"
+    "Light a Village": "Light a Village",
+    "Starlink": "Starlink",
+    "GROW Project": "GROW Project"
   };
   var progHtml = Object.keys(programMap)
     .filter(function(key) { return info[key] == 1; })

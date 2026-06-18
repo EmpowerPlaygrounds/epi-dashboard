@@ -60,6 +60,7 @@ schools_json <- schools |>
          MGR, `Non-Generating MGR`, `Feminine Hygiene Kits`, `Science Kits`,
          Library, Computer, `Construction Projects`, Boreholes,
          `Solar Power`, `Biofill Toilets`, `Light a Village`,
+         Starlink, `GROW Project`,
          n_visits, n_responses, n_issues) |>
   toJSON(auto_unbox = TRUE)
 
@@ -240,7 +241,9 @@ function renderDashboard() {
     { key: 'Boreholes', label: 'Boreholes' },
     { key: 'Solar Power', label: 'Solar Power' },
     { key: 'Biofill Toilets', label: 'Biofill Toilets' },
-    { key: 'Light a Village', label: 'Light a Village' }
+    { key: 'Light a Village', label: 'Light a Village' },
+    { key: 'Starlink', label: 'Starlink' },
+    { key: 'GROW Project', label: 'GROW Project' }
   ];
 
   var barsHtml = '';
