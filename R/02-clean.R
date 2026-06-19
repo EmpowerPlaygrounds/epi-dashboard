@@ -72,6 +72,7 @@ name_fixes <- c(
   "Kpala"                      = "Kpala Government",
 
   # --- Longer/shorter formal name variants ---
+  "Apaah DA Basic School"            = "Apaah",
   "Adorkope"                         = "Ador Kope R/C Primary",
   "Ador Kope"                        = "Ador Kope R/C Primary",
   "Afransua Dedewa"                  = "Afransua Dedewa MA Primary",
@@ -259,7 +260,14 @@ clean_student <- raw_student |>
 # ------------------------------------------------------------------
 # New Project Survey — skip label row, clean school + project names
 # ------------------------------------------------------------------
-clean_newproj <- raw_newproj |>
+# Helper: split a list cell (comma- or newline-separated) into clean names
+split_schools <- function(x) {
+  if (length(x) == 0 || is.na(x) || x == "") return(character(0))
+  parts <- str_trim(str_split(x, "[,\n]+")[[1]])
+  parts[parts != ""]
+}
+
+clean_newproj_base <- raw_newproj |>
   slice(-1) |>
   rename(
     visitor       = `1`,
@@ -278,8 +286,33 @@ clean_newproj <- raw_newproj |>
     school_name  = fix_school_name(school_name),
     project_date = parse_sheet_date(StartDate, orders = c("mdY HMS", "Ymd HMS", "mdY HM")),
     project_date = as.Date(project_date)
-  ) |>
+  )
+
+# Single-school projects: each tied to one school via the School Name field
+single_proj <- clean_newproj_base |>
   filter(!is.na(school_name) & school_name != "" & !school_name %in% ignore_names)
+
+# Multi-school events (e.g. Empower STEM Day) record participating schools in
+# list columns instead of the single School Name field, so they'd otherwise be
+# dropped. Expand each into one row per participating school. For STEM Day:
+#   `57` = participating EPI schools (comma-separated)
+#   `56` = participating non-EPI schools (one per line)
+stem_rows <- clean_newproj_base |>
+  filter((is.na(school_name) | school_name == ""),
+         str_detect(coalesce(project_type, ""), regex("STEM", ignore_case = TRUE)))
+
+if (nrow(stem_rows) > 0) {
+  stem_expanded <- stem_rows |>
+    mutate(.participants = map2(`57`, `56`, ~ unique(c(split_schools(.x), split_schools(.y))))) |>
+    select(-school_name) |>
+    unnest_longer(.participants, values_to = "school_name") |>
+    mutate(school_name = fix_school_name(school_name)) |>
+    filter(!is.na(school_name) & school_name != "" & !school_name %in% ignore_names)
+} else {
+  stem_expanded <- single_proj[0, ]
+}
+
+clean_newproj <- bind_rows(single_proj, stem_expanded)
 
 # ------------------------------------------------------------------
 # Diagnostic: report any school names that don't match canonical list
