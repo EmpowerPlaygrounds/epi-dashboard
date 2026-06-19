@@ -339,10 +339,9 @@ function makeRecCard(r) {
   }
   html += \'</div>\';
 
-  // MGR swap
-  if (r.recommend_mgr_swap && r.recommend_mgr_swap !== "NA" && r.recommend_mgr_swap !== "") {
-    var swapColor = r.recommend_mgr_swap === "Yes" ? "#dc3545" : "#6c757d";
-    html += \'<p style="margin:0.35rem 0 0; font-size:0.85rem;"><span style="display:inline-block; background:#fff3cd; color:#856404; border:1px solid #ffc107; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600;">MGR Swap: \' + r.recommend_mgr_swap + \'</span></p>\';
+  // MGR swap — only show the badge when a swap is actually recommended
+  if (r.recommend_mgr_swap === "Yes") {
+    html += \'<p style="margin:0.35rem 0 0; font-size:0.85rem;"><span style="display:inline-block; background:#fff3cd; color:#856404; border:1px solid #ffc107; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600;">MGR Swap: Yes</span></p>\';
   }
 
   // Visitor
