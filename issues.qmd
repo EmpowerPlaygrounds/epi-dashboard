@@ -56,6 +56,12 @@ htmltools::HTML(paste0(
 
 <!-- Resolved Issues -->
 <h2>Resolved Issues</h2>
+<div id="resolved-controls" style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom:1rem;">
+  <label for="resolved-school-filter" style="font-weight:600; color:var(--epi-navy); font-size:0.85rem;">Filter by school:</label>
+  <select id="resolved-school-filter" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem; max-width:240px;">
+    <option value="">All schools</option>
+  </select>
+</div>
 <div id="resolved-issues-container"></div>
 
 <!-- Resolve Modal -->
@@ -123,6 +129,67 @@ function sortByDateDesc(a, b) {
   return (a.school_name || "").localeCompare(b.school_name || "");
 }
 
+// Resolved issues: show a short preview by default, with a "Show all" toggle,
+// plus a per-school filter so the list stays manageable as it grows.
+var RESOLVED_PREVIEW_COUNT = 5;
+var resolvedShowAll = false;
+
+function populateResolvedFilter() {
+  var sel = document.getElementById("resolved-school-filter");
+  if (!sel) return;
+  var current = sel.value;
+  var names = {};
+  RESOLVED_ISSUES.forEach(function(i) { if (i.school_name) names[i.school_name] = true; });
+  var sorted = Object.keys(names).sort(function(a, b) { return a.localeCompare(b); });
+  sel.innerHTML = \'<option value="">All schools</option>\';
+  sorted.forEach(function(n) {
+    var o = document.createElement("option");
+    o.value = n;
+    o.textContent = n;
+    sel.appendChild(o);
+  });
+  sel.value = current;
+}
+
+function renderResolved() {
+  var container = document.getElementById("resolved-issues-container");
+  var sel = document.getElementById("resolved-school-filter");
+  var schoolFilter = sel ? sel.value : "";
+
+  var list = RESOLVED_ISSUES.slice().sort(sortByDateDesc);
+  if (schoolFilter) {
+    list = list.filter(function(i) { return i.school_name === schoolFilter; });
+  }
+
+  if (list.length === 0) {
+    var emptyMsg = schoolFilter ? "No resolved issues for this school." : "No resolved issues yet.";
+    container.innerHTML = \'<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#999; font-style:italic; margin:0;">\' + emptyMsg + \'</p></div>\';
+    return;
+  }
+
+  // Limit the preview only when viewing all schools and not expanded
+  var limited = (!schoolFilter && !resolvedShowAll && list.length > RESOLVED_PREVIEW_COUNT);
+  var shown = limited ? list.slice(0, RESOLVED_PREVIEW_COUNT) : list;
+
+  var html = "";
+  shown.forEach(function(issue) { html += makeIssueCard(issue, true); });
+
+  if (!schoolFilter && list.length > RESOLVED_PREVIEW_COUNT) {
+    var label = resolvedShowAll ? "Show fewer" : ("Show all (" + list.length + ")");
+    html += \'<button id="btn-toggle-resolved" style="background:#fff; color:var(--epi-navy); border:1px solid var(--epi-navy); border-radius:4px; padding:0.5rem 1.25rem; font-size:0.85rem; cursor:pointer; font-weight:600;">\' + label + \'</button>\';
+  }
+
+  container.innerHTML = html;
+
+  var btn = document.getElementById("btn-toggle-resolved");
+  if (btn) {
+    btn.addEventListener("click", function() {
+      resolvedShowAll = !resolvedShowAll;
+      renderResolved();
+    });
+  }
+}
+
 function renderIssues() {
   var openHtml = "";
   if (OPEN_ISSUES.length === 0) {
@@ -134,15 +201,8 @@ function renderIssues() {
   }
   document.getElementById("open-issues-container").innerHTML = openHtml;
 
-  var resolvedHtml = "";
-  if (RESOLVED_ISSUES.length === 0) {
-    resolvedHtml = \'<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#999; font-style:italic; margin:0;">No resolved issues yet.</p></div>\';
-  } else {
-    RESOLVED_ISSUES.slice().sort(sortByDateDesc).forEach(function(issue) {
-      resolvedHtml += makeIssueCard(issue, true);
-    });
-  }
-  document.getElementById("resolved-issues-container").innerHTML = resolvedHtml;
+  populateResolvedFilter();
+  renderResolved();
 
   document.getElementById("stat-open").textContent = OPEN_ISSUES.length;
   document.getElementById("stat-resolved").textContent = RESOLVED_ISSUES.length;
@@ -242,7 +302,16 @@ function showToast(message) {
 }
 
 // Initial render
-document.addEventListener("DOMContentLoaded", renderIssues);
+document.addEventListener("DOMContentLoaded", function() {
+  renderIssues();
+  var sel = document.getElementById("resolved-school-filter");
+  if (sel) {
+    sel.addEventListener("change", function() {
+      resolvedShowAll = false;
+      renderResolved();
+    });
+  }
+});
 </script>
 '))
 ```
