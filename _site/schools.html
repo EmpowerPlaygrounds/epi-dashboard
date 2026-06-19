@@ -449,9 +449,9 @@ function renderSchoolContent(slug, data) {
   var schoolEncoded = encodeURIComponent(info.school_name);
   cards += '<a href="visits.html?school=' + schoolEncoded + '&tab=visit-log" style="text-decoration:none; cursor:pointer; transition:transform 0.15s;" class="stat-card-link">' + makeCard(visits.length, "Visit(s) in Range", ICONS.visits) + '</a>';
   var openIssuesList = data.open_issues || [];
-  if (info.n_issues > 0) {
-    var issueAnchor = openIssuesList.length > 0 && openIssuesList[0].issue_id ? "#issue-" + openIssuesList[0].issue_id : "";
-    cards += '<a href="issues.html' + issueAnchor + '" style="text-decoration:none; cursor:pointer; transition:transform 0.15s;" class="stat-card-link">' + makeCard(info.n_issues, "Open Issues", ICONS.issues) + '</a>';
+  if (openIssuesList.length > 0) {
+    var issueAnchor = openIssuesList[0].issue_id ? "#issue-" + openIssuesList[0].issue_id : "";
+    cards += '<a href="issues.html' + issueAnchor + '" style="text-decoration:none; cursor:pointer; transition:transform 0.15s;" class="stat-card-link">' + makeCard(openIssuesList.length, "Open Issues", ICONS.issues) + '</a>';
   }
   document.getElementById("info-cards").innerHTML = cards;
 
