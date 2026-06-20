@@ -174,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
   <label style="font-weight:600; color:var(--epi-navy);">Date Range:</label>
   <input type="date" id="date-start" value="2025-08-01" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
   <span>to</span>
-  <input type="date" id="date-end" value="2026-06-19" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
+  <input type="date" id="date-end" value="2026-06-20" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
   <select id="type-filter" style="padding:0.35rem 0.5rem; border:1px solid #ccc; border-radius:4px; max-width:220px;">
     <option value="">All Project Types</option>
   </select>
@@ -193,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
     <label style="font-weight:600; color:var(--epi-navy);">Date Range:</label>
     <input type="date" id="rec-date-start" value="2025-08-01" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
     <span>to</span>
-    <input type="date" id="rec-date-end" value="2026-06-19" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
+    <input type="date" id="rec-date-end" value="2026-06-20" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
     <select id="rec-filter" style="padding:0.35rem 0.5rem; border:1px solid #ccc; border-radius:4px; max-width:220px;">
       <option value="">All Recommendations</option>
       <option value="Yes">Recommended</option>
@@ -381,10 +381,9 @@ function makeRecCard(r) {
   }
   html += '</div>';
 
-  // MGR swap
-  if (r.recommend_mgr_swap && r.recommend_mgr_swap !== "NA" && r.recommend_mgr_swap !== "") {
-    var swapColor = r.recommend_mgr_swap === "Yes" ? "#dc3545" : "#6c757d";
-    html += '<p style="margin:0.35rem 0 0; font-size:0.85rem;"><span style="display:inline-block; background:#fff3cd; color:#856404; border:1px solid #ffc107; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600;">MGR Swap: ' + r.recommend_mgr_swap + '</span></p>';
+  // MGR swap — only show the badge when a swap is actually recommended
+  if (r.recommend_mgr_swap === "Yes") {
+    html += '<p style="margin:0.35rem 0 0; font-size:0.85rem;"><span style="display:inline-block; background:#fff3cd; color:#856404; border:1px solid #ffc107; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600;">MGR Swap: Yes</span></p>';
   }
 
   // Visitor
