@@ -18,7 +18,7 @@
     "Light a Village": 0,
     "Starlink": 0,
     "GROW Project": 1,
-    "n_visits": 9,
+    "n_visits": 10,
     "n_responses": 50,
     "pct_lantern": 0,
     "pct_library": 0.12,
@@ -170,6 +170,22 @@
       "struggles": "None",
       "urgent_issues": "No",
       "observations": "No",
+      "visit_date": "2026-06-12"
+    },
+    {
+      "StartDate": "2026-06-12 4:07:06",
+      "Duration (in seconds)": "96",
+      "ResponseId": "R_byvy9baCWltpSEA",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Isaac, Richard, Alex, Peace, Akuvi",
+      "school_name": "Dedenya",
+      "visit_reason": "Menstrual Kit Distribution",
+      "activities": "Routine Visit, Menstrual Kit Distribution",
+      "Q20": "34",
+      "doing_well": "Doing well in all programs",
+      "struggles": "More commitment from headmistress",
       "visit_date": "2026-06-12"
     }
   ],

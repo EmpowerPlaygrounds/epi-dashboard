@@ -18,7 +18,7 @@
     "Light a Village": 0,
     "Starlink": 0,
     "GROW Project": 0,
-    "n_visits": 6,
+    "n_visits": 7,
     "n_responses": 146,
     "pct_lantern": 0.6027,
     "pct_library": 0.1132,
@@ -101,6 +101,20 @@
       "struggles": "Enrollment",
       "observations": "Preparing for the building of the computer lab.",
       "visit_date": "2026-04-27"
+    },
+    {
+      "StartDate": "2026-06-22 5:03:56",
+      "Duration (in seconds)": "183",
+      "ResponseId": "R_gVVgU2p6uItDBxZ",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "school_name": "Abrenya",
+      "visit_reason": "New Project Preparation/Check In",
+      "activities": "New Project Preparation/Check In",
+      "doing_well": "Most of our programs are being of monitored very well and that’s something the school does well.",
+      "struggles": "The use of science kits.",
+      "visit_date": "2026-06-22"
     }
   ],
   "full_update": [

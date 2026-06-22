@@ -18,7 +18,7 @@
     "Light a Village": 0,
     "Starlink": 0,
     "GROW Project": 1,
-    "n_visits": 8,
+    "n_visits": 9,
     "n_responses": 80,
     "pct_lantern": 0.2875,
     "pct_library": 0,
@@ -160,6 +160,27 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-06-11"
+    },
+    {
+      "StartDate": "2026-06-12 4:08:45",
+      "Duration (in seconds)": "100",
+      "ResponseId": "R_23DRzKpwJMTJBPh",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Richard",
+      "Q1.5": "Richard, Alex, Peace, Akuvi",
+      "school_name": "Madavunu",
+      "visit_reason": "Science Kit Training/Distribution",
+      "activities": "Computer Training, Science Kit Training/Distribution",
+      "Q16": "Introducing more Science kits for the school",
+      "Q17": "10",
+      "Q18": "Yes",
+      "Q19": "All of the basic 8 class",
+      "Q21": "Yes",
+      "Q22": "4",
+      "Q23": "Yes",
+      "Q24": "10",
+      "visit_date": "2026-06-12"
     }
   ],
   "full_update": [
