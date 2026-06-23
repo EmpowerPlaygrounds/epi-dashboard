@@ -18,13 +18,13 @@
     "Light a Village": 0,
     "Starlink": 0,
     "GROW Project": 0,
-    "n_visits": 10,
+    "n_visits": 11,
     "n_responses": 105,
     "pct_lantern": 0.7905,
     "pct_library": 0.5965,
     "pct_menstrual": 0.4762,
     "pct_computers": 0,
-    "n_issues": 2
+    "n_issues": 3
   },
   "visits": [
     {
@@ -161,6 +161,28 @@
       "urgent_issues": "No",
       "observations": "There was an ongoing PTA meeting in the school at the time of my visit, part of the discussions was reminding  parents to always allow their children to meet and study together using the lanterns provided by empowerplaygrounds, some parents also express their appreciation to empowerplaygrounds.",
       "visit_date": "2026-05-20"
+    },
+    {
+      "StartDate": "2026-06-16 4:24:59",
+      "Duration (in seconds)": "195",
+      "ResponseId": "R_i2oOlqVPUXY45ZJ",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Peace, Other:",
+      "Q1.5_6_TEXT": "Kwame",
+      "school_name": "Nyapienya",
+      "visit_reason": "Routine Visit, MGR/Charging Maintenance, Menstrual Kit Distribution",
+      "activities": "MGR/Charging Maintenance, Menstrual Kit Distribution",
+      "Q5": "The charging station/solar needed to be fixed",
+      "Q6": "Yes, all problems were resolved",
+      "Q6.5": "No",
+      "Q20": "7",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-06-16"
     }
   ],
   "full_update": [
