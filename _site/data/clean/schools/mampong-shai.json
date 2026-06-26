@@ -18,13 +18,13 @@
     "Light a Village": 0,
     "Starlink": 0,
     "GROW Project": 0,
-    "n_visits": 5,
+    "n_visits": 6,
     "n_responses": 141,
     "pct_lantern": 0.0426,
     "pct_library": 0.3607,
     "pct_menstrual": 0.6842,
     "pct_computers": 0,
-    "n_issues": 3
+    "n_issues": 4
   },
   "visits": [
     {
@@ -106,6 +106,24 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-05-18"
+    },
+    {
+      "StartDate": "2026-06-25 5:40:01",
+      "Duration (in seconds)": "150",
+      "ResponseId": "R_9fk8XTOOjVNjt8Y",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Peace",
+      "school_name": "Mampong Shai",
+      "visit_reason": "Menstrual Kit Distribution",
+      "activities": "Routine Visit, Menstrual Kit Distribution",
+      "Q20": "22",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-06-25"
     }
   ],
   "full_update": [
