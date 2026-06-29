@@ -31,3 +31,8 @@ format:
     theme: cosmo
     css: styles.css
     toc: false
+    include-in-header:
+      # Vercel Web Analytics (static-site method). Only active when served
+      # from Vercel with Web Analytics enabled; harmless everywhere else.
+      text: |
+        <script defer src="/_vercel/insights/script.js"></script>
