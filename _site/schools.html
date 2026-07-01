@@ -536,10 +536,12 @@ function renderSchoolContent(slug, data) {
     // Last year stats — compute actual year label from school year
     var hasLastYear = latestUpdate.Q9 || latestUpdate.Q12 || latestUpdate.Q13 || (latestUpdate.Q15 && latestUpdate.Q15 !== "N/A");
     if (hasLastYear) {
-      // Determine the "previous year" based on the date range start
-      var startDate = new Date(start + "T00:00:00");
-      var syStartYear = startDate.getMonth() >= 7 ? startDate.getFullYear() : startDate.getFullYear() - 1;
-      var prevYearLabel = "in " + syStartYear;
+      // Base the year on the survey itself: academic outcomes are reported
+      // for the year before the update was taken (e.g. a 2023 update reports
+      // 2022 outcomes). Falls back gracefully if no date is available.
+      var surveyDateStr = latestUpdate.update_date || latestUpdate.StartDate || "";
+      var surveyYear = parseInt(String(surveyDateStr).slice(0, 4), 10);
+      var prevYearLabel = !isNaN(surveyYear) ? "in " + (surveyYear - 1) : "";
       details += '<h5 style="margin:1.25rem 0 0.5rem; color:var(--epi-navy); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.05em; border-top:1px solid #e9ecef; padding-top:1rem;">Academic Outcomes ' + prevYearLabel + '</h5>';
       details += '<table class="dashboard-table">';
       if (latestUpdate.Q9) details += "<tr><td style=\"font-weight:600; width:250px;\">Completed Primary to JHS</td><td>" + latestUpdate.Q9 + " students</td></tr>";
