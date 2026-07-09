@@ -23,6 +23,8 @@ website:
         text: Student Surveys
       - href: new-projects.qmd
         text: New Projects
+      - href: impact.qmd
+        text: Impact
       - href: issues.qmd
         text: Issues
 

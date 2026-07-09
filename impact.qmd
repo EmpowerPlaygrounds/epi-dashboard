@@ -1,0 +1,123 @@
+---
+title: "Impact"
+format:
+  html:
+    toc: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(jsonlite)
+library(here)
+
+items <- if (file.exists(here("data", "clean", "items_distributed.csv"))) {
+  read_csv(here("data", "clean", "items_distributed.csv"), show_col_types = FALSE)
+} else {
+  tibble(school_name = character(), project_date = character(), item_key = character(),
+         item_label = character(), group = character(), quantity = numeric())
+}
+
+# Date range default: current school year (Aug 1 – Jul 31)
+school_year_start <- if (as.integer(format(Sys.Date(), "%m")) >= 8) {
+  paste0(format(Sys.Date(), "%Y"), "-08-01")
+} else {
+  paste0(as.integer(format(Sys.Date(), "%Y")) - 1, "-08-01")
+}
+date_min <- school_year_start
+date_max <- as.character(Sys.Date())
+
+items_json_data <- items |>
+  transmute(
+    project_date = as.character(project_date),
+    item_key, item_label, group,
+    quantity = as.numeric(quantity)
+  )
+items_json <- toJSON(items_json_data, auto_unbox = TRUE, na = "null")
+```
+
+```{r}
+#| echo: false
+htmltools::HTML(paste0(
+'<p style="color:#666; font-size:0.95rem; margin-bottom:1.25rem;">Items EPI has distributed and built across all schools during the selected date range.</p>
+
+<!-- Date range bar -->
+<div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">
+  <label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>
+  <input type="date" id="imp-date-start" value="', date_min, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+  <span style="color:#999;">to</span>
+  <input type="date" id="imp-date-end" value="', date_max, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+  <button id="btn-imp-apply" style="background:var(--epi-navy); color:#fff; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Apply</button>
+  <button id="btn-imp-reset" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer;">Reset</button>
+</div>
+
+<div id="impact-empty" style="display:none; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#999; font-style:italic; margin:0;">No items recorded in this date range.</p></div>
+
+<h3 id="head-distributed" style="color:var(--epi-navy); font-size:1.05rem; margin:0.5rem 0 0.75rem;">Distributed</h3>
+<div id="tiles-distributed" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem; margin-bottom:1.75rem;"></div>
+
+<h3 id="head-built" style="color:var(--epi-navy); font-size:1.05rem; margin:0.5rem 0 0.75rem;">Built &amp; Installed</h3>
+<div id="tiles-built" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem; margin-bottom:1.5rem;"></div>
+
+<script>
+var ITEMS = ', items_json, ';
+
+// Display order within each group (items with 0 in the range are hidden)
+var DIST_ORDER  = ["lanterns", "science_kits", "menstrual_kits", "computers", "solar_panels", "library_books", "lantern_groups", "rooms", "toilets"];
+var BUILT_ORDER = ["mgr_generating", "mgr_nongenerating", "construction", "borehole", "starlink", "rachel", "library", "grow"];
+
+function inRange(dateStr, start, end) {
+  if (!dateStr) return false;
+  var d = dateStr.slice(0, 10);
+  return d >= start && d <= end;
+}
+
+function tile(label, value) {
+  return \'<div style="background:#fff; border-radius:8px; padding:1.25rem 1rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;">\'
+    + \'<span style="font-size:2rem; font-weight:700; color:var(--epi-navy); display:block; line-height:1.1;">\' + value.toLocaleString() + \'</span>\'
+    + \'<span style="color:#666; font-size:0.85rem;">\' + label + \'</span></div>\';
+}
+
+function renderImpact() {
+  var start = document.getElementById("imp-date-start").value;
+  var end   = document.getElementById("imp-date-end").value;
+
+  var filtered = ITEMS.filter(function(it) { return inRange(it.project_date, start, end); });
+
+  var totals = {}, labels = {};
+  filtered.forEach(function(it) {
+    totals[it.item_key] = (totals[it.item_key] || 0) + Number(it.quantity || 0);
+    labels[it.item_key] = it.item_label;
+  });
+
+  function renderGroup(order, containerId) {
+    var html = "";
+    order.forEach(function(key) {
+      if (totals[key] > 0) html += tile(labels[key] || key, totals[key]);
+    });
+    document.getElementById(containerId).innerHTML = html;
+    return html !== "";
+  }
+
+  var anyD = renderGroup(DIST_ORDER, "tiles-distributed");
+  var anyB = renderGroup(BUILT_ORDER, "tiles-built");
+
+  document.getElementById("head-distributed").style.display = anyD ? "block" : "none";
+  document.getElementById("head-built").style.display = anyB ? "block" : "none";
+  document.getElementById("impact-empty").style.display = (!anyD && !anyB) ? "block" : "none";
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  renderImpact();
+  document.getElementById("btn-imp-apply").addEventListener("click", renderImpact);
+  document.getElementById("btn-imp-reset").addEventListener("click", function() {
+    var now = new Date();
+    var syYear = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
+    document.getElementById("imp-date-start").value = syYear + "-08-01";
+    document.getElementById("imp-date-end").value = now.toISOString().slice(0, 10);
+    renderImpact();
+  });
+});
+</script>
+'))
+```

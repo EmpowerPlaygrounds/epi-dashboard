@@ -32,6 +32,90 @@ recommended_projects <- clean_full |>
 
 write_csv(recommended_projects, here("data", "clean", "recommended_projects.csv"))
 
+# ------------------------------------------------------------------
+# Items distributed & built — tidy long table for the Impact page.
+# Derived from New Project entries. Two shapes:
+#   * counted items   -> sum a quantity column
+#   * occurrence items -> each matching install counts as 1
+# Multi-school events (e.g. STEM Day) carry no item quantities and match
+# no occurrence pattern, so they contribute nothing here.
+# ------------------------------------------------------------------
+np <- clean_newproj
+
+# Safe numeric accessor (a column may be absent in some survey versions)
+num_col <- function(df, code) {
+  if (code %in% names(df)) suppressWarnings(as.numeric(df[[code]])) else rep(NA_real_, nrow(df))
+}
+
+items_counted <- tibble(
+  school_name    = np$school_name,
+  project_date   = np$project_date,
+  lanterns       = rowSums(cbind(num_col(np, "12_1"), num_col(np, "26_1")), na.rm = TRUE),
+  lantern_groups = num_col(np, "13"),
+  computers      = num_col(np, "17_1"),
+  solar_panels   = num_col(np, "28"),
+  rooms          = num_col(np, "30"),
+  science_kits   = num_col(np, "33_1"),
+  menstrual_kits = num_col(np, "36"),
+  library_books  = num_col(np, "43"),
+  toilets        = num_col(np, "65_1")
+) |>
+  pivot_longer(-c(school_name, project_date), names_to = "item_key", values_to = "quantity") |>
+  filter(!is.na(quantity) & quantity > 0) |>
+  mutate(group = "distributed")
+
+# Occurrence items: match the exact project_type option (multi-select, comma-
+# joined). "Non-Generating MGR" is matched by its own string; the generating
+# one uses "Electricity Generating MGR" so it never matches the non-gen option.
+occ_defs <- tribble(
+  ~item_key,           ~pattern,
+  "mgr_generating",    "Electricity Generating MGR",
+  "mgr_nongenerating", "Non-Generating MGR",
+  "borehole",          "Borehole",
+  "starlink",          "Starlink",
+  "rachel",            "RACHEL",
+  "library",           "Library",
+  "grow",              "GROW Project",
+  "construction",      "Building Construction"
+)
+
+items_occurrence <- map_dfr(seq_len(nrow(occ_defs)), function(i) {
+  d <- occ_defs[i, ]
+  np |>
+    filter(str_detect(coalesce(project_type, ""), fixed(d$pattern))) |>
+    transmute(school_name, project_date, item_key = d$item_key, quantity = 1, group = "built")
+})
+
+item_labels <- tribble(
+  ~item_key,           ~item_label,
+  "lanterns",          "Lanterns",
+  "lantern_groups",    "Lantern Groups",
+  "computers",         "Computers",
+  "solar_panels",      "Solar Panels",
+  "rooms",             "Classroom Rooms",
+  "science_kits",      "Science Kits",
+  "menstrual_kits",    "Menstrual Kits",
+  "library_books",     "Library Books",
+  "toilets",           "Biofil Toilets",
+  "mgr_generating",    "Generating MGRs",
+  "mgr_nongenerating", "Non-Generating MGRs",
+  "borehole",          "Boreholes",
+  "starlink",          "Starlink",
+  "rachel",            "RACHEL Devices",
+  "library",           "Libraries",
+  "grow",              "GROW Projects",
+  "construction",      "Classroom Blocks"
+)
+
+items_distributed <- bind_rows(items_counted, items_occurrence) |>
+  filter(!is.na(school_name) & school_name != "") |>
+  left_join(item_labels, by = "item_key") |>
+  mutate(project_date = as.character(project_date)) |>
+  select(school_name, project_date, item_key, item_label, group, quantity) |>
+  arrange(desc(project_date))
+
+write_csv(items_distributed, here("data", "clean", "items_distributed.csv"))
+
 # Issues: extract urgent issues from visit data (exclude No/None/N/A)
 issues <- clean_quick |>
   filter(!is.na(urgent_issues) & urgent_issues != "") |>
