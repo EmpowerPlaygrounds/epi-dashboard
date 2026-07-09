@@ -92,7 +92,7 @@ item_labels <- tribble(
   "lantern_groups",    "Lantern Groups",
   "computers",         "Computers",
   "solar_panels",      "Solar Panels",
-  "rooms",             "Classroom Rooms",
+  "rooms",             "Classrooms",
   "science_kits",      "Science Kits",
   "menstrual_kits",    "Menstrual Kits",
   "library_books",     "Library Books",
