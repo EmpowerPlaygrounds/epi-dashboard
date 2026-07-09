@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Impact – EPI Data Dashboard</title>
+<title>Results – EPI Data Dashboard</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -118,8 +118,8 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">New Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./impact.html" aria-current="page"> 
-<span class="menu-text">Impact</span></a>
+    <a class="nav-link active" href="./results.html" aria-current="page"> 
+<span class="menu-text">Results</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./issues.html"> 
@@ -142,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Impact</h1>
+<h1 class="title">Results</h1>
 </div>
 
 
@@ -161,9 +161,21 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="cell">
 <div class="cell-output-display">
-<p style="color:#666; font-size:0.95rem; margin-bottom:1.25rem;">Items EPI has distributed and built across all schools during the selected date range.</p>
+<!-- ── Reach ─────────────────────────────────────────────────────── -->
+<h3 style="color:var(--epi-navy); font-size:1.15rem; margin:0.25rem 0 0.9rem;" class="anchored">Reach</h3>
+<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:2rem;">
+  <div style="display:flex; align-items:baseline; gap:0.5rem; margin-bottom:1rem;">
+    <span style="font-size:2.5rem; font-weight:700; color:var(--epi-navy); line-height:1;">78</span>
+    <span style="color:#666; font-size:0.95rem;">schools served to date</span>
+  </div>
+  <p style="color:#999; font-size:0.8rem; margin:0 0 0.75rem;">Schools EPI has worked in, cumulative by year (once we start in a school, we stay)</p>
+  <div style="position:relative; height:280px;"><canvas id="reach-chart"></canvas></div>
+</div>
 
-<!-- Date range bar -->
+<!-- ── Outputs ───────────────────────────────────────────────────── -->
+<h3 style="color:var(--epi-navy); font-size:1.15rem; margin:0.5rem 0 0.75rem;" class="anchored">Outputs</h3>
+<p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">Items EPI has distributed and built during the selected date range.</p>
+
 <div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">
   <label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>
   <input type="date" id="imp-date-start" value="2025-08-01" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
@@ -175,18 +187,15 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="impact-empty" style="display:none; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#999; font-style:italic; margin:0;">No items recorded in this date range.</p></div>
 
-<h3 id="head-distributed" style="color:var(--epi-navy); font-size:1.05rem; margin:0.5rem 0 0.75rem;" class="anchored">Distributed</h3>
-<div id="tiles-distributed" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem; margin-bottom:1.75rem;"></div>
+<div id="tiles-all" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem; margin-bottom:1.5rem;"></div>
 
-<h3 id="head-built" style="color:var(--epi-navy); font-size:1.05rem; margin:0.5rem 0 0.75rem;" class="anchored">Built &amp; Installed</h3>
-<div id="tiles-built" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem; margin-bottom:1.5rem;"></div>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-var ITEMS = [{"project_date":"2026-06-18","item_key":"borehole","item_label":"Boreholes","group":"built","quantity":1},{"project_date":"2026-06-11","item_key":"computers","item_label":"Computers","group":"distributed","quantity":10},{"project_date":"2026-06-11","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":2000},{"project_date":"2026-06-11","item_key":"rachel","item_label":"RACHEL Devices","group":"built","quantity":1},{"project_date":"2026-06-11","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-06-11","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-06-05","item_key":"mgr_nongenerating","item_label":"Non-Generating MGRs","group":"built","quantity":1},{"project_date":"2026-06-02","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":15},{"project_date":"2026-06-02","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":8},{"project_date":"2026-05-29","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":200},{"project_date":"2026-05-14","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":5},{"project_date":"2026-05-14","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":15},{"project_date":"2026-05-14","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":250},{"project_date":"2026-05-12","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":20},{"project_date":"2026-05-12","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"project_date":"2026-05-11","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":20},{"project_date":"2026-05-11","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"project_date":"2026-03-24","item_key":"science_kits","item_label":"Science Kits","group":"distributed","quantity":6},{"project_date":"2026-03-24","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":32},{"project_date":"2026-03-17","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"project_date":"2026-03-14","item_key":"rooms","item_label":"Classroom Rooms","group":"distributed","quantity":4},{"project_date":"2026-03-14","item_key":"construction","item_label":"Classroom Blocks","group":"built","quantity":1},{"project_date":"2026-03-11","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"project_date":"2026-03-07","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-03-07","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-03-07","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-02","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"project_date":"2026-01-30","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":24},{"project_date":"2026-01-30","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":8},{"project_date":"2026-01-30","item_key":"mgr_generating","item_label":"Generating MGRs","group":"built","quantity":1},{"project_date":"2026-01-26","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":17},{"project_date":"2026-01-26","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"project_date":"2026-01-26","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":16},{"project_date":"2026-01-26","item_key":"solar_panels","item_label":"Solar Panels","group":"distributed","quantity":12},{"project_date":"2026-01-26","item_key":"mgr_generating","item_label":"Generating MGRs","group":"built","quantity":1}];
+var ITEMS = [{"project_date":"2026-06-18","item_key":"borehole","item_label":"Boreholes","group":"built","quantity":1},{"project_date":"2026-06-11","item_key":"computers","item_label":"Computers","group":"distributed","quantity":10},{"project_date":"2026-06-11","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":2000},{"project_date":"2026-06-11","item_key":"rachel","item_label":"RACHEL Devices","group":"built","quantity":1},{"project_date":"2026-06-11","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-06-11","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-06-05","item_key":"mgr_nongenerating","item_label":"Non-Generating MGRs","group":"built","quantity":1},{"project_date":"2026-06-02","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":15},{"project_date":"2026-06-02","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":8},{"project_date":"2026-05-29","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":200},{"project_date":"2026-05-14","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":5},{"project_date":"2026-05-14","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":15},{"project_date":"2026-05-14","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":250},{"project_date":"2026-05-12","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":20},{"project_date":"2026-05-12","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"project_date":"2026-05-11","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":20},{"project_date":"2026-05-11","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"project_date":"2026-03-24","item_key":"science_kits","item_label":"Science Kits","group":"distributed","quantity":6},{"project_date":"2026-03-24","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":32},{"project_date":"2026-03-17","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"project_date":"2026-03-14","item_key":"rooms","item_label":"Classrooms","group":"distributed","quantity":4},{"project_date":"2026-03-14","item_key":"construction","item_label":"Classroom Blocks","group":"built","quantity":1},{"project_date":"2026-03-11","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"project_date":"2026-03-07","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-03-07","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-03-07","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-02","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"project_date":"2026-01-30","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":24},{"project_date":"2026-01-30","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":8},{"project_date":"2026-01-30","item_key":"mgr_generating","item_label":"Generating MGRs","group":"built","quantity":1},{"project_date":"2026-01-26","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":17},{"project_date":"2026-01-26","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"project_date":"2026-01-26","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":16},{"project_date":"2026-01-26","item_key":"solar_panels","item_label":"Solar Panels","group":"distributed","quantity":12},{"project_date":"2026-01-26","item_key":"mgr_generating","item_label":"Generating MGRs","group":"built","quantity":1}];
+var REACH = {"years":[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026],"counts":[7,8,22,27,33,40,46,51,54,58,59,66,66,67,67,69,70,76,78]};
 
-// Display order within each group (items with 0 in the range are hidden)
-var DIST_ORDER  = ["lanterns", "science_kits", "menstrual_kits", "computers", "solar_panels", "library_books", "lantern_groups", "rooms", "toilets"];
-var BUILT_ORDER = ["mgr_generating", "mgr_nongenerating", "construction", "borehole", "starlink", "rachel", "library", "grow"];
+// Single display order (items with 0 in the range are hidden)
+var ORDER = ["lanterns", "science_kits", "menstrual_kits", "computers", "solar_panels", "library_books", "lantern_groups", "rooms", "toilets", "mgr_generating", "mgr_nongenerating", "construction", "borehole", "starlink", "rachel", "library", "grow"];
 
 function inRange(dateStr, start, end) {
   if (!dateStr) return false;
@@ -200,7 +209,7 @@ function tile(label, value) {
     + '<span style="color:#666; font-size:0.85rem;">' + label + '</span></div>';
 }
 
-function renderImpact() {
+function renderOutputs() {
   var start = document.getElementById("imp-date-start").value;
   var end   = document.getElementById("imp-date-end").value;
 
@@ -212,32 +221,57 @@ function renderImpact() {
     labels[it.item_key] = it.item_label;
   });
 
-  function renderGroup(order, containerId) {
-    var html = "";
-    order.forEach(function(key) {
-      if (totals[key] > 0) html += tile(labels[key] || key, totals[key]);
-    });
-    document.getElementById(containerId).innerHTML = html;
-    return html !== "";
-  }
+  var html = "";
+  ORDER.forEach(function(key) {
+    if (totals[key] > 0) html += tile(labels[key] || key, totals[key]);
+  });
+  document.getElementById("tiles-all").innerHTML = html;
+  document.getElementById("impact-empty").style.display = (html === "") ? "block" : "none";
+}
 
-  var anyD = renderGroup(DIST_ORDER, "tiles-distributed");
-  var anyB = renderGroup(BUILT_ORDER, "tiles-built");
-
-  document.getElementById("head-distributed").style.display = anyD ? "block" : "none";
-  document.getElementById("head-built").style.display = anyB ? "block" : "none";
-  document.getElementById("impact-empty").style.display = (!anyD && !anyB) ? "block" : "none";
+function renderReach() {
+  var canvas = document.getElementById("reach-chart");
+  if (!canvas || typeof Chart === "undefined" || !REACH.years || REACH.years.length === 0) return;
+  new Chart(canvas, {
+    type: "line",
+    data: {
+      labels: REACH.years,
+      datasets: [{
+        data: REACH.counts,
+        borderColor: "#1C2B4A",
+        backgroundColor: "rgba(28,43,74,0.08)",
+        fill: true,
+        tension: 0.2,
+        pointRadius: 3,
+        pointBackgroundColor: "#F5B800",
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: function(ctx) { return ctx.raw + " schools"; } } }
+      },
+      scales: {
+        y: { beginAtZero: true, ticks: { precision: 0 }, title: { display: true, text: "Schools" } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  renderImpact();
-  document.getElementById("btn-imp-apply").addEventListener("click", renderImpact);
+  renderReach();
+  renderOutputs();
+  document.getElementById("btn-imp-apply").addEventListener("click", renderOutputs);
   document.getElementById("btn-imp-reset").addEventListener("click", function() {
     var now = new Date();
     var syYear = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
     document.getElementById("imp-date-start").value = syYear + "-08-01";
     document.getElementById("imp-date-end").value = now.toISOString().slice(0, 10);
-    renderImpact();
+    renderOutputs();
   });
 });
 </script>
