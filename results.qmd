@@ -82,7 +82,7 @@ htmltools::HTML(paste0(
 var ITEMS = ', items_json, ';
 var REACH = ', reach_json, ';
 
-// Outputs grouped into EPI's three program areas (matches empowerplaygrounds.org).
+// Outputs grouped into the three EPI program areas (matches empowerplaygrounds.org).
 // Solar Panels placed under Providing Light; Biofil Toilets under Promoting Wellness.
 var CATEGORIES = [
   { name: "Providing Light",
