@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Issues – EPI Data Dashboard</title>
+<title>Impact – EPI Data Dashboard</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -118,11 +118,11 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">New Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./impact.html"> 
+    <a class="nav-link active" href="./impact.html" aria-current="page"> 
 <span class="menu-text">Impact</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./issues.html" aria-current="page"> 
+    <a class="nav-link" href="./issues.html"> 
 <span class="menu-text">Issues</span></a>
   </li>  
 </ul>
@@ -142,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Issues</h1>
+<h1 class="title">Impact</h1>
 </div>
 
 
@@ -160,269 +160,85 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="cell">
-<div class="cell-output-display no-overflow-x">
-<!-- Open Issues -->
-<h2 class="anchored">Open Issues</h2>
-<p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">Urgent issues flagged during field visits. Click <strong>Resolve</strong> to mark an issue as addressed.</p>
-<div id="open-issues-container"></div>
+<div class="cell-output-display">
+<p style="color:#666; font-size:0.95rem; margin-bottom:1.25rem;">Items EPI has distributed and built across all schools during the selected date range.</p>
 
-<!-- Resolved Issues -->
-<h2 class="anchored">Resolved Issues</h2>
-<div id="resolved-controls" style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom:1rem;">
-  <label for="resolved-school-filter" style="font-weight:600; color:var(--epi-navy); font-size:0.85rem;">Filter by school:</label>
-  <select id="resolved-school-filter" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem; max-width:240px;">
-    <option value="">All schools</option>
-  </select>
+<!-- Date range bar -->
+<div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">
+  <label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>
+  <input type="date" id="imp-date-start" value="2025-08-01" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+  <span style="color:#999;">to</span>
+  <input type="date" id="imp-date-end" value="2026-07-09" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+  <button id="btn-imp-apply" style="background:var(--epi-navy); color:#fff; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Apply</button>
+  <button id="btn-imp-reset" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer;">Reset</button>
 </div>
-<div id="resolved-issues-container"></div>
 
-<!-- Resolve Modal -->
-<div id="resolve-modal" onclick="if(event.target===this)closeResolveModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
-  <div style="background:#fff; border-radius:12px; padding:2rem; max-width:480px; width:90%; box-shadow:0 8px 32px rgba(0,0,0,0.2);">
-    <h3 style="color:var(--epi-navy); margin-top:0; margin-bottom:0.5rem;" class="anchored">Resolve Issue</h3>
-    <p id="resolve-modal-school" style="font-weight:600; color:var(--epi-navy); margin-bottom:0.25rem;"></p>
-    <p id="resolve-modal-issue" style="color:#555; font-size:0.9rem; margin-bottom:1.25rem; padding:0.75rem; background:#f8f9fa; border-radius:4px; border-left:3px solid #dc3545;"></p>
-    <div style="margin-bottom:1rem;">
-      <label style="font-weight:600; color:var(--epi-navy); font-size:0.85rem; display:block; margin-bottom:0.35rem;">Your Name *</label>
-      <input type="text" id="resolve-by" placeholder="e.g. Richard" style="width:100%; padding:0.5rem; border:1px solid #ccc; border-radius:4px; font-size:0.9rem; box-sizing:border-box;">
-    </div>
-    <div style="margin-bottom:1.25rem;">
-      <label style="font-weight:600; color:var(--epi-navy); font-size:0.85rem; display:block; margin-bottom:0.35rem;">Resolution Notes (optional)</label>
-      <textarea id="resolve-notes" rows="3" placeholder="What was done to address this issue?" style="width:100%; padding:0.5rem; border:1px solid #ccc; border-radius:4px; font-size:0.9rem; resize:vertical; box-sizing:border-box;"></textarea>
-    </div>
-    <div id="resolve-error" style="display:none; color:#dc3545; font-size:0.85rem; margin-bottom:0.75rem;"></div>
-    <div style="display:flex; gap:0.75rem; justify-content:flex-end;">
-      <button onclick="closeResolveModal()" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.5rem 1.25rem; font-size:0.85rem; cursor:pointer;">Cancel</button>
-      <button id="btn-confirm-resolve" onclick="submitResolve()" style="background:#28a745; color:#fff; border:none; border-radius:4px; padding:0.5rem 1.25rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Confirm Resolution</button>
-    </div>
-  </div>
-</div>
+<div id="impact-empty" style="display:none; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#999; font-style:italic; margin:0;">No items recorded in this date range.</p></div>
+
+<h3 id="head-distributed" style="color:var(--epi-navy); font-size:1.05rem; margin:0.5rem 0 0.75rem;" class="anchored">Distributed</h3>
+<div id="tiles-distributed" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem; margin-bottom:1.75rem;"></div>
+
+<h3 id="head-built" style="color:var(--epi-navy); font-size:1.05rem; margin:0.5rem 0 0.75rem;" class="anchored">Built &amp; Installed</h3>
+<div id="tiles-built" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem; margin-bottom:1.5rem;"></div>
 
 <script>
-var OPEN_ISSUES = [{"school_name":"Bahankra","urgent_issues":"The issue with the teachers bungalow is still not resolved.","visit_reason":"Routine Visit, Lantern Replacement","activities":"Routine Visit, MGR/Charging Maintenance, Lantern Replacement","observations":"There is a construction of CHIP compound close to the school. Information is that it will provide health care for the community","visit_date":"2026-04-29","visitor":"Richard","issue_id":"b881ea29ada5","slug":"bahankra"}];
-var RESOLVED_ISSUES = [{"school_name":"Akwanserem","urgent_issues":"The lantern group was recognized immediately","visit_reason":"Routine Visit,MGR/Charging Maintenance","activities":"Routine Visit,MGR/Charging Maintenance","observations":null,"visit_date":"2026-01-12","visitor":"Richard","issue_id":"1c536a9b85a9","resolved_date":"2026-04-17","resolved_by":"Morgan","resolution_notes":"Looks like accidental entry","slug":"akwanserem"},{"school_name":"Bahankra","urgent_issues":"The school borehole isn’t working well","visit_reason":"Routine Visit","activities":"Routine Visit","observations":null,"visit_date":"2026-01-12","visitor":"Richard","issue_id":"7987dcd738ac","resolved_date":"2026-04-30","resolved_by":"Richard Koomson","resolution_notes":"It’s currently working now","slug":"bahankra"},{"school_name":"Domase","urgent_issues":"Immediate training for the science kits program","visit_reason":"Routine Visit,Look at the borehole and the classroom","activities":"Routine Visit","observations":"Student population are increasing. Their classroom isn’t sufficient to cater for the students body","visit_date":"2026-01-12","visitor":"Richard","issue_id":"69182b15ce94","resolved_date":"2026-04-30","resolved_by":"Richard Koomson","resolution_notes":"Training meeting was held to help train the new teachers as well.","slug":"domase"},{"school_name":"Abrenya","urgent_issues":"I met with the Headmaster and the SMC chairman to finds ways to improve the use.","visit_reason":"Routine Visit,Initiate the process of building a computer Lab","activities":"Routine Visit,Student Survey Team Visit","observations":"The school is doing well in academics. Since they got electricity recently. The school has wired all classroom with light and are doing night studies for the students who stay in close proximity","visit_date":"2026-01-14","visitor":"Richard","issue_id":"deccb47f041e","resolved_date":"2026-04-27","resolved_by":"Morgan","resolution_notes":"Looks like an accidental entry","slug":"abrenya"},{"school_name":"Bepotumtum","urgent_issues":"Leakage at the one of the windows of the lab. Rains come inside the lab.","visit_reason":"Computer Maintenance,Student Survey Team Visit","activities":"Routine Visit,Computer Maintenance,Student Survey Team Visit","observations":null,"visit_date":"2026-01-19","visitor":"Richard","issue_id":"4c0febebf03b","resolved_date":"2026-05-21","resolved_by":"Richard","resolution_notes":"Window has been fixed","slug":"bepotumtum"},{"school_name":"Akwansu","urgent_issues":"New charging stations because the JHS is far from the primary school block, we are in process of building a new charging station for the school","visit_reason":"Routine Visit","activities":"Routine Visit,Science Kit Training/Distribution","observations":"None","visit_date":"2026-01-19","visitor":"Alex","issue_id":"c919b6321892","resolved_date":"2026-05-21","resolved_by":"Alex","resolution_notes":"New charging Station installed for the JHS","slug":"akwansu"},{"school_name":"Tun Tun","urgent_issues":"Parent teacher meeting to help the parents understand the lantern program","visit_reason":"Routine Visit,MGR/Charging Maintenance","activities":"Routine Visit,MGR/Charging Maintenance,Science Kit Training/Distribution,Student Survey Team Visit","observations":null,"visit_date":"2026-01-27","visitor":"Richard","issue_id":"79d4e78cc06c","resolved_date":"2026-04-30","resolved_by":"Richard","resolution_notes":"Meeting was held to that effect.","slug":"tun-tun"},{"school_name":"Ekorso Akwadum","urgent_issues":"They are relocating to a new rooms shortly","visit_reason":"Computer Maintenance","activities":"Computer Maintenance","observations":null,"visit_date":"2026-02-12","visitor":"Richard","issue_id":"09c7ca8732f8","resolved_date":"2026-06-02","resolved_by":"Richard","resolution_notes":"Computer Lab has been moved to the new location","slug":"ekorso-akwadum"},{"school_name":"Dagomba","urgent_issues":"Increase of computers or improve current schedule","visit_reason":"MGR/Charging Maintenance,Computer Maintenance,Science Kit Training/Distribution","activities":"MGR/Charging Maintenance","observations":null,"visit_date":"2026-02-23","visitor":"Richard","issue_id":"915e27a7110f","resolved_date":"2026-04-30","resolved_by":"Richard","resolution_notes":null,"slug":"dagomba"},{"school_name":"Anateem Sumbrungu","urgent_issues":"Teachers are planning to have a PTA meeting to review that","visit_reason":"Routine Visit, Full Update Survey","activities":"Routine Visit, Student Survey Team Visit","observations":null,"visit_date":"2026-05-13","visitor":"Richard","issue_id":"a2c37dbdcfea","resolved_date":"2026-06-01","resolved_by":"Richard","resolution_notes":"PTA meeting has been held to resolve the issue","slug":"anateem-sumbrungu"},{"school_name":"Dagomba","urgent_issues":"Teacher training","visit_reason":"MGR/Charging Maintenance","activities":"MGR/Charging Maintenance, Computer Maintenance","observations":null,"visit_date":"2026-05-15","visitor":"Richard","issue_id":"541810e35dbf","resolved_date":"2026-05-22","resolved_by":"Anna","resolution_notes":"Not an issue","slug":"dagomba"},{"school_name":"Begoro","urgent_issues":"Staff meeting about the use of our projects.","visit_reason":"Routine Visit, Computer Maintenance","activities":"Routine Visit, Computer Maintenance","observations":"Though the school is doing well academically, they are to appreciate our effort in helping them augment what they are doing. Especially in the ICT field","visit_date":"2026-05-18","visitor":"Richard","issue_id":"a66265861d20","resolved_date":"2026-05-22","resolved_by":"Anna","resolution_notes":"Not an issue","slug":"begoro"},{"school_name":"Mpaem","urgent_issues":"Develop a separate charging station for the JHS","visit_reason":"Full update","activities":"Full Update Survey","observations":null,"visit_date":"2026-06-03","visitor":"Richard","issue_id":"eecd2736d67f","resolved_date":"2026-07-06","resolved_by":"Richard Koomson","resolution_notes":"All students have electricity in their home and therefore the need for separate charging station is not","slug":"mpaem"},{"school_name":"Wangarakrom","urgent_issues":"Teachers will be trained to engage the students with the science kits","visit_reason":"Routine Visit","activities":"MGR/Charging Maintenance, Menstrual Kit Distribution","observations":"No","visit_date":"2026-06-30","visitor":"Akuvi","issue_id":"056b0da7b412","resolved_date":"2026-07-06","resolved_by":"Richard Koomson","resolution_notes":"Teachers were engaged and trained about the use of science kits","slug":"wangarakrom"}];
-var currentResolveIssue = null;
+var ITEMS = [{"project_date":"2026-06-18","item_key":"borehole","item_label":"Boreholes","group":"built","quantity":1},{"project_date":"2026-06-11","item_key":"computers","item_label":"Computers","group":"distributed","quantity":10},{"project_date":"2026-06-11","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":2000},{"project_date":"2026-06-11","item_key":"rachel","item_label":"RACHEL Devices","group":"built","quantity":1},{"project_date":"2026-06-11","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-06-11","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-06-05","item_key":"mgr_nongenerating","item_label":"Non-Generating MGRs","group":"built","quantity":1},{"project_date":"2026-06-02","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":15},{"project_date":"2026-06-02","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":8},{"project_date":"2026-05-29","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":200},{"project_date":"2026-05-14","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":5},{"project_date":"2026-05-14","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":15},{"project_date":"2026-05-14","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":250},{"project_date":"2026-05-12","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":20},{"project_date":"2026-05-12","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"project_date":"2026-05-11","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":20},{"project_date":"2026-05-11","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"project_date":"2026-03-24","item_key":"science_kits","item_label":"Science Kits","group":"distributed","quantity":6},{"project_date":"2026-03-24","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":32},{"project_date":"2026-03-17","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"project_date":"2026-03-14","item_key":"rooms","item_label":"Classroom Rooms","group":"distributed","quantity":4},{"project_date":"2026-03-14","item_key":"construction","item_label":"Classroom Blocks","group":"built","quantity":1},{"project_date":"2026-03-11","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"project_date":"2026-03-07","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-03-07","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-03-07","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-02","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"project_date":"2026-01-30","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":24},{"project_date":"2026-01-30","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":8},{"project_date":"2026-01-30","item_key":"mgr_generating","item_label":"Generating MGRs","group":"built","quantity":1},{"project_date":"2026-01-26","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":17},{"project_date":"2026-01-26","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"project_date":"2026-01-26","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":16},{"project_date":"2026-01-26","item_key":"solar_panels","item_label":"Solar Panels","group":"distributed","quantity":12},{"project_date":"2026-01-26","item_key":"mgr_generating","item_label":"Generating MGRs","group":"built","quantity":1}];
 
-function makeIssueCard(issue, isResolved) {
-  var border = isResolved ? "border-left:4px solid #28a745;" : "border-left:4px solid #dc3545;";
-  var html = '<div id="issue-' + issue.issue_id + '" style="background:#fff; border-radius:8px; padding:1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1rem; ' + border + '">';
-  html += '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">';
-  html += '<a href="schools.html?school=' + (issue.slug || "") + '" style="color:var(--epi-navy); font-weight:700; font-size:1rem; text-decoration:none; border-bottom:1px dashed var(--epi-navy);">' + issue.school_name + '</a>';
-  var meta = (issue.visit_date || "");
-  if (issue.visitor) meta += " &middot; " + issue.visitor;
-  html += '<span style="color:#999; font-size:0.8rem;">' + meta + '</span>';
-  html += '</div>';
+// Display order within each group (items with 0 in the range are hidden)
+var DIST_ORDER  = ["lanterns", "science_kits", "menstrual_kits", "computers", "solar_panels", "library_books", "lantern_groups", "rooms", "toilets"];
+var BUILT_ORDER = ["mgr_generating", "mgr_nongenerating", "construction", "borehole", "starlink", "rachel", "library", "grow"];
 
-  if (isResolved) {
-    html += '<p style="font-size:0.9rem; margin:0.25rem 0 0; color:#999; text-decoration:line-through;">' + issue.urgent_issues + '</p>';
-    html += '<details style="margin-top:0.5rem;"><summary style="cursor:pointer; font-size:0.85rem; color:var(--epi-navy); font-weight:600;">Resolution details</summary>';
-    html += '<div style="margin-top:0.5rem; padding:0.75rem; background:#f0faf0; border-radius:4px; font-size:0.85rem;">';
-    html += '<p style="margin:0 0 0.25rem;"><strong>Resolved by:</strong> ' + (issue.resolved_by || "—") + ' on ' + (issue.resolved_date || "—") + '</p>';
-    if (issue.resolution_notes) {
-      html += '<p style="margin:0;"><strong>Notes:</strong> ' + issue.resolution_notes + '</p>';
-    }
-    html += '</div></details>';
-  } else {
-    html += '<p style="font-size:0.9rem; margin:0.25rem 0 0; color:#333;">' + issue.urgent_issues + '</p>';
-    if (issue.visit_reason && issue.visit_reason !== "null") {
-      html += '<p style="font-size:0.8rem; margin:0.25rem 0 0; color:#999;">Visit reason: ' + issue.visit_reason + '</p>';
-    }
-    html += '<button class="btn-resolve" onclick="openResolveModal(\'' + issue.issue_id + '\')">Resolve</button>';
-  }
-
-  html += '</div>';
-  return html;
+function inRange(dateStr, start, end) {
+  if (!dateStr) return false;
+  var d = dateStr.slice(0, 10);
+  return d >= start && d <= end;
 }
 
-function sortByDateDesc(a, b) {
-  var da = a.visit_date || "";
-  var db = b.visit_date || "";
-  if (da !== db) return db.localeCompare(da);
-  return (a.school_name || "").localeCompare(b.school_name || "");
+function tile(label, value) {
+  return '<div style="background:#fff; border-radius:8px; padding:1.25rem 1rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;">'
+    + '<span style="font-size:2rem; font-weight:700; color:var(--epi-navy); display:block; line-height:1.1;">' + value.toLocaleString() + '</span>'
+    + '<span style="color:#666; font-size:0.85rem;">' + label + '</span></div>';
 }
 
-// Resolved issues: show a short preview by default, with a "Show all" toggle,
-// plus a per-school filter so the list stays manageable as it grows.
-var RESOLVED_PREVIEW_COUNT = 5;
-var resolvedShowAll = false;
+function renderImpact() {
+  var start = document.getElementById("imp-date-start").value;
+  var end   = document.getElementById("imp-date-end").value;
 
-function populateResolvedFilter() {
-  var sel = document.getElementById("resolved-school-filter");
-  if (!sel) return;
-  var current = sel.value;
-  var names = {};
-  RESOLVED_ISSUES.forEach(function(i) { if (i.school_name) names[i.school_name] = true; });
-  var sorted = Object.keys(names).sort(function(a, b) { return a.localeCompare(b); });
-  sel.innerHTML = '<option value="">All schools</option>';
-  sorted.forEach(function(n) {
-    var o = document.createElement("option");
-    o.value = n;
-    o.textContent = n;
-    sel.appendChild(o);
+  var filtered = ITEMS.filter(function(it) { return inRange(it.project_date, start, end); });
+
+  var totals = {}, labels = {};
+  filtered.forEach(function(it) {
+    totals[it.item_key] = (totals[it.item_key] || 0) + Number(it.quantity || 0);
+    labels[it.item_key] = it.item_label;
   });
-  sel.value = current;
-}
 
-function renderResolved() {
-  var container = document.getElementById("resolved-issues-container");
-  var sel = document.getElementById("resolved-school-filter");
-  var schoolFilter = sel ? sel.value : "";
-
-  var list = RESOLVED_ISSUES.slice().sort(sortByDateDesc);
-  if (schoolFilter) {
-    list = list.filter(function(i) { return i.school_name === schoolFilter; });
-  }
-
-  if (list.length === 0) {
-    var emptyMsg = schoolFilter ? "No resolved issues for this school." : "No resolved issues yet.";
-    container.innerHTML = '<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#999; font-style:italic; margin:0;">' + emptyMsg + '</p></div>';
-    return;
-  }
-
-  // Limit the preview only when viewing all schools and not expanded
-  var limited = (!schoolFilter && !resolvedShowAll && list.length > RESOLVED_PREVIEW_COUNT);
-  var shown = limited ? list.slice(0, RESOLVED_PREVIEW_COUNT) : list;
-
-  var html = "";
-  shown.forEach(function(issue) { html += makeIssueCard(issue, true); });
-
-  if (!schoolFilter && list.length > RESOLVED_PREVIEW_COUNT) {
-    var label = resolvedShowAll ? "Show fewer" : ("Show all (" + list.length + ")");
-    html += '<button id="btn-toggle-resolved" style="background:#fff; color:var(--epi-navy); border:1px solid var(--epi-navy); border-radius:4px; padding:0.5rem 1.25rem; font-size:0.85rem; cursor:pointer; font-weight:600;">' + label + '</button>';
-  }
-
-  container.innerHTML = html;
-
-  var btn = document.getElementById("btn-toggle-resolved");
-  if (btn) {
-    btn.addEventListener("click", function() {
-      resolvedShowAll = !resolvedShowAll;
-      renderResolved();
+  function renderGroup(order, containerId) {
+    var html = "";
+    order.forEach(function(key) {
+      if (totals[key] > 0) html += tile(labels[key] || key, totals[key]);
     });
-  }
-}
-
-function renderIssues() {
-  var openHtml = "";
-  if (OPEN_ISSUES.length === 0) {
-    openHtml = '<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#28a745; font-weight:600; margin:0;">All issues have been resolved!</p></div>';
-  } else {
-    OPEN_ISSUES.slice().sort(sortByDateDesc).forEach(function(issue) {
-      openHtml += makeIssueCard(issue, false);
-    });
-  }
-  document.getElementById("open-issues-container").innerHTML = openHtml;
-
-  populateResolvedFilter();
-  renderResolved();
-
-  document.getElementById("stat-open").textContent = OPEN_ISSUES.length;
-  document.getElementById("stat-resolved").textContent = RESOLVED_ISSUES.length;
-}
-
-function openResolveModal(issueId) {
-  currentResolveIssue = OPEN_ISSUES.find(function(i) { return i.issue_id === issueId; });
-  if (!currentResolveIssue) return;
-  document.getElementById("resolve-modal-school").textContent = currentResolveIssue.school_name;
-  document.getElementById("resolve-modal-issue").textContent = currentResolveIssue.urgent_issues;
-  document.getElementById("resolve-by").value = "";
-  document.getElementById("resolve-notes").value = "";
-  document.getElementById("resolve-error").style.display = "none";
-  document.getElementById("btn-confirm-resolve").disabled = false;
-  document.getElementById("btn-confirm-resolve").textContent = "Confirm Resolution";
-  document.getElementById("resolve-modal").style.display = "flex";
-}
-
-function closeResolveModal() {
-  document.getElementById("resolve-modal").style.display = "none";
-  currentResolveIssue = null;
-}
-
-async function submitResolve() {
-  if (!currentResolveIssue) return;
-  var resolvedBy = document.getElementById("resolve-by").value.trim();
-  if (!resolvedBy) {
-    var errDiv = document.getElementById("resolve-error");
-    errDiv.textContent = "Please enter your name.";
-    errDiv.style.display = "block";
-    return;
+    document.getElementById(containerId).innerHTML = html;
+    return html !== "";
   }
 
-  var btn = document.getElementById("btn-confirm-resolve");
-  btn.disabled = true;
-  btn.textContent = "Submitting...";
-  document.getElementById("resolve-error").style.display = "none";
+  var anyD = renderGroup(DIST_ORDER, "tiles-distributed");
+  var anyB = renderGroup(BUILT_ORDER, "tiles-built");
 
-  try {
-    var resp = await fetch("/api/resolve-issue", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        issue_id: currentResolveIssue.issue_id,
-        school_name: currentResolveIssue.school_name,
-        issue_text: currentResolveIssue.urgent_issues,
-        visit_date: currentResolveIssue.visit_date,
-        resolved_by: resolvedBy,
-        resolution_notes: document.getElementById("resolve-notes").value.trim()
-      })
-    });
-    var data = await resp.json();
-    if (!resp.ok || data.error) {
-      throw new Error(data.error || "Failed to resolve issue");
-    }
-
-    // Move issue from open to resolved
-    var resolved = Object.assign({}, currentResolveIssue, {
-      resolved_by: resolvedBy,
-      resolved_date: data.resolved_date,
-      resolution_notes: document.getElementById("resolve-notes").value.trim()
-    });
-    OPEN_ISSUES = OPEN_ISSUES.filter(function(i) { return i.issue_id !== currentResolveIssue.issue_id; });
-    RESOLVED_ISSUES.unshift(resolved);
-
-    closeResolveModal();
-    renderIssues();
-
-    // Show a temporary toast so the user knows the site rebuild was triggered
-    if (data.rebuildTriggered) {
-      showToast("Issue resolved. Site is updating — others will see this in a minute or two.");
-    } else {
-      showToast("Issue resolved. The change will be visible to others after the next scheduled update.");
-    }
-  } catch (err) {
-    var errDiv = document.getElementById("resolve-error");
-    errDiv.textContent = "Error: " + err.message;
-    errDiv.style.display = "block";
-    btn.disabled = false;
-    btn.textContent = "Confirm Resolution";
-  }
+  document.getElementById("head-distributed").style.display = anyD ? "block" : "none";
+  document.getElementById("head-built").style.display = anyB ? "block" : "none";
+  document.getElementById("impact-empty").style.display = (!anyD && !anyB) ? "block" : "none";
 }
 
-function showToast(message) {
-  var existing = document.getElementById("epi-toast");
-  if (existing) existing.remove();
-  var toast = document.createElement("div");
-  toast.id = "epi-toast";
-  toast.textContent = message;
-  toast.style.cssText = "position:fixed; bottom:1.5rem; left:50%; transform:translateX(-50%); background:#1C2B4A; color:#fff; padding:0.85rem 1.25rem; border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.2); font-size:0.9rem; max-width:90%; z-index:10000; opacity:0; transition:opacity 0.2s;";
-  document.body.appendChild(toast);
-  requestAnimationFrame(function() { toast.style.opacity = "1"; });
-  setTimeout(function() {
-    toast.style.opacity = "0";
-    setTimeout(function() { toast.remove(); }, 250);
-  }, 5000);
-}
-
-// Initial render
 document.addEventListener("DOMContentLoaded", function() {
-  renderIssues();
-  var sel = document.getElementById("resolved-school-filter");
-  if (sel) {
-    sel.addEventListener("change", function() {
-      resolvedShowAll = false;
-      renderResolved();
-    });
-  }
+  renderImpact();
+  document.getElementById("btn-imp-apply").addEventListener("click", renderImpact);
+  document.getElementById("btn-imp-reset").addEventListener("click", function() {
+    var now = new Date();
+    var syYear = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
+    document.getElementById("imp-date-start").value = syYear + "-08-01";
+    document.getElementById("imp-date-end").value = now.toISOString().slice(0, 10);
+    renderImpact();
+  });
 });
 </script>
 
