@@ -53,18 +53,41 @@ htmltools::HTML(paste0(
 
 <div id="impact-empty" style="display:none; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#999; font-style:italic; margin:0;">No items recorded in this date range.</p></div>
 
-<h3 id="head-distributed" style="color:var(--epi-navy); font-size:1.05rem; margin:0.5rem 0 0.75rem;">Distributed</h3>
-<div id="tiles-distributed" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem; margin-bottom:1.75rem;"></div>
-
-<h3 id="head-built" style="color:var(--epi-navy); font-size:1.05rem; margin:0.5rem 0 0.75rem;">Built &amp; Installed</h3>
-<div id="tiles-built" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem; margin-bottom:1.5rem;"></div>
+<h3 style="color:var(--epi-navy); font-size:1.15rem; margin:0.5rem 0 0.9rem;">Outputs</h3>
+<div id="tiles-all" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem; margin-bottom:1.5rem;"></div>
 
 <script>
 var ITEMS = ', items_json, ';
 
-// Display order within each group (items with 0 in the range are hidden)
-var DIST_ORDER  = ["lanterns", "science_kits", "menstrual_kits", "computers", "solar_panels", "library_books", "lantern_groups", "rooms", "toilets"];
-var BUILT_ORDER = ["mgr_generating", "mgr_nongenerating", "construction", "borehole", "starlink", "rachel", "library", "grow"];
+// Single display order (items with 0 in the range are hidden)
+var ORDER = ["lanterns", "science_kits", "menstrual_kits", "computers", "solar_panels", "library_books", "lantern_groups", "rooms", "toilets", "mgr_generating", "mgr_nongenerating", "construction", "borehole", "starlink", "rachel", "library", "grow"];
+
+// Simple hand-drawn line icons (inline SVG, no external requests)
+var ICON_PATHS = {
+  lanterns:          \'<path d="M12 2v2"/><rect x="7" y="5" width="10" height="3" rx="1"/><rect x="8" y="8" width="8" height="9" rx="1"/><rect x="9.5" y="17" width="5" height="3" rx="1"/><path d="M12 10v4"/>\',
+  lantern_groups:    \'<circle cx="9" cy="9" r="2.3"/><circle cx="16" cy="10" r="1.9"/><path d="M4 19a5 5 0 0 1 10 0"/><path d="M14.8 19a4 4 0 0 1 5.2-3.6"/>\',
+  computers:         \'<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/>\',
+  science_kits:      \'<path d="M9 3h6M10 3v6l-4.4 8A1.5 1.5 0 0 0 7 19.5h10a1.5 1.5 0 0 0 1.4-2.5L14 9V3"/><path d="M7.5 14.5h9"/>\',
+  menstrual_kits:    \'<path d="M12 20s-6.5-4.1-6.5-8.7A3.5 3.5 0 0 1 12 8a3.5 3.5 0 0 1 6.5 3.3C18.5 15.9 12 20 12 20z"/>\',
+  solar_panels:      \'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5.6 5.6 4.2 4.2M19.8 19.8l-1.4-1.4M18.4 5.6l1.4-1.4M4.2 19.8l1.4-1.4"/>\',
+  library_books:     \'<path d="M4 5a1 1 0 0 1 1-1h6v16H5a1 1 0 0 1-1-1z"/><path d="M20 5a1 1 0 0 0-1-1h-6v16h6a1 1 0 0 0 1-1z"/>\',
+  library:           \'<path d="M4 5a1 1 0 0 1 1-1h6v16H5a1 1 0 0 1-1-1z"/><path d="M20 5a1 1 0 0 0-1-1h-6v16h6a1 1 0 0 0 1-1z"/>\',
+  rooms:             \'<rect x="6" y="3" width="12" height="18" rx="1"/><circle cx="14.5" cy="12" r="1" fill="#1C2B4A"/>\',
+  toilets:           \'<circle cx="12" cy="9" r="5"/><path d="M9 19h6M12 14v5"/>\',
+  mgr_nongenerating: \'<circle cx="12" cy="13" r="6.5"/><path d="M12 6.5v13M5.5 13h13M7.4 8.4l9.2 9.2M16.6 8.4 7.4 17.6"/><circle cx="12" cy="13" r="1" fill="#1C2B4A"/>\',
+  mgr_generating:    \'<circle cx="11" cy="14" r="5.5"/><path d="M11 8.5v11M5.5 14h11M7.1 10.1l7.8 7.8M14.9 10.1 7.1 17.9"/><circle cx="11" cy="14" r="0.9" fill="#1C2B4A"/><path d="M18 3l-2.5 4H18l-2.5 4"/>\',
+  construction:      \'<path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M10 21v-5h4v5"/>\',
+  borehole:          \'<path d="M12 3.5s5.5 6 5.5 10.5a5.5 5.5 0 0 1-11 0C6.5 9.5 12 3.5 12 3.5z"/>\',
+  starlink:          \'<path d="M5 12.5a10 10 0 0 1 14 0"/><path d="M8 15.5a6 6 0 0 1 8 0"/><circle cx="12" cy="19" r="1.2" fill="#1C2B4A"/>\',
+  rachel:            \'<rect x="4" y="4.5" width="16" height="6.5" rx="1.3"/><rect x="4" y="13" width="16" height="6.5" rx="1.3"/><circle cx="7.5" cy="7.75" r="0.6" fill="#1C2B4A"/><circle cx="7.5" cy="16.25" r="0.6" fill="#1C2B4A"/>\',
+  grow:              \'<path d="M12 21v-7"/><path d="M12 14c0-2.8 2-4.8 4.8-4.8C16.8 12 14.8 14 12 14z"/><path d="M12 16c0-2.4-1.9-4.3-4.7-4.3C7.3 14.1 9.2 16 12 16z"/>\'
+};
+
+function svgIcon(key) {
+  var inner = ICON_PATHS[key];
+  if (!inner) return "";
+  return \'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:0.4rem;">\' + inner + \'</svg>\';
+}
 
 function inRange(dateStr, start, end) {
   if (!dateStr) return false;
@@ -72,8 +95,9 @@ function inRange(dateStr, start, end) {
   return d >= start && d <= end;
 }
 
-function tile(label, value) {
+function tile(label, value, key) {
   return \'<div style="background:#fff; border-radius:8px; padding:1.25rem 1rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;">\'
+    + svgIcon(key)
     + \'<span style="font-size:2rem; font-weight:700; color:var(--epi-navy); display:block; line-height:1.1;">\' + value.toLocaleString() + \'</span>\'
     + \'<span style="color:#666; font-size:0.85rem;">\' + label + \'</span></div>\';
 }
@@ -90,21 +114,12 @@ function renderImpact() {
     labels[it.item_key] = it.item_label;
   });
 
-  function renderGroup(order, containerId) {
-    var html = "";
-    order.forEach(function(key) {
-      if (totals[key] > 0) html += tile(labels[key] || key, totals[key]);
-    });
-    document.getElementById(containerId).innerHTML = html;
-    return html !== "";
-  }
-
-  var anyD = renderGroup(DIST_ORDER, "tiles-distributed");
-  var anyB = renderGroup(BUILT_ORDER, "tiles-built");
-
-  document.getElementById("head-distributed").style.display = anyD ? "block" : "none";
-  document.getElementById("head-built").style.display = anyB ? "block" : "none";
-  document.getElementById("impact-empty").style.display = (!anyD && !anyB) ? "block" : "none";
+  var html = "";
+  ORDER.forEach(function(key) {
+    if (totals[key] > 0) html += tile(labels[key] || key, totals[key], key);
+  });
+  document.getElementById("tiles-all").innerHTML = html;
+  document.getElementById("impact-empty").style.display = (html === "") ? "block" : "none";
 }
 
 document.addEventListener("DOMContentLoaded", function() {
