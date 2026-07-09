@@ -30,6 +30,7 @@ reach_years  <- if (length(start_years) > 0) seq(min(start_years), max(max(start
 reach_counts <- vapply(reach_years, function(y) sum(start_years <= y), integer(1))
 reach_json   <- toJSON(list(years = reach_years, counts = reach_counts), auto_unbox = TRUE)
 n_schools    <- nrow(schools)
+first_year   <- if (length(start_years) > 0) min(start_years) else 2008
 
 # Date range default for Outputs: current school year (Aug 1 – Jul 31)
 school_year_start <- if (as.integer(format(Sys.Date(), "%m")) >= 8) {
@@ -55,11 +56,7 @@ htmltools::HTML(paste0(
 '<!-- ── Reach ─────────────────────────────────────────────────────── -->
 <h3 style="color:var(--epi-navy); font-size:1.15rem; margin:0.25rem 0 0.9rem;">Reach</h3>
 <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:2rem;">
-  <div style="display:flex; align-items:baseline; gap:0.5rem; margin-bottom:1rem;">
-    <span style="font-size:2.5rem; font-weight:700; color:var(--epi-navy); line-height:1;">', n_schools, '</span>
-    <span style="color:#666; font-size:0.95rem;">schools served to date</span>
-  </div>
-  <p style="color:#999; font-size:0.8rem; margin:0 0 0.75rem;">Schools EPI has worked in, cumulative by year (once we start in a school, we stay)</p>
+  <p style="color:var(--epi-navy); font-size:1.15rem; margin:0 0 1rem; font-weight:500;">Since ', first_year, ', EPI has expanded to <strong>', n_schools, '</strong> schools</p>
   <div style="position:relative; height:280px;"><canvas id="reach-chart"></canvas></div>
 </div>
 
@@ -78,15 +75,30 @@ htmltools::HTML(paste0(
 
 <div id="impact-empty" style="display:none; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#999; font-style:italic; margin:0;">No items recorded in this date range.</p></div>
 
-<div id="tiles-all" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem; margin-bottom:1.5rem;"></div>
+<div id="outputs-container" style="margin-bottom:1.5rem;"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 var ITEMS = ', items_json, ';
 var REACH = ', reach_json, ';
 
-// Single display order (items with 0 in the range are hidden)
-var ORDER = ["lanterns", "science_kits", "menstrual_kits", "computers", "solar_panels", "library_books", "lantern_groups", "rooms", "toilets", "mgr_generating", "mgr_nongenerating", "construction", "borehole", "starlink", "rachel", "library", "grow"];
+// Outputs grouped into EPI's three program areas (matches empowerplaygrounds.org).
+// Solar Panels placed under Providing Light; Biofil Toilets under Promoting Wellness.
+var CATEGORIES = [
+  { name: "Providing Light",
+    icon: \'<path d="M12 2a6 6 0 0 0-3.5 10.9c.4.3.5.6.5 1.1V15h6v-1c0-.5.1-.8.5-1.1A6 6 0 0 0 12 2z"/><path d="M9 18h6"/><path d="M10 21h4"/>\',
+    items: ["lanterns", "lantern_groups", "mgr_generating", "solar_panels"] },
+  { name: "Augmenting Education",
+    icon: \'<path d="M4 5a1 1 0 0 1 1-1h6v16H5a1 1 0 0 1-1-1z"/><path d="M20 5a1 1 0 0 0-1-1h-6v16h6a1 1 0 0 0 1-1z"/>\',
+    items: ["library", "library_books", "computers", "rachel", "starlink", "science_kits", "mgr_nongenerating", "construction", "rooms", "grow"] },
+  { name: "Promoting Wellness",
+    icon: \'<path d="M12 3.5s5.5 6 5.5 10.5a5.5 5.5 0 0 1-11 0C6.5 9.5 12 3.5 12 3.5z"/>\',
+    items: ["menstrual_kits", "borehole", "toilets"] }
+];
+
+function catIcon(inner) {
+  return \'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C2B4A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex:none;">\' + inner + \'</svg>\';
+}
 
 function inRange(dateStr, start, end) {
   if (!dateStr) return false;
@@ -113,10 +125,16 @@ function renderOutputs() {
   });
 
   var html = "";
-  ORDER.forEach(function(key) {
-    if (totals[key] > 0) html += tile(labels[key] || key, totals[key]);
+  CATEGORIES.forEach(function(cat) {
+    var tilesHtml = "";
+    cat.items.forEach(function(key) {
+      if (totals[key] > 0) tilesHtml += tile(labels[key] || key, totals[key]);
+    });
+    if (tilesHtml === "") return;
+    html += \'<h4 style="display:flex; align-items:center; gap:0.5rem; color:var(--epi-navy); font-size:1.05rem; margin:1.5rem 0 0.75rem;">\' + catIcon(cat.icon) + \'<span>\' + cat.name + \'</span></h4>\';
+    html += \'<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:1rem;">\' + tilesHtml + \'</div>\';
   });
-  document.getElementById("tiles-all").innerHTML = html;
+  document.getElementById("outputs-container").innerHTML = html;
   document.getElementById("impact-empty").style.display = (html === "") ? "block" : "none";
 }
 
