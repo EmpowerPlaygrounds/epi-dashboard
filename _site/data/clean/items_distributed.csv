@@ -1,52 +1,52 @@
 school_name,project_date,item_key,item_label,group,quantity
-Adenya,2026-06-18,borehole,Boreholes,built,1
-Madavunu,2026-06-11,computers,Computers,distributed,10
-Madavunu,2026-06-11,library_books,Library Books,distributed,2000
-Madavunu,2026-06-11,rachel,RACHEL Devices,built,1
-Madavunu,2026-06-11,library,Libraries,built,1
-Madavunu,2026-06-11,grow,GROW Projects,built,1
-Avadre,2026-06-05,mgr_nongenerating,Non-Generating MGRs,built,1
-Apaah,2026-06-02,lanterns,Lanterns,distributed,15
-Apaah,2026-06-02,lantern_groups,Lantern Groups,distributed,8
-Trekume,2026-05-29,menstrual_kits,Menstrual Kits,distributed,200
-Mosipanin,2026-05-14,lanterns,Lanterns,distributed,5
-Mosipanin,2026-05-14,lantern_groups,Lantern Groups,distributed,15
-Salaam Islamic School,2026-05-14,menstrual_kits,Menstrual Kits,distributed,250
-Akwansu,2026-05-12,lanterns,Lanterns,distributed,20
-Akwansu,2026-05-12,lantern_groups,Lantern Groups,distributed,10
-Apaah,2026-05-11,lanterns,Lanterns,distributed,20
-Apaah,2026-05-11,lantern_groups,Lantern Groups,distributed,10
-Avadre Basic school,2026-03-24,science_kits,Science Kits,distributed,6
-Avadre Basic school,2026-03-24,menstrual_kits,Menstrual Kits,distributed,32
-Alorkpem Island,2026-03-17,starlink,Starlink,built,1
-Mobia,2026-03-14,rooms,Classrooms,distributed,4
-Mobia,2026-03-14,construction,Classroom Blocks,built,1
-Pediatorkope,2026-03-11,starlink,Starlink,built,1
-Pediatorkope,2026-03-07,library_books,Library Books,distributed,1000
-Pediatorkope,2026-03-07,library,Libraries,built,1
-Pediatorkope,2026-03-07,grow,GROW Projects,built,1
-Anamenampa,2026-02-20,library_books,Library Books,distributed,1000
-Afransua Dedewa MA Primary,2026-02-20,library_books,Library Books,distributed,1000
-Dedenya,2026-02-20,library_books,Library Books,distributed,1000
-Wurudu Wurudu,2026-02-20,library_books,Library Books,distributed,1000
-Amuyaokope,2026-02-20,library_books,Library Books,distributed,1000
-Anamenampa,2026-02-20,library,Libraries,built,1
-Afransua Dedewa MA Primary,2026-02-20,library,Libraries,built,1
-Dedenya,2026-02-20,library,Libraries,built,1
-Wurudu Wurudu,2026-02-20,library,Libraries,built,1
-Amuyaokope,2026-02-20,library,Libraries,built,1
-Anamenampa,2026-02-20,grow,GROW Projects,built,1
-Afransua Dedewa MA Primary,2026-02-20,grow,GROW Projects,built,1
-Dedenya,2026-02-20,grow,GROW Projects,built,1
-Fawotrikosie,2026-02-20,grow,GROW Projects,built,1
-Wurudu Wurudu,2026-02-20,grow,GROW Projects,built,1
-Amuyaokope,2026-02-20,grow,GROW Projects,built,1
-Luta,2026-02-02,starlink,Starlink,built,1
-Apaah,2026-01-30,lanterns,Lanterns,distributed,24
-Apaah,2026-01-30,lantern_groups,Lantern Groups,distributed,8
-Apaah,2026-01-30,mgr_generating,Generating MGRs,built,1
-Adenya,2026-01-26,lanterns,Lanterns,distributed,17
-Adenya,2026-01-26,lantern_groups,Lantern Groups,distributed,10
-Adenya,2026-01-26,lanterns,Lanterns,distributed,16
-Akwanserem,2026-01-26,solar_panels,Solar Panels,distributed,12
-Adenya,2026-01-26,mgr_generating,Generating MGRs,built,1
+Adenya,2026-06-18,borehole,Boreholes Constructed,built,1
+Madavunu,2026-06-11,computers,Computers Installed,distributed,10
+Madavunu,2026-06-11,library_books,Library Books Distributed,distributed,2000
+Madavunu,2026-06-11,rachel,RACHELs Installed,built,1
+Madavunu,2026-06-11,library,Libraries Created,built,1
+Madavunu,2026-06-11,grow,GROW Projects Initiated,built,1
+Avadre,2026-06-05,mgr_nongenerating,Non-Generating MGRs Installed,built,1
+Apaah,2026-06-02,lanterns,Lanterns Distributed,distributed,15
+Apaah,2026-06-02,lantern_groups,Lantern Groups Created,distributed,8
+Trekume,2026-05-29,menstrual_kits,Menstrual Kits Distributed,distributed,200
+Mosipanin,2026-05-14,lanterns,Lanterns Distributed,distributed,5
+Mosipanin,2026-05-14,lantern_groups,Lantern Groups Created,distributed,15
+Salaam Islamic School,2026-05-14,menstrual_kits,Menstrual Kits Distributed,distributed,250
+Akwansu,2026-05-12,lanterns,Lanterns Distributed,distributed,20
+Akwansu,2026-05-12,lantern_groups,Lantern Groups Created,distributed,10
+Apaah,2026-05-11,lanterns,Lanterns Distributed,distributed,20
+Apaah,2026-05-11,lantern_groups,Lantern Groups Created,distributed,10
+Avadre Basic school,2026-03-24,science_kits,Science Kits Distributed,distributed,6
+Avadre Basic school,2026-03-24,menstrual_kits,Menstrual Kits Distributed,distributed,32
+Alorkpem Island,2026-03-17,starlink,Starlinks Installed,built,1
+Mobia,2026-03-14,rooms,Classrooms Created,distributed,4
+Mobia,2026-03-14,construction,Classroom Blocks Constructed,built,1
+Pediatorkope,2026-03-11,starlink,Starlinks Installed,built,1
+Pediatorkope,2026-03-07,library_books,Library Books Distributed,distributed,1000
+Pediatorkope,2026-03-07,library,Libraries Created,built,1
+Pediatorkope,2026-03-07,grow,GROW Projects Initiated,built,1
+Anamenampa,2026-02-20,library_books,Library Books Distributed,distributed,1000
+Afransua Dedewa MA Primary,2026-02-20,library_books,Library Books Distributed,distributed,1000
+Dedenya,2026-02-20,library_books,Library Books Distributed,distributed,1000
+Wurudu Wurudu,2026-02-20,library_books,Library Books Distributed,distributed,1000
+Amuyaokope,2026-02-20,library_books,Library Books Distributed,distributed,1000
+Anamenampa,2026-02-20,library,Libraries Created,built,1
+Afransua Dedewa MA Primary,2026-02-20,library,Libraries Created,built,1
+Dedenya,2026-02-20,library,Libraries Created,built,1
+Wurudu Wurudu,2026-02-20,library,Libraries Created,built,1
+Amuyaokope,2026-02-20,library,Libraries Created,built,1
+Anamenampa,2026-02-20,grow,GROW Projects Initiated,built,1
+Afransua Dedewa MA Primary,2026-02-20,grow,GROW Projects Initiated,built,1
+Dedenya,2026-02-20,grow,GROW Projects Initiated,built,1
+Fawotrikosie,2026-02-20,grow,GROW Projects Initiated,built,1
+Wurudu Wurudu,2026-02-20,grow,GROW Projects Initiated,built,1
+Amuyaokope,2026-02-20,grow,GROW Projects Initiated,built,1
+Luta,2026-02-02,starlink,Starlinks Installed,built,1
+Apaah,2026-01-30,lanterns,Lanterns Distributed,distributed,24
+Apaah,2026-01-30,lantern_groups,Lantern Groups Created,distributed,8
+Apaah,2026-01-30,mgr_generating,Power-Generating MGRs Installed,built,1
+Adenya,2026-01-26,lanterns,Lanterns Distributed,distributed,17
+Adenya,2026-01-26,lantern_groups,Lantern Groups Created,distributed,10
+Adenya,2026-01-26,lanterns,Lanterns Distributed,distributed,16
+Akwanserem,2026-01-26,solar_panels,Solar Panels Installed,distributed,12
+Adenya,2026-01-26,mgr_generating,Power-Generating MGRs Installed,built,1
