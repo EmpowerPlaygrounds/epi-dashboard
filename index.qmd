@@ -231,7 +231,7 @@ function renderDashboard() {
 
   // Program Reach bars
   var programCols = [
-    { key: 'MGR', label: 'MGR (Merry-Go-Round)' },
+    { key: 'MGR', label: 'Power-Generating MGR' },
     { key: 'Non-Generating MGR', label: 'Non-Generating MGR' },
     { key: 'Feminine Hygiene Kits', label: 'Feminine Hygiene Kits' },
     { key: 'Science Kits', label: 'Science Kits' },

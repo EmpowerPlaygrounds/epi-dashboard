@@ -67,7 +67,7 @@ htmltools::HTML(paste0(
 
 <!-- ── Outputs ───────────────────────────────────────────────────── -->
 <h3 style="color:var(--epi-navy); font-size:1.15rem; margin:0.5rem 0 0.75rem;">Outputs</h3>
-<p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">Items EPI has distributed and built during the selected date range.</p>
+<p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">EPI program outputs during the selected date range.</p>
 
 <div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">
   <label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>
