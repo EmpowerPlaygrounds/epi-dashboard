@@ -161,6 +161,10 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="cell">
 <div class="cell-output-display">
+<style>
+.output-tile:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.12) !important; }
+</style>
+
 <!-- ── Reach ─────────────────────────────────────────────────────── -->
 <h3 style="color:var(--epi-navy); font-size:1.15rem; margin:0.25rem 0 0.9rem;" class="anchored">Reach</h3>
 <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:2rem;">
@@ -170,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 
 <!-- ── Outputs ───────────────────────────────────────────────────── -->
 <h3 style="color:var(--epi-navy); font-size:1.15rem; margin:0.5rem 0 0.75rem;" class="anchored">Outputs</h3>
-<p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">Items EPI has distributed and built during the selected date range.</p>
+<p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">EPI program outputs during the selected date range.</p>
 
 <div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">
   <label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>
@@ -185,9 +189,21 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="outputs-container" style="margin-bottom:1.5rem;"></div>
 
+<!-- Output detail modal -->
+<div id="output-modal" onclick="if(event.target===this)closeOutputModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:#fff; border-radius:12px; padding:1.5rem 1.75rem; max-width:460px; width:90%; max-height:80vh; overflow:auto; box-shadow:0 8px 32px rgba(0,0,0,0.2);">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem;">
+      <h3 id="output-modal-title" style="color:var(--epi-navy); margin:0 0 0.25rem;" class="anchored"></h3>
+      <button onclick="closeOutputModal()" style="background:none; border:none; font-size:1.6rem; line-height:1; color:#999; cursor:pointer;">×</button>
+    </div>
+    <p id="output-modal-sub" style="color:#999; font-size:0.85rem; margin:0 0 1rem;"></p>
+    <div id="output-modal-list"></div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-var ITEMS = [{"project_date":"2026-06-18","item_key":"borehole","item_label":"Boreholes","group":"built","quantity":1},{"project_date":"2026-06-11","item_key":"computers","item_label":"Computers","group":"distributed","quantity":10},{"project_date":"2026-06-11","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":2000},{"project_date":"2026-06-11","item_key":"rachel","item_label":"RACHEL Devices","group":"built","quantity":1},{"project_date":"2026-06-11","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-06-11","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-06-05","item_key":"mgr_nongenerating","item_label":"Non-Generating MGRs","group":"built","quantity":1},{"project_date":"2026-06-02","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":15},{"project_date":"2026-06-02","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":8},{"project_date":"2026-05-29","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":200},{"project_date":"2026-05-14","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":5},{"project_date":"2026-05-14","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":15},{"project_date":"2026-05-14","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":250},{"project_date":"2026-05-12","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":20},{"project_date":"2026-05-12","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"project_date":"2026-05-11","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":20},{"project_date":"2026-05-11","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"project_date":"2026-03-24","item_key":"science_kits","item_label":"Science Kits","group":"distributed","quantity":6},{"project_date":"2026-03-24","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":32},{"project_date":"2026-03-17","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"project_date":"2026-03-14","item_key":"rooms","item_label":"Classrooms","group":"distributed","quantity":4},{"project_date":"2026-03-14","item_key":"construction","item_label":"Classroom Blocks","group":"built","quantity":1},{"project_date":"2026-03-11","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"project_date":"2026-03-07","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-03-07","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-03-07","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"project_date":"2026-02-02","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"project_date":"2026-01-30","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":24},{"project_date":"2026-01-30","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":8},{"project_date":"2026-01-30","item_key":"mgr_generating","item_label":"Generating MGRs","group":"built","quantity":1},{"project_date":"2026-01-26","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":17},{"project_date":"2026-01-26","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"project_date":"2026-01-26","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":16},{"project_date":"2026-01-26","item_key":"solar_panels","item_label":"Solar Panels","group":"distributed","quantity":12},{"project_date":"2026-01-26","item_key":"mgr_generating","item_label":"Generating MGRs","group":"built","quantity":1}];
+var ITEMS = [{"school_name":"Adenya","project_date":"2026-06-18","item_key":"borehole","item_label":"Boreholes","group":"built","quantity":1},{"school_name":"Madavunu","project_date":"2026-06-11","item_key":"computers","item_label":"Computers","group":"distributed","quantity":10},{"school_name":"Madavunu","project_date":"2026-06-11","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":2000},{"school_name":"Madavunu","project_date":"2026-06-11","item_key":"rachel","item_label":"RACHEL Devices","group":"built","quantity":1},{"school_name":"Madavunu","project_date":"2026-06-11","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"school_name":"Madavunu","project_date":"2026-06-11","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"school_name":"Avadre","project_date":"2026-06-05","item_key":"mgr_nongenerating","item_label":"Non-Generating MGRs","group":"built","quantity":1},{"school_name":"Apaah","project_date":"2026-06-02","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":15},{"school_name":"Apaah","project_date":"2026-06-02","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":8},{"school_name":"Trekume","project_date":"2026-05-29","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":200},{"school_name":"Mosipanin","project_date":"2026-05-14","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":5},{"school_name":"Mosipanin","project_date":"2026-05-14","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":15},{"school_name":"Salaam Islamic School","project_date":"2026-05-14","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":250},{"school_name":"Akwansu","project_date":"2026-05-12","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":20},{"school_name":"Akwansu","project_date":"2026-05-12","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"school_name":"Apaah","project_date":"2026-05-11","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":20},{"school_name":"Apaah","project_date":"2026-05-11","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"school_name":"Avadre Basic school","project_date":"2026-03-24","item_key":"science_kits","item_label":"Science Kits","group":"distributed","quantity":6},{"school_name":"Avadre Basic school","project_date":"2026-03-24","item_key":"menstrual_kits","item_label":"Menstrual Kits","group":"distributed","quantity":32},{"school_name":"Alorkpem Island","project_date":"2026-03-17","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"school_name":"Mobia","project_date":"2026-03-14","item_key":"rooms","item_label":"Classrooms","group":"distributed","quantity":4},{"school_name":"Mobia","project_date":"2026-03-14","item_key":"construction","item_label":"Classroom Blocks","group":"built","quantity":1},{"school_name":"Pediatorkope","project_date":"2026-03-11","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"school_name":"Pediatorkope","project_date":"2026-03-07","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"school_name":"Pediatorkope","project_date":"2026-03-07","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"school_name":"Pediatorkope","project_date":"2026-03-07","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"school_name":"Anamenampa","project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"school_name":"Afransua Dedewa MA Primary","project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"school_name":"Dedenya","project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"school_name":"Wurudu Wurudu","project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"school_name":"Amuyaokope","project_date":"2026-02-20","item_key":"library_books","item_label":"Library Books","group":"distributed","quantity":1000},{"school_name":"Anamenampa","project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"school_name":"Afransua Dedewa MA Primary","project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"school_name":"Dedenya","project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"school_name":"Wurudu Wurudu","project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"school_name":"Amuyaokope","project_date":"2026-02-20","item_key":"library","item_label":"Libraries","group":"built","quantity":1},{"school_name":"Anamenampa","project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"school_name":"Afransua Dedewa MA Primary","project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"school_name":"Dedenya","project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"school_name":"Fawotrikosie","project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"school_name":"Wurudu Wurudu","project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"school_name":"Amuyaokope","project_date":"2026-02-20","item_key":"grow","item_label":"GROW Projects","group":"built","quantity":1},{"school_name":"Luta","project_date":"2026-02-02","item_key":"starlink","item_label":"Starlink","group":"built","quantity":1},{"school_name":"Apaah","project_date":"2026-01-30","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":24},{"school_name":"Apaah","project_date":"2026-01-30","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":8},{"school_name":"Apaah","project_date":"2026-01-30","item_key":"mgr_generating","item_label":"Generating MGRs","group":"built","quantity":1},{"school_name":"Adenya","project_date":"2026-01-26","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":17},{"school_name":"Adenya","project_date":"2026-01-26","item_key":"lantern_groups","item_label":"Lantern Groups","group":"distributed","quantity":10},{"school_name":"Adenya","project_date":"2026-01-26","item_key":"lanterns","item_label":"Lanterns","group":"distributed","quantity":16},{"school_name":"Akwanserem","project_date":"2026-01-26","item_key":"solar_panels","item_label":"Solar Panels","group":"distributed","quantity":12},{"school_name":"Adenya","project_date":"2026-01-26","item_key":"mgr_generating","item_label":"Generating MGRs","group":"built","quantity":1}];
 var REACH = {"years":[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026],"counts":[7,8,22,27,33,40,46,51,54,58,59,66,66,67,67,69,70,76,78]};
 
 // Outputs grouped into the three EPI program areas (matches empowerplaygrounds.org).
@@ -214,10 +230,48 @@ function inRange(dateStr, start, end) {
   return d >= start && d <= end;
 }
 
-function tile(label, value) {
-  return '<div style="background:#fff; border-radius:8px; padding:1.25rem 1rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center;">'
+function tile(label, value, key) {
+  return '<div class="output-tile" data-key="' + key + '" title="Click to see schools" style="background:#fff; border-radius:8px; padding:1.25rem 1rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center; cursor:pointer; transition:transform 0.12s, box-shadow 0.12s;">'
     + '<span style="font-size:2rem; font-weight:700; color:var(--epi-navy); display:block; line-height:1.1;">' + value.toLocaleString() + '</span>'
     + '<span style="color:#666; font-size:0.85rem;">' + label + '</span></div>';
+}
+
+function slugify(name) {
+  return (name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
+}
+
+function openOutputModal(key) {
+  var start = document.getElementById("imp-date-start").value;
+  var end   = document.getElementById("imp-date-end").value;
+  var rows = ITEMS.filter(function(it) { return it.item_key === key && inRange(it.project_date, start, end); });
+  if (rows.length === 0) return;
+
+  var bySchool = {};
+  rows.forEach(function(it) {
+    var s = it.school_name || "Unknown";
+    bySchool[s] = (bySchool[s] || 0) + Number(it.quantity || 0);
+  });
+  var schools = Object.keys(bySchool).sort(function(a, b) {
+    if (bySchool[b] !== bySchool[a]) return bySchool[b] - bySchool[a];
+    return a.localeCompare(b);
+  });
+
+  document.getElementById("output-modal-title").textContent = rows[0].item_label || key;
+  document.getElementById("output-modal-sub").textContent =
+    schools.length + (schools.length === 1 ? " school" : " schools") + "  \u00b7  " + start + " to " + end;
+
+  var listHtml = "";
+  schools.forEach(function(s) {
+    listHtml += '<div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:0.5rem 0; border-bottom:1px solid #f0f0f0;">'
+      + '<a href="schools.html?school=' + slugify(s) + '" style="color:var(--epi-navy); text-decoration:none; border-bottom:1px dashed var(--epi-navy);">' + s + '</a>'
+      + '<span style="font-weight:600; color:var(--epi-navy);">' + bySchool[s].toLocaleString() + '</span></div>';
+  });
+  document.getElementById("output-modal-list").innerHTML = listHtml;
+  document.getElementById("output-modal").style.display = "flex";
+}
+
+function closeOutputModal() {
+  document.getElementById("output-modal").style.display = "none";
 }
 
 function renderOutputs() {
@@ -236,7 +290,7 @@ function renderOutputs() {
   CATEGORIES.forEach(function(cat) {
     var tilesHtml = "";
     cat.items.forEach(function(key) {
-      if (totals[key] > 0) tilesHtml += tile(labels[key] || key, totals[key]);
+      if (totals[key] > 0) tilesHtml += tile(labels[key] || key, totals[key], key);
     });
     if (tilesHtml === "") return;
     html += '<h4 style="display:flex; align-items:center; gap:0.5rem; color:var(--epi-navy); font-size:1.05rem; margin:1.5rem 0 0.75rem;">' + catIcon(cat.icon) + '<span>' + cat.name + '</span></h4>';
@@ -244,6 +298,10 @@ function renderOutputs() {
   });
   document.getElementById("outputs-container").innerHTML = html;
   document.getElementById("impact-empty").style.display = (html === "") ? "block" : "none";
+
+  document.querySelectorAll(".output-tile").forEach(function(el) {
+    el.addEventListener("click", function() { openOutputModal(el.getAttribute("data-key")); });
+  });
 }
 
 function renderReach() {

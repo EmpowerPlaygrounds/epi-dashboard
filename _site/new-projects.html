@@ -193,7 +193,11 @@ ul.task-list li input[type="checkbox"] {
 
 <!-- Tab: Recommended Projects -->
 <div id="tab-recommended" class="proj-tab-content" style="display:none; padding-top:1rem;">
-  <h3 style="color:var(--epi-navy); margin-top:0; margin-bottom:1rem;" class="anchored">Schools recommended to be reviewed for new projects.</h3>
+  <h3 style="color:var(--epi-navy); margin-top:0; margin-bottom:0.5rem;" class="anchored">Schools recommended to be reviewed for new projects.</h3>
+  <p style="color:#666; font-size:0.85rem; margin:0 0 1rem; display:flex; gap:1.25rem; flex-wrap:wrap; align-items:center;">
+    <span style="display:inline-flex; align-items:center; gap:0.4rem;"><span style="width:12px; height:12px; border-radius:50%; background:#28a745; display:inline-block;"></span> Green = Priority</span>
+    <span style="display:inline-flex; align-items:center; gap:0.4rem;"><span style="width:12px; height:12px; border-radius:50%; background:#ffc107; display:inline-block;"></span> Yellow = Maybe</span>
+  </p>
   <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; margin-bottom:1.5rem; justify-content:center;">
     <label style="font-weight:600; color:var(--epi-navy);">Date Range:</label>
     <input type="date" id="rec-date-start" value="2025-08-01" style="padding:0.35rem; border:1px solid #ccc; border-radius:4px;">
@@ -224,7 +228,14 @@ var TYPE_COLORS = {
   "Building Construction": {bg: "#f5d6cc", border: "#dc3545", label: "Building Construction"},
   "GROW Project": {bg: "#d4edda", border: "#28a745", label: "GROW Project"},
   "Science Kit Distribution": {bg: "#fde8d0", border: "#fd7e14", label: "Science Kits"},
-  "Menstrual Kit Distribution": {bg: "#f8d7da", border: "#e83e8c", label: "Menstrual Kits"}
+  "Menstrual Kit Distribution": {bg: "#f8d7da", border: "#e83e8c", label: "Menstrual Kits"},
+  "Non-Generating MGR Installation": {bg: "#e6dccb", border: "#a9743b", label: "Non-Gen MGR"},
+  "Computer Lab": {bg: "#cfe2ff", border: "#0d6efd", label: "Computer Lab"},
+  "RACHEL Device": {bg: "#dcd6f7", border: "#5b3bdb", label: "RACHEL"},
+  "Borehole": {bg: "#cdf3f7", border: "#0a9bb5", label: "Borehole"},
+  "Library": {bg: "#f7ecc9", border: "#c9992a", label: "Library"},
+  "Empower STEM Day": {bg: "#dde3ee", border: "#3f5c99", label: "STEM Day"},
+  "World Menstrual Hygiene Day Celebration": {bg: "#f8d7da", border: "#e83e8c", label: "MH Day"}
 };
 
 function getTypeInfo(projectType) {
