@@ -323,6 +323,10 @@ function makeRecCard(r) {
   var isYes = r.recommend_project === "Yes";
   var statusColor = isYes ? "#28a745" : "#ffc107";
   var borderColor = statusColor;
+  // Badge colors match the card status: green for priority, yellow for "maybe"
+  var badgeBg     = isYes ? "#e8f5e9" : "#fff3cd";
+  var badgeText   = isYes ? "#2e7d32" : "#856404";
+  var badgeBorder = isYes ? "#a5d6a7" : "#ffc107";
   var slug = r.school_name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
 
   var html = \'<div style="background:#fff; border-radius:8px; padding:1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1rem; border-left:4px solid \' + borderColor + \';">\';
@@ -343,7 +347,7 @@ function makeRecCard(r) {
     var types = String(r.recommended_types).split(",");
     types.forEach(function(t) {
       var trimmed = t.trim();
-      if (trimmed) html += \' <span style="display:inline-block; background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600;">\' + trimmed + \'</span>\';
+      if (trimmed) html += \' <span style="display:inline-block; background:\' + badgeBg + \'; color:\' + badgeText + \'; border:1px solid \' + badgeBorder + \'; padding:0.15rem 0.6rem; border-radius:12px; font-size:0.75rem; font-weight:600;">\' + trimmed + \'</span>\';
     });
   } else {
     html += \' <span style="color:#6c757d; font-weight:600;">Unspecified</span>\';
