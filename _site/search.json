@@ -9,9 +9,9 @@
   {
     "objectID": "visits.html",
     "href": "visits.html",
-    "title": "Visit Tracker",
+    "title": "Visits",
     "section": "",
-    "text": "Date Range:toAll SchoolsApplyReset\n\n\n\n\n\n\n  \n    Needs Full Update \n  \n  \n    Visit Log\n  \n  \n    Visits by School\n  \n\n\n\n\n  Schools that have not received a full school update during the current date range."
+    "text": "Date Range:toAll SchoolsApplyReset\n\n\n\n\n\n\n  \n    Visit Log\n  \n  \n    Needs Full Update \n  \n  \n    Visits by School\n  \n\n\n\n\n  Schools that have not received a full school update during the current date range."
   },
   {
     "objectID": "schools.html",
@@ -109,7 +109,7 @@
     "href": "index.html",
     "title": "Overview",
     "section": "",
-    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n  Download Data\n\n\n\n\n  \n    \n    \n      Dataset\n      \n        Quick School Updates\n        Full School Updates\n        New Projects\n        Student Surveys\n        School Overviews\n      \n    \n    \n      Date Range\n      \n        \n        to\n        \n      \n    \n    \n      Cancel\n      Download CSV\n    \n  \n\n\n\n\n  \n    \n    New Projects\n  \n  \n    \n    Schools Need Full Updates\n  \n  \n    \n    Open Issues"
+    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n\n\n\n\n  \n    \n    New Projects\n  \n  \n    \n    Schools Need Full Updates\n  \n  \n    \n    Open Issues"
   },
   {
     "objectID": "index.html#school-map",

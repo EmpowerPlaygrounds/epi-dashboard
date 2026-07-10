@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Visit Tracker – EPI Data Dashboard</title>
+<title>Visits – EPI Data Dashboard</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -142,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Visit Tracker</h1>
+<h1 class="title">Visits</h1>
 </div>
 
 
@@ -168,11 +168,11 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <!-- Tab Navigation -->
 <div id="visit-tabs" style="display:flex; gap:0; margin-bottom:0; border-bottom:2px solid #e9ecef;">
-  <button class="visit-tab active" data-tab="needs-update" style="flex:1; padding:0.75rem 1rem; border:none; background:none; font-size:0.9rem; font-weight:600; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.15s;">
-    Needs Full Update <span id="tab-count-needs" style="background:#dc3545; color:#fff; border-radius:10px; padding:0.1rem 0.5rem; font-size:0.75rem; margin-left:0.35rem;"></span>
-  </button>
-  <button class="visit-tab" data-tab="visit-log" style="flex:1; padding:0.75rem 1rem; border:none; background:none; font-size:0.9rem; font-weight:600; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.15s;">
+  <button class="visit-tab active" data-tab="visit-log" style="flex:1; padding:0.75rem 1rem; border:none; background:none; font-size:0.9rem; font-weight:600; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.15s;">
     Visit Log
+  </button>
+  <button class="visit-tab" data-tab="needs-update" style="flex:1; padding:0.75rem 1rem; border:none; background:none; font-size:0.9rem; font-weight:600; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.15s;">
+    Needs Full Update <span id="tab-count-needs" style="background:#dc3545; color:#fff; border-radius:10px; padding:0.1rem 0.5rem; font-size:0.75rem; margin-left:0.35rem;"></span>
   </button>
   <button class="visit-tab" data-tab="by-school" style="flex:1; padding:0.75rem 1rem; border:none; background:none; font-size:0.9rem; font-weight:600; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.15s;">
     Visits by School
@@ -180,7 +180,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 <!-- Tab: Needs Full Update -->
-<div id="tab-needs-update" class="visit-tab-content" style="padding-top:1rem;">
+<div id="tab-needs-update" class="visit-tab-content" style="display:none; padding-top:1rem;">
   <p style="color:#666; font-size:0.9rem; margin-bottom:0.75rem;">Schools that have not received a full school update during the current date range.</p>
   <div id="needs-update-container">
     <table id="needs-survey-table" class="display compact stripe" style="width:100%;"></table>
@@ -188,7 +188,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 <!-- Tab: Visit Log -->
-<div id="tab-visit-log" class="visit-tab-content" style="display:none; padding-top:1rem;">
+<div id="tab-visit-log" class="visit-tab-content" style="padding-top:1rem;">
   <div id="visit-log-container">
     <table id="visit-log-table" class="display compact stripe" style="width:100%;"></table>
   </div>
@@ -396,7 +396,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Check URL parameter for tab (e.g., ?tab=visit-log)
   var tabParam = params.get("tab");
-  var initialTab = (tabParam === "visit-log" || tabParam === "by-school") ? tabParam : "needs-update";
+  var initialTab = (tabParam === "needs-update" || tabParam === "by-school") ? tabParam : "visit-log";
 
   renderVisitPage();
   switchTab(initialTab);
