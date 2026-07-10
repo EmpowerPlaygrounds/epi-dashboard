@@ -88,23 +88,23 @@ items_occurrence <- map_dfr(seq_len(nrow(occ_defs)), function(i) {
 
 item_labels <- tribble(
   ~item_key,           ~item_label,
-  "lanterns",          "Lanterns",
-  "lantern_groups",    "Lantern Groups",
-  "computers",         "Computers",
-  "solar_panels",      "Solar Panels",
-  "rooms",             "Classrooms",
-  "science_kits",      "Science Kits",
-  "menstrual_kits",    "Menstrual Kits",
-  "library_books",     "Library Books",
+  "lanterns",          "Lanterns Distributed",
+  "lantern_groups",    "Lantern Groups Created",
+  "computers",         "Computers Installed",
+  "solar_panels",      "Solar Panels Installed",
+  "rooms",             "Classrooms Created",
+  "science_kits",      "Science Kits Distributed",
+  "menstrual_kits",    "Menstrual Kits Distributed",
+  "library_books",     "Library Books Distributed",
   "toilets",           "Biofil Toilets",
-  "mgr_generating",    "Generating MGRs",
-  "mgr_nongenerating", "Non-Generating MGRs",
-  "borehole",          "Boreholes",
-  "starlink",          "Starlink",
-  "rachel",            "RACHEL Devices",
-  "library",           "Libraries",
-  "grow",              "GROW Projects",
-  "construction",      "Classroom Blocks"
+  "mgr_generating",    "Power-Generating MGRs Installed",
+  "mgr_nongenerating", "Non-Generating MGRs Installed",
+  "borehole",          "Boreholes Constructed",
+  "starlink",          "Starlinks Installed",
+  "rachel",            "RACHELs Installed",
+  "library",           "Libraries Created",
+  "grow",              "GROW Projects Initiated",
+  "construction",      "Classroom Blocks Constructed"
 )
 
 items_distributed <- bind_rows(items_counted, items_occurrence) |>

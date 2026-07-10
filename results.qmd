@@ -99,7 +99,7 @@ htmltools::HTML(paste0(
 <!-- ── Reach ─────────────────────────────────────────────────────── -->
 <h3 style="color:var(--epi-navy); font-size:1.15rem; margin:0.5rem 0 0.9rem;">Reach</h3>
 <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem;">
-  <p style="color:var(--epi-navy); font-size:1.15rem; margin:0 0 1rem; font-weight:500;">Since ', first_year, ', EPI has expanded to <strong style="color:#2563EB; font-size:1.45rem;">', n_schools, '</strong> schools</p>
+  <p style="color:var(--epi-navy); font-size:1.15rem; margin:0 0 1rem; font-weight:500;">Since ', first_year, ', EPI has expanded to <strong style="color:#1C2B4A; font-size:1.45rem;">', n_schools, '</strong> schools</p>
   <div style="position:relative; height:280px;"><canvas id="reach-chart"></canvas></div>
 </div>
 <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:2rem;">
@@ -119,7 +119,7 @@ var CATEGORIES = [
   { name: "Providing Light", color: "#F5B800", bg: "#FFF8E6",
     icon: \'<path d="M12 2a6 6 0 0 0-3.5 10.9c.4.3.5.6.5 1.1V15h6v-1c0-.5.1-.8.5-1.1A6 6 0 0 0 12 2z"/><path d="M9 18h6"/><path d="M10 21h4"/>\',
     items: ["lanterns", "lantern_groups", "mgr_generating", "solar_panels"] },
-  { name: "Augmenting Education", color: "#2563EB", bg: "#EEF3FE",
+  { name: "Augmenting Education", color: "#1C2B4A", bg: "#EEF3FE",
     icon: \'<path d="M4 5a1 1 0 0 1 1-1h6v16H5a1 1 0 0 1-1-1z"/><path d="M20 5a1 1 0 0 0-1-1h-6v16h6a1 1 0 0 0 1-1z"/>\',
     items: ["library", "library_books", "computers", "rachel", "starlink", "science_kits", "mgr_nongenerating", "construction", "rooms", "grow"] },
   { name: "Promoting Wellness", color: "#DC3545", bg: "#FDECEC",
