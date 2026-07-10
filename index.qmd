@@ -166,21 +166,6 @@ leaflet(schools_with_coords) |>
   )
 ```
 
-## Programs at a Glance
-
-```{r}
-#| echo: false
-htmltools::HTML('
-<div style="max-width:600px; margin:0 auto 2rem;">
-  <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
-    <h4 style="color:var(--epi-navy); margin-top:0;">Program Reach</h4>
-    <p style="color:#999; font-size:0.8rem; margin-bottom:1rem;">% of schools with each program</p>
-    <div id="program-bars"></div>
-  </div>
-</div>
-')
-```
-
 ```{r}
 #| echo: false
 htmltools::HTML(paste0(
@@ -229,37 +214,6 @@ function renderDashboard() {
   document.getElementById('stat-needs-update').textContent = nNeedUpdate;
   document.getElementById('stat-issues').textContent    = issues.length;
 
-  // Program Reach bars
-  var programCols = [
-    { key: 'MGR', label: 'Power-Generating MGR' },
-    { key: 'Non-Generating MGR', label: 'Non-Generating MGR' },
-    { key: 'Feminine Hygiene Kits', label: 'Feminine Hygiene Kits' },
-    { key: 'Science Kits', label: 'Science Kits' },
-    { key: 'Library', label: 'Library' },
-    { key: 'Computer', label: 'Computer Lab' },
-    { key: 'Construction Projects', label: 'Construction Projects' },
-    { key: 'Boreholes', label: 'Boreholes' },
-    { key: 'Solar Power', label: 'Solar Power' },
-    { key: 'Biofill Toilets', label: 'Biofill Toilets' },
-    { key: 'Light a Village', label: 'Light a Village' },
-    { key: 'Starlink', label: 'Starlink' },
-    { key: 'GROW Project', label: 'GROW Project' }
-  ];
-
-  var barsHtml = '';
-  programCols.forEach(function(prog) {
-    var total = ALL_SCHOOLS.length;
-    var withProg = ALL_SCHOOLS.filter(function(s) { return Number(s[prog.key]) >= 1; }).length;
-    var pct = Math.round((withProg / total) * 100);
-    var barWidth = Math.max(pct, 3);
-    barsHtml +=
-      '<div style="display:flex; align-items:center; margin-bottom:0.4rem;">' +
-      '<span style="width:180px; font-size:0.85rem;">' + prog.label + '</span>' +
-      '<div class="program-bar" style="flex:1;">' +
-      '<div class="fill" style="width:' + barWidth + '%;">' + pct + '%</div>' +
-      '</div></div>';
-  });
-  document.getElementById('program-bars').innerHTML = barsHtml;
 }
 
 // Download Data feature
