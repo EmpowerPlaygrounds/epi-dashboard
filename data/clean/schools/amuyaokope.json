@@ -18,13 +18,13 @@
     "Light a Village": 0,
     "Starlink": 0,
     "GROW Project": 1,
-    "n_visits": 9,
+    "n_visits": 10,
     "n_responses": 90,
     "pct_lantern": 0.3111,
     "pct_library": 0.5062,
     "pct_menstrual": 0.28,
     "pct_computers": 1,
-    "n_issues": 5
+    "n_issues": 6
   },
   "visits": [
     {
@@ -168,6 +168,24 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-06-11"
+    },
+    {
+      "StartDate": "2026-07-07 6:08:08",
+      "Duration (in seconds)": "106",
+      "ResponseId": "R_ibwmyGtmpTK6LbT",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Akuvi, Other:",
+      "Q1.5_6_TEXT": "Kwame",
+      "school_name": "Amuyaokope",
+      "visit_reason": "GROW Project",
+      "activities": "GROW Project",
+      "doing_well": "They are doing well with the new grow project",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-07-07"
     }
   ],
   "full_update": [

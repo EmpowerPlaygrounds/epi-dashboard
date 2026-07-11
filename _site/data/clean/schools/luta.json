@@ -18,13 +18,13 @@
     "Light a Village": 0,
     "Starlink": 1,
     "GROW Project": 1,
-    "n_visits": 9,
+    "n_visits": 10,
     "n_responses": 71,
     "pct_lantern": 0.1143,
     "pct_library": 0.3443,
     "pct_menstrual": 0.4211,
     "pct_computers": 1,
-    "n_issues": 4
+    "n_issues": 5
   },
   "visits": [
     {
@@ -163,6 +163,24 @@
       "urgent_issues": "No",
       "observations": "The teachers are happy with the star link installed by empowerplaygrounds in the school and how it has help with teaching and learning",
       "visit_date": "2026-06-11"
+    },
+    {
+      "StartDate": "2026-07-07 5:34:37",
+      "Duration (in seconds)": "69",
+      "ResponseId": "R_4Ou18ZkOlm6N7MK",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "school_name": "Luta",
+      "visit_reason": "Computer Maintenance, GROW Project",
+      "activities": "Computer Maintenance, GROW Project",
+      "Q11": "One or more computers were not working/turning on",
+      "Q12": "Yes, it is all functioning",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-07-07"
     }
   ],
   "full_update": [

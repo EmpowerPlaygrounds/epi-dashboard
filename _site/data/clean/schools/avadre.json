@@ -18,15 +18,37 @@
     "Light a Village": 0,
     "Starlink": 0,
     "GROW Project": 0,
-    "n_visits": 0,
+    "n_visits": 1,
     "n_responses": 0,
     "pct_lantern": "NA",
     "pct_library": "NA",
     "pct_menstrual": "NA",
     "pct_computers": "NA",
-    "n_issues": 0
+    "n_issues": 1
   },
-  "visits": [],
+  "visits": [
+    {
+      "StartDate": "2026-07-10 11:56:08",
+      "Duration (in seconds)": "98",
+      "ResponseId": "R_jJnUJ45AMxDb0U6",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Isaac",
+      "school_name": "Avadre",
+      "visit_reason": "Routine Visit",
+      "activities": "MGR/Charging Maintenance, Science Kit Training/Distribution",
+      "Q5": "It wasn't spinning properly",
+      "Q6": "Yes, all problems were resolved",
+      "Q21": "No",
+      "Q23": "Yes",
+      "Q24": "2",
+      "doing_well": "Everything is fine in the school",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-07-10"
+    }
+  ],
   "full_update": [],
   "surveys": [],
   "issues": []

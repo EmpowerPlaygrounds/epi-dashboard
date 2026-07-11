@@ -18,13 +18,13 @@
     "Light a Village": 0,
     "Starlink": 0,
     "GROW Project": 1,
-    "n_visits": 9,
+    "n_visits": 10,
     "n_responses": 80,
     "pct_lantern": 0.2875,
     "pct_library": 0,
     "pct_menstrual": 0.9259,
     "pct_computers": 0,
-    "n_issues": 5
+    "n_issues": 6
   },
   "visits": [
     {
@@ -181,6 +181,25 @@
       "Q23": "Yes",
       "Q24": "10",
       "visit_date": "2026-06-12"
+    },
+    {
+      "StartDate": "2026-07-07 4:34:39",
+      "Duration (in seconds)": "99",
+      "ResponseId": "R_1Vt32K30kpCAX0Z",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Akuvi",
+      "school_name": "Madavunu",
+      "visit_reason": "Computer Maintenance, GROW Project",
+      "activities": "Computer Maintenance, GROW Project",
+      "Q11": "One or more computers were not working/turning on",
+      "Q12": "Yes, it is all functioning",
+      "doing_well": "They are have started the grow project well",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-07-07"
     }
   ],
   "full_update": [
