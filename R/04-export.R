@@ -86,6 +86,21 @@ items_occurrence <- map_dfr(seq_len(nrow(occ_defs)), function(i) {
     transmute(school_name, project_date, item_key = d$item_key, quantity = 1, group = "built")
 })
 
+# Quick Update also records items handed out / replaced during routine visits
+# (lanterns replaced, science kits given, menstrual kits distributed). Include
+# these so Outputs reflects BOTH surveys (matches a manual cross-check).
+qu_counted <- clean_quick |>
+  transmute(
+    school_name,
+    project_date   = visit_date,
+    lanterns       = suppressWarnings(as.numeric(Q9)),
+    science_kits   = suppressWarnings(as.numeric(Q22)),
+    menstrual_kits = suppressWarnings(as.numeric(Q20))
+  ) |>
+  pivot_longer(-c(school_name, project_date), names_to = "item_key", values_to = "quantity") |>
+  filter(!is.na(quantity) & quantity > 0) |>
+  mutate(group = "distributed")
+
 item_labels <- tribble(
   ~item_key,           ~item_label,
   "lanterns",          "Lanterns Distributed",
@@ -107,7 +122,7 @@ item_labels <- tribble(
   "construction",      "Classroom Blocks Constructed"
 )
 
-items_distributed <- bind_rows(items_counted, items_occurrence) |>
+items_distributed <- bind_rows(items_counted, qu_counted, items_occurrence) |>
   filter(!is.na(school_name) & school_name != "") |>
   left_join(item_labels, by = "item_key") |>
   mutate(project_date = as.character(project_date)) |>
