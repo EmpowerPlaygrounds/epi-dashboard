@@ -49,11 +49,14 @@ Alorkpem Island,2026-03-17,starlink,Starlinks Installed,built,new,1
 Mobia,2026-03-14,rooms,Classrooms Created,distributed,new,4
 Mobia,2026-03-14,construction,Classroom Blocks Constructed,built,new,1
 Pediatorkope,2026-03-11,starlink,Starlinks Installed,built,new,1
+Pediatorkope,2026-03-09,computers,Computers Installed,distributed,replaced,5
 Pediatorkope,2026-03-07,library_books,Library Books Distributed,distributed,new,1000
 Pediatorkope,2026-03-07,library,Libraries Created,built,new,1
 Pediatorkope,2026-03-07,grow,GROW Projects Initiated,built,new,1
 Mansokwa,2026-03-05,lanterns,Lanterns Distributed,distributed,replaced,2
+Pediatorkope,2026-03-02,computers,Computers Installed,distributed,replaced,3
 Pediatorkope,2026-03-02,menstrual_kits,Menstrual Kits Distributed,distributed,new,13
+Alorkpem Island,2026-03-02,computers,Computers Installed,distributed,replaced,2
 Alorkpem Island,2026-03-02,menstrual_kits,Menstrual Kits Distributed,distributed,new,4
 Adenya,2026-02-24,menstrual_kits,Menstrual Kits Distributed,distributed,new,7
 Adenya,2026-02-24,menstrual_kits,Menstrual Kits Distributed,distributed,new,5
@@ -79,6 +82,7 @@ Luta,2026-02-02,starlink,Starlinks Installed,built,new,1
 Apaah,2026-01-30,lanterns,Lanterns Distributed,distributed,new,24
 Apaah,2026-01-30,lantern_groups,Lantern Groups Created,distributed,new,8
 Apaah,2026-01-30,mgr_generating,Power-Generating MGRs Installed,built,new,1
+Dedenya,2026-01-29,computers,Computers Installed,distributed,replaced,2
 Adenya,2026-01-26,lanterns,Lanterns Distributed,distributed,new,17
 Adenya,2026-01-26,lantern_groups,Lantern Groups Created,distributed,new,10
 Adenya,2026-01-26,lanterns,Lanterns Distributed,distributed,new,16
