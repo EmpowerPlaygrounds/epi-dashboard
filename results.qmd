@@ -15,7 +15,7 @@ items <- if (file.exists(here("data", "clean", "items_distributed.csv"))) {
   read_csv(here("data", "clean", "items_distributed.csv"), show_col_types = FALSE)
 } else {
   tibble(school_name = character(), project_date = character(), item_key = character(),
-         item_label = character(), group = character(), quantity = numeric())
+         item_label = character(), group = character(), kind = character(), quantity = numeric())
 }
 
 schools <- read_csv(here("data", "clean", "schools.csv"), show_col_types = FALSE)
@@ -41,7 +41,7 @@ programs_json <- schools |>
   ) |>
   toJSON(na = "null")
 
-# Date range default for Outputs: current school year (Aug 1 – Jul 31)
+# Date range default (Aug 1 – Jul 31 school year) — shared by Outputs + Student Surveys
 school_year_start <- if (as.integer(format(Sys.Date(), "%m")) >= 8) {
   paste0(format(Sys.Date(), "%Y"), "-08-01")
 } else {
@@ -65,26 +65,46 @@ items_json <- toJSON(items_json_data, auto_unbox = TRUE, na = "null")
 htmltools::HTML(paste0(
 '<style>
 .output-tile:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.14) !important; }
+.results-tab { flex:1; padding:0.75rem 1rem; border:none; background:none; font-size:0.95rem; font-weight:600; color:#999; cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all 0.15s; }
 </style>
 
-<!-- ── Outputs ───────────────────────────────────────────────────── -->
-<h3 style="color:var(--epi-navy); font-size:1.15rem; margin:0.25rem 0 0.75rem;">Outputs</h3>
-<p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">EPI program outputs during the selected date range.</p>
-
-<div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">
-  <label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>
-  <input type="date" id="imp-date-start" value="', date_min, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
-  <span style="color:#999;">to</span>
-  <input type="date" id="imp-date-end" value="', date_max, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
-  <button id="btn-imp-apply" style="background:var(--epi-navy); color:#fff; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Apply</button>
-  <button id="btn-imp-reset" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer;">Reset</button>
+<!-- Outer tabs -->
+<div id="results-tabs" style="display:flex; gap:0; margin-bottom:1.25rem; border-bottom:2px solid #e9ecef;">
+  <button class="results-tab active" data-tab="outputs">Outputs</button>
+  <button class="results-tab" data-tab="reach">Reach</button>
+  <button class="results-tab" data-tab="surveys">Student Surveys</button>
 </div>
 
-<div id="impact-empty" style="display:none; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#999; font-style:italic; margin:0;">No items recorded in this date range.</p></div>
+<!-- Shared date range (Outputs + Student Surveys) -->
+<div id="results-date-bar" style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">
+  <label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>
+  <input type="date" id="res-date-start" value="', date_min, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+  <span style="color:#999;">to</span>
+  <input type="date" id="res-date-end" value="', date_max, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">
+  <button id="btn-res-apply" style="background:var(--epi-navy); color:#fff; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Apply</button>
+  <button id="btn-res-reset" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer;">Reset</button>
+</div>
 
-<div id="outputs-container" style="margin-bottom:2rem;"></div>
+<!-- ── Outputs panel ─────────────────────────────────────────────── -->
+<div id="tab-outputs" class="results-panel">
+  <p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">EPI program outputs during the selected date range.</p>
+  <div id="impact-empty" style="display:none; background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08);"><p style="color:#999; font-style:italic; margin:0;">No items recorded in this date range.</p></div>
+  <div id="outputs-container" style="margin-bottom:1rem;"></div>
+</div>
 
-<!-- Output detail modal -->
+<!-- ── Reach panel ───────────────────────────────────────────────── -->
+<div id="tab-reach" class="results-panel" style="display:none;">
+  <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem;">
+    <p style="color:var(--epi-navy); font-size:1.15rem; margin:0 0 1rem; font-weight:500;">Since ', first_year, ', EPI has expanded to <strong style="color:#1C2B4A; font-size:1.45rem;">', n_schools, '</strong> schools</p>
+    <div style="position:relative; height:280px;"><canvas id="reach-chart"></canvas></div>
+  </div>
+  <div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1rem;">
+    <p style="color:var(--epi-navy); font-size:1.15rem; margin:0 0 1.1rem; font-weight:500;">% of schools with each program</p>
+    <div id="program-bars"></div>
+  </div>
+</div>
+
+<!-- Output detail modal (top-level so it overlays regardless of active tab) -->
 <div id="output-modal" onclick="if(event.target===this)closeOutputModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
   <div style="background:#fff; border-radius:12px; padding:1.5rem 1.75rem; max-width:460px; width:90%; max-height:80vh; overflow:auto; box-shadow:0 8px 32px rgba(0,0,0,0.2);">
     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem;">
@@ -95,19 +115,19 @@ htmltools::HTML(paste0(
     <div id="output-modal-list"></div>
   </div>
 </div>
+'))
+```
 
-<!-- ── Reach ─────────────────────────────────────────────────────── -->
-<h3 style="color:var(--epi-navy); font-size:1.15rem; margin:0.5rem 0 0.9rem;">Reach</h3>
-<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem;">
-  <p style="color:var(--epi-navy); font-size:1.15rem; margin:0 0 1rem; font-weight:500;">Since ', first_year, ', EPI has expanded to <strong style="color:#1C2B4A; font-size:1.45rem;">', n_schools, '</strong> schools</p>
-  <div style="position:relative; height:280px;"><canvas id="reach-chart"></canvas></div>
-</div>
-<div style="background:#fff; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:2rem;">
-  <p style="color:var(--epi-navy); font-size:1.15rem; margin:0 0 1.1rem; font-weight:500;">% of schools with each program</p>
-  <div id="program-bars"></div>
-</div>
+::: {#tab-surveys .results-panel style="display:none;"}
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+{{< include _student-surveys.qmd >}}
+
+:::
+
+```{r}
+#| echo: false
+htmltools::HTML(paste0(
+'<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 var ITEMS = ', items_json, ';
 var REACH = ', reach_json, ';
@@ -148,7 +168,7 @@ function catIcon(inner, color) {
   return \'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="\' + color + \'" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;">\' + inner + \'</svg>\';
 }
 
-function inRange(dateStr, start, end) {
+function outputsInRange(dateStr, start, end) {
   if (!dateStr) return false;
   var d = dateStr.slice(0, 10);
   return d >= start && d <= end;
@@ -160,14 +180,14 @@ function tile(label, value, key, color, bg) {
     + \'<span style="color:#555; font-size:0.85rem;">\' + label + \'</span></div>\';
 }
 
-function slugify(name) {
+function resSlugify(name) {
   return (name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
 }
 
 function openOutputModal(key) {
-  var start = document.getElementById("imp-date-start").value;
-  var end   = document.getElementById("imp-date-end").value;
-  var rows = ITEMS.filter(function(it) { return it.item_key === key && inRange(it.project_date, start, end); });
+  var start = document.getElementById("res-date-start").value;
+  var end   = document.getElementById("res-date-end").value;
+  var rows = ITEMS.filter(function(it) { return it.item_key === key && outputsInRange(it.project_date, start, end); });
   if (rows.length === 0) return;
 
   var bySchool = {};
@@ -194,7 +214,7 @@ function openOutputModal(key) {
       ? \'<span style="display:block; color:#999; font-size:0.72rem; font-weight:400;">\' + o.isNew.toLocaleString() + \' new \\u00b7 \' + o.replaced.toLocaleString() + \' replaced</span>\'
       : "";
     listHtml += \'<div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:0.5rem 0; border-bottom:1px solid #f0f0f0;">\'
-      + \'<a href="schools.html?school=\' + slugify(s) + \'" style="color:var(--epi-navy); text-decoration:none; border-bottom:1px dashed var(--epi-navy);">\' + s + \'</a>\'
+      + \'<a href="schools.html?school=\' + resSlugify(s) + \'" style="color:var(--epi-navy); text-decoration:none; border-bottom:1px dashed var(--epi-navy);">\' + s + \'</a>\'
       + \'<span style="text-align:right; font-weight:600; color:var(--epi-navy);">\' + o.total.toLocaleString() + breakdown + \'</span></div>\';
   });
   document.getElementById("output-modal-list").innerHTML = listHtml;
@@ -206,10 +226,10 @@ function closeOutputModal() {
 }
 
 function renderOutputs() {
-  var start = document.getElementById("imp-date-start").value;
-  var end   = document.getElementById("imp-date-end").value;
+  var start = document.getElementById("res-date-start").value;
+  var end   = document.getElementById("res-date-end").value;
 
-  var filtered = ITEMS.filter(function(it) { return inRange(it.project_date, start, end); });
+  var filtered = ITEMS.filter(function(it) { return outputsInRange(it.project_date, start, end); });
 
   var totals = {}, labels = {};
   filtered.forEach(function(it) {
@@ -284,18 +304,53 @@ function renderProgramBars() {
   el.innerHTML = html;
 }
 
+// ── Outer tab switching ────────────────────────────────────────────────
+var activeResultsTab = "outputs";
+var reachRendered = false;
+
+function switchResultsTab(tab) {
+  activeResultsTab = tab;
+  ["outputs", "reach", "surveys"].forEach(function(t) {
+    var panel = document.getElementById("tab-" + t);
+    if (panel) panel.style.display = (t === tab) ? "block" : "none";
+  });
+  document.querySelectorAll(".results-tab").forEach(function(btn) {
+    var on = btn.getAttribute("data-tab") === tab;
+    btn.style.color = on ? "var(--epi-navy)" : "#999";
+    btn.style.borderBottomColor = on ? "var(--epi-navy)" : "transparent";
+  });
+  // Date range applies to Outputs and Student Surveys only (Reach is all-time)
+  var dateBar = document.getElementById("results-date-bar");
+  if (dateBar) dateBar.style.display = (tab === "reach") ? "none" : "flex";
+
+  // Render on show (fixes 0-size charts created while hidden)
+  if (tab === "outputs") {
+    renderOutputs();
+  } else if (tab === "reach") {
+    if (!reachRendered) { renderReach(); renderProgramBars(); reachRendered = true; }
+  } else if (tab === "surveys") {
+    if (typeof renderAll === "function") renderAll();
+  }
+}
+
+function applyResultsDate() {
+  if (activeResultsTab === "outputs") renderOutputs();
+  else if (activeResultsTab === "surveys" && typeof renderAll === "function") renderAll();
+}
+
 document.addEventListener("DOMContentLoaded", function() {
-  renderReach();
-  renderProgramBars();
-  renderOutputs();
-  document.getElementById("btn-imp-apply").addEventListener("click", renderOutputs);
-  document.getElementById("btn-imp-reset").addEventListener("click", function() {
+  document.querySelectorAll(".results-tab").forEach(function(btn) {
+    btn.addEventListener("click", function() { switchResultsTab(btn.getAttribute("data-tab")); });
+  });
+  document.getElementById("btn-res-apply").addEventListener("click", applyResultsDate);
+  document.getElementById("btn-res-reset").addEventListener("click", function() {
     var now = new Date();
     var syYear = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
-    document.getElementById("imp-date-start").value = syYear + "-08-01";
-    document.getElementById("imp-date-end").value = now.toISOString().slice(0, 10);
-    renderOutputs();
+    document.getElementById("res-date-start").value = syYear + "-08-01";
+    document.getElementById("res-date-end").value = now.toISOString().slice(0, 10);
+    applyResultsDate();
   });
+  switchResultsTab("outputs");
 });
 </script>
 '))

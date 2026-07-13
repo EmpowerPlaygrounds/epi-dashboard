@@ -19,14 +19,12 @@ website:
         text: School Profiles
       - href: visits.qmd
         text: Visits
-      - href: surveys.qmd
-        text: Student Surveys
       - href: new-projects.qmd
         text: New Projects
-      - href: results.qmd
-        text: Results
       - href: issues.qmd
         text: Issues
+      - href: results.qmd
+        text: Results
 
 format:
   html:

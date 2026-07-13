@@ -1,9 +1,4 @@
----
-title: "Student Surveys"
-format:
-  html:
-    toc: false
----
+<!-- Partial: Student Surveys content, included into results.qmd (#tab-surveys). Not rendered as its own page. -->
 
 ```{r}
 #| include: false
@@ -731,8 +726,8 @@ function inRange(dateStr, start, end) {
 
 function renderAll() {
   var school = document.getElementById("insights-school-filter").value;
-  var startEl = document.getElementById("survey-date-start");
-  var endEl = document.getElementById("survey-date-end");
+  var startEl = document.getElementById("res-date-start");
+  var endEl = document.getElementById("res-date-end");
   var start = startEl ? startEl.value : "";
   var end = endEl ? endEl.value : "";
 
@@ -756,20 +751,8 @@ function renderAll() {
   renderScienceKits(data);
 }
 
-// Initial render + event listeners
-document.addEventListener("DOMContentLoaded", function() {
-  renderAll();
-  var applyBtn = document.getElementById("btn-survey-apply");
-  if (applyBtn) applyBtn.addEventListener("click", renderAll);
-  var resetBtn = document.getElementById("btn-survey-reset");
-  if (resetBtn) resetBtn.addEventListener("click", function() {
-    var now = new Date();
-    var syYear = now.getMonth() >= 7 ? now.getFullYear() : now.getFullYear() - 1;
-    document.getElementById("survey-date-start").value = syYear + "-08-01";
-    document.getElementById("survey-date-end").value = now.toISOString().slice(0, 10);
-    renderAll();
-  });
-});
+// Initialization is driven by results.qmd (outer tabs + shared date range);
+// renderAll() is called when the Student Surveys tab is shown.
 )--"
 
 # ── Assemble the big HTML block ────────────────────────────────────────
@@ -810,8 +793,7 @@ insights_html <- paste0(
   computers_tab,
   science_tab,
 
-  # Chart.js + data + render logic
-  '<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>',
+  # data + render logic (Chart.js is loaded once by results.qmd)
   '<script>',
   'var SURVEY_DATA = ', survey_json, ';\n',
   'var SCHOOL_NAMES = ', school_names_json, ';\n',
@@ -819,22 +801,6 @@ insights_html <- paste0(
   js_code,
   '</script>'
 )
-```
-
-```{r}
-#| echo: false
-
-# Date range selector
-htmltools::HTML(paste0(
-  '<div style="background:#fff; border-radius:8px; padding:1rem 1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center;">',
-  '<label style="font-weight:600; color:var(--epi-navy); font-size:0.9rem;">Date Range:</label>',
-  '<input type="date" id="survey-date-start" value="', survey_date_min, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">',
-  '<span style="color:#999;">to</span>',
-  '<input type="date" id="survey-date-end" value="', survey_date_max, '" style="border:1px solid #ccc; border-radius:4px; padding:0.35rem 0.5rem; font-size:0.85rem;">',
-  '<button id="btn-survey-apply" style="background:var(--epi-navy); color:#fff; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer; font-weight:600;">Apply</button>',
-  '<button id="btn-survey-reset" style="background:#e9ecef; color:#333; border:none; border-radius:4px; padding:0.4rem 1rem; font-size:0.85rem; cursor:pointer;">Reset</button>',
-  '</div>'
-))
 ```
 
 <!-- Stat Cards -->
