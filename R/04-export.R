@@ -50,7 +50,7 @@ num_col <- function(df, code) {
 items_counted <- tibble(
   school_name    = np$school_name,
   project_date   = np$project_date,
-  lanterns       = rowSums(cbind(num_col(np, "12_1"), num_col(np, "26_1")), na.rm = TRUE),
+  lanterns       = num_col(np, "12_1"),
   lantern_groups = num_col(np, "13"),
   computers      = num_col(np, "17_1"),
   solar_panels   = num_col(np, "28"),
@@ -62,7 +62,7 @@ items_counted <- tibble(
 ) |>
   pivot_longer(-c(school_name, project_date), names_to = "item_key", values_to = "quantity") |>
   filter(!is.na(quantity) & quantity > 0) |>
-  mutate(group = "distributed")
+  mutate(group = "distributed", kind = "new")
 
 # Occurrence items: match the exact project_type option (multi-select, comma-
 # joined). "Non-Generating MGR" is matched by its own string; the generating
@@ -83,7 +83,7 @@ items_occurrence <- map_dfr(seq_len(nrow(occ_defs)), function(i) {
   d <- occ_defs[i, ]
   np |>
     filter(str_detect(coalesce(project_type, ""), fixed(d$pattern))) |>
-    transmute(school_name, project_date, item_key = d$item_key, quantity = 1, group = "built")
+    transmute(school_name, project_date, item_key = d$item_key, quantity = 1, group = "built", kind = "new")
 })
 
 # Quick Update also records items handed out / replaced during routine visits
@@ -99,7 +99,7 @@ qu_counted <- clean_quick |>
   ) |>
   pivot_longer(-c(school_name, project_date), names_to = "item_key", values_to = "quantity") |>
   filter(!is.na(quantity) & quantity > 0) |>
-  mutate(group = "distributed")
+  mutate(group = "distributed", kind = if_else(item_key == "lanterns", "replaced", "new"))
 
 item_labels <- tribble(
   ~item_key,           ~item_label,
@@ -126,7 +126,7 @@ items_distributed <- bind_rows(items_counted, qu_counted, items_occurrence) |>
   filter(!is.na(school_name) & school_name != "") |>
   left_join(item_labels, by = "item_key") |>
   mutate(project_date = as.character(project_date)) |>
-  select(school_name, project_date, item_key, item_label, group, quantity) |>
+  select(school_name, project_date, item_key, item_label, group, kind, quantity) |>
   arrange(desc(project_date))
 
 write_csv(items_distributed, here("data", "clean", "items_distributed.csv"))

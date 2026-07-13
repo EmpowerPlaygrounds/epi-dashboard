@@ -54,7 +54,7 @@ items_json_data <- items |>
   transmute(
     school_name,
     project_date = as.character(project_date),
-    item_key, item_label, group,
+    item_key, item_label, group, kind,
     quantity = as.numeric(quantity)
   )
 items_json <- toJSON(items_json_data, auto_unbox = TRUE, na = "null")
@@ -173,10 +173,13 @@ function openOutputModal(key) {
   var bySchool = {};
   rows.forEach(function(it) {
     var s = it.school_name || "Unknown";
-    bySchool[s] = (bySchool[s] || 0) + Number(it.quantity || 0);
+    if (!bySchool[s]) bySchool[s] = { total: 0, isNew: 0, replaced: 0 };
+    var q = Number(it.quantity || 0);
+    bySchool[s].total += q;
+    if (it.kind === "replaced") bySchool[s].replaced += q; else bySchool[s].isNew += q;
   });
   var schools = Object.keys(bySchool).sort(function(a, b) {
-    if (bySchool[b] !== bySchool[a]) return bySchool[b] - bySchool[a];
+    if (bySchool[b].total !== bySchool[a].total) return bySchool[b].total - bySchool[a].total;
     return a.localeCompare(b);
   });
 
@@ -186,9 +189,13 @@ function openOutputModal(key) {
 
   var listHtml = "";
   schools.forEach(function(s) {
+    var o = bySchool[s];
+    var breakdown = o.replaced > 0
+      ? \'<span style="display:block; color:#999; font-size:0.72rem; font-weight:400;">\' + o.isNew.toLocaleString() + \' new \\u00b7 \' + o.replaced.toLocaleString() + \' replaced</span>\'
+      : "";
     listHtml += \'<div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:0.5rem 0; border-bottom:1px solid #f0f0f0;">\'
       + \'<a href="schools.html?school=\' + slugify(s) + \'" style="color:var(--epi-navy); text-decoration:none; border-bottom:1px dashed var(--epi-navy);">\' + s + \'</a>\'
-      + \'<span style="font-weight:600; color:var(--epi-navy);">\' + bySchool[s].toLocaleString() + \'</span></div>\';
+      + \'<span style="text-align:right; font-weight:600; color:var(--epi-navy);">\' + o.total.toLocaleString() + breakdown + \'</span></div>\';
   });
   document.getElementById("output-modal-list").innerHTML = listHtml;
   document.getElementById("output-modal").style.display = "flex";
