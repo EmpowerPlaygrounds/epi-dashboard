@@ -124,8 +124,7 @@ leaflet(schools_with_coords) |>
     popup = ~paste0(
       "<strong>", school_name, "</strong><br>",
       "Region: ", Region, "<br>",
-      "EPI Start: ", `EPI Start Year`, "<br>",
-      "Visits: ", n_visits, " | Surveys: ", n_responses
+      "EPI Start: ", `EPI Start Year`
     ),
     radius = 6,
     color = "#1C2B4A",
