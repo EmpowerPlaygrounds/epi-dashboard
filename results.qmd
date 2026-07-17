@@ -138,7 +138,7 @@ var PROGRAMS = ', programs_json, ';
 var CATEGORIES = [
   { name: "Providing Light", color: "#F5B800", bg: "#FFF8E6",
     icon: \'<path d="M12 2a6 6 0 0 0-3.5 10.9c.4.3.5.6.5 1.1V15h6v-1c0-.5.1-.8.5-1.1A6 6 0 0 0 12 2z"/><path d="M9 18h6"/><path d="M10 21h4"/>\',
-    items: ["lanterns", "lantern_groups", "mgr_generating", "solar_panels"] },
+    items: ["lanterns", "lantern_groups", "mgr_generating", "solar"] },
   { name: "Augmenting Education", color: "#1C2B4A", bg: "#EEF3FE",
     icon: \'<path d="M4 5a1 1 0 0 1 1-1h6v16H5a1 1 0 0 1-1-1z"/><path d="M20 5a1 1 0 0 0-1-1h-6v16h6a1 1 0 0 0 1-1z"/>\',
     items: ["library", "library_books", "computers", "rachel", "starlink", "science_kits", "mgr_nongenerating", "construction", "rooms", "grow"] },

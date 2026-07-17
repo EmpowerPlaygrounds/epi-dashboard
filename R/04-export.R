@@ -53,7 +53,6 @@ items_counted <- tibble(
   lanterns       = num_col(np, "12_1"),
   lantern_groups = num_col(np, "13"),
   computers      = num_col(np, "17_1"),
-  solar_panels   = num_col(np, "28"),
   rooms          = num_col(np, "30"),
   science_kits   = num_col(np, "33_1"),
   menstrual_kits = num_col(np, "36"),
@@ -76,7 +75,8 @@ occ_defs <- tribble(
   "rachel",            "RACHEL",
   "library",           "Library",
   "grow",              "GROW Project",
-  "construction",      "Building Construction"
+  "construction",      "Building Construction",
+  "solar",             "Solar Project"
 )
 
 items_occurrence <- map_dfr(seq_len(nrow(occ_defs)), function(i) {
@@ -109,7 +109,6 @@ item_labels <- tribble(
   "lanterns",          "Lanterns Distributed",
   "lantern_groups",    "Lantern Groups Created",
   "computers",         "Computers Installed",
-  "solar_panels",      "Solar Panels Installed",
   "rooms",             "Classrooms Created",
   "science_kits",      "Science Kits Distributed",
   "menstrual_kits",    "Menstrual Kits Distributed",
@@ -122,7 +121,8 @@ item_labels <- tribble(
   "rachel",            "RACHELs Installed",
   "library",           "Libraries Created",
   "grow",              "GROW Projects Initiated",
-  "construction",      "Classroom Blocks Constructed"
+  "construction",      "Classroom Blocks Constructed",
+  "solar",             "Solar Projects"
 )
 
 items_distributed <- bind_rows(items_counted, qu_counted, items_occurrence) |>
