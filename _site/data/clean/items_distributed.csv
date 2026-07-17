@@ -22,6 +22,7 @@ Apaah,2026-06-02,lanterns,Lanterns Distributed,distributed,new,10
 Apaah,2026-06-02,lantern_groups,Lantern Groups Created,distributed,new,8
 Mamakrom,2026-06-02,lanterns,Lanterns Distributed,distributed,replaced,4
 Mamakrom,2026-06-02,menstrual_kits,Menstrual Kits Distributed,distributed,new,18
+Apaah,2026-06-02,solar,Solar Projects,built,new,1
 Adenya,2026-06-01,lanterns,Lanterns Distributed,distributed,replaced,10
 Trekume,2026-05-29,menstrual_kits,Menstrual Kits Distributed,distributed,new,200
 Anamenampa,2026-05-25,lanterns,Lanterns Distributed,distributed,replaced,2
@@ -32,11 +33,14 @@ Mosipanin,2026-05-14,lanterns,Lanterns Distributed,distributed,new,5
 Mosipanin,2026-05-14,lantern_groups,Lantern Groups Created,distributed,new,15
 Salaam Islamic School,2026-05-14,menstrual_kits,Menstrual Kits Distributed,distributed,new,250
 Mosipanin,2026-05-14,lanterns,Lanterns Distributed,distributed,replaced,2
+Mosipanin,2026-05-14,solar,Solar Projects,built,new,1
 Terhey,2026-05-13,lanterns,Lanterns Distributed,distributed,replaced,10
 Akwansu,2026-05-12,lanterns,Lanterns Distributed,distributed,new,10
 Akwansu,2026-05-12,lantern_groups,Lantern Groups Created,distributed,new,10
+Akwansu,2026-05-12,solar,Solar Projects,built,new,1
 Apaah,2026-05-11,lanterns,Lanterns Distributed,distributed,new,10
 Apaah,2026-05-11,lantern_groups,Lantern Groups Created,distributed,new,10
+Apaah,2026-05-11,solar,Solar Projects,built,new,1
 Apaah,2026-04-30,lanterns,Lanterns Distributed,distributed,replaced,1
 Bahankra,2026-04-29,lanterns,Lanterns Distributed,distributed,replaced,2
 Domase,2026-04-29,lanterns,Lanterns Distributed,distributed,replaced,3
@@ -86,8 +90,9 @@ Dedenya,2026-01-29,computers,Computers Installed,distributed,replaced,2
 Adenya,2026-01-26,lanterns,Lanterns Distributed,distributed,new,17
 Adenya,2026-01-26,lantern_groups,Lantern Groups Created,distributed,new,10
 Adenya,2026-01-26,lanterns,Lanterns Distributed,distributed,new,16
-Akwanserem,2026-01-26,solar_panels,Solar Panels Installed,distributed,new,12
 Adenya,2026-01-26,mgr_generating,Power-Generating MGRs Installed,built,new,1
+Adenya,2026-01-26,solar,Solar Projects,built,new,1
+Akwanserem,2026-01-26,solar,Solar Projects,built,new,1
 Mamakrom,2026-01-22,lanterns,Lanterns Distributed,distributed,replaced,6
 Mamakrom,2026-01-22,science_kits,Science Kits Distributed,distributed,new,4
 Wurudu Wurudu,2026-01-21,menstrual_kits,Menstrual Kits Distributed,distributed,new,10
