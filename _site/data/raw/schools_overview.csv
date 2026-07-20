@@ -1,4 +1,4 @@
-School Name,Region,EPI Start Year,Latitude,Longitude,MGR,Non-Generating MGR,Feminine Hygiene Kits,Science Kits,Library,Computer,Construction Projects,Boreholes,Solar Power,Biofill Toilets,Light a Village,Starlink,GROW Project,6/18/2026
+School Name,Region,EPI Start Year,Latitude,Longitude,MGR,Non-Generating MGR,Feminine Hygiene Kits,Science Kits,Library,Computer,Construction Projects,Boreholes,Solar Power,Biofill Toilets,Light a Village,Starlink,7/17/2026,6/18/2026
 Abrenya,Eastern,2012,6.324242861,-0.583628271,1,0,1,1,0,0,1,1,0,0,0,0,0,NA
 Adenya,Eastern,2010,5.965312,-0.175099,1,0,1,1,1,0,0,0,0,0,0,0,0,NA
 Ador Kope R/C Primary,Greater Accra,2019,7.114074,0.125415,1,0,1,1,0,1,0,0,1,0,0,0,0,NA
@@ -37,7 +37,7 @@ Immanuel Christian Academy (Liberia),NA,2025,6.259301,-10.708433,0,0,1,0,0,0,0,0
 Koni Kablu,Greater Accra,2008,5.876078,0.337461,0,0,0,1,0,0,0,1,0,0,0,0,0,NA
 Kpala Government,Eastern,2012,6.987634,0.11678,1,0,1,1,0,0,0,0,0,0,1,0,0,NA
 Kpala Private,Eastern,2008,6.97744,0.121821,1,0,1,1,0,0,1,0,0,0,1,0,0,NA
-Kurasua #1 MA,Bono,2014,7.281956,-2.435211,1,0,1,1,1,0,0,0,0,0,0,0,0,NA
+Kurasua #1 MA,Bono,2014,7.281956,-2.435211,1,0,1,1,1,1,1,0,0,0,0,0,0,NA
 Luta,Greater Accra,2010,5.952769,0.370543,1,0,1,1,0,1,0,0,0,0,0,1,1,NA
 Madavunu,Greater Accra,2010,5.971462,0.424356,1,0,1,1,1,1,0,0,0,0,0,0,1,NA
 Mamakrom,Eastern,2013,5.851524,-0.59891,1,0,1,1,1,0,1,0,0,0,0,0,0,NA
@@ -51,7 +51,7 @@ Mosipanin,Ashanti,2017,NA,NA,1,0,1,1,0,0,1,0,1,0,0,0,0,NA
 Mountain Rural Community (Sierra Leone),NA,2025,8.8136287,-12.0911511,0,0,1,0,0,0,0,0,0,0,0,0,0,NA
 Mpaem,Eastern,2014,6.158015,-0.337939,1,0,1,1,1,1,1,1,0,0,0,0,0,NA
 Ntomem,Eastern,2012,6.5372,0.60592,1,0,1,1,0,0,0,0,0,0,0,0,0,NA
-Nwawasua MA,Bono,2014,7.342513,-2.340941,1,0,1,1,0,0,0,0,0,0,0,0,0,NA
+Nwawasua MA,Bono,2014,7.342513,-2.340941,1,0,1,1,0,1,0,0,0,0,0,0,0,NA
 Nwowom,Bono East,2013,7.812019471,-1.03033881,1,0,1,1,1,0,0,0,0,1,0,0,0,NA
 Nyariga Girls' School,Upper East,2010,10.850795,-0.090442,1,0,1,1,0,0,0,0,0,0,0,0,0,NA
 Nyapienya,Greater Accra,2015,6.024719,0.259324,1,0,1,1,1,0,1,0,0,1,0,0,0,NA
@@ -63,7 +63,6 @@ Oyoko,Eastern,2025,6.13857,-0.290613,0,0,0,0,0,1,0,0,0,0,0,0,0,NA
 Paynesville Community (Liberia),NA,2025,6.2681875,-10.6945625,0,0,1,0,0,0,0,0,0,0,0,0,0,NA
 Pediatorkope,Greater Accra,2009,5.819813,0.628755,1,0,1,1,0,1,1,0,1,0,0,1,1,NA
 Salam Islamic (Sierra Leone),NA,2026,8.386937,-13.15195,0,0,1,0,0,0,0,0,0,0,0,0,0,NA
-Sunyani,Bono,2025,7.282031,-2.435831,1,0,1,1,0,1,1,0,0,0,0,0,0,NA
 Terhey,Greater Accra,2010,6.003635,0.423684,1,0,1,1,0,0,0,0,0,0,0,0,0,NA
 Torjeh,Greater Accra,2010,5.947827305,0.501367145,1,0,0,1,0,0,0,0,0,0,0,0,0,NA
 Tsledom,Eastern,2021,6.21754801,-0.008548714,1,0,1,1,0,0,1,0,0,0,0,0,0,NA
