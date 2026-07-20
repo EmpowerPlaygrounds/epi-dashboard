@@ -56,12 +56,11 @@ surveys_json <- surveys |>
   toJSON(auto_unbox = TRUE)
 
 schools_json <- schools |>
-  select(school_name, Region, `EPI Start Year`, Latitude, Longitude,
-         MGR, `Non-Generating MGR`, `Feminine Hygiene Kits`, `Science Kits`,
-         Library, Computer, `Construction Projects`, Boreholes,
-         `Solar Power`, `Biofill Toilets`, `Light a Village`,
-         Starlink, `GROW Project`,
-         n_visits, n_responses, n_issues) |>
+  select(any_of(c("school_name", "Region", "EPI Start Year", "Latitude", "Longitude",
+                  "MGR", "Non-Generating MGR", "Feminine Hygiene Kits", "Science Kits",
+                  "Library", "Computer", "Construction Projects", "Boreholes",
+                  "Solar Power", "Biofill Toilets", "Light a Village", "Starlink", "GROW Project",
+                  "n_visits", "n_responses", "n_issues"))) |>
   toJSON(auto_unbox = TRUE)
 
 # Date range defaults: current school year (Aug 1 – Jul 31)

@@ -32,13 +32,14 @@ reach_json   <- toJSON(list(years = reach_years, counts = reach_counts), auto_un
 n_schools    <- nrow(schools)
 first_year   <- if (length(start_years) > 0) min(start_years) else 2008
 
-# Program flags per school (for the "% of schools with each program" bars)
+# Program flags per school (for the "% of schools with each program" bars).
+# Use any_of() so a program column being renamed/removed in the Schools
+# Overview sheet just drops that bar instead of crashing the whole build.
+program_cols <- c("MGR", "Non-Generating MGR", "Feminine Hygiene Kits", "Science Kits",
+                  "Library", "Computer", "Construction Projects", "Boreholes",
+                  "Solar Power", "Biofill Toilets", "Light a Village", "Starlink", "GROW Project")
 programs_json <- schools |>
-  transmute(
-    MGR, `Non-Generating MGR`, `Feminine Hygiene Kits`, `Science Kits`,
-    Library, Computer, `Construction Projects`, Boreholes,
-    `Solar Power`, `Biofill Toilets`, `Light a Village`, Starlink, `GROW Project`
-  ) |>
+  select(any_of(program_cols)) |>
   toJSON(na = "null")
 
 # Date range default (Aug 1 – Jul 31 school year) — shared by Outputs + Student Surveys
@@ -294,6 +295,7 @@ function renderProgramBars() {
   var total = PROGRAMS.length;
   var html = "";
   PROGRAM_COLS.forEach(function(prog) {
+    if (!(prog.key in PROGRAMS[0])) return; // column not in the sheet — skip its bar
     var withProg = PROGRAMS.filter(function(s) { return Number(s[prog.key]) >= 1; }).length;
     var pct = Math.round((withProg / total) * 100);
     var barWidth = Math.max(pct, 3);
