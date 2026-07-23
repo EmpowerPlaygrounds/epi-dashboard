@@ -37,7 +37,6 @@ canonical_names <- sort(unique(clean_schools$school_name))
 # ------------------------------------------------------------------
 name_fixes <- c(
   # --- Typos (1-2 character errors) ---
-  "Mepotumtum"                 = "Bepotumtum",
   "Bepotuntum"                 = "Bepotumtum",
   "Nyienpeya"                  = "Nyapienya",
   "Akeyermanteng"              = "Akyeremanteng",
@@ -64,6 +63,9 @@ name_fixes <- c(
   "TunTum"                     = "Tun Tun",
   "TumTum"                     = "Tun Tun",
   "Tuntum"                     = "Tun Tun",
+  # NOTE: "Mepotumtum" is an alternate name for Tun Tun (NOT a typo of
+  # "Bepotumtum", which is a separate school). Do not remap to Bepotumtum.
+  "Mepotumtum"                 = "Tun Tun",
   "Old KonKrompe"              = "Old Konkompe",
   "Mongpong Shai"              = "Mampong Shai",
   "Mampong"                    = "Mampong Shai",
