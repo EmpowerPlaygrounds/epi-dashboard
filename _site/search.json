@@ -1,26 +1,5 @@
 [
   {
-    "objectID": "schools.html",
-    "href": "schools.html",
-    "title": "School Profiles",
-    "section": "",
-    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n  Print Reports\n\n\n\n  Select a School:\n  \n    — Choose a school —\n    Abrenya\nAdenya\nAdor Kope R/C Primary\nAfransua Dedewa MA Primary\nAkwanserem\nAkwansu\nAkyeremanteng\nAlorkpem Island\nAmuyaokope\nAnamenampa\nAnateem Sumbrungu\nApaah\nAtaampuutum A/B\nAttabui\nAvadre\nAzizakpem\nBahankra\nBegoro\nBepotumtum\nBomigo\nCommunity 3\nCommunity 9\nDagomba\nDedenya\nDedewa\nDomase\nEbourso\nEkorso Akwadum\nEssam\nFanterila\nFawotrikosie\nFerekoroba\nGalalia\nGourcy Burkina Faso School\nImmanuel Christian Academy (Liberia)\nKoni Kablu\nKpala Government\nKpala Private\nKurasua #1 MA\nLuta\nMadavunu\nMamakrom\nMampong Shai\nMansokwa\nMantukwa\nMeyikpoi\nMinya\nMobia\nMosipanin\nMountain Rural Community (Sierra Leone)\nMpaem\nNtomem\nNwawasua MA\nNwowom\nNyapienya\nNyariga Girls' School\nObani\nObelemanya\nObosonu\nOld Konkompe\nOyoko\nPaynesville Community (Liberia)\nPediatorkope\nSalam Islamic (Sierra Leone)\nTerhey\nTorjeh\nTsledom\nTuanikope\nTun Tun\nWangarakrom\nWatro (Watroso)\nWekpeti Abresu\nWenamda\nWurudu Wurudu\nYonguase\nYorogo-Asorogobisi\nZippo Nyuinyui\n  \n\n\n\n\n\n  \n  \n\n\n\n\n\n\nPrograms\n\n\n\nSchool Details\n\n  \n    Student Enrollment Breakdown\n    \n    No class data available\n  \n  \n\n\n\nNotes From Last Visit (click to view all)\n\n\n\n  Open Issues\n  \n\n\n\n  Recommended Projects\n  \n\n\nAI Summary\n\n  AI-powered summary of visit notes organized by strengths, challenges, and recommendations.\n  Generate AI Summary"
-  },
-  {
-    "objectID": "issues.html",
-    "href": "issues.html",
-    "title": "Issues",
-    "section": "",
-    "text": "Open Issues\nUrgent issues flagged during field visits. Click Resolve to mark an issue as addressed.\n\n\n\nResolved Issues\n\n  Filter by school:\n  \n    All schools\n  \n\n\n\n\n\n  \n    Resolve Issue\n    \n    \n    \n      Your Name *\n      \n    \n    \n      Resolution Notes (optional)\n      \n    \n    \n    \n      Cancel\n      Confirm Resolution"
-  },
-  {
-    "objectID": "new-projects.html",
-    "href": "new-projects.html",
-    "title": "New Projects",
-    "section": "",
-    "text": "Completed Projects\n  \n  \n    Recommended Projects \n  \n\n\n\n\n\n\n\n  Date Range:\n  \n  to\n  \n  \n    All Project Types\n  \n  Apply\n  Reset\n\n\n\n\n\n\n\n\n  Schools recommended to be reviewed for new projects.\n  \n     Green = Priority\n     Yellow = Maybe\n  \n  \n    Date Range:\n    \n    to\n    \n    \n      All Recommendations\n      Recommended\n      Maybe\n      MGR Swap Recommended\n    \n    Apply\n    Reset"
-  },
-  {
     "objectID": "results.html",
     "href": "results.html",
     "title": "Results",
@@ -40,6 +19,13 @@
     "title": "Visits",
     "section": "",
     "text": "Date Range:toAll SchoolsApplyReset\n\n\n\n\n\n\n  \n    Visit Log\n  \n  \n    Needs Full Update \n  \n  \n    Visits by School\n  \n\n\n\n\n  Schools that have not received a full school update during the current date range."
+  },
+  {
+    "objectID": "new-projects.html",
+    "href": "new-projects.html",
+    "title": "New Projects",
+    "section": "",
+    "text": "Completed Projects\n  \n  \n    Recommended Projects \n  \n\n\n\n\n\n\n\n  Date Range:\n  \n  to\n  \n  \n    All Project Types\n  \n  Apply\n  Reset\n\n\n\n\n\n\n\n\n  Schools recommended to be reviewed for new projects.\n  \n     Green = Priority\n     Yellow = Maybe\n  \n  \n    Date Range:\n    \n    to\n    \n    \n      All Recommendations\n      Recommended\n      Maybe\n      MGR Swap Recommended\n    \n    Apply\n    Reset"
   },
   {
     "objectID": "deck/slides.html#empower-playgrounds-inc.",
@@ -91,11 +77,18 @@
     "text": "Thank You\n\nQuestions?"
   },
   {
-    "objectID": "print-reports.html",
-    "href": "print-reports.html",
-    "title": "Print School Reports",
+    "objectID": "schools.html",
+    "href": "schools.html",
+    "title": "School Profiles",
     "section": "",
-    "text": "Print School Profile Reports\n  \n    Select a date range to filter visit notes, then click Generate & Print.\n    Each school will appear on its own page. You can print to paper or save as PDF.\n  \n\n  \n    Date Range:\n    \n    to\n    \n  \n\n  Generate Reports\n  Print All"
+    "text": "Date Range:\n  \n  to\n  \n  Apply\n  Reset\n  Print Reports\n\n\n\n  Select a School:\n  \n    — Choose a school —\n    Abrenya\nAdenya\nAdor Kope R/C Primary\nAfransua Dedewa MA Primary\nAkwanserem\nAkwansu\nAkyeremanteng\nAlorkpem Island\nAmuyaokope\nAnamenampa\nAnateem Sumbrungu\nApaah\nAtaampuutum A/B\nAttabui\nAvadre\nAzizakpem\nBahankra\nBegoro\nBepotumtum\nBomigo\nCommunity 3\nCommunity 9\nDagomba\nDedenya\nDedewa\nDomase\nEbourso\nEkorso Akwadum\nEssam\nFanterila\nFawotrikosie\nFerekoroba\nGalalia\nGourcy Burkina Faso School\nImmanuel Christian Academy (Liberia)\nKoni Kablu\nKpala Government\nKpala Private\nKurasua #1 MA\nLuta\nMadavunu\nMamakrom\nMampong Shai\nMansokwa\nMantukwa\nMeyikpoi\nMinya\nMobia\nMosipanin\nMountain Rural Community (Sierra Leone)\nMpaem\nNtomem\nNwawasua MA\nNwowom\nNyapienya\nNyariga Girls' School\nObani\nObelemanya\nObosonu\nOld Konkompe\nOyoko\nPaynesville Community (Liberia)\nPediatorkope\nSalam Islamic (Sierra Leone)\nTerhey\nTorjeh\nTsledom\nTuanikope\nTun Tun\nWangarakrom\nWatro (Watroso)\nWekpeti Abresu\nWenamda\nWurudu Wurudu\nYonguase\nYorogo-Asorogobisi\nZippo Nyuinyui\n  \n\n\n\n\n\n  \n  \n\n\n\n\n\n\nPrograms\n\n\n\nSchool Details\n\n  \n    Student Enrollment Breakdown\n    \n    No class data available\n  \n  \n\n\n\nNotes From Last Visit (click to view all)\n\n\n\n  Open Issues\n  \n\n\n\n  Recommended Projects\n  \n\n\nAI Summary\n\n  AI-powered summary of visit notes organized by strengths, challenges, and recommendations.\n  Generate AI Summary"
+  },
+  {
+    "objectID": "issues.html",
+    "href": "issues.html",
+    "title": "Issues",
+    "section": "",
+    "text": "Open Issues\nUrgent issues flagged during field visits. Click Resolve to mark an issue as addressed.\n\n\n\nResolved Issues\n\n  Filter by school:\n  \n    All schools\n  \n\n\n\n\n\n  \n    Resolve Issue\n    \n    \n    \n      Your Name *\n      \n    \n    \n      Resolution Notes (optional)\n      \n    \n    \n    \n      Cancel\n      Confirm Resolution"
   },
   {
     "objectID": "index.html",
@@ -110,5 +103,12 @@
     "title": "Overview",
     "section": "School Map",
     "text": "School Map"
+  },
+  {
+    "objectID": "print-reports.html",
+    "href": "print-reports.html",
+    "title": "Print School Reports",
+    "section": "",
+    "text": "Print School Profile Reports\n  \n    Select a date range to filter visit notes, then click Generate & Print.\n    Each school will appear on its own page. You can print to paper or save as PDF.\n  \n\n  \n    Date Range:\n    \n    to\n    \n  \n\n  Generate Reports\n  Print All"
   }
 ]
