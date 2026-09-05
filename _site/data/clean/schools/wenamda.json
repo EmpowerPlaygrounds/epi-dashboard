@@ -17,13 +17,13 @@
     "Biofill Toilets": 0,
     "Light a Village": 0,
     "Starlink": 0,
-    "n_visits": 8,
+    "n_visits": 9,
     "n_responses": 48,
     "pct_lantern": 0.875,
     "pct_library": 0,
     "pct_menstrual": 0.5789,
     "pct_computers": 0,
-    "n_issues": 0
+    "n_issues": 1
   },
   "visits": [
     {
@@ -115,6 +115,23 @@
       "Q10": "Broken",
       "doing_well": "Doing well in our program but do well in lantern program.  The use of the library is commendable",
       "visit_date": "2026-05-15"
+    },
+    {
+      "StartDate": "2026-07-13 5:56:27",
+      "Duration (in seconds)": "156",
+      "ResponseId": "R_ny6LiZcKnwAGjPy",
+      "LocationLatitude": "6.6816",
+      "LocationLongitude": "-1.6221",
+      "visitor": "Richard",
+      "Q1.5": "Isaac, Richard, Alex, Peace",
+      "school_name": "Wenamda",
+      "visit_reason": "Routine Visit, Menstrual Kit Distribution",
+      "activities": "Routine Visit, Menstrual Kit Distribution, New Project Preparation/Check In",
+      "Q20": "13",
+      "doing_well": "Doing well in most of our programs",
+      "struggles": "The use of science kits declined this term",
+      "urgent_issues": "Provide training for teachers for  the use of science kits",
+      "visit_date": "2026-07-13"
     }
   ],
   "full_update": [
@@ -1719,5 +1736,15 @@
       "school_name": "Wenamda"
     }
   ],
-  "issues": []
+  "issues": [
+    {
+      "school_name": "Wenamda",
+      "urgent_issues": "Provide training for teachers for  the use of science kits",
+      "visit_reason": "Routine Visit, Menstrual Kit Distribution",
+      "activities": "Routine Visit, Menstrual Kit Distribution, New Project Preparation/Check In",
+      "visit_date": "2026-07-13",
+      "visitor": "Richard",
+      "issue_id": "46f49ca0086b"
+    }
+  ]
 }
