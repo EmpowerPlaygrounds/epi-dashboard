@@ -17,13 +17,13 @@
     "Biofill Toilets": 0,
     "Light a Village": 0,
     "Starlink": 0,
-    "n_visits": 14,
+    "n_visits": 15,
     "n_responses": 145,
     "pct_lantern": 0.669,
     "pct_library": 0.5781,
     "pct_menstrual": 0.6296,
     "pct_computers": 0,
-    "n_issues": 5
+    "n_issues": 6
   },
   "visits": [
     {
@@ -218,6 +218,23 @@
       "urgent_issues": "No",
       "observations": "No",
       "visit_date": "2026-06-01"
+    },
+    {
+      "StartDate": "2026-09-09 5:15:35",
+      "Duration (in seconds)": "314",
+      "ResponseId": "R_0D6rTBaT5Comocl",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Isaac, Richard, Alex, Peace, Akuvi",
+      "school_name": "Adenya",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit",
+      "doing_well": "Second day at school all our programs \nCharging system \nLanterns \nScience kits are all good",
+      "struggles": "Nothing for now",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-09-09"
     }
   ],
   "full_update": [
