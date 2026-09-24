@@ -17,7 +17,7 @@
     "Biofill Toilets": 0,
     "Light a Village": 0,
     "Starlink": 0,
-    "n_visits": 5,
+    "n_visits": 6,
     "n_responses": 233,
     "pct_lantern": 0.2661,
     "pct_library": 0.0307,
@@ -104,6 +104,23 @@
       "struggles": "Large number of students makes difficult in lantern grouping.",
       "observations": "Study population is increasing",
       "visit_date": "2026-04-30"
+    },
+    {
+      "StartDate": "2026-09-24 4:23:28",
+      "Duration (in seconds)": "121",
+      "ResponseId": "R_oJcK7o5oifM72EZ",
+      "LocationLatitude": "5.6714",
+      "LocationLongitude": "-0.0086",
+      "visitor": "Richard",
+      "Q1.5": "Richard, Alex, Peace, Other:",
+      "Q1.5_6_TEXT": "Anna",
+      "school_name": "Ntomem",
+      "visit_reason": "Routine Visit, Menstrual Kit Distribution, Student Survey Team Visit, Full Update Survey",
+      "activities": "Routine Visit, Menstrual Kit Distribution, Student Survey Team Visit, Full Update Survey",
+      "Q20": "76",
+      "doing_well": "The school is doing well on all our programs",
+      "struggles": "The use of science kits and lantern group",
+      "visit_date": "2026-09-24"
     }
   ],
   "full_update": [
