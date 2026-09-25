@@ -17,13 +17,13 @@
     "Biofill Toilets": 0,
     "Light a Village": 0,
     "Starlink": 0,
-    "n_visits": 10,
+    "n_visits": 11,
     "n_responses": 50,
     "pct_lantern": 0,
     "pct_library": 0.12,
     "pct_menstrual": 0.3333,
     "pct_computers": 1,
-    "n_issues": 5
+    "n_issues": 6
   },
   "visits": [
     {
@@ -186,6 +186,24 @@
       "doing_well": "Doing well in all programs",
       "struggles": "More commitment from headmistress",
       "visit_date": "2026-06-12"
+    },
+    {
+      "StartDate": "2026-09-15 4:44:35",
+      "Duration (in seconds)": "146",
+      "ResponseId": "R_0xCuSIpWvHXYX7v",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Peace, Akuvi, Other:",
+      "Q1.5_6_TEXT": "Anna",
+      "school_name": "Dedenya",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit",
+      "doing_well": "They are trying with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "None",
+      "visit_date": "2026-09-15"
     }
   ],
   "full_update": [
