@@ -17,13 +17,13 @@
     "Biofill Toilets": 0,
     "Light a Village": 0,
     "Starlink": 0,
-    "n_visits": 2,
+    "n_visits": 3,
     "n_responses": 98,
     "pct_lantern": 0.6122,
     "pct_library": 0.1176,
     "pct_menstrual": 0.6522,
     "pct_computers": 0,
-    "n_issues": 0
+    "n_issues": 1
   },
   "visits": [
     {
@@ -52,6 +52,24 @@
       "doing_well": "Doing well in all our programs",
       "struggles": "Student population is decreasing",
       "visit_date": "2026-04-30"
+    },
+    {
+      "StartDate": "2026-10-14 4:14:37",
+      "Duration (in seconds)": "117",
+      "ResponseId": "R_cxTGYEBilMC3ags",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Richard, Peace",
+      "school_name": "Akyeremanteng",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit, Menstrual Kit Distribution",
+      "Q20": "13",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-10-14"
     }
   ],
   "full_update": [

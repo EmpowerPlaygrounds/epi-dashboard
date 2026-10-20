@@ -17,13 +17,13 @@
     "Biofill Toilets": 0,
     "Light a Village": 0,
     "Starlink": 0,
-    "n_visits": 6,
+    "n_visits": 7,
     "n_responses": 37,
     "pct_lantern": 0.6216,
     "pct_library": 0.1765,
     "pct_menstrual": 0.5714,
     "pct_computers": 0,
-    "n_issues": 0
+    "n_issues": 1
   },
   "visits": [
     {
@@ -98,6 +98,24 @@
       "Q6": "Yes, all problems were resolved",
       "doing_well": "Schools is doing well in running our programs. The headmaster is very dedicated to EPI programs because he has increased students participation and overall performance of the school",
       "visit_date": "2026-05-19"
+    },
+    {
+      "StartDate": "2026-10-14 5:39:17",
+      "Duration (in seconds)": "67",
+      "ResponseId": "R_bumRAq8UMocCiL1",
+      "LocationLatitude": "5.5545",
+      "LocationLongitude": "-0.1902",
+      "visitor": "Alex",
+      "Q1.5": "Richard, Peace",
+      "school_name": "Yonguase",
+      "visit_reason": "Routine Visit",
+      "activities": "Routine Visit, Menstrual Kit Distribution",
+      "Q20": "8",
+      "doing_well": "They are doing well with all our programs",
+      "struggles": "None",
+      "urgent_issues": "No",
+      "observations": "No",
+      "visit_date": "2026-10-14"
     }
   ],
   "full_update": [
